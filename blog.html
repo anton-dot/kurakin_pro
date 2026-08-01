@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,follow">
+    <title>Статьи - Anton Kurakin</title>
+    <link rel="icon" href="assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script>
+      (() => {
+        const supported = ["ru", "en"];
+        const normalize = (value) => value?.trim().toLowerCase().split("-")[0];
+        const params = new URLSearchParams(window.location.search);
+        const candidates = [
+          params.get("lang"),
+          window.localStorage.getItem("kurakin-site-lang"),
+          ...(navigator.languages ?? []),
+          navigator.language,
+        ].map(normalize);
+        const lang = candidates.find((candidate) => supported.includes(candidate)) ?? "ru";
+        window.location.replace(`${lang}/articles/index.html`);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="redirect-page">
+      <img src="assets/img/logo-icon.svg" alt="" width="48" height="48">
+      <h1>Статьи / Articles</h1>
+      <p><a href="ru/articles/index.html">Русский</a> · <a href="en/articles/index.html">English</a></p>
+    </main>
+  </body>
+</html>

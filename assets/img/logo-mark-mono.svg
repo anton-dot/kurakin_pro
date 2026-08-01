@@ -1,0 +1,18 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Anton Kurakin monochrome play mark</title>
+  <desc id="desc">A monochrome rounded forward mark inspired by the previous play-shaped logo.</desc>
+  <defs>
+    <linearGradient id="mono" x1="18" y1="16" x2="82" y2="80" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00A88E"/>
+      <stop offset="0.5" stop-color="#007C78"/>
+      <stop offset="1" stop-color="#005653"/>
+    </linearGradient>
+    <linearGradient id="monoSoft" x1="14" y1="16" x2="26" y2="80" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#35C6AA"/>
+      <stop offset="1" stop-color="#007C78"/>
+    </linearGradient>
+  </defs>
+  <path d="M20 18C27.7 18 34 24.3 34 32V64C34 71.7 27.7 78 20 78C12.3 78 6 71.7 6 64V32C6 24.3 12.3 18 20 18Z" fill="url(#monoSoft)"/>
+  <path d="M33 26.7C35.8 22.2 41.9 20.9 46.3 23.9L84.8 48.1C88.9 50.7 88.9 56.7 84.8 59.3L46.3 83.5C41.9 86.3 36 85.1 33.2 80.7C30.4 76.3 31.7 70.4 36.1 67.6L58.1 53.7L36 39.8C31.6 37 30.3 31.1 33 26.7Z" fill="url(#mono)"/>
+  <path d="M34 32V64C34 66.3 33.5 68.5 32.5 70.5L58.1 53.7L32.6 36.8C33.5 35.2 34 33.6 34 32Z" fill="#007C78" opacity="0.22"/>
+</svg>

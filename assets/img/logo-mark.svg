@@ -1,0 +1,17 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Anton Kurakin brand mark</title>
+  <desc id="desc">A clean forward play mark inspired by motion and digital transformation.</desc>
+  <defs>
+    <linearGradient id="akMain" x1="14" y1="18" x2="82" y2="78" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34B66F"/>
+      <stop offset="0.52" stop-color="#008B88"/>
+      <stop offset="1" stop-color="#315FE4"/>
+    </linearGradient>
+    <linearGradient id="akAccent" x1="16" y1="18" x2="16" y2="78" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7CC85F"/>
+      <stop offset="1" stop-color="#C98128"/>
+    </linearGradient>
+  </defs>
+  <path d="M22 22V74" stroke="url(#akAccent)" stroke-width="14" stroke-linecap="round"/>
+  <path d="M38 25L76 48L38 71" stroke="url(#akMain)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Anton Kurakin brand symbol</title>
+  <desc id="desc">A clean monochrome forward mark with a vertical stem and rounded play shape.</desc>
+  <g transform="translate(3 4)">
+    <path d="M24 25V61" stroke="#061A3D" stroke-width="16" stroke-linecap="round"/>
+    <path d="M24 25L70 48L37 67" stroke="#061A3D" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

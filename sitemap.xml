@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://kurakin.pro/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/experience.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/experience.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/experience.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/experience.html" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/en/experience.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/experience.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/experience.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/experience.html" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/ru/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/en/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />
+  </url>
+</urlset>
