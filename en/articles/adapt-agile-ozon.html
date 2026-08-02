@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Four ways poorly applied Agile harms business and engineering, plus a practical approach to priorities, delivery, technical debt, and team autonomy.">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How We Adapt Agile at Ozon">
+    <meta property="og:description" content="A practical look at connecting business priorities with engineering autonomy without turning Agile into a cargo cult.">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/adapt-agile-ozon.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+    <title>How We Adapt Agile at Ozon - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/adapt-agile-ozon.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/adapt-agile-ozon.html">
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How We Adapt Agile at Ozon",
+        "description": "Four ways poorly applied Agile harms business and engineering, plus a practical approach to priorities, delivery, technical debt, and team autonomy.",
+        "inLanguage": "en",
+        "datePublished": "2025-01-29",
+        "dateModified": "2025-01-29",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://kurakin.pro/en/articles/adapt-agile-ozon.html"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Anton Kurakin",
+          "url": "https://kurakin.pro/"
+        },
+        "image": "https://kurakin.pro/assets/img/article-notes.png"
+      }
+    </script>
+  </head>
+  <body data-page="articles" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin">
+        <img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42">
+        <span class="brand-text">Anton Kurakin</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../experience.html">About</a>
+        <a href="index.html" aria-current="page">Writing</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <div class="lang-switcher" aria-label="Language switcher">
+        <a href="https://habr.com/ru/companies/ozontech/articles/877244/" target="_blank" rel="noopener noreferrer">RU<span aria-hidden="true">↗</span></a>
+        <a href="adapt-agile-ozon.html" aria-current="page">EN</a>
+      </div>
+    </header>
+
+    <main id="main" class="article-page">
+      <article>
+        <header class="article-hero">
+          <div class="article-hero-copy">
+            <a class="article-back-link" href="index.html">All articles</a>
+            <p class="article-kicker">
+              <time datetime="2025-01-29">January 29, 2025</time>
+              <span>22 min read</span>
+              <span>Translation</span>
+            </p>
+            <h1>How We Adapt Agile at Ozon</h1>
+            <p class="article-summary">
+              Agile is supposed to keep teams focused on customers, but poor implementation can weaken responsibility, slow delivery, exhaust developers, and hide technical debt. Here is how we connect Agile practices with processes the business can understand.
+            </p>
+          </div>
+        </header>
+
+        <div class="article-content">
+          <div class="article-source">
+            <span>Translation</span>
+            <a href="https://habr.com/ru/companies/ozontech/articles/877244/" target="_blank" rel="noopener noreferrer">Original Russian article on Habr ↗</a>
+          </div>
+
+          <p>
+            Hi, Habr! My name is Anton, and I am a team lead at Ozon. I have spent more than twenty years in IT, including over fifteen years in management roles, and I have worked across a wide range of software projects. While developing my management approach, I repeatedly noticed that projects often ignored their most important concern: the customer—the person for whom we are actually building these products and systems.
+          </p>
+
+          <p>
+            Agile was meant to address exactly this problem. Its purpose was to keep teams close to customers and help them create a first-class product through continuous collaboration. People and communication come first in Agile, while technology is barely mentioned at all.
+          </p>
+
+          <p>
+            The problems with Agile are discussed not only by ordinary practitioners but also by people such as Robert C. Martin and Kent Beck, two of the authors of the Agile Manifesto. Allen Holub has observed that Agile has increasingly come to mean doing half of Scrum badly while using Jira.
+          </p>
+
+          <p>
+            Everyone knows the benefits associated with Agile. Over the years, however, I have identified several negative patterns. In this article, I will look at four consequences of using Agile poorly—consequences that undermine its effectiveness—and offer recommendations for fitting Agile into processes the business can understand.
+          </p>
+
+          <p>
+            I try to examine these problems equally from the perspectives of business and IT. I hope the article will therefore be useful not only to technical managers but also to people working in business functions.
+          </p>
+
+          <h2>Overheard in a Bar: An Agile Non-Comedy in Five Acts</h2>
+
+          <p><strong>Cast:</strong></p>
+
+          <p>
+            <strong>PM</strong> — either a project manager or a product manager. Management has not decided which, so he does both jobs. In our story, he represents the business. He is relatively young, loves Agile, and believes that everything will work if the methodology is applied correctly. He believes—or his company believes—that IT is often responsible for missed project deadlines. He is business-oriented, wants to create value for customers and the company, and focuses on results. He knows the theory well and enjoys being pedantic. He has almost no technical background.
+          </p>
+
+          <p>
+            <strong>TL</strong> — an experienced team lead who grew out of software development. He has spent a lot of time on projects with almost no requirements and one-way, coercive communication from the business. He understands Agile and other software development methods. He briefly worked as a PM in the past but returned to engineering. He wants to work in a company where business behaves reasonably and collaborates closely with IT. He keeps learning, listens to others, and has shown no signs of losing touch with reality during the past three years.
+          </p>
+
+          <p>
+            <strong>DEV</strong> — a senior developer who does not care much about project methodologies and has little patience for management, strategy, or corporate culture. He completes tasks and periodically changes companies for a better salary. At home, he works on a pet project that he still cannot launch. He enjoys trolling and memes, but he is always ready to help colleagues and solve difficult technical problems. He has deep expertise and has saved companies more than once when critical systems were close to collapse. He believes in clean code, design patterns, and the majesty of refactoring.
+          </p>
+
+          <p>
+            <strong>A random listener</strong> — an IT business consultant, speaker, and article author. He is taking notes on what he hears, hopefully with reasonable accuracy.
+          </p>
+
+          <p>
+            All the characters work in different teams or companies. TL, PM, and DEV have known one another for a long time.
+          </p>
+
+          <p>
+            <strong>Important:</strong> the situation described below is hypothetical. The characters are not intended as generalizations. They are products of the author’s imagination, created only to sharpen the ideas in the article. In other words, everyone is fictional and any resemblance is coincidental.
+          </p>
+
+          <h2>Act One: At the Bar After a Difficult Working Day</h2>
+
+          <p>
+            <strong>PM:</strong> …I still think Agile is a great thing. Its principles were written back in 2001, but they remain relevant and effective. There are only four values, so anyone can remember them:
+          </p>
+
+          <ol>
+            <li>Individuals and interactions over processes and tools.</li>
+            <li>Working software over comprehensive documentation.</li>
+            <li>Customer collaboration over contract negotiation.</li>
+            <li>Responding to change over following a plan.</li>
+          </ol>
+
+          <p>
+            And remember the final part: while the things on the right have value, we value the things on the left more.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Yes, yes, I have heard the story. A group of people got stuck high in the mountains and negotiated four principles that initially seemed acceptable to everyone. Now the rest of us have to clean up after them.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Not bad for a gathering at a ski resort. The most we ever did was drink hot tea from thermos flasks.
+          </p>
+
+          <p>
+            Despite the limited enthusiasm shown by TL and DEV, PM continued explaining the benefits and value of the Agile Manifesto.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Look, the manifesto really does focus on people and results, but it does not dismiss processes, documentation, or plans. If people stop adding their own nonsense to it, it is genuinely good.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Could we stop talking and get back to work?
+          </p>
+
+          <p>
+            <strong>TL</strong> (continuing without noticing DEV): We work with people, though, and over time the meaning of these values has changed beyond recognition. Some elements were simply ignored. One of my former PMs used to say, “Who needs documentation? You are not writing the code in Sumerian.”
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Right. The developer’s opinion has been ignored again.
+          </p>
+
+          <p>
+            <strong>TL</strong> (continuing): Another PM told us deadlines were just boxes to tick—until he lost his bonus for missing those boxes. Naturally, people become frustrated after experiences like that, and Agile gets blamed instead of project management.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Fine, I will add my two cents. Some of my colleagues hate Agile. To them, it is another word for chaos. There seems to be a plan, but there is not. Roles seem to be divided, but in reality nobody is responsible for anything. My friends at another company are obsessed with story points and burndown charts. Either way, I am still the person writing the code. Call it whatever you like—the routine stays the same: write, rewrite, write again. Let’s get a table and order some fries.
+          </p>
+
+          <h2>IT Suffers from Management</h2>
+
+          <p>
+            <strong>Act Two.</strong> The same people are now sitting at a table with fries and garlic bread.
+          </p>
+
+          <p>
+            <strong>TL</strong> (continuing with a mouthful of fries): Bad managers love Agile because it completely changes the balance between authority and responsibility. Suddenly you PMs gain the traditional power to tell the engineering team exactly what to do, how to do it, what to work on, and what to abandon immediately. Yet you take no responsibility. None at all. (He gestures and wipes ketchup from his hands.) Developers and testers are blamed for everything—usually testers, but we will leave that aside.
+          </p>
+
+          <p>
+            For you, a daily or retrospective becomes a ritual of accountability. When the team says, “What did we do wrong, and what can we improve?” everyone hears, “What did you do wrong, and how will you fix it during the next two weeks?”
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Exactly. I choose tickets carefully so I have the smallest possible chance of messing up during the sprint. I do not want to spend the retrospective explaining why I missed something or broke a release.
+          </p>
+
+          <p>
+            <strong>TL:</strong> But what about value for the user? (He laughs.)
+          </p>
+
+          <p>
+            DEV mutters something indistinct and takes a drink.
+          </p>
+
+          <p>
+            <strong>TL:</strong> I also feel that our PM acts like a filter between us and the real users. We receive weak feedback that has been transformed by his interpretation. Our observations and questions seem to disappear into the sand. I start with a team of strong, capable specialists and end up with a group of dependent people who do only what he tells them.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Who is “he”—the business?
+          </p>
+
+          <p>
+            <strong>TL:</strong> What business? The PM, obviously. I have started noticing that my developers are increasingly reluctant to take a ticket when it requires them to think, investigate, or make a judgment. Something is wrong. (He turns his glass in frustration.)
+          </p>
+
+          <p>
+            <strong>PM:</strong> Wait, I think I remember what that is called: learned helplessness. We covered it in some motivation course. Let me search. Here: in a state of learned helplessness, a person experiencing discomfort, pain, or other negative factors does not try to improve the situation, even when improvement is possible.
+          </p>
+
+          <p>
+            Look at this. (He shows TL his phone.) According to Martin Seligman, learned helplessness in people is accompanied by a loss of freedom and control, disbelief in the possibility of change and in their own abilities, weakened will, depression, and in extreme cases even death. We may have just uncovered the great mystery of rapid burnout in IT.
+          </p>
+
+          <h2>Business Suffers from IT</h2>
+
+          <p>
+            <strong>Act Three.</strong> The same group steps outside the bar for some air.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Tell me something. In the past, programmers handled development. How did that turn into several separate roles? Now you ask the business for a business analyst, a systems analyst, and naturally a tester. All of that for work that one person used to perform. I will not even start on designers.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Everyone should do their own job. I write code. The rest is not my responsibility. Gathering business requirements certainly is not, and neither is thinking on behalf of the business.
+          </p>
+
+          <p>
+            <strong>TL</strong> (to PM): Do you not think projects have become more complex while the business still wants everything yesterday?
+          </p>
+
+          <p>
+            <strong>PM:</strong> How did people manage before? I do not mean you two specifically—I mean leads and developers. Team leads barely existed until recently. Where did they come from?
+          </p>
+
+          <p>
+            <strong>TL:</strong> We all know where. (He laughs.)
+          </p>
+
+          <p>
+            <strong>PM</strong> (thinking aloud): We are confidently moving toward microservices with clearly defined areas of responsibility, so projects should theoretically become simpler. I still do not understand. Do you not think that expanding teams has slowed down the delivery of change? A more experienced colleague told me that they once implemented entire ERP subsystems in a few days, without analysts or testers. Today the same work would take months.
+          </p>
+
+          <p>
+            And there were certainly no more defects than we would produce now.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Writing bad code does not require much intelligence.
+          </p>
+
+          <p>
+            <strong>TL:</strong> And you do not write any bad code today?
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Oh, forget it.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Fine, suppose you are right. Products must have become better, then. Releases must be free of bugs. And overloaded interfaces definitely do not exist in 2025.
+          </p>
+
+          <p>
+            DEV, TL, and PM silently watch an expensive car pass by.
+          </p>
+
+          <p>
+            <strong>PM</strong> (breaking the silence): Understand me correctly. I am not against analysts or testers. I object when developers deliberately put on blinders and become helpless whenever those analysts and testers are unavailable. Focusing only on code may work when you are implementing algorithms, but it creates problems when you encounter business requirements.
+          </p>
+
+          <p>
+            <strong>TL:</strong> I know one head of engineering who divides developers into coders and business programmers.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Good luck recruiting those.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Did I say “head of engineering” instead of “team lead”?
+          </p>
+
+          <p>
+            <strong>PM:</strong> Got you. (He laughs.)
+          </p>
+
+          <p>
+            <strong>TL:</strong> I may agree that adding more roles makes communication harder and extends delivery times. Try getting everyone into the same sync or grooming session. I attend so many meetings across different projects that my brain sometimes melts and I confuse them. Once or twice, I even created tasks in the wrong project. People implemented them and the business accepted the result. Funny.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Do not worry. Sometimes I have no idea what I am doing, but the lead seems happy.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Naturally. Every employee performing part of the work once handled by a programmer now reports as an isolated unit. Where do you think pointless features, security gaps, and interfaces designed for highly technical users come from? I am convinced that staff expansion and the division of work into micro-roles are the main reasons for chaotic systems and interfaces—not managers.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Slow down. Management has also been divided into micro-roles. You do not consider that a problem?
+          </p>
+
+          <p>
+            <strong>PM:</strong> Hmm. Perhaps that contributes too.
+          </p>
+
+          <h2>A Sprint as an Excuse to Demand More</h2>
+
+          <p>
+            <strong>Act Four.</strong> The group returns to the bar to finish eating and drinking before heading home.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> I often feel that the only thing PMs care about is the deadline. You have pushed us into sprints whose endings feel like small deaths. The closer we get to the end, the more often you ask, “When? When?” Pressure, pressure, pressure. One of my former team leads liked to say that, according to the laws of physics, everything gets worse under pressure.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Exactly. Then the retrospective becomes an exercise in shifting responsibility for missed deadlines onto us.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Come on. We ask you for estimates, you calculate something, and you give us dates. Why become offended when we return after those dates and ask for the result?
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Of course we estimate. The problem comes afterward.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Afterward, the PM decides the estimate is unacceptable and asks us to deliver a small part of the task or project in half the time—sometimes even sooner. The estimate for that smaller piece is no longer proportional because we estimated the whole task, not an isolated fragment.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Yet they expect a complete product within that half-window.
+          </p>
+
+          <p>
+            <strong>PM:</strong> I think you are exaggerating.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Are you saying this has never happened to you?
+          </p>
+
+          <p>
+            A waiter interrupts the conversation. The group pays and starts getting ready to leave.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> The only thing left for me is to spend evenings and weekends building monstrous workarounds. Just thinking about it makes me shiver. Maybe I should change jobs. I am getting tired of this.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Yes—overtime or the door.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> You can hold as many meetings as you like and draw as many diagrams as you want, but sooner or later you will come to me and say, “Start digging.” Preferably yesterday, because you have already spent so much time discussing it. Your discussions can sometimes be shortened or replaced with documentation. My work cannot be replaced. There is no substitute for hard work here.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Yes, but my PM does not understand that you can sometimes make people work more, while you cannot make them think faster. That creates a closed loop: overtime does not help, so we add more overtime, and everyone becomes completely dissatisfied.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Many people I know call this “putting an elephant into a box.” It is depressing, but what if it produces results?
+          </p>
+
+          <p>
+            <strong>TL:</strong> Over what horizon? Once, perhaps. Over the long term, I doubt it.
+          </p>
+
+          <p>
+            They enter the metro and stand silently on the escalator.
+          </p>
+
+          <h2>Ignoring Technical Debt</h2>
+
+          <p>
+            <strong>Act Five.</strong> The same group is travelling home in a metro carriage.
+          </p>
+
+          <p>
+            <strong>TL:</strong> PM, tell me something. Why does the business refuse to take technical debt seriously?
+          </p>
+
+          <p>
+            <strong>PM:</strong> Business is moving forward at a crazy pace. We need features, and users may need them too. There is simply no time for your technical debt.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> It is funny when the business does not even know the debt exists.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Let us be honest. Your technical debt is not particularly interesting to us because we think in categories such as “bad code does not make money; good code does.” What happens under the hood is not really our concern. The business assumes that six months from now your code, whatever its quality, may no longer be needed.
+          </p>
+
+          <p>
+            <strong>TL:</strong> Interesting. Have you considered whose debt it is?
+          </p>
+
+          <p>
+            <strong>PM:</strong> Obviously yours. It is called technical debt. Find time to fix it wherever you can. You created the problem, so you repair it.
+          </p>
+
+          <p>
+            <strong>TL:</strong> I consider it a debt the business owes to IT because we had to deliver urgently while ignoring software engineering principles, quality, and patterns.
+          </p>
+
+          <p>
+            <strong>PM:</strong> I can already imagine you going to the CEO and saying, “We have technical debt, but it is not ours—it is yours. Give us capacity, budget, and priority.”
+          </p>
+
+          <p>
+            <strong>TL:</strong> It is called debt for a reason. At some point, someone will demand repayment, and nobody is likely to forgive it. Worst of all, repayment may be demanded at two in the morning during the peak sales season. The consequences will affect everyone, but the business will suffer first. I think a CEO would understand that framing.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> I absolutely love fixing production workarounds at night.
+          </p>
+
+          <p>
+            <strong>PM:</strong> Yes, it clearly hits the business first. (He looks at the metro map and thinks.) Following that logic, is there such a thing as business debt—debt that IT owes to the business?
+          </p>
+
+          <p>
+            <strong>TL:</strong> Of course. We usually call it the project portfolio.
+          </p>
+
+          <p>
+            <strong>DEV:</strong> Nice wordplay. Maybe business and IT should agree on terminology before opening the black box labelled “development.”
+          </p>
+
+          <p>
+            <strong>PM:</strong> The problems of our world are communication problems, not failures to follow instructions. What a mess.
+          </p>
+
+          <p>
+            TL gets off at his station. PM and DEV look at their phones.
+          </p>
+
+          <h2>How We Adapt Agile</h2>
+
+          <p>
+            Our characters have highlighted several painful issues. Now let us look at what can be done about them. One point is important: we do not worship Agile or try to turn the organization into a model Agile company. Our goal is to make the company resilient to change and adaptable to customer needs.
+          </p>
+
+          <p>
+            To achieve this, we developed a flow that we follow when delivering projects. Teams may adapt individual elements of the flow to the specific characteristics of their services, projects, and products.
+          </p>
+
+          <h3>High-Level Flow</h3>
+
+          <blockquote>
+            <p>What do you want: to win or not to lose?</p>
+            <p>What is the difference?</p>
+            <p>Those are two different strategies.</p>
+          </blockquote>
+
+          <p>
+            Strategically, tasks can be divided into three categories: protecting market share, increasing market share, and creating a new market.
+          </p>
+
+          <p>
+            Work in these categories is usually represented as projects or products and prioritized during dedicated meetings. Each engineering area has capacity allocated to different categories. For example, 20% may be assigned to technical debt, 40% to strategic projects, and 40% to medium-sized projects. Work within each allocation is prioritized using many criteria: money, reputation, convenience, deadlines, and others.
+          </p>
+
+          <p>
+            The most important point is that representatives of both business functions and IT participate in prioritization.
+          </p>
+
+          <p>
+            Technical debt can be treated as a retention activity because customer satisfaction directly depends on the stability and quality of existing systems. It can also be treated as growth work when the number of customers the company can serve is constrained by the capabilities of its information systems. The business understands that technical debt does not appear from nowhere. It often results from delivering under extreme time pressure or from changes in business processes.
+          </p>
+
+          <p>
+            Time must therefore be allocated to closing these gaps. Such discussions are one of the key points of interaction between business and IT.
+          </p>
+
+          <p>
+            For IT, the selected initiatives are represented as large umbrella epics. Their combination, adjusted for priority, becomes the roadmap for an area, department, or group. Every team therefore understands the approximate amount of work expected by particular periods, including technical-debt work.
+          </p>
+
+          <p>
+            When a project contains several stages, we perform another exercise: we draw a high-level implementation plan as a Gantt chart. This is particularly useful for identifying critical paths. A small project can immediately be divided from one umbrella epic into sub-epics or stories. An extremely large project is divided into phases or milestones, each of which is treated as a separate project within the same flow.
+          </p>
+
+          <blockquote>
+            <p>Plans are useless, but planning is indispensable. — Dwight D. Eisenhower</p>
+          </blockquote>
+
+          <p>
+            The tasks themselves are then implemented using Agile practices chosen by the team. One team may use Scrum, another Kanban, and a third—such as mine—may combine both. In that model, the sprint acts as a mini-milestone while tasks move through Kanban inside it.
+          </p>
+
+          <p>
+            The benefit is that business functions can manage deadlines at a high level or drill down as far as a specific task. In practice, umbrella epics and Gantt charts are usually sufficient. IT teams receive clear boundaries and timeframes, which helps them organize and synchronize work, especially across domains.
+          </p>
+
+          <p>
+            The idea can be summarized as follows: you know what must be done; decide for yourselves how to do it. You are professionals, and we trust you.
+          </p>
+
+          <p>
+            When questions, difficulties, or proposals appear during implementation, we can return to the business—for example, to reprioritize work or reduce project scope. Business teams often meet us halfway, and we return the favor when something new must be delivered that was not discussed at the beginning. Business listens to us, and we listen to the business, especially when “meteorites” appear.
+          </p>
+
+          <p>
+            Meteorites are urgent, unplanned tasks. They are often caused by regulatory changes or reactions to feedback from customers and operational functions that influence delivery speed and the handover of long-awaited orders.
+          </p>
+
+          <blockquote>
+            <p>What killed the dinosaurs: one asteroid or a shower of meteorites?</p>
+            <p>Now I am no longer sure.</p>
+          </blockquote>
+
+          <h3>Activities</h3>
+
+          <p>
+            Let us look briefly at the activities that accompany almost every project. As mentioned earlier, a team usually works on several projects at once, including technical-debt initiatives.
+          </p>
+
+          <p>
+            These activities are not carved in stone. If I believe the team should finish important tasks instead of holding a retrospective, demo, or another meeting, I will cancel the activity or ask specific people to skip it. The main rule I recommend for every meeting is to involve only the minimum necessary number of people.
+          </p>
+
+          <p>
+            Activities that require complex technical decisions are better scheduled during the first half of the day. Our cognitive performance begins to decline around 11:30, and the period after 14:00 is more suitable for less demanding work. The time around 18:00 can be effective for generating new ideas.
+          </p>
+
+          <p>
+            Retrospectives and demos work well on Friday evenings. By the end of the week, people have less appetite for routine work and are already thinking about the weekend, so the element of a show fits naturally. This timing also helps the team end the working week on a positive note.
+          </p>
+
+          <p>
+            The golden rule is simple: do not take your engineering team’s most productive development time away from them.
+          </p>
+
+          <p>
+            <strong>Kickoff meeting.</strong> Agree on project goals, success criteria, and stopping criteria. Align the views of IT and business one final time. IT naturally focuses more on requirements, the project vision, and risks visible from the technical side. Project goals generally come from the business.
+          </p>
+
+          <p>
+            <strong>Presentation to the engineering team.</strong> Help the team understand the project and involve engineers in its business purpose. Do not forget designers: they need to be immersed in the project from the beginning. I have seen companies involve designers only near the end and then discover major UX problems that required serious rework.
+          </p>
+
+          <p>
+            <strong>Epic or story grooming with the business.</strong> Questions usually emerge after the initial presentation and can be resolved with business stakeholders. Focus on “what,” not “how.” Do not discuss technical implementation at this stage.
+          </p>
+
+          <p>
+            <strong>Task grooming with the engineering team.</strong> Discuss the technical options for implementation and focus on “how.” Prefer proven solutions and technologies. The amount of work should be as small as possible while the effect remains predictable.
+          </p>
+
+          <p>
+            <strong>Dailies.</strong> Hold regular short meetings of no more than fifteen minutes for project participants. Synchronize, share progress and new information, and make problems visible. An interrogation built around “what did you do and what will you do?” is not our preferred format. It is better to discuss open questions and obstacles. The facilitator should watch the time and stop arguments; a separate meeting can be arranged when a debate needs more space.
+          </p>
+
+          <p>
+            Frequency depends on project complexity—from every day to several times per week—but at least one meeting should fall on Monday.
+          </p>
+
+          <p>
+            <strong>Demo.</strong> Present work results to business functions and future users to collect feedback and suggestions. A demo can also show ideas and work in progress, allowing feedback before final implementation. In effect, it can become a place for discussing open or controversial questions with the business and end users.
+          </p>
+
+          <p>
+            <strong>Phase retrospective.</strong> Review mistakes, especially after a demo. Collect problems and suggestions from the project team for improving the development process.
+          </p>
+
+          <p>
+            <strong>Ad hoc meetings.</strong> Use these to solve urgent problems with only the necessary participants. They can also accelerate code review. Do not overuse them, particularly when developers are involved, or people will spend the entire day in meetings instead of writing code.
+          </p>
+
+          <p>
+            <strong>Project closure.</strong> Close the project during the same business meetings where umbrella epics are prioritized—ideally to enthusiastic applause. After major projects, hold a retrospective with the customers and discuss openly what could have been done better.
+          </p>
+
+          <p>
+            The ability to voice real problems without political decoration genuinely improves the process. That is why interaction between business and IT should be as transparent as possible.
+          </p>
+
+          <h2>Instead of a Retrospective</h2>
+
+          <p>
+            Let us look once more at the Agile Manifesto, this time through the lens of adaptation.
+          </p>
+
+          <h3>1. Pay Attention to People and to the Tools They Use</h3>
+
+          <ul>
+            <li>People create products for other people—different people, sometimes very different people.</li>
+            <li>People should not waste time on unnecessary bureaucracy. Follow Lean’s principle of eliminating waste.</li>
+            <li>Professionals need professional tools. When suitable tools cannot be bought, allocate resources to build them.</li>
+          </ul>
+
+          <h3>2. Aim for a Working Product That Users Can Use and Developers Can Support</h3>
+
+          <ul>
+            <li>The product must address real user needs.</li>
+            <li>The interface should follow a familiar standard, be common within the company, or be supported by documentation.</li>
+            <li>A developer from another team should need as little time as possible to understand the project. Standard service templates, current documentation, and shared company practices help.</li>
+            <li>Work with the customer and record agreements to improve collaboration.</li>
+          </ul>
+
+          <h3>3. The Customer Has Responsibilities as Well as Rights</h3>
+
+          <p>
+            Responsibilities may include responding to the team’s observations and proposals, clarifying unknowns, and testing the results of development.
+          </p>
+
+          <ul>
+            <li>An agreement is a documented result of negotiation: a portal article, a properly described task, an addendum to a contract, or another durable artifact.</li>
+            <li>Use a win-win approach. Recognize the interests of both the business and the engineering team. There are people on both sides.</li>
+            <li>Create a development plan, but reserve time for change.</li>
+            <li>Follow the tree principle: a solid foundation in the roots and flexible processes in the branches.</li>
+            <li>Separate business requirements by necessity and criticality. The situation is rarely as simple as it first appears.</li>
+            <li>Sometimes you need to say no, and that is normal.</li>
+          </ul>
+
+          <p>
+            Agile is not a cure-all. It is not a truth carved in stone that must be followed without question. Agile is only a manifesto—a philosophy formulated in the mountains by a small group of people. Its purpose is to help you reach the main goal: creating value for the user. Nothing more.
+          </p>
+
+          <p>
+            There is nothing wrong with being unable to use it on some projects or combining it with other methods on others.
+          </p>
+
+          <p>
+            Your toolbox contains more than a hammer, and not everything around you is necessarily a nail.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Anton Kurakin.</p>
+      <a href="../index.html">Home</a>
+    </footer>
+  </body>
+</html>

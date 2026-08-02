@@ -12,7 +12,8 @@ Personal static website for GitHub Pages with Russian and English content. No si
 - `ru/articles/<slug>.html` and `en/articles/<slug>.html` - internal article pages.
 - `.nojekyll` - disables Jekyll processing on GitHub Pages.
 - `assets/styles.css` - responsive visual design.
-- `assets/script.js` - language data and rendering.
+- `assets/script.js` - editable language data and rendering source.
+- `assets/script.min.js` - minified production script loaded by the HTML pages.
 - `assets/img/` - local images and placeholders. `source-home-hero.png` is migrated from the previous site homepage.
 - `assets/img/experience-portrait.jpg` - migrated from the previous About page.
 - `assets/img/logo-icon.svg` - current header, favicon, and social icon.
@@ -23,6 +24,12 @@ Personal static website for GitHub Pages with Russian and English content. No si
 
 Most editable text lives in `assets/script.js` inside the `languages` object.
 To add another language, copy the `ru` or `en` object, change the key, and add translated content.
+
+After changing `assets/script.js`, regenerate the production file:
+
+```powershell
+npx --yes terser@5 assets/script.js --compress --mangle --output assets/script.min.js
+```
 
 Article content is stored in:
 

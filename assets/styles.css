@@ -842,6 +842,7 @@ h3 {
 .article-hero h1 {
   font-size: 4rem;
   margin-bottom: 22px;
+  overflow-wrap: anywhere;
 }
 
 .article-back-link {
@@ -887,9 +888,32 @@ h3 {
   margin-top: 52px;
 }
 
+.article-content h3 {
+  font-size: 1.45rem;
+  margin-top: 38px;
+}
+
 .article-content p,
 .article-content li {
   color: var(--ink-soft);
+}
+
+.article-content blockquote {
+  border-left: 3px solid var(--amber);
+  margin: 32px 0;
+  padding-left: 22px;
+}
+
+.article-content blockquote p {
+  font-size: 1.15rem;
+  margin-bottom: 0;
+}
+
+.article-content pre {
+  background: var(--ink);
+  color: #ffffff;
+  overflow-x: auto;
+  padding: 18px 20px;
 }
 
 .article-content li + li {
@@ -1010,6 +1034,10 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .article-hero h1 {
+    font-size: 3rem;
+  }
+
   .contact-panel {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1114,7 +1142,7 @@ h3 {
   }
 
   .article-hero h1 {
-    font-size: 2.55rem;
+    font-size: 2.2rem;
   }
 
   .article-summary {
