@@ -5,8 +5,9 @@ const languages = {
       title: "Антон Куракин - IT Leader и руководитель разработки",
       description:
         "Антон Куракин: IT Leader и руководитель разработки, цифровизация, enterprise-системы, управление IT-командами, проекты и статьи.",
-      projectsTitle: "Проекты - Антон Куракин",
-      projectsDescription: "Раздел проектов Антона Куракина обновляется.",
+      projectsTitle: "Проекты и программные продукты",
+      projectsDescription:
+        "Авторские программные продукты Антона Куракина. B-Maker объединяет планирование, написание, редактуру и подготовку книги к выпуску.",
       blogTitle: "Статьи и материалы - Антон Куракин",
       blogDescription:
         "Публикации, выступления и программы обучения Антона Куракина.",
@@ -56,7 +57,8 @@ const languages = {
       projectsPage: {
         eyebrow: "Проекты",
         title: "Проекты",
-        lead: "Раздел обновляется.",
+        lead:
+          "Авторские программные продукты: от идеи и архитектуры до работающего решения.",
       },
       experience: {
         eyebrow: "О себе",
@@ -514,8 +516,9 @@ const languages = {
       title: "Anton Kurakin - IT Leader and Engineering Executive",
       description:
         "Anton Kurakin: IT leadership, engineering management, digital transformation, enterprise systems, projects, and writing.",
-      projectsTitle: "Projects - Anton Kurakin",
-      projectsDescription: "Anton Kurakin's projects section is being updated.",
+      projectsTitle: "Software Projects and Products",
+      projectsDescription:
+        "Software products by Anton Kurakin. B-Maker brings book planning, writing, editing, and publishing preparation into one application.",
       blogTitle: "Writing and materials - Anton Kurakin",
       blogDescription:
         "Publications, talks, and training programs by Anton Kurakin.",
@@ -565,7 +568,8 @@ const languages = {
       projectsPage: {
         eyebrow: "Projects",
         title: "Projects",
-        lead: "This section is being updated.",
+        lead:
+          "Independent software products, from idea and architecture to a working solution.",
       },
       experience: {
         eyebrow: "About",

@@ -21,19 +21,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Раздел проектов Антона Куракина обновляется."
+      content="Авторские программные продукты Антона Куракина. B-Maker объединяет планирование, написание, редактуру и подготовку книги к выпуску."
     >
-    <meta name="robots" content="noindex,follow">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/b-maker-icon.png">
     <meta property="og:url" content="https://kurakin.pro/projects.html">
-    <meta property="og:title" content="Проекты - Антон Куракин">
+    <meta property="og:title" content="Проекты и программные продукты">
     <meta
       property="og:description"
-      content="Раздел проектов обновляется."
+      content="B-Maker и другие авторские программные продукты: от идеи и архитектуры до работающего решения."
     >
-    <title>Проекты - Антон Куракин</title>
+    <title>Проекты и программные продукты</title>
     <link rel="canonical" href="https://kurakin.pro/projects.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects.html">
+    <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects.html">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "B-Maker",
+        "url": "https://b-maker.kurakin.pro/",
+        "image": "https://kurakin.pro/assets/img/b-maker-icon.png",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Windows, Web",
+        "description": "Приложение для планирования, написания, редактирования и подготовки книг к выпуску.",
+        "author": {
+          "@type": "Person",
+          "@id": "https://kurakin.pro/#person",
+          "name": "Антон Куракин",
+          "url": "https://kurakin.pro/"
+        }
+      }
+    </script>
     <link rel="icon" href="assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/styles.css">
   </head>
@@ -62,11 +83,30 @@
     </header>
 
     <main id="main">
-      <section class="page-hero projects-empty">
+      <section class="page-hero">
         <div>
           <p class="eyebrow" data-i18n="projectsPage.eyebrow">Проекты</p>
           <h1 data-i18n="projectsPage.title">Проекты</h1>
-          <p data-i18n="projectsPage.lead">Раздел обновляется.</p>
+          <p data-i18n="projectsPage.lead">Авторские программные продукты: от идеи и архитектуры до работающего решения.</p>
+        </div>
+      </section>
+
+      <section class="section muted" aria-label="Авторские проекты">
+        <div class="project-showcase">
+          <article class="project-card project-card--featured">
+            <div class="project-brand-media">
+              <img src="assets/img/b-maker-icon.png" alt="Логотип B-Maker" width="512" height="512">
+            </div>
+            <div class="project-body">
+              <h2>B-Maker</h2>
+              <p>
+                Приложение для планирования, написания, редактирования и подготовки книг к выпуску. Рукопись, версии, персонажи и сюжет хранятся в одном переносимом проекте.
+              </p>
+              <div class="project-actions">
+                <a class="button project-action" href="projects/b-maker.html">Подробнее</a>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
     </main>
