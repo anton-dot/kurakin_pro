@@ -271,6 +271,37 @@ h3 {
   margin-top: 32px;
 }
 
+.resume-downloads {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.resume-downloads-label {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-weight: 780;
+  margin-right: 4px;
+}
+
+.button.resume-download {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--ink);
+  padding: 10px 14px;
+}
+
+.button.resume-download:hover {
+  border-color: var(--teal-dark);
+  color: var(--teal-dark);
+}
+
+.resume-download span {
+  margin-left: 8px;
+}
+
 .button {
   align-items: center;
   border: 1px solid transparent;
@@ -467,6 +498,7 @@ h3 {
 }
 
 .project-showcase {
+  align-items: stretch;
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -474,7 +506,9 @@ h3 {
 }
 
 .project-card--featured {
-  display: flex;
+  display: grid;
+  grid-template-rows: 190px minmax(0, 1fr);
+  height: 100%;
 }
 
 .project-card--featured .project-brand-media {
@@ -482,7 +516,6 @@ h3 {
   background: #071426;
   display: flex;
   justify-content: center;
-  min-height: 190px;
   padding: 28px;
 }
 
@@ -496,8 +529,19 @@ h3 {
   width: 100%;
 }
 
+.project-card--featured .project-brand-media--menglish {
+  background: #f3f0ff;
+}
+
 .project-card--featured .project-body {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 0;
   padding: 24px;
+}
+
+.project-card--featured .project-actions {
+  margin-top: 0;
 }
 
 .project-card--featured h2 {
@@ -709,6 +753,36 @@ h3 {
 
 .project-detail-cta .button {
   flex: 0 0 auto;
+}
+
+.store-badges {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.store-badge-link {
+  align-self: flex-start;
+  border-radius: 6px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  outline-offset: 3px;
+}
+
+.store-badge-link img {
+  display: block;
+  height: 48px;
+  object-fit: contain;
+  width: auto;
+}
+
+.project-store-actions {
+  align-items: flex-end;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 12px;
 }
 }
 
@@ -1442,8 +1516,11 @@ h3 {
   }
 
   .project-card--featured .project-brand-media {
-    min-height: 168px;
     padding: 24px;
+  }
+
+  .project-card--featured {
+    grid-template-rows: 168px minmax(0, 1fr);
   }
 
   .project-card--featured .project-brand-media img {
@@ -1473,7 +1550,7 @@ h3 {
   }
 
   .project-detail-hero h1 {
-    font-size: clamp(3.2rem, 18vw, 5.2rem);
+    font-size: 3rem;
   }
 
   .project-feature-grid,
@@ -1491,6 +1568,11 @@ h3 {
   }
 
   .project-detail-cta .button {
+    width: 100%;
+  }
+
+  .project-store-actions {
+    align-items: flex-start;
     width: 100%;
   }
 

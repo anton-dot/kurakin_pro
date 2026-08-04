@@ -7,7 +7,7 @@ const languages = {
         "Антон Куракин: IT Leader и руководитель разработки, цифровизация, enterprise-системы, управление IT-командами, проекты и статьи.",
       projectsTitle: "Проекты и программные продукты",
       projectsDescription:
-        "Авторские программные продукты Антона Куракина. B-Maker объединяет планирование, написание, редактуру и подготовку книги к выпуску.",
+        "Авторские программные продукты Антона Куракина: B-Maker для работы над книгами и игровая платформа изучения английского MEnglish.",
       blogTitle: "Статьи и материалы - Антон Куракин",
       blogDescription:
         "Публикации, выступления и программы обучения Антона Куракина.",
@@ -518,7 +518,7 @@ const languages = {
         "Anton Kurakin: IT leadership, engineering management, digital transformation, enterprise systems, projects, and writing.",
       projectsTitle: "Software Projects and Products",
       projectsDescription:
-        "Software products by Anton Kurakin. B-Maker brings book planning, writing, editing, and publishing preparation into one application.",
+        "Software products by Anton Kurakin: B-Maker for book creation and MEnglish for game-based English learning.",
       blogTitle: "Writing and materials - Anton Kurakin",
       blogDescription:
         "Publications, talks, and training programs by Anton Kurakin.",

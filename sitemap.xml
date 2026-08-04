@@ -50,6 +50,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/b-maker.html" />
   </url>
   <url>
+    <loc>https://kurakin.pro/projects/menglish.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/menglish.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/menglish.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/menglish.html" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/en/projects/menglish.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/menglish.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/menglish.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/menglish.html" />
+  </url>
+  <url>
     <loc>https://kurakin.pro/ru/articles/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />
