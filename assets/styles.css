@@ -533,6 +533,10 @@ h3 {
   background: #f3f0ff;
 }
 
+.project-card--featured .project-brand-media--callpub {
+  background: #e9f4f5;
+}
+
 .project-card--featured .project-body {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
