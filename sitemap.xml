@@ -74,6 +74,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/callpub.html" />
   </url>
   <url>
+    <loc>https://kurakin.pro/projects/cv-boost.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/cv-boost.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/cv-boost.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/en/projects/cv-boost.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/cv-boost.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/cv-boost.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" />
+  </url>
+  <url>
     <loc>https://kurakin.pro/ru/articles/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />
