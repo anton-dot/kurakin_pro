@@ -35,7 +35,7 @@
           navigator.language,
         ].map(normalize);
         const lang = candidates.find((candidate) => supported.includes(candidate)) ?? "ru";
-        window.location.replace(`${lang}/articles/index.html`);
+        window.location.replace(`${lang}/articles/`);
       })();
     </script>
   </head>
@@ -47,7 +47,7 @@
     <main class="redirect-page">
       <img src="assets/img/logo-icon.svg" alt="" width="48" height="48">
       <h1>Статьи / Articles</h1>
-      <p><a href="ru/articles/index.html">Русский</a> · <a href="en/articles/index.html">English</a></p>
+      <p><a href="/ru/articles/">Русский</a> · <a href="/en/articles/">English</a></p>
     </main>
   </body>
 </html>

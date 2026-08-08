@@ -1267,7 +1267,7 @@ const updateLocalizedArticleLinks = (lang) => {
   }
 
   document.querySelectorAll("[data-articles-link]").forEach((link) => {
-    link.href = `${lang}/articles/index.html`;
+    link.href = `/${lang}/articles/`;
   });
 };
 
