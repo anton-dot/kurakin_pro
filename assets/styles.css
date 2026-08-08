@@ -314,6 +314,13 @@ h3 {
   text-decoration: none;
 }
 
+.button-icon {
+  flex: 0 0 20px;
+  height: 20px;
+  margin-right: 8px;
+  width: 20px;
+}
+
 .button.primary {
   background: #ffffff;
   color: var(--ink);
