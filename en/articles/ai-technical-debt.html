@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why AI can accelerate technical debt as well as delivery when teams do not strengthen architecture, review, and testing discipline.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AI Can Create Technical Debt Faster Than We Can">
+    <meta property="og:description" content="Why AI can accelerate technical debt as well as delivery when teams do not strengthen architecture, review, and testing discipline.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/ai-technical-debt.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <title>AI Can Create Technical Debt Faster Than We Can - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/ai-technical-debt.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-technical-debt.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-technical-debt.html">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"AI Can Create Technical Debt Faster Than We Can","description":"Why AI can accelerate technical debt as well as delivery when teams do not strengthen architecture, review, and testing discipline.","inLanguage":"en","datePublished":"2026-08-09","dateModified":"2026-08-09","mainEntityOfPage":"https://kurakin-anton.ru/en/articles/ai-technical-debt.html","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}
+    </script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body class="article-page" data-page="article" data-lang="en">
+    <header class="site-header">
+      <a class="brand" href="../../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../index.html">Home</a><a href="../../projects.html">Projects</a><a href="../../experience.html">About</a><a href="index.html">Writing</a></nav>
+      <div class="lang-switcher" aria-label="Language switcher"><a href="../../ru/articles/ai-technical-debt.html">RU</a><a href="ai-technical-debt.html" aria-current="page">EN</a></div>
+    </header>
+    <main id="main">
+      <article>
+        <header class="article-hero">
+          <div class="article-hero-copy">
+            <a class="article-back-link" href="index.html">← All articles</a>
+            <p class="article-kicker"><time datetime="2026-08-09">August 9, 2026</time> · 4 min · note</p>
+            <h1>AI Can Create Technical Debt Faster Than We Can</h1>
+            <p class="article-summary">If a team can produce code faster without strengthening architecture, review, and testing, it also starts producing the consequences of weak decisions faster.</p>
+          </div>
+        </header>
+        <div class="article-content">
+          <p>AI has reduced the cost of producing a first version of code. Work that used to take hours can sometimes appear in minutes. That is good news. The bad news is that the cost of producing bad code has fallen too.</p>
+
+          <h2>The bottleneck moves</h2>
+          <p>When writing code is expensive, development speed naturally limits the number of changes entering a system. When generation becomes faster, the bottleneck moves away from typing and toward decision quality: architecture, context, tests, review, and the team's ability to maintain what it creates.</p>
+          <p>If those parts of the system do not improve, the team simply delivers future problems faster.</p>
+
+          <h2>Working code is not necessarily good code</h2>
+          <p>AI is especially convincing on a local task: the function works, the test passes, the interface looks fine. But technical debt often does not live inside one function. It appears in duplicated solutions, hidden dependencies, blurred boundaries, and dozens of small compromises across the system.</p>
+          <p>A model can solve one fragment well while missing the fact that the team is solving the same problem for the third time in three different ways.</p>
+
+          <h2>Code volume stops being an achievement</h2>
+          <p>If another thousand lines of code become cheap to produce, value shifts in the opposite direction: avoiding unnecessary code, reusing an existing solution, simplifying architecture, and deleting what is no longer needed.</p>
+          <p>In a world of cheap generation, a strong engineer is increasingly defined not by how much complexity they can create, but by how much complexity they prevent from entering the system.</p>
+
+          <h2>Review becomes more important, not less</h2>
+          <p>There is a temptation to treat AI-generated code as nearly finished. But if creation speed increases, review capacity becomes critical.</p>
+          <p>The review should go beyond syntax and obvious defects. Does the solution fit the architecture? Does it introduce a new pattern without need? Is component responsibility clear? Will the team understand and maintain this a year from now?</p>
+
+          <h2>Tests can create false confidence too</h2>
+          <p>AI can quickly generate tests for code it also generated. That is convenient, but a test that repeats the implementation's assumptions does not necessarily protect against misunderstanding the actual requirement.</p>
+          <p>Independent criteria therefore matter even more: behavioral contracts, product requirements, integration scenarios, and checks outside the generated implementation.</p>
+
+          <h2>Technical debt becomes a speed-management problem</h2>
+          <p>AI does not create technical debt by itself. Teams create it through decisions. AI simply increases the speed at which those decisions become real code.</p>
+          <p>If weak engineering discipline used to create problems slowly, it can now create them very efficiently.</p>
+
+          <h2>What changes for a CTO</h2>
+          <p>I would not restrict AI simply because quality might suffer. A better response is to strengthen the system receiving the output: architecture rules, automated checks, review, observability, test requirements, and clear ownership of maintenance.</p>
+          <p>AI accelerates code production. The technology leader's job is to make sure decision quality scales at least as quickly as generation speed.</p>
+        </div>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../../index.html">Home</a></footer>
+  </body>
+</html>
