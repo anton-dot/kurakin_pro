@@ -1,745 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>https://kurakin.pro/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/experience.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/experience.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/experience.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/experience.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/experience.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/experience.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/experience.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/experience.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/projects.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/projects.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/projects/b-maker.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/b-maker.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/b-maker.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/b-maker.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/projects/b-maker.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/b-maker.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/b-maker.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/b-maker.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/projects/menglish.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/menglish.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/menglish.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/menglish.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/projects/menglish.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/menglish.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/menglish.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/menglish.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/policy/menglish_policy.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/projects/callpub.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/callpub.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/callpub.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/callpub.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/projects/callpub.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/callpub.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/callpub.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/callpub.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/projects/cv-boost.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/cv-boost.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/cv-boost.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/projects/cv-boost.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/cv-boost.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/cv-boost.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/ai-interview-cheating.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-interview-cheating.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-interview-cheating.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/ai-interview-cheating.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-interview-cheating.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-interview-cheating.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/hiring-in-ai-era.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hiring-in-ai-era.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hiring-in-ai-era.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/hiring-in-ai-era.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hiring-in-ai-era.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hiring-in-ai-era.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/why-interviews-fail.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-interviews-fail.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-interviews-fail.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/why-interviews-fail.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-interviews-fail.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-interviews-fail.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/skills-over-job-titles.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/skills-over-job-titles.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/skills-over-job-titles.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/skills-over-job-titles.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/skills-over-job-titles.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/skills-over-job-titles.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/shadow-ai.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/shadow-ai.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/shadow-ai.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/shadow-ai.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/shadow-ai.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/shadow-ai.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/ai-agent-accountability.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-agent-accountability.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-agent-accountability.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/ai-agent-accountability.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-agent-accountability.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-agent-accountability.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/why-good-employees-leave.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-good-employees-leave.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-good-employees-leave.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/why-good-employees-leave.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-good-employees-leave.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-good-employees-leave.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/one-on-one-meetings.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/one-on-one-meetings.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/one-on-one-meetings.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/one-on-one-meetings.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/one-on-one-meetings.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/one-on-one-meetings.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/manage-smarter-people.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/manage-smarter-people.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/manage-smarter-people.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/manage-smarter-people.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/manage-smarter-people.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/manage-smarter-people.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/need-a-cto.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/need-a-cto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/need-a-cto.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/need-a-cto.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/need-a-cto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/need-a-cto.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/cto-vs-cio.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-cio.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-cio.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/cto-vs-cio.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-cio.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-cio.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/cto-vs-vp-engineering.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-vp-engineering.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-vp-engineering.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/cto-vs-vp-engineering.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-vp-engineering.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-vp-engineering.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/how-to-hire-cto.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-hire-cto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-hire-cto.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/how-to-hire-cto.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-hire-cto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-hire-cto.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/cto-interview-questions.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-interview-questions.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-interview-questions.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/cto-interview-questions.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-interview-questions.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-interview-questions.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/should-cto-code.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/should-cto-code.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/should-cto-code.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/should-cto-code.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/should-cto-code.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/should-cto-code.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/employee-initiative.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-initiative.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-initiative.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/employee-initiative.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-initiative.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-initiative.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/negative-feedback.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/negative-feedback.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/negative-feedback.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/negative-feedback.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/negative-feedback.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/negative-feedback.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/technical-debt-explained.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-explained.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-explained.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/technical-debt-explained.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-explained.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-explained.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/technical-debt-business.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-business.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-business.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/technical-debt-business.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-business.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-business.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/build-vs-buy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/build-vs-buy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/build-vs-buy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/build-vs-buy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/build-vs-buy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/build-vs-buy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/failing-it-project.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/failing-it-project.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/failing-it-project.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/failing-it-project.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/failing-it-project.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/failing-it-project.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/why-it-projects-fail.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-it-projects-fail.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-it-projects-fail.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/why-it-projects-fail.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-it-projects-fail.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-it-projects-fail.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/no-ai-strategy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/no-ai-strategy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/no-ai-strategy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/no-ai-strategy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/no-ai-strategy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/no-ai-strategy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/chatgpt-not-ai-strategy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/chatgpt-not-ai-strategy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/chatgpt-not-ai-strategy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/chatgpt-not-ai-strategy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/chatgpt-not-ai-strategy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/chatgpt-not-ai-strategy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/ai-pilot-problem.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-pilot-problem.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-pilot-problem.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/ai-pilot-problem.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-pilot-problem.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-pilot-problem.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/ai-business-value.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-business-value.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-business-value.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/ai-business-value.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-business-value.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-business-value.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/ai-technical-debt.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-technical-debt.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-technical-debt.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/ai-technical-debt.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-technical-debt.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-technical-debt.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/women-leadership.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/women-leadership.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/women-leadership.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/women-leadership.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/women-leadership.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/women-leadership.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/bhag-goals.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bhag-goals.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bhag-goals.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/career-tips.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/career-tips.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/career-tips.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/fractal-employee.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fractal-employee.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fractal-employee.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/employee-types.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-types.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-types.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/motivation-secrets.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-secrets.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-secrets.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/micromanagement.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/micromanagement.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/micromanagement.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/motivation-questions.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-questions.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-questions.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/coronavirus-business-test.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-test.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-test.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/fast-vs-smart-goals.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fast-vs-smart-goals.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fast-vs-smart-goals.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/managers-at-35.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managers-at-35.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managers-at-35.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/sunk-cost-decisions.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/sunk-cost-decisions.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/sunk-cost-decisions.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/covid-and-technology.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/covid-and-technology.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/covid-and-technology.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/remote-work-expectations.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-expectations.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-expectations.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/emotional-intelligence-resume.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/emotional-intelligence-resume.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/emotional-intelligence-resume.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/coronavirus-future-model.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-future-model.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-future-model.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/promotion-tips.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/promotion-tips.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/promotion-tips.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/salary-negotiation-confidence.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/salary-negotiation-confidence.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/salary-negotiation-confidence.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/managing-remote-teams.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managing-remote-teams.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managing-remote-teams.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/business-processes-in-isolation.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/business-processes-in-isolation.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/business-processes-in-isolation.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/company-strategy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/company-strategy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/company-strategy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/integrity-at-work.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/integrity-at-work.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/integrity-at-work.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/remote-work-productivity.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-productivity.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-productivity.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/coronavirus-business-lessons.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-lessons.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-lessons.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/schrodinger-work-week.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/schrodinger-work-week.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/schrodinger-work-week.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/still-working-moscow.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/still-working-moscow.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/still-working-moscow.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/hp-law.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hp-law.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hp-law.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/management-levels.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/management-levels.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/management-levels.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/expert-job-search.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/expert-job-search.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/expert-job-search.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/ai-mirror.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/adapt-agile-ozon.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/21-it-project-rules.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/ideal-it-specialist.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/future-of-work-challenges.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/future-of-work-trends.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/future-of-work-trends.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/future-of-work-trends.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/future-of-work-trends.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/future-of-work-trends.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/future-of-work-trends.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/employee-onboarding-games.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/it-staff-shortage.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/why-it-specialists-leave.html</loc>
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/bhag-goals.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bhag-goals.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bhag-goals.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/business-processes-in-isolation.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/business-processes-in-isolation.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/business-processes-in-isolation.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/career-tips.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/career-tips.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/career-tips.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/company-strategy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/company-strategy.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/company-strategy.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/coronavirus-business-lessons.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-lessons.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-lessons.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/coronavirus-business-test.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-test.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-test.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/coronavirus-future-model.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-future-model.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-future-model.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/covid-and-technology.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/covid-and-technology.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/covid-and-technology.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/emotional-intelligence-resume.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/emotional-intelligence-resume.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/emotional-intelligence-resume.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/employee-types.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-types.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-types.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/expert-job-search.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/expert-job-search.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/expert-job-search.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/fast-vs-smart-goals.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fast-vs-smart-goals.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fast-vs-smart-goals.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/fractal-employee.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fractal-employee.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fractal-employee.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/hp-law.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hp-law.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hp-law.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/integrity-at-work.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/integrity-at-work.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/integrity-at-work.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/management-levels.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/management-levels.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/management-levels.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/managers-at-35.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managers-at-35.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managers-at-35.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/managing-remote-teams.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managing-remote-teams.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managing-remote-teams.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/micromanagement.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/micromanagement.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/micromanagement.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/motivation-questions.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-questions.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-questions.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/motivation-secrets.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-secrets.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-secrets.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/promotion-tips.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/promotion-tips.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/promotion-tips.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/remote-work-expectations.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-expectations.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-expectations.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/remote-work-productivity.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-productivity.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-productivity.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/salary-negotiation-confidence.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/salary-negotiation-confidence.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/salary-negotiation-confidence.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/schrodinger-work-week.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/schrodinger-work-week.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/schrodinger-work-week.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/still-working-moscow.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/still-working-moscow.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/still-working-moscow.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/sunk-cost-decisions.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/sunk-cost-decisions.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/sunk-cost-decisions.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/how-to-evaluate-cto.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-evaluate-cto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-evaluate-cto.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/how-to-evaluate-cto.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-evaluate-cto.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-evaluate-cto.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/cto-first-90-days.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-first-90-days.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-first-90-days.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/cto-first-90-days.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-first-90-days.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-first-90-days.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/developer-productivity-metrics.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/developer-productivity-metrics.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/developer-productivity-metrics.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/developer-productivity-metrics.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/developer-productivity-metrics.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/developer-productivity-metrics.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/employees-stop-telling-truth.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employees-stop-telling-truth.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employees-stop-telling-truth.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/employees-stop-telling-truth.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employees-stop-telling-truth.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employees-stop-telling-truth.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/ru/articles/technology-due-diligence.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technology-due-diligence.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technology-due-diligence.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/articles/technology-due-diligence.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technology-due-diligence.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technology-due-diligence.html" />
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://kurakin.pro/</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/" /></url>
+  <url><loc>https://kurakin.pro/en/</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/" /></url>
+  <url><loc>https://kurakin.pro/experience.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/experience.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/experience.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/experience.html" /></url>
+  <url><loc>https://kurakin.pro/en/experience.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/experience.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/experience.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/experience.html" /></url>
+  <url><loc>https://kurakin.pro/projects.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects.html" /></url>
+  <url><loc>https://kurakin.pro/en/projects.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects.html" /></url>
+  <url><loc>https://kurakin.pro/projects/b-maker.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/b-maker.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/b-maker.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/b-maker.html" /></url>
+  <url><loc>https://kurakin.pro/en/projects/b-maker.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/b-maker.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/b-maker.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/b-maker.html" /></url>
+  <url><loc>https://kurakin.pro/projects/menglish.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/menglish.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/menglish.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/menglish.html" /></url>
+  <url><loc>https://kurakin.pro/en/projects/menglish.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/menglish.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/menglish.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/menglish.html" /></url>
+  <url><loc>https://kurakin.pro/policy/menglish_policy.html</loc></url>
+  <url><loc>https://kurakin.pro/projects/callpub.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/callpub.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/callpub.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/callpub.html" /></url>
+  <url><loc>https://kurakin.pro/en/projects/callpub.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/callpub.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/callpub.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/callpub.html" /></url>
+  <url><loc>https://kurakin.pro/projects/cv-boost.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/cv-boost.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/cv-boost.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" /></url>
+  <url><loc>https://kurakin.pro/en/projects/cv-boost.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/cv-boost.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/cv-boost.html" /><xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" /></url>
+  <url><loc>https://kurakin.pro/en/articles/</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/ai-interview-cheating.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-interview-cheating.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-interview-cheating.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/ai-interview-cheating.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-interview-cheating.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-interview-cheating.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/hiring-in-ai-era.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hiring-in-ai-era.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hiring-in-ai-era.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/hiring-in-ai-era.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hiring-in-ai-era.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hiring-in-ai-era.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/why-interviews-fail.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-interviews-fail.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-interviews-fail.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/why-interviews-fail.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-interviews-fail.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-interviews-fail.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/skills-over-job-titles.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/skills-over-job-titles.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/skills-over-job-titles.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/skills-over-job-titles.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/skills-over-job-titles.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/skills-over-job-titles.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/shadow-ai.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/shadow-ai.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/shadow-ai.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/shadow-ai.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/shadow-ai.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/shadow-ai.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/ai-agent-accountability.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-agent-accountability.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-agent-accountability.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/ai-agent-accountability.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-agent-accountability.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-agent-accountability.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/why-good-employees-leave.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-good-employees-leave.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-good-employees-leave.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/why-good-employees-leave.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-good-employees-leave.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-good-employees-leave.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/one-on-one-meetings.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/one-on-one-meetings.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/one-on-one-meetings.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/one-on-one-meetings.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/one-on-one-meetings.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/one-on-one-meetings.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/manage-smarter-people.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/manage-smarter-people.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/manage-smarter-people.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/manage-smarter-people.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/manage-smarter-people.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/manage-smarter-people.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/need-a-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/need-a-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/need-a-cto.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/need-a-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/need-a-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/need-a-cto.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/cto-vs-cio.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-cio.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-cio.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/cto-vs-cio.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-cio.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-cio.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/cto-vs-vp-engineering.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-vp-engineering.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-vp-engineering.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/cto-vs-vp-engineering.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-vs-vp-engineering.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-vs-vp-engineering.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/how-to-hire-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-hire-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-hire-cto.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/how-to-hire-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-hire-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-hire-cto.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/cto-interview-questions.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-interview-questions.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-interview-questions.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/cto-interview-questions.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-interview-questions.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-interview-questions.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/should-cto-code.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/should-cto-code.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/should-cto-code.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/should-cto-code.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/should-cto-code.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/should-cto-code.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/employee-initiative.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-initiative.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-initiative.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/employee-initiative.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-initiative.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-initiative.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/negative-feedback.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/negative-feedback.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/negative-feedback.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/negative-feedback.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/negative-feedback.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/negative-feedback.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/technical-debt-explained.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-explained.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-explained.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/technical-debt-explained.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-explained.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-explained.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/technical-debt-business.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-business.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-business.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/technical-debt-business.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technical-debt-business.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technical-debt-business.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/build-vs-buy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/build-vs-buy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/build-vs-buy.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/build-vs-buy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/build-vs-buy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/build-vs-buy.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/failing-it-project.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/failing-it-project.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/failing-it-project.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/failing-it-project.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/failing-it-project.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/failing-it-project.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/why-it-projects-fail.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-it-projects-fail.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-it-projects-fail.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/why-it-projects-fail.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/why-it-projects-fail.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/why-it-projects-fail.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/no-ai-strategy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/no-ai-strategy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/no-ai-strategy.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/no-ai-strategy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/no-ai-strategy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/no-ai-strategy.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/chatgpt-not-ai-strategy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/chatgpt-not-ai-strategy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/chatgpt-not-ai-strategy.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/chatgpt-not-ai-strategy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/chatgpt-not-ai-strategy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/chatgpt-not-ai-strategy.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/ai-pilot-problem.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-pilot-problem.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-pilot-problem.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/ai-pilot-problem.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-pilot-problem.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-pilot-problem.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/ai-business-value.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-business-value.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-business-value.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/ai-business-value.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-business-value.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-business-value.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/ai-technical-debt.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-technical-debt.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-technical-debt.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/ai-technical-debt.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-technical-debt.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-technical-debt.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/women-leadership.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/women-leadership.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/women-leadership.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/women-leadership.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/women-leadership.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/women-leadership.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/bhag-goals.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bhag-goals.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bhag-goals.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/career-tips.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/career-tips.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/career-tips.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/fractal-employee.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fractal-employee.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fractal-employee.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/employee-types.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-types.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-types.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/motivation-secrets.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-secrets.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-secrets.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/micromanagement.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/micromanagement.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/micromanagement.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/motivation-questions.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-questions.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-questions.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/coronavirus-business-test.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-test.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-test.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/fast-vs-smart-goals.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fast-vs-smart-goals.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fast-vs-smart-goals.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/managers-at-35.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managers-at-35.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managers-at-35.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/sunk-cost-decisions.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/sunk-cost-decisions.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/sunk-cost-decisions.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/covid-and-technology.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/covid-and-technology.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/covid-and-technology.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/remote-work-expectations.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-expectations.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-expectations.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/emotional-intelligence-resume.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/emotional-intelligence-resume.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/emotional-intelligence-resume.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/coronavirus-future-model.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-future-model.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-future-model.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/promotion-tips.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/promotion-tips.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/promotion-tips.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/salary-negotiation-confidence.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/salary-negotiation-confidence.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/salary-negotiation-confidence.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/managing-remote-teams.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managing-remote-teams.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managing-remote-teams.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/business-processes-in-isolation.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/business-processes-in-isolation.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/business-processes-in-isolation.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/company-strategy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/company-strategy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/company-strategy.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/integrity-at-work.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/integrity-at-work.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/integrity-at-work.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/remote-work-productivity.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-productivity.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-productivity.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/coronavirus-business-lessons.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-lessons.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-lessons.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/schrodinger-work-week.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/schrodinger-work-week.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/schrodinger-work-week.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/still-working-moscow.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/still-working-moscow.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/still-working-moscow.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/hp-law.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hp-law.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hp-law.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/management-levels.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/management-levels.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/management-levels.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/expert-job-search.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/expert-job-search.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/expert-job-search.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/ai-mirror.html</loc></url>
+  <url><loc>https://kurakin.pro/en/articles/adapt-agile-ozon.html</loc></url>
+  <url><loc>https://kurakin.pro/en/articles/21-it-project-rules.html</loc></url>
+  <url><loc>https://kurakin.pro/en/articles/ideal-it-specialist.html</loc></url>
+  <url><loc>https://kurakin.pro/en/articles/future-of-work-challenges.html</loc></url>
+  <url><loc>https://kurakin.pro/ru/articles/future-of-work-trends.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/future-of-work-trends.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/future-of-work-trends.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/future-of-work-trends.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/future-of-work-trends.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/future-of-work-trends.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/employee-onboarding-games.html</loc></url>
+  <url><loc>https://kurakin.pro/en/articles/it-staff-shortage.html</loc></url>
+  <url><loc>https://kurakin.pro/en/articles/why-it-specialists-leave.html</loc></url>
+  <url><loc>https://kurakin.pro/en/articles/bhag-goals.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bhag-goals.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bhag-goals.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/business-processes-in-isolation.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/business-processes-in-isolation.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/business-processes-in-isolation.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/career-tips.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/career-tips.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/career-tips.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/company-strategy.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/company-strategy.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/company-strategy.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/coronavirus-business-lessons.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-lessons.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-lessons.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/coronavirus-business-test.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-business-test.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-business-test.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/coronavirus-future-model.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/coronavirus-future-model.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/coronavirus-future-model.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/covid-and-technology.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/covid-and-technology.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/covid-and-technology.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/emotional-intelligence-resume.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/emotional-intelligence-resume.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/emotional-intelligence-resume.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/employee-types.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employee-types.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employee-types.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/expert-job-search.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/expert-job-search.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/expert-job-search.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/fast-vs-smart-goals.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fast-vs-smart-goals.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fast-vs-smart-goals.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/fractal-employee.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/fractal-employee.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/fractal-employee.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/hp-law.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hp-law.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hp-law.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/integrity-at-work.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/integrity-at-work.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/integrity-at-work.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/management-levels.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/management-levels.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/management-levels.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/managers-at-35.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managers-at-35.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managers-at-35.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/managing-remote-teams.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/managing-remote-teams.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/managing-remote-teams.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/micromanagement.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/micromanagement.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/micromanagement.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/motivation-questions.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-questions.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-questions.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/motivation-secrets.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/motivation-secrets.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/motivation-secrets.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/promotion-tips.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/promotion-tips.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/promotion-tips.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/remote-work-expectations.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-expectations.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-expectations.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/remote-work-productivity.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/remote-work-productivity.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/remote-work-productivity.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/salary-negotiation-confidence.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/salary-negotiation-confidence.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/salary-negotiation-confidence.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/schrodinger-work-week.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/schrodinger-work-week.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/schrodinger-work-week.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/still-working-moscow.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/still-working-moscow.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/still-working-moscow.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/sunk-cost-decisions.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/sunk-cost-decisions.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/sunk-cost-decisions.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/how-to-evaluate-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-evaluate-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-evaluate-cto.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/how-to-evaluate-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/how-to-evaluate-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/how-to-evaluate-cto.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/cto-first-90-days.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-first-90-days.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-first-90-days.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/cto-first-90-days.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cto-first-90-days.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cto-first-90-days.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/developer-productivity-metrics.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/developer-productivity-metrics.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/developer-productivity-metrics.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/developer-productivity-metrics.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/developer-productivity-metrics.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/developer-productivity-metrics.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/employees-stop-telling-truth.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employees-stop-telling-truth.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employees-stop-telling-truth.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/employees-stop-telling-truth.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/employees-stop-telling-truth.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/employees-stop-telling-truth.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/technology-due-diligence.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technology-due-diligence.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technology-due-diligence.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/technology-due-diligence.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technology-due-diligence.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technology-due-diligence.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/when-to-replace-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/when-to-replace-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/when-to-replace-cto.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/when-to-replace-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/when-to-replace-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/when-to-replace-cto.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/questions-for-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/questions-for-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/questions-for-cto.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/questions-for-cto.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/questions-for-cto.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/questions-for-cto.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/faster-code-same-delivery.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/faster-code-same-delivery.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/faster-code-same-delivery.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/faster-code-same-delivery.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/faster-code-same-delivery.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/faster-code-same-delivery.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/engineer-to-manager.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/engineer-to-manager.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/engineer-to-manager.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/engineer-to-manager.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/engineer-to-manager.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/engineer-to-manager.html" /></url>
+  <url><loc>https://kurakin.pro/ru/articles/manager-bottleneck.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/manager-bottleneck.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/manager-bottleneck.html" /></url>
+  <url><loc>https://kurakin.pro/en/articles/manager-bottleneck.html</loc><xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/manager-bottleneck.html" /><xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/manager-bottleneck.html" /></url>
 </urlset>
