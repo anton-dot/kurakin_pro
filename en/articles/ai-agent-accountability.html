@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Who is accountable when AI agents send messages, change data, or take actions on behalf of a company, and how to define ownership and limits.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AI Agents at Work: Who Is Accountable for Their Mistakes?">
+    <meta property="og:description" content="Why actions can be delegated to an AI agent but accountability cannot, and how to define ownership, autonomy, and control.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/ai-agent-accountability.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <title>AI Agents at Work: Who Is Accountable for Their Mistakes? - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/ai-agent-accountability.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-agent-accountability.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-agent-accountability.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Agents at Work: Who Is Accountable for Their Mistakes?","description":"Who is accountable when AI agents send messages, change data, or take actions on behalf of a company, and how to define ownership and limits.","inLanguage":"en","datePublished":"2026-02-23","dateModified":"2026-02-23","mainEntityOfPage":"https://kurakin-anton.ru/en/articles/ai-agent-accountability.html","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><a class="brand" href="../../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../index.html">Home</a><a href="../../projects.html">Projects</a><a href="../../experience.html">About</a><a href="index.html" aria-current="page">Writing</a></nav><div class="lang-switcher" aria-label="Language switcher"><a href="../../ru/articles/ai-agent-accountability.html">RU</a><a href="ai-agent-accountability.html" aria-current="page">EN</a></div></header>
+    <main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="index.html">All articles</a><p class="article-kicker"><time datetime="2026-02-23">February 23, 2026</time><span aria-hidden="true">·</span><span>5 min read</span></p><h1>AI Agents at Work: Who Is Accountable for Their Mistakes?</h1><p class="article-summary">When AI only gives advice, accountability is still easy to see. When an agent sends messages, changes data, or starts processes by itself, the question becomes harder: who owns the result?</p></div></header>
+      <article class="article-content">
+        <p>AI agents are moving from generating answers to taking actions. They can work with documents, systems, tasks, and communications on behalf of a person or team.</p>
+        <p>That is convenient until the first serious failure. Then one question appears very quickly: who actually made the decision?</p>
+
+        <h2>“The AI did it” is not an answer</h2>
+        <p>A company can automate an action, but accountability still remains inside the organization.</p>
+        <p>A customer, employee, or partner gets little value from being told that the wrong message was sent by an agent. From the outside, it is still an action taken by the company.</p>
+
+        <h2>Every agent needs an owner</h2>
+        <p>Not only the developer or technical team that connected the model.</p>
+        <p>There should be a business-process owner who understands why the agent exists, what it is allowed to do, and what outcome is acceptable.</p>
+        <p>If the owner cannot be named in one sentence, the agent may have received too much autonomy too early.</p>
+
+        <h2>Autonomy should match the cost of failure</h2>
+        <p>Not every action should require human approval. Otherwise automation loses much of its value.</p>
+        <p>But the boundary should depend on consequences. Drafting an internal note and independently changing payment details are completely different risk levels.</p>
+        <p>The higher the cost of failure, the stronger the limits, checks, and rollback options should be.</p>
+
+        <h2>You need to know what the agent actually did</h2>
+        <p>If a system acts autonomously, the company should be able to reconstruct the sequence: what information the agent received, what actions it took, and what led to those actions.</p>
+        <p>Without that, an investigation turns into a discussion about why “the model somehow decided” to do something.</p>
+
+        <h2>Human in the loop is not a universal solution</h2>
+        <p>The phrase sounds reassuring, but if a person must approve hundreds of actions each day, approval quickly becomes automatic.</p>
+        <p>Controls therefore need to be designed intentionally: which actions need approval, which only need logging, and which should be technically impossible.</p>
+
+        <h2>Do not spread accountability across IT, business, and the vendor</h2>
+        <p>A common failure pattern is that the business assumes IT owns the agent, IT assumes the business owns the rules, and both sides rely on the vendor's safeguards.</p>
+        <p>In that system, responsibility becomes visible only after an incident.</p>
+
+        <h2>Start with three questions</h2>
+        <ul>
+          <li>who owns the outcome produced by the agent;</li>
+          <li>which actions can the agent take without approval;</li>
+          <li>what happens when the agent is wrong.</li>
+        </ul>
+        <p>If any of these has no clear answer, it is too early to scale the agent.</p>
+
+        <h2>You can delegate action. You cannot delegate accountability</h2>
+        <p><strong>An AI agent can perform work instead of a person, but it does not become the subject of management accountability.</strong></p>
+        <p>The more autonomous systems become, the more important it is to define ownership, decision boundaries, and the cost of failure in advance. Otherwise the company automates not only work but confusion about responsibility.</p>
+      </article></main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../../index.html">Home</a></footer>
+  </body>
+</html>
