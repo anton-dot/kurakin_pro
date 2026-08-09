@@ -19,15 +19,15 @@
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CV Boost is a local-first Russian and English CV builder with six templates, ATS checks, PDF and Word export, and no registration.">
+    <meta name="description" content="CV Boost is a local-first workspace for CVs, cover letters, and interview tracking, with ATS checks, PDF and Word export, and no registration.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://kurakin.pro/assets/img/cv-boost-icon.png">
     <meta property="og:url" content="https://kurakin.pro/en/projects/cv-boost.html">
-    <meta property="og:title" content="CV Boost — a CV tailored to the role, not the template">
-    <meta property="og:description" content="Multilingual CVs, six layouts, local ATS checks, cover letters, and PDF and Word export.">
-    <title>CV Boost — Local-first CV Builder</title>
+    <meta property="og:title" content="CV Boost — CVs and interviews in one workspace">
+    <meta property="og:description" content="Multilingual CVs, cover letters, local interview tracking, ATS checks, and PDF and Word export.">
+    <title>CV Boost — CV Builder and Interview Tracker</title>
     <link rel="canonical" href="https://kurakin.pro/en/projects/cv-boost.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/cv-boost.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/cv-boost.html">
@@ -41,17 +41,19 @@
         "mainEntityOfPage": "https://kurakin.pro/en/projects/cv-boost.html",
         "image": "https://kurakin.pro/assets/img/cv-boost-icon.png",
         "applicationCategory": "BusinessApplication",
-        "applicationSubCategory": "Resume builder",
+        "applicationSubCategory": "Career management and resume builder",
         "operatingSystem": "Web",
         "browserRequirements": "A modern browser with PWA and local storage support.",
         "isAccessibleForFree": true,
-        "description": "A local-first Russian and English CV builder with six templates, ATS checks, and PDF and Word export.",
+        "description": "A local-first workspace for Russian and English CVs, cover letters, and interview tracking.",
         "featureList": [
           "Multiple CVs with independent Russian and English versions",
           "Six templates and three layout density modes",
           "Local completeness checks and ATS guidance",
           "PDF and Word export",
-          "Cover letters and portable backups",
+          "Cover letters",
+          "Portable backup export and import",
+          "Interview tracking with stages, meetings, questions, and outcomes",
           "Installable PWA with offline use after the first launch"
         ],
         "author": {
@@ -101,7 +103,7 @@
             <h1>CV Boost</h1>
           </div>
           <p class="project-detail-lead">
-            A CV tailored to the role, with control over structure, presentation, and ATS compatibility.
+            CVs, cover letters, and interviews in one local-first workspace for managing a job search.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://cv.kurakin.pro/" target="_blank" rel="noopener noreferrer">
@@ -115,14 +117,14 @@
         <div class="project-detail-inner project-intro">
           <div>
             <p class="eyebrow">About the product</p>
-            <h2 id="about-project-title">One profile, different CV versions</h2>
+            <h2 id="about-project-title">From CV creation to interview outcomes</h2>
           </div>
           <div class="project-intro-copy">
             <p>
-              CV Boost helps create and store multiple CVs, tailor them to different roles, and maintain separate Russian and English versions. The editor covers professional experience, projects, education, skills, languages, certificates, publications, and work preferences.
+              CV Boost supports the personal job-search workflow: create multiple CVs, tailor them to roles, prepare cover letters, and track interviews. Each company record can include the role, stages, meetings, questions, impressions, and final outcome.
             </p>
             <p>
-              Data is stored locally in the browser. The application requires no registration or dedicated server, and the installed PWA can be used offline after its first launch.
+              CVs, letters, and interview history are stored locally in the browser. The application requires no registration or dedicated server, and the installed PWA can be used offline after its first launch.
             </p>
           </div>
         </div>
@@ -131,7 +133,7 @@
       <section class="project-detail-section muted" aria-labelledby="features-title">
         <div class="project-detail-inner">
           <p class="eyebrow">Core features</p>
-          <h2 id="features-title">From content to a finished document</h2>
+          <h2 id="features-title">From content to the next stage</h2>
           <div class="project-feature-grid">
             <article class="project-feature-item">
               <span class="project-feature-index">01</span>
@@ -171,8 +173,22 @@
             <article class="project-feature-item">
               <span class="project-feature-index">06</span>
               <div>
+                <h3>Interview tracker</h3>
+                <p>Company, role, stage, status, meetings, questions, and impressions stay together with the submitted CV version.</p>
+              </div>
+            </article>
+            <article class="project-feature-item">
+              <span class="project-feature-index">07</span>
+              <div>
                 <h3>Portable backups</h3>
                 <p>CVs can be duplicated, exported to a portable backup file, and restored through the import flow.</p>
+              </div>
+            </article>
+            <article class="project-feature-item">
+              <span class="project-feature-index">08</span>
+              <div>
+                <h3>Local and registration-free</h3>
+                <p>Data stays in the browser, while the installed PWA continues to work offline after its first launch.</p>
               </div>
             </article>
           </div>
@@ -182,7 +198,7 @@
       <section class="project-detail-section" aria-labelledby="workspace-title">
         <div class="project-detail-inner">
           <p class="eyebrow">Workflow</p>
-          <h2 id="workspace-title">Prepare a CV without extra services</h2>
+          <h2 id="workspace-title">Manage a job search without extra services</h2>
           <div class="project-capability-list">
             <article class="project-capability">
               <h3>Content</h3>
@@ -194,12 +210,12 @@
               </ul>
             </article>
             <article class="project-capability">
-              <h3>Configuration</h3>
+              <h3>Interviews</h3>
               <ul>
-                <li>manual entry ordering;</li>
-                <li>reusable photo library;</li>
-                <li>reference lists and date pickers;</li>
-                <li>three layout density modes.</li>
+                <li>company, role, stage, and status;</li>
+                <li>multiple meetings with one company;</li>
+                <li>questions, impressions, and outcomes;</li>
+                <li>link to the submitted CV version.</li>
               </ul>
             </article>
             <article class="project-capability">
@@ -224,7 +240,7 @@
           <div class="project-technical-list">
             <article class="project-technical-item">
               <h3>Local-first</h3>
-              <p>CVs, photos, and letters are stored in the browser's local database and do not require a user account.</p>
+              <p>CVs, photos, letters, and interview history are stored in the browser's local database and do not require a user account.</p>
             </article>
             <article class="project-technical-item">
               <h3>Client-side export</h3>
@@ -246,7 +262,7 @@
         <div class="project-detail-cta-inner">
           <div>
             <h2 id="project-cta-title">Build a CV with CV Boost</h2>
-            <p>Open the application, choose a language and template, complete the profile, and export the finished document.</p>
+            <p>Prepare a CV and cover letter, then track interviews and next steps in the same application.</p>
           </div>
           <a class="button primary" href="https://cv.kurakin.pro/" target="_blank" rel="noopener noreferrer">
             Open CV Boost <span aria-hidden="true">↗</span>
