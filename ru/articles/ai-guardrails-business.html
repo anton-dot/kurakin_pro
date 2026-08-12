@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Зачем AI-продуктам guardrails, как ограничивать опасные действия, данные и стоимость и почему контроль должен быть частью архитектуры, а не только промпта.">
+    <meta name="author" content="Антон Куракин">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AI Guardrails: почему AI нельзя давать полную свободу даже при хорошей модели">
+    <meta property="og:description" content="Зачем AI-продуктам guardrails, как ограничивать опасные действия, данные и стоимость и почему контроль должен быть частью архитектуры, а не только промпта.">
+    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/ai-guardrails-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>AI Guardrails: почему AI нельзя давать полную свободу даже при хорошей модели - Антон Куракин</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/ai-guardrails-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-guardrails-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-guardrails-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Guardrails: почему AI нельзя давать полную свободу даже при хорошей модели","description":"Зачем AI-продуктам guardrails, как ограничивать опасные действия, данные и стоимость и почему контроль должен быть частью архитектуры, а не только промпта.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/ai-guardrails-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="ru">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="ai-guardrails-business.html" aria-current="page">RU</a><a href="../../en/articles/ai-guardrails-business.html">EN</a></div></header>
+    <main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>AI Guardrails: почему AI нельзя давать полную свободу даже при хорошей модели</h1><p class="article-summary">Чем больше AI умеет делать сам, тем важнее ограничения вокруг него. Guardrails — это не попытка сделать модель идеальной, а архитектурный способ ограничить последствия ошибки.</p></div></header>
+      <article class="article-content">
+        <p>У AI есть неприятное свойство: он может дать убедительный ответ даже тогда, когда ошибается. Пока модель только предлагает текст, цена ошибки ограничена. Когда она получает доступ к данным, инструментам и реальным действиям, последствия становятся другими.</p>
+        <p>Guardrails — это ограничения вокруг AI-системы: что ей разрешено видеть, что можно делать автоматически, где нужна проверка и какие бюджеты нельзя превышать.</p>
+        <h2>Какую проблему мы решаем</h2>
+        <p>Нельзя строить безопасность AI на предположении, что модель «достаточно умная» и всегда следует инструкции.</p>
+        <p>Архитектура должна исходить из того, что модель иногда ошибается, неправильно понимает контекст или выбирает нежелательное действие.</p>
+        <h2>Что получает бизнес</h2>
+        <p>Бизнес получает возможность использовать AI в более важных процессах, не превращая каждую ошибку модели в неограниченный финансовый или операционный риск.</p>
+        <p>Можно ограничить стоимость запроса, перечень доступных инструментов, классы данных, которые AI видит, суммы операций и действия, требующие подтверждения человеком.</p>
+        <p>Это позволяет расширять автоматизацию постепенно: сначала безопасные сценарии, затем более чувствительные по мере накопления доверия и контроля.</p>
+        <h2>Что получает команда</h2>
+        <p>Команда получает явные политики вокруг модели: фильтрацию входа и выхода, авторизацию инструментов, лимиты, аудит действий и точки human-in-the-loop.</p>
+        <p>Контроль перестаёт зависеть только от текста системного промпта.</p>
+        <h2>Что получает клиент</h2>
+        <p>Клиент получает более предсказуемый AI-продукт: меньше опасных действий, утечек чувствительных данных и неожиданных последствий автоматизации.</p>
+        <p>Иногда это означает дополнительное подтверждение или отказ выполнить часть запроса — это цена управляемости.</p>
+        <h2>Чем мы за это платим</h2>
+        <p>Цена — дополнительные правила, инфраструктура и ложные срабатывания. Слишком строгие ограничения могут сделать AI бесполезным, слишком мягкие — опасным.</p>
+        <p>Политики также нужно постоянно пересматривать по мере появления новых инструментов и сценариев.</p>
+        <h2>Когда guardrails особенно важны</h2>
+        <p>Чем ближе AI к деньгам, персональным данным, внешним коммуникациям и изменению реального состояния систем, тем меньше можно полагаться только на модель.</p>
+        <h2>Что стоит спросить перед решением</h2>
+        <ul><li>Какой худший результат ошибки модели?</li><li>Какие действия можно выполнять без подтверждения?</li><li>Какие данные модель вообще не должна видеть?</li><li>Какие лимиты стоимости и частоты нужны?</li><li>Есть ли полный аудит выполненных действий?</li></ul>
+        <h2>В итоге</h2>
+        <p><strong>Guardrails нужны не потому, что AI плох. Они нужны потому, что хороший AI становится достаточно полезным, чтобы дать ему реальные полномочия — а полномочия требуют границ.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+  </body>
+</html>
