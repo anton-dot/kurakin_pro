@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why a modular monolith can be a better business choice than moving to microservices too early: speed, cost of change, teams, and risk.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Modular Monolith: Why the Business May Be Better Off Not Moving to Microservices Yet">
+    <meta property="og:description" content="Modular monolith in business language: when modularity gives most of the needed benefits without paying the full price of a distributed system.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/modular-monolith-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Modular Monolith: Why the Business May Be Better Off Not Moving to Microservices Yet - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/modular-monolith-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/modular-monolith-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/modular-monolith-business.html">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Modular Monolith: Why the Business May Be Better Off Not Moving to Microservices Yet",
+        "description": "Why a modular monolith can be a better business choice than moving to microservices too early: speed, cost of change, teams, and risk.",
+        "inLanguage": "en",
+        "datePublished": "2026-08-12",
+        "dateModified": "2026-08-12",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kurakin-anton.ru/en/articles/modular-monolith-business.html"},
+        "author": {"@type": "Person", "name": "Anton Kurakin", "url": "https://kurakin-anton.ru/"},
+        "image": "https://kurakin-anton.ru/assets/img/article-notes.png"
+      }
+    </script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/modular-monolith-business.html">RU</a><a href="modular-monolith-business.html" aria-current="page">EN</a></div>
+    </header>
+
+    <main class="article-page" id="main">
+      <header class="article-hero">
+        <div class="article-hero-copy">
+          <a class="article-back-link" href="../architecture/index.html#foundations">Architecture foundations</a>
+          <p class="article-kicker"><span>5 min read</span></p>
+          <h1>Modular Monolith: Why the Business May Be Better Off Not Moving to Microservices Yet</h1>
+          <p class="article-summary">Microservices promise team independence and flexibility. But if the company has not yet hit the real limits of a monolith, a modular monolith can provide the control it needs at a much lower cost.</p>
+        </div>
+      </header>
+
+      <article class="article-content">
+        <p>“Monolith” is often treated almost like a diagnosis. As a system grows, the conversation quickly moves toward microservices: split the application, give teams independence, release changes separately.</p>
+        <p>The problem is that independence comes bundled with a distributed system: networks, separate deployments, observability, cross-service failures, data consistency, and much more operational work.</p>
+        <p>Sometimes the business genuinely needs that. Sometimes it simply needs one system with much better internal boundaries.</p>
+
+        <h2>What is a Modular Monolith?</h2>
+        <p>A Modular Monolith is still one application and is usually deployed as one unit. Internally, however, it is divided into clear modules with explicit boundaries and rules for interaction.</p>
+        <p>Orders, payments, catalog, and customers can all live in the same system without being allowed to reach freely into each other's internals.</p>
+        <p>The basic idea is simple: create architectural independence inside the application first, and only move selected modules into separate services later if there is a real reason to do so.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>A monolith is not a problem simply because there is only one application. It becomes a problem when boundaries disappear.</p>
+        <p>A change in one area unexpectedly breaks another. Several teams constantly touch the same code. Ownership becomes unclear. Extracting anything requires untangling years of dependencies.</p>
+        <p>A Modular Monolith tries to remove that coupling without buying network and infrastructure complexity before it is needed.</p>
+
+        <h2>What does the business get?</h2>
+        <p>The main business benefit is the ability to keep a simpler and relatively cheaper architecture for longer without blocking future product growth.</p>
+        <p>The company spends less on running a distributed system, while teams spend less time coordinating technical work across services.</p>
+        <p>That leaves more capacity for product change while the scale of the business still does not require something more complex.</p>
+        <p>There is another benefit: the move to microservices can stay incremental. If one module later becomes a scaling bottleneck, needs an independent release cycle, or gets its own autonomous team, it can be extracted without rewriting the entire system.</p>
+        <p>In other words, the business preserves the option to split later without paying for that complexity upfront.</p>
+
+        <h2>What does the team get?</h2>
+        <p>Teams get clear boundaries inside the system: where one module ends, where another begins, who owns what, and through which interfaces they are allowed to interact.</p>
+        <p>Development still remains simpler than in a microservice environment. Developers do not have to run dozens of services locally, investigate network timeouts, or maintain distributed tracing just to understand an ordinary business flow.</p>
+        <p>Transactions and data access are often simpler too because the system still runs in one process and can share one infrastructure platform.</p>
+        <p>But this only works with discipline. If modules exist on paper while code keeps reaching directly into anything it wants, the system will become the same tightly coupled monolith again.</p>
+
+        <h2>What does the customer get?</h2>
+        <p>The customer will almost never care whether the product uses a monolith or microservices. They care about how quickly improvements arrive and how reliably the product behaves.</p>
+        <p>If a simpler architecture lets the team deliver features faster and creates fewer failures at service boundaries, that is a real customer benefit.</p>
+        <p>Moving to microservices does not automatically make a product faster or more reliable. For a while, it may do exactly the opposite.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price of a Modular Monolith is the limitations of a shared system.</p>
+        <p>Individual modules cannot be scaled as freely as independent services. Using completely different technology stacks is harder. Releases often remain shared, and a serious problem in one process can potentially affect the entire application.</p>
+        <p>There is also an organizational risk: because everything lives in one application, teams may decide that crossing a boundary “just this once” is harmless. Enough of those exceptions eventually recreate a traditional large monolith.</p>
+
+        <h2>When should we start looking at microservices?</h2>
+        <p>Microservices become more reasonable when parts of the system genuinely need to live different lives.</p>
+        <ul>
+          <li>Different teams need truly independent release cycles.</li>
+          <li>Some parts need fundamentally different scaling.</li>
+          <li>A failure in one domain must not affect the others.</li>
+          <li>Modules have strongly different technology requirements.</li>
+          <li>A shared release process and codebase are already slowing the business down.</li>
+        </ul>
+        <p>The key word is <strong>already</strong>. Not “we may need this someday,” but the problem exists now and is costing the company money or speed.</p>
+
+        <h2>Questions to ask before choosing</h2>
+        <ul>
+          <li>Which specific problem in the monolith is hurting the business today?</li>
+          <li>Can modular boundaries solve it without distributing the system?</li>
+          <li>Do teams truly need independent releases?</li>
+          <li>Are there parts of the system with very different load profiles?</li>
+          <li>Is the organization ready to pay for observability, DevOps, and operating a distributed system?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>A Modular Monolith is not a compromise for teams that have not “grown up” enough for microservices.</p>
+        <p>It is a deliberate architecture choice: keep the simplicity of one system without letting it become an unstructured mass of dependencies.</p>
+        <p><strong>If the business does not yet need real service independence, microservices may not be the next level of maturity. They may simply be a more expensive way to solve a problem the company does not have yet.</strong></p>
+      </article>
+    </main>
+
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
