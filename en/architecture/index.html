@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="IT Architecture for Everyone: architecture patterns and decisions explained through their impact on business, teams, cost, risk, and customer experience.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IT Architecture for Everyone">
+    <meta property="og:description" content="Architecture decisions without unnecessary theory: what they give business, teams, and customers, and what they cost.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/architecture/">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <title>IT Architecture for Everyone - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/architecture/">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/architecture/">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/architecture/">
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="architecture" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin">
+        <img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42">
+        <span class="brand-text">Anton Kurakin</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../../en/index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../experience.html">About</a>
+        <a href="../articles/index.html">Writing</a>
+        <a href="../../en/index.html#contact">Contact</a>
+      </nav>
+      <div class="lang-switcher" aria-label="Language selection">
+        <a href="../../ru/architecture/index.html">RU</a>
+        <a href="index.html" aria-current="page">EN</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="section">
+        <div class="section-heading wide">
+          <div>
+            <p class="eyebrow">IT Architecture for Everyone</p>
+            <h1>Architecture without the technical translation layer</h1>
+          </div>
+          <p>What architecture decisions give the business, the company, teams, and customers — and what we have to pay for those benefits.</p>
+        </div>
+      </section>
+
+      <section class="section muted" aria-labelledby="start-title">
+        <div class="section-heading">
+          <p class="eyebrow">Start here</p>
+          <h2 id="start-title">Why should business care about IT architecture?</h2>
+          <p>A short introduction to the logic of this section: which questions to ask about any architecture decision and why its consequences matter as much as the technology itself.</p>
+        </div>
+        <div class="publication-list">
+          <article class="publication-item">
+            <div class="publication-meta"><time datetime="2026-08-12">August 12, 2026</time><span>2 min</span></div>
+            <div class="publication-copy">
+              <p class="publication-source">Kurakin.pro · introduction</p>
+              <h3><a href="../articles/it-architecture-for-business.html">Why Should Business Care About IT Architecture?</a></h3>
+              <p>Not to choose technologies instead of the CTO, but to understand how architecture affects speed of change, cost, risk, teams, and customer experience.</p>
+            </div>
+            <nav class="publication-versions" aria-label="Available language versions">
+              <a href="../../ru/articles/it-architecture-for-business.html">RU</a>
+              <a href="../articles/it-architecture-for-business.html" aria-current="true">EN</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="nav-title">
+        <div class="section-heading">
+          <p class="eyebrow">Navigation</p>
+          <h2 id="nav-title">Topics</h2>
+          <p>The section will grow by category. Jump directly to the type of architecture decision you are interested in.</p>
+        </div>
+        <div class="catalog-grid">
+          <article class="catalog-card"><h3><a href="#foundations">Architecture foundations</a></h3><p>Monoliths, modularity, microservices, system boundaries, and core architecture approaches.</p></article>
+          <article class="catalog-card"><h3><a href="#api">APIs and integrations</a></h3><p>REST, GraphQL, gRPC, API Gateway, BFF, webhooks, and system-to-system communication.</p></article>
+          <article class="catalog-card"><h3><a href="#events">Events and messaging</a></h3><p>Event-driven architecture, brokers, Kafka, Saga, Outbox, CQRS, and consistency.</p></article>
+          <article class="catalog-card"><h3><a href="#data">Data and databases</a></h3><p>Database selection, SQL and NoSQL, caching, replication, sharding, and consistency models.</p></article>
+          <article class="catalog-card"><h3><a href="#scale">Scaling and reliability</a></h3><p>Load balancing, autoscaling, fault tolerance, graceful degradation, and disaster recovery.</p></article>
+          <article class="catalog-card"><h3><a href="#cloud">Cloud and infrastructure</a></h3><p>Containers, Kubernetes, serverless, multi-region, edge, and infrastructure trade-offs.</p></article>
+          <article class="catalog-card"><h3><a href="#security">Security</a></h3><p>Identity, Zero Trust, access management, secrets, and architecture-level security risks.</p></article>
+          <article class="catalog-card"><h3><a href="#domain">Domains and teams</a></h3><p>DDD, bounded contexts, Conway’s Law, ownership, platform engineering, and team structure.</p></article>
+          <article class="catalog-card"><h3><a href="#legacy">Legacy and migration</a></h3><p>Strangler, incremental migration, compatibility, feature flags, and safe system evolution.</p></article>
+          <article class="catalog-card"><h3><a href="#analytics">Data and analytics</a></h3><p>Warehouses, lakes, streaming, ETL/ELT, Data Mesh, and analytics platform architecture.</p></article>
+          <article class="catalog-card"><h3><a href="#ai">AI architecture</a></h3><p>RAG, vector search, LLM Gateway, agents, guardrails, and architecture decisions around AI.</p></article>
+        </div>
+      </section>
+
+      <section class="section muted" id="foundations"><div class="section-heading"><p class="eyebrow">01</p><h2>Architecture foundations</h2><p>Articles will appear here.</p></div></section>
+      <section class="section" id="api"><div class="section-heading"><p class="eyebrow">02</p><h2>APIs and integrations</h2><p>Articles will appear here.</p></div></section>
+      <section class="section muted" id="events"><div class="section-heading"><p class="eyebrow">03</p><h2>Events and messaging</h2><p>Articles will appear here.</p></div></section>
+      <section class="section" id="data"><div class="section-heading"><p class="eyebrow">04</p><h2>Data and databases</h2><p>Articles will appear here.</p></div></section>
+      <section class="section muted" id="scale"><div class="section-heading"><p class="eyebrow">05</p><h2>Scaling and reliability</h2><p>Articles will appear here.</p></div></section>
+      <section class="section" id="cloud"><div class="section-heading"><p class="eyebrow">06</p><h2>Cloud and infrastructure</h2><p>Articles will appear here.</p></div></section>
+      <section class="section muted" id="security"><div class="section-heading"><p class="eyebrow">07</p><h2>Security</h2><p>Articles will appear here.</p></div></section>
+      <section class="section" id="domain"><div class="section-heading"><p class="eyebrow">08</p><h2>Domains and teams</h2><p>Articles will appear here.</p></div></section>
+      <section class="section muted" id="legacy"><div class="section-heading"><p class="eyebrow">09</p><h2>Legacy and migration</h2><p>Articles will appear here.</p></div></section>
+      <section class="section" id="analytics"><div class="section-heading"><p class="eyebrow">10</p><h2>Data and analytics</h2><p>Articles will appear here.</p></div></section>
+      <section class="section muted" id="ai"><div class="section-heading"><p class="eyebrow">11</p><h2>AI architecture</h2><p>Articles will appear here.</p></div></section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Anton Kurakin.</p>
+      <a href="../../en/index.html">Home</a>
+    </footer>
+  </body>
+</html>
