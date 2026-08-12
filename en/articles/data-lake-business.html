@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What a data lake is, why raw data may be worth keeping before its future use is known, and why governance determines whether the lake creates value.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It">
+    <meta property="og:description" content="Data lakes in business language: flexible storage for diverse data, new analytics opportunities, and the cost of cataloging, quality, and governance.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/data-lake-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/data-lake-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/data-lake-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/data-lake-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It","description":"What a data lake is, why raw data may be worth keeping before its future use is known, and why governance determines whether the lake creates value.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/data-lake-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/data-lake-business.html">RU</a><a href="data-lake-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#analytics">Data and analytics</a><p class="article-kicker"><span>5 min read</span></p><h1>Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It</h1><p class="article-summary">Not every dataset is ready for a report or a model today. A data lake lets the company keep diverse information closer to its original form, but without management the storage quickly loses value.</p></div></header>
+      <article class="article-content">
+        <p>Operational systems generate more and more data: events, logs, documents, files, user history, and computed results.</p>
+        <p>Some of that information is useful today. Some may become useful six months from now for a new report, model, or investigation. Some may never be used.</p>
+        <p>A data lake gives the company a place to keep data before every dataset has a final analytical structure.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>A data warehouse usually expects data to be shaped into a known model first. That is useful for stable reporting, but less convenient for new or poorly understood sources.</p>
+        <p>A data lake can accept more varied formats and preserve data closer to its source form.</p>
+        <p>Later, analysts, engineers, or ML teams can select what they need and prepare it for a specific use case.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The main benefit is not throwing away potentially valuable data simply because there is no report for it yet.</p>
+        <p>That creates room for future analytics and AI use cases. The company can return to historical information and ask new questions later.</p>
+        <p>A second benefit is faster onboarding of new sources because every source does not need a complete analytical model before storage begins.</p>
+        <p>But having data is not the same as creating value. If nobody knows what is stored, whether it can be trusted, or who may use it, the lake becomes an expensive archive.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>The team gets flexibility across formats and can separate data ingestion from later transformation.</p>
+        <p>This is useful for experimentation, data science, and cases where the structure is still changing.</p>
+        <p>At the same time, cataloging, metadata, data quality, and lineage become much more important. Teams need to know where data came from, who owns it, and how it can be used.</p>
+
+        <h2>What does the customer gain?</h2>
+        <p>Customers do not see the data lake directly. They may see better analytics, personalization, or new services made possible by historical data.</p>
+        <p>But keeping data “just in case” cannot be careless. More retained information means stronger requirements around privacy, access, and retention periods.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is governance.</p>
+        <p>The company needs a catalog, access controls, retention rules, quality checks, and ownership. Otherwise, cheap storage encourages endless accumulation of data nobody understands.</p>
+        <p>The dangerous illusion is that low storage cost makes data free. Storing is easy. Finding, understanding, protecting, and maintaining it is much more expensive.</p>
+
+        <h2>When is a data lake unnecessary?</h2>
+        <p>If sources are limited, analytical needs are stable, and the existing data warehouse handles the required data well, a separate lake may add another layer without enough benefit.</p>
+        <p>It becomes useful when sources are diverse, volumes are large, or future use cases are difficult to define in advance.</p>
+
+        <h2>What should we ask before deciding?</h2>
+        <ul>
+          <li>Which data do we want to keep, and what future value might it have?</li>
+          <li>Who owns each dataset and is responsible for its quality?</li>
+          <li>How will someone find and understand the data a year from now?</li>
+          <li>What privacy and retention rules apply?</li>
+          <li>Can the existing data warehouse solve the problem more simply?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>A data lake lets the company postpone some decisions about data structure until later.</p>
+        <p><strong>For the business, that is useful when the future value of data is still uncertain. Without cataloging, ownership, and rules, however, the lake quickly turns into a swamp.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
