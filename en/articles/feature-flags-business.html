@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What feature flags are, how they separate code deployment from feature release, and why temporary flexibility can become permanent complexity.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Feature Flags: Why a New Feature Does Not Have to Reach Everyone at Once">
+    <meta property="og:description" content="Feature flags in business language: gradual rollout, fast shutdown without redeploying, and the cost of many temporary system states.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/feature-flags-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Feature Flags: Why a New Feature Does Not Have to Reach Everyone at Once - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/feature-flags-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/feature-flags-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/feature-flags-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Feature Flags: Why a New Feature Does Not Have to Reach Everyone at Once","description":"What feature flags are, how they separate code deployment from feature release, and why temporary flexibility can become permanent complexity.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/feature-flags-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/feature-flags-business.html">RU</a><a href="feature-flags-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy and migration</a><p class="article-kicker"><span>5 min read</span></p><h1>Feature Flags: Why a New Feature Does Not Have to Reach Everyone at Once</h1><p class="article-summary">Code can already be in production while the feature remains off. Feature flags separate technical deployment from business release and give more control over rollout risk.</p></div></header>
+      <article class="article-content">
+        <p>A traditional release is often binary: the new feature is either in production and available to everyone, or it is not there at all.</p>
+        <p>That is inconvenient when a change is risky, should roll out gradually, or must go live at a specific business moment without another deployment.</p>
+        <p>A feature flag adds a switch. The code can already exist in the system while access is controlled separately.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>A flag can expose a new capability only to employees, a small customer group, one market, or a defined percentage of users.</p>
+        <p>If problems appear, the feature can be turned off without rolling back the entire application version.</p>
+        <p>That makes rollout more controlled and reduces the size of each individual bet.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The main benefit is lower rollout risk.</p>
+        <p>Instead of “enable for everyone and hope,” the company can expand the audience gradually while watching real metrics, support requests, and failures.</p>
+        <p>A second benefit is separating the business launch moment from the technical deployment. The team can deliver code earlier and enable the feature when marketing, support, or partners are ready.</p>
+        <p>A third is faster recovery from a bad experiment. Turning off one flag can be much cheaper than rolling back a release that contains other valuable changes.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>The team gets a safer way to integrate large changes in smaller pieces and deliver code to production earlier.</p>
+        <p>Flags also make it possible to test new paths on real infrastructure without immediately exposing them to every user.</p>
+        <p>But every flag creates another possible system state. If flags are never removed, the number of combinations becomes hard to understand and test.</p>
+
+        <h2>What does the customer gain?</h2>
+        <p>Customers get smoother launches and a lower chance that one new feature creates a product-wide problem.</p>
+        <p>At the same time, different users may see different versions of the product. Support and documentation need to account for that reality.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is temporary complexity that can easily become permanent.</p>
+        <p>Every flag needs an owner, a reason to exist, and a removal point. Otherwise, a year later nobody knows why the condition is still there or whether deleting it is safe.</p>
+        <p>Flags also do not replace testing or rollback. They reduce the blast radius, but they do not make bad code safe by themselves.</p>
+
+        <h2>When are feature flags unnecessary?</h2>
+        <p>For a small, easily reversible change, a separate flag can add more work than value.</p>
+        <p>Not every button needs to become configuration. A flag is justified when the rollout moment or audience genuinely needs to be controlled independently.</p>
+
+        <h2>What should we ask before deciding?</h2>
+        <ul>
+          <li>Do we need to separate code deployment from the business launch?</li>
+          <li>Can the feature be enabled gradually?</li>
+          <li>How quickly can we disable it if something goes wrong?</li>
+          <li>Who is responsible for deleting the flag after rollout?</li>
+          <li>Which metrics tell us it is safe to open the feature to everyone?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Feature flags turn a release from one big switch into a controlled process.</p>
+        <p><strong>For the business, the value is launching new functionality in smaller bets. The price is making sure the temporary switches are removed before they become legacy themselves.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
