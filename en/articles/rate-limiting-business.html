@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why use Rate Limiting, how request limits protect product capacity and cost, what business, teams, and customers gain, and when limits create more harm than value.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Rate Limiting: Why Sometimes It Is Better to Say ‘Too Many Requests’">
+    <meta property="og:description" content="Rate Limiting in business language: protect capacity, control cost, and set clear rules for API usage.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/rate-limiting-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Rate Limiting: Why Sometimes It Is Better to Say ‘Too Many Requests’ - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/rate-limiting-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/rate-limiting-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/rate-limiting-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rate Limiting: Why Sometimes It Is Better to Say ‘Too Many Requests’","description":"Why use Rate Limiting, how request limits protect product capacity and cost, what business, teams, and customers gain, and when limits create more harm than value.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/rate-limiting-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/rate-limiting-business.html">RU</a><a href="rate-limiting-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">APIs and integrations</a><p class="article-kicker"><span>5 min read</span></p><h1>Rate Limiting: Why Sometimes It Is Better to Say “Too Many Requests”</h1><p class="article-summary">Unlimited access sounds convenient until one customer, bot, or broken integration consumes capacity meant for everyone. Rate Limiting introduces rules before overload turns into an outage.</p></div></header>
+      <article class="article-content">
+        <p>Imagine a public API. One partner sends a hundred requests per minute, another sends a thousand, and a third has a broken script that keeps sending the same request without stopping.</p>
+        <p>To the system, these are all requests. Without limits, the most aggressive consumer can occupy resources that should be shared by everyone else.</p>
+        <p>Rate Limiting applies a simple idea: each customer, token, user, or type of operation has an acceptable pace.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>Rate Limiting restricts how many requests can be made within a period or how quickly they may arrive.</p>
+        <p>When the limit is exceeded, the system does not try to serve everything at any cost. It rejects some requests, asks the caller to retry later, or applies another level of control.</p>
+        <p>The goal is not to punish the customer. It is to stop one source from degrading service for everyone else.</p>
+
+        <h2>What does the business get?</h2>
+        <p>The business gets more predictable capacity and cost.</p>
+        <p>If every partner can increase traffic without boundaries, infrastructure spending starts to depend not only on product growth but also on somebody else’s bugs, inefficient integrations, and automated traffic.</p>
+        <p>Limits create clear usage rules and protect capacity for priority customers and critical operations.</p>
+        <p>They can also become part of the commercial model. Different API quotas may support different plans, SLAs, or partner agreements — not as a technical trick, but as a manageable product capability.</p>
+        <p>There is another benefit: one customer’s faulty integration is less likely to degrade the service for everybody and turn into the company’s reputational problem.</p>
+
+        <h2>What does the team get?</h2>
+        <p>Teams get a protective layer in front of services and databases.</p>
+        <p>Rate Limiting helps control spikes, reduce the risk of exhausting connections or external quotas, and distinguish healthy growth from abnormal behavior.</p>
+        <p>It also makes a problem visible: if a client constantly hits the limit, either the integration should change or the agreed service level should.</p>
+
+        <h2>What does the customer get?</h2>
+        <p>At first glance, the customer gets a restriction. With sensible rules, the customer actually gets a more predictable service.</p>
+        <p>A clear “limit exceeded, retry later” response is often better than an API that becomes randomly slow because of somebody else’s traffic.</p>
+        <p>Good customer experience requires transparency: where the limit is, how it is calculated, when it resets, and what the customer can do if the current quota is not enough.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The main risk is limiting legitimate customer growth rather than abuse.</p>
+        <p>A quota that is too strict can break real peak scenarios, block a large partner, or create an artificial bottleneck in a successful product.</p>
+        <p>You also need to decide what to limit: user, IP, API key, organization, endpoint, or a combination. In a distributed system those counters must be coordinated correctly.</p>
+        <p>And this becomes product work: quotas should reflect real usage, not a number an engineer invented once and nobody revisited.</p>
+
+        <h2>When is Rate Limiting unnecessary?</h2>
+        <p>In a small internal service with a few trusted consumers, a dedicated quota system may be unnecessary.</p>
+        <p>If load is predictable and the cost of a mistake is low, monitoring and normal capacity management may be enough.</p>
+
+        <h2>Questions to ask before choosing it</h2>
+        <ul>
+          <li>Can one customer materially degrade service for everyone else?</li>
+          <li>Which operations are more important to the business than others?</li>
+          <li>Should limits differ by plan or partner type?</li>
+          <li>How will customers know their quota before they hit it?</li>
+          <li>What happens during a sudden but legitimate traffic spike?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Rate Limiting is not about saying no. It is about distributing limited capacity according to explicit rules.</p>
+        <p><strong>Sometimes rejecting some requests from one customer is better than letting them degrade the product for everyone and turning someone else’s mistake into your own outage.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
