@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Что такое Event Sourcing, почему иногда полезно хранить историю изменений вместо только текущего состояния и какую цену это создаёт для бизнеса и команды.">
+    <meta name="author" content="Антон Куракин">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Event Sourcing: зачем хранить историю изменений, а не только текущее состояние">
+    <meta property="og:description" content="Event Sourcing на языке бизнеса: когда история операций становится активом, помогает расследовать изменения и восстанавливать состояние — и когда это слишком дорого.">
+    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/event-sourcing-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Event Sourcing: зачем хранить историю изменений, а не только текущее состояние - Антон Куракин</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/event-sourcing-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/event-sourcing-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/event-sourcing-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Event Sourcing: зачем хранить историю изменений, а не только текущее состояние","description":"Что такое Event Sourcing, почему иногда полезно хранить историю изменений вместо только текущего состояния и какую цену это создаёт для бизнеса и команды.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/event-sourcing-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="ru">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <header class="site-header">
+      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <div class="lang-switcher" aria-label="Выбор языка"><a href="event-sourcing-business.html" aria-current="page">RU</a><a href="../../en/articles/event-sourcing-business.html">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Event Sourcing: зачем хранить историю изменений, а не только текущее состояние</h1><p class="article-summary">Обычная база отвечает на вопрос «что сейчас». Event Sourcing пытается сохранить ещё и «как мы к этому пришли» — последовательность бизнес-событий, из которой состояние можно восстановить.</p></div></header>
+      <article class="article-content">
+        <p>Во многих системах после изменения старое состояние исчезает. Баланс стал другим, статус заказа поменялся, данные клиента обновились — и база хранит только результат.</p>
+        <p>Но иногда бизнесу важен не только итог. Важно понимать, какие события привели к нему, в каком порядке и почему.</p>
+
+        <h2>Какую проблему мы решаем</h2>
+        <p>Event Sourcing хранит не только текущее состояние объекта, а последовательность событий: заказ создан, позиция добавлена, оплата подтверждена, адрес изменён.</p>
+        <p>Текущее состояние можно получить, последовательно применив эти события. В практических системах для ускорения часто используются snapshots и отдельные модели чтения.</p>
+        <p>Главное отличие — история становится частью основной модели данных, а не вторичным журналом.</p>
+
+        <h2>Что получает бизнес</h2>
+        <p>Главная ценность — объяснимость важных изменений.</p>
+        <p>Если нужно разобраться, почему баланс, статус или договорное состояние оказалось именно таким, у компании есть не только текущая цифра, но и цепочка событий, которая её сформировала.</p>
+        <p>Это может уменьшать стоимость расследований и разбирательств, а также открывать новые сценарии: пересчитать состояние по новым правилам, построить новую аналитику на старой истории или восстановить производное представление данных.</p>
+        <p>Но выгода появляется только тогда, когда история действительно имеет бизнес-ценность. Хранить каждое изменение «на всякий случай» — дорогой способ получить сложную систему.</p>
+
+        <h2>Что получает команда</h2>
+        <p>Команда получает полный журнал доменных изменений и возможность строить разные представления из одного потока событий.</p>
+        <p>Но меняется сам способ проектирования. Нужно версионировать события, понимать, что старые события нельзя бездумно переписывать, уметь восстанавливать состояние и поддерживать проекции.</p>
+        <p>Отладка становится одновременно сильнее и сложнее: история есть, но её нужно правильно интерпретировать.</p>
+
+        <h2>Что получает клиент</h2>
+        <p>Клиент может получить более прозрачный продукт: историю операций, понятное объяснение изменений, возможность восстановить последовательность действий.</p>
+        <p>Но сама технология клиенту не нужна. Если бизнес не превращает историю в понятную пользу, Event Sourcing остаётся внутренней сложностью.</p>
+
+        <h2>Чем мы за это платим</h2>
+        <p>Цена высокая: сложнее модель данных, миграции, тестирование, хранение и обучение команды.</p>
+        <p>Особенно болезненна эволюция событий. Код меняется, а события пятилетней давности должны оставаться интерпретируемыми.</p>
+        <p>Появляется и eventual consistency, если модели чтения обновляются асинхронно.</p>
+
+        <h2>Когда Event Sourcing не нужен</h2>
+        <p>Если бизнесу достаточно текущего состояния и обычного audit log, Event Sourcing почти наверняка избыточен.</p>
+        <p>Он особенно плохо окупается в простом CRUD, где история не создаёт дополнительной ценности и не влияет на принятие решений.</p>
+
+        <h2>Что стоит спросить перед решением</h2>
+        <ul>
+          <li>Нужна ли бизнесу полная история причин изменения состояния?</li>
+          <li>Будем ли мы реально пересчитывать или переиспользовать эту историю?</li>
+          <li>Достаточно ли обычного audit log?</li>
+          <li>Готова ли команда поддерживать версии событий годами?</li>
+          <li>Как быстро должны обновляться модели чтения?</li>
+        </ul>
+
+        <h2>В итоге</h2>
+        <p>Event Sourcing превращает историю из побочного лога в источник истины.</p>
+        <p><strong>Для бизнеса это оправдано, когда вопрос «как мы получили это состояние?» достаточно важен, чтобы платить за более сложную модель данных и её долгую поддержку.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+  </body>
+</html>
