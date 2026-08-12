@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Что такое Data Mesh, когда централизованная data-команда становится бутылочным горлышком и почему владение данными бизнес-доменами требует общей платформы и стандартов.">
+    <meta name="author" content="Антон Куракин">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде">
+    <meta property="og:description" content="Data Mesh на языке бизнеса: как распределить ответственность за данные между доменами, ускорить аналитику и не получить вместо централизации новый хаос.">
+    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/data-mesh-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде - Антон Куракин</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/data-mesh-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/data-mesh-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/data-mesh-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде","description":"Что такое Data Mesh, когда централизованная data-команда становится бутылочным горлышком и почему владение данными бизнес-доменами требует общей платформы и стандартов.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/data-mesh-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="ru">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="data-mesh-business.html" aria-current="page">RU</a><a href="../../en/articles/data-mesh-business.html">EN</a></div></header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#analytics">Данные и аналитика</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде</h1><p class="article-summary">Когда все данные компании проходят через одну центральную команду, она рано или поздно начинает одновременно обслуживать десятки доменов, которых не знает достаточно глубоко. Data Mesh предлагает распределить ответственность — но не отменяет общие правила.</p></div></header>
+      <article class="article-content">
+        <p>Централизация аналитики выглядит логично: одна data-команда, единая платформа, общие специалисты. На небольшом масштабе это часто отлично работает.</p>
+        <p>Проблема начинается, когда команда данных должна одновременно понимать продажи, логистику, финансы, продукт, поддержку и десятки локальных определений.</p>
+
+        <h2>Какую проблему мы решаем</h2>
+        <p>Data Mesh переносит часть ответственности за аналитические данные к бизнес-доменам, которые эти данные создают и лучше всего понимают.</p>
+        <p>Домен не просто выгружает таблицу. Он относится к данным как к продукту: определяет смысл, качество, владельца, контракт и доступность.</p>
+        <p>При этом общая платформа, стандарты безопасности, каталог и governance остаются общими.</p>
+
+        <h2>Что получает бизнес</h2>
+        <p>Главная выгода — уменьшение очереди между бизнес-вопросом и людьми, которые способны правильно подготовить данные для ответа.</p>
+        <p>Команда конкретного домена меньше зависит от центрального backlog. Она может быстрее выпускать новые наборы данных и менять их вместе с собственными бизнес-процессами.</p>
+        <p>Второй эффект — выше ответственность за качество. Если у данных есть понятный владелец внутри домена, проблема «никто не знает, что означает это поле» перестаёт быть нормой.</p>
+        <p>Но Data Mesh не экономит людей автоматически. Он скорее перераспределяет ответственность и требует data-компетенций ближе к бизнес-доменам.</p>
+
+        <h2>Что получает команда</h2>
+        <p>Центральная data-команда может меньше заниматься ручной интеграцией каждого источника и больше развивать платформу самообслуживания, стандарты и общие инструменты.</p>
+        <p>Доменные команды получают больше автономии, но вместе с ней — обязанность поддерживать схемы, качество, документацию и совместимость своих data products.</p>
+
+        <h2>Что получает клиент</h2>
+        <p>Внешний клиент редко видит Data Mesh напрямую. Косвенный эффект появляется, когда продуктовые и операционные решения быстрее получают качественные данные.</p>
+        <p>Внутренний потребитель данных получает понятнее описанные источники, владельцев и контракты — если организация действительно выполняет правила, а не только меняет оргструктуру.</p>
+
+        <h2>Чем мы за это платим</h2>
+        <p>Цена — организационная сложность. Нельзя просто объявить «теперь каждый домен отвечает за данные» и ожидать результата.</p>
+        <p>Нужны общая платформа, каталог, стандарты, правила доступа, обучение и федеративное управление. Без этого вместо одной очереди компания получает десятки несовместимых мини-платформ.</p>
+
+        <h2>Когда Data Mesh не нужен</h2>
+        <p>Если компания небольшая, доменов мало, а центральная data-команда успевает обслуживать потребности без длинной очереди, распределение ответственности может только усложнить работу.</p>
+        <p>Data Mesh особенно опасно начинать с организационной моды, а не с конкретной проблемы масштаба.</p>
+
+        <h2>Что стоит спросить перед решением</h2>
+        <ul>
+          <li>Центральная data-команда действительно стала бутылочным горлышком?</li>
+          <li>Есть ли у бизнес-доменов люди, способные владеть data products?</li>
+          <li>Что останется централизованным: платформа, каталог, безопасность, стандарты?</li>
+          <li>Как измеряется качество данных каждого домена?</li>
+          <li>Кто отвечает за совместимость данных между доменами?</li>
+        </ul>
+
+        <h2>В итоге</h2>
+        <p>Data Mesh — это в первую очередь модель ответственности, а не новый тип хранилища.</p>
+        <p><strong>Для бизнеса он имеет смысл, когда централизованная работа с данными уже тормозит домены, а компания готова дать им не только автономию, но и реальную ответственность за качество данных.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+  </body>
+</html>
