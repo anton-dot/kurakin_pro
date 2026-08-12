@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What Event Sourcing is, why a system may keep the history of changes instead of only current state, and what business and engineering cost comes with it.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Event Sourcing: Why Keep the History of Changes Instead of Only Current State">
+    <meta property="og:description" content="Event Sourcing in business terms: when a history of operations becomes an asset for investigations, reconstruction, and new views — and when it is too expensive.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/event-sourcing-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Event Sourcing: Why Keep the History of Changes Instead of Only Current State - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/event-sourcing-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/event-sourcing-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/event-sourcing-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Event Sourcing: Why Keep the History of Changes Instead of Only Current State","description":"What Event Sourcing is, why a system may keep the history of changes instead of only current state, and what business and engineering cost comes with it.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/event-sourcing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/event-sourcing-business.html">RU</a><a href="event-sourcing-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Event Sourcing: Why Keep the History of Changes Instead of Only Current State</h1><p class="article-summary">A normal database answers “what is true now.” Event Sourcing also tries to preserve “how did we get here” — the sequence of business events from which state can be reconstructed.</p></div></header>
+      <article class="article-content">
+        <p>In many systems, the previous state disappears after an update. A balance changes, an order moves to another status, customer data is updated — and the database keeps only the result.</p>
+        <p>Sometimes the business needs more than the result. It needs to know which events created it, in what order, and why.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>Event Sourcing stores a sequence of events rather than only the current state: order created, item added, payment confirmed, address changed.</p>
+        <p>Current state can be rebuilt by applying those events. Practical systems often use snapshots and separate read models for performance.</p>
+        <p>The key difference is that history becomes part of the primary data model, not a secondary log.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The main value is explainability of important changes.</p>
+        <p>If the company needs to understand why a balance, status, or contractual state looks the way it does, it has not only the current value but the chain of events that produced it.</p>
+        <p>This can reduce the cost of investigations and disputes and enable new scenarios: rebuilding state under new rules, creating new analytics from old history, or reconstructing derived views.</p>
+        <p>But the benefit appears only when the history itself has business value. Keeping every change “just in case” is an expensive way to create a complicated system.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>The team gets a complete record of domain changes and can build different views from the same event stream.</p>
+        <p>But the design model changes. Events need versions, old events cannot be casually rewritten, state reconstruction must work, and projections need maintenance.</p>
+        <p>Debugging becomes both stronger and harder: the history exists, but the team must understand how to interpret it.</p>
+
+        <h2>What does the customer gain?</h2>
+        <p>The customer may get a more transparent product: operation history, clearer explanations of changes, and a recoverable sequence of actions.</p>
+        <p>But customers do not benefit from the technology itself. If the business does not turn the history into useful product behavior, Event Sourcing remains internal complexity.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is high: more complex data modeling, migrations, testing, storage, and team training.</p>
+        <p>Event evolution is especially difficult. Code changes, but events created years ago must remain understandable.</p>
+        <p>Eventual consistency may also appear when read models are updated asynchronously.</p>
+
+        <h2>When do you not need Event Sourcing?</h2>
+        <p>If the business only needs current state and a conventional audit log, Event Sourcing is probably excessive.</p>
+        <p>It is a poor fit for simple CRUD where history creates no additional value and does not influence decisions.</p>
+
+        <h2>What should we ask before deciding?</h2>
+        <ul>
+          <li>Does the business need a complete history of why state changed?</li>
+          <li>Will we actually rebuild or reuse that history?</li>
+          <li>Would a normal audit log be enough?</li>
+          <li>Can the team support event versions for years?</li>
+          <li>How quickly must read models become current?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Event Sourcing turns history from a side log into the source of truth.</p>
+        <p><strong>For the business, that is justified when the question “how did we arrive at this state?” is important enough to pay for a more complex data model and its long-term maintenance.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
