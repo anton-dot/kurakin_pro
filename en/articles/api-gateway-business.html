@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why use an API Gateway, what it gives the business, teams, and customers, what complexity it adds, and when it is better to avoid it.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="API Gateway: Why Add Another Layer Between the Customer and the System?">
+    <meta property="og:description" content="API Gateway in business language: one entry point, controlled change, protection of internal services, and the cost of an extra layer.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/api-gateway-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>API Gateway: Why Add Another Layer Between the Customer and the System? - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/api-gateway-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/api-gateway-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/api-gateway-business.html">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "API Gateway: Why Add Another Layer Between the Customer and the System?",
+        "description": "Why use an API Gateway, what it gives the business, teams, and customers, what complexity it adds, and when it is better to avoid it.",
+        "inLanguage": "en",
+        "datePublished": "2026-08-12",
+        "dateModified": "2026-08-12",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://kurakin-anton.ru/en/articles/api-gateway-business.html"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Anton Kurakin",
+          "url": "https://kurakin-anton.ru/"
+        },
+        "image": "https://kurakin-anton.ru/assets/img/article-notes.png"
+      }
+    </script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin">
+        <img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42">
+        <span class="brand-text">Anton Kurakin</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../../en/index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../experience.html">About</a>
+        <a href="index.html">Writing</a>
+        <a href="../../en/index.html#contact">Contact</a>
+      </nav>
+      <div class="lang-switcher" aria-label="Language selection">
+        <a href="../../ru/articles/api-gateway-business.html">RU</a>
+        <a href="api-gateway-business.html" aria-current="page">EN</a>
+      </div>
+    </header>
+
+    <main class="article-page" id="main">
+      <header class="article-hero">
+        <div class="article-hero-copy">
+          <a class="article-back-link" href="../architecture/index.html#api">APIs and integrations</a>
+          <p class="article-kicker">
+            <time datetime="2026-08-12">August 12, 2026</time>
+            <span aria-hidden="true">·</span>
+            <span>5 min read</span>
+          </p>
+          <h1>API Gateway: Why Add Another Layer Between the Customer and the System?</h1>
+          <p class="article-summary">An API Gateway can look like just another technical component. In practice, it can give a company one place to control external APIs — or simply add complexity before there is a real problem to solve.</p>
+        </div>
+      </header>
+
+      <article class="article-content">
+        <p>When a system is small, a client application can talk directly to the backend. One API, a few endpoints, and the model is easy to understand.</p>
+        <p>The problem starts when the number of services grows. The mobile app talks to one service, the web application to another, partners use a third set of APIs. Authentication, request limits, versioning, logging, and access rules begin to appear in different places.</p>
+        <p>That is usually when the idea of putting one common entry point in front of internal services appears: an API Gateway.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>An API Gateway receives an external request and decides where it should go next. It can check access, limit request rates, select the right API version, combine data from several services, or hide the internal structure of the system from the client.</p>
+        <p>Internally, the company may have twenty services. Externally, the customer still works with one predictable entry point.</p>
+        <p>That is already more than a technical convenience.</p>
+
+        <h2>What does the business get?</h2>
+        <p>The main value is control.</p>
+        <p>The company gets a place where API access rules can be changed centrally, limits can be introduced, traffic can be routed differently, multiple versions can be supported, and the internal architecture can evolve without forcing every external client to evolve at the same pace.</p>
+        <p>This becomes particularly valuable when mobile applications, partner integrations, public APIs, or several product teams appear.</p>
+        <p>Internal services can change while the external contract remains much more stable.</p>
+
+        <h2>What does the team get?</h2>
+        <p>Teams do not have to implement the same infrastructure concerns separately in every service.</p>
+        <p>Some authentication, rate limiting, routing, technical metrics, and common rules for external requests can live at the shared entry layer.</p>
+        <p>There is another benefit: internal services become less dependent on the exact way external clients consume them. That creates more freedom to change the system internally.</p>
+        <p>But only if the Gateway remains an infrastructure layer instead of becoming the place where business logic gradually accumulates.</p>
+
+        <h2>What does the customer get?</h2>
+        <p>The customer does not need an API Gateway as a technology. The customer needs a stable interface.</p>
+        <p>If the company splits one internal service into three, the customer should not necessarily learn about it through an urgent request to rewrite an integration.</p>
+        <p>If one part of the system becomes temporarily unavailable, the Gateway can sometimes help return a controlled error, provide a fallback, or route traffic differently.</p>
+        <p>For the customer, good architecture here looks very simple: the API stays predictable even while the system behind it changes.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The API Gateway becomes part of the critical path for every request.</p>
+        <p>If it performs badly, everything behind it starts to perform badly. It must therefore be scaled, monitored, protected, and designed as carefully as any other critical component.</p>
+        <p>There is an organizational cost too. Who owns the Gateway? Who can change its rules? How do we avoid turning the platform team into an approval queue for everyone else?</p>
+        <p>And there is a strong temptation to use the Gateway as a universal home for every kind of logic. First it only routes traffic. Then it performs a few transformations. Then comes a “small validation.” A year later, the company has created a new monolith, only now it sits between the customer and the microservices.</p>
+
+        <h2>When is an API Gateway unnecessary?</h2>
+        <p>If the company has one application, a few simple backend services, and no real problem with multiple external interfaces, a Gateway may simply be another component to operate.</p>
+        <p>Architecture does not become better just because it has more layers.</p>
+        <p>Sometimes a direct API between the client and the backend is the most sensible design.</p>
+        <p>An API Gateway starts to make sense when the cost of managing fragmented external APIs becomes higher than the cost of the Gateway itself.</p>
+
+        <h2>Questions to ask before choosing it</h2>
+        <ul>
+          <li>How many different clients and external integrations use our system?</li>
+          <li>Are we duplicating authentication, rate limiting, and other common rules across several services?</li>
+          <li>Do we need to hide internal architecture changes from external clients?</li>
+          <li>Who will own the Gateway and how will changes be governed?</li>
+          <li>What happens to the whole system if the Gateway becomes unavailable?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>An API Gateway is not a mandatory attribute of modern architecture.</p>
+        <p>It is a way to create one control point for external APIs, make internal changes less visible to customers, and move some common concerns out of individual services.</p>
+        <p>The price is a new critical component, additional operational complexity, and the risk of creating another concentration point for dependencies.</p>
+        <p><strong>If the Gateway solves a problem the company already has, it can simplify the system significantly. If it appears only because “microservices are supposed to have one,” the company is probably buying complexity too early.</strong></p>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Anton Kurakin.</p>
+      <a href="../architecture/index.html">IT Architecture for Everyone</a>
+    </footer>
+  </body>
+</html>
