@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How caching makes systems faster and reduces load cost, why it creates stale-data problems, and when the trade-off makes business sense.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Caching: Why Making a System Faster Creates a New Problem — Stale Data">
+    <meta property="og:description" content="Caching in business language: faster responses, cheaper load, and the price of data that may not be fully fresh.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/caching-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Caching: Why Making a System Faster Creates a New Problem — Stale Data - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/caching-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/caching-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/caching-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Caching: Why Making a System Faster Creates a New Problem — Stale Data","description":"How caching makes systems faster and reduces load cost, why it creates stale-data problems, and when the trade-off makes business sense.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/caching-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/caching-business.html">RU</a><a href="caching-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Data and databases</a><p class="article-kicker"><span>4 min read</span></p><h1>Caching: Why Making a System Faster Creates a New Problem — Stale Data</h1><p class="article-summary">A cache can make a system much faster and reduce load on expensive components. But once a second copy of data exists, the question becomes how long we are willing to show something that may not be fully fresh.</p></div></header>
+      <article class="article-content">
+        <p>If the same data is read thousands of times, there is little value in calculating or fetching it from an expensive source every single time.</p>
+        <p>A cache stores frequently used results closer to the consumer and returns them faster. That sounds simple until the original data changes.</p>
+        <p>Then the central caching question appears: who knows when the old copy is no longer valid, and how quickly?</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>Caching helps when reads are frequent, data changes less often, and obtaining the original result is expensive in time or resources.</p>
+        <p>That may be a product page, configuration, reference data, an expensive calculation, or a response from an external system.</p>
+        <p>Instead of repeating the expensive operation, the system reuses a prepared result.</p>
+
+        <h2>What does the business get?</h2>
+        <p>The main benefits are faster customer experience and lower cost of serving load.</p>
+        <p>If popular data can be served from cache, the company does not necessarily need to scale an expensive database or external dependency in direct proportion to traffic.</p>
+        <p>This can help absorb traffic peaks with lower infrastructure cost while keeping the product responsive as the audience grows.</p>
+        <p>There is also a product effect: a faster interface gives users fewer reasons to wait, repeat actions, or leave.</p>
+        <p>But the economics only work when the business can define acceptable freshness. Exchange rates, inventory, and a legally significant balance do not have the same tolerance for stale data.</p>
+
+        <h2>What does the team get?</h2>
+        <p>The team reduces load on databases, APIs, and expensive computation and gets another scaling tool.</p>
+        <p>But caching creates a second state of the system. It is no longer enough to know what is in the database; engineers also need to know what is in cache, when it expires, and who updates it.</p>
+        <p>Many difficult bugs appear here: the underlying data changed while some users still see the previous value.</p>
+
+        <h2>What does the customer get?</h2>
+        <p>The customer primarily gets speed.</p>
+        <p>Sometimes they pay with freshness. A price may remain visible briefly after it changes. A status may not update instantly. Right after an action, the customer may still see the old state.</p>
+        <p>If that behavior is expected and acceptable, there is no problem. If the result of an action must be visible immediately, a poorly chosen cache can turn performance into a trust issue.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The main price is freshness complexity.</p>
+        <p>You need to decide how long cached data lives, how it is invalidated, what happens when refresh fails, and whether stale data may be served when the source is unavailable.</p>
+        <p>A cache also needs memory or separate infrastructure. The more cache layers exist, the harder it becomes to explain why a specific user sees a specific value.</p>
+
+        <h2>When is caching unnecessary?</h2>
+        <p>If the query is already cheap, load is low, and the data must always be fully current, caching may create more problems than it solves.</p>
+        <p>Not every millisecond needs to be optimized in advance.</p>
+
+        <h2>Questions to ask before choosing it</h2>
+        <ul>
+          <li>Which specific cost or latency are we reducing?</li>
+          <li>How long may the data be stale?</li>
+          <li>What will the customer see immediately after a change?</li>
+          <li>How will the cache be refreshed or invalidated?</li>
+          <li>What happens if the source system is unavailable?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Caching is a classic architecture trade-off.</p>
+        <p><strong>We buy speed and lower serving cost by agreeing to manage another copy of data and by deciding in advance how much staleness the business is willing to tolerate.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
