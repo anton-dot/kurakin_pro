@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What Hexagonal Architecture is, how ports and adapters protect business logic from technical details, and when that isolation justifies extra code structure.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Hexagonal Architecture: Why Separate Business Logic From Databases, APIs, and Frameworks">
+    <meta property="og:description" content="How Ports and Adapters let business rules outlive specific technologies and when that flexibility is worth the extra structure.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/hexagonal-architecture-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Hexagonal Architecture: Why Separate Business Logic From Databases, APIs, and Frameworks - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/hexagonal-architecture-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/hexagonal-architecture-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/hexagonal-architecture-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Hexagonal Architecture: Why Separate Business Logic From Databases, APIs, and Frameworks","description":"What Hexagonal Architecture is, how ports and adapters protect business logic from technical details, and when that isolation justifies extra code structure.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/hexagonal-architecture-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Primary navigation"><a href="../../en/index.html">Home</a><a href="../../en/projects.html">Projects</a><a href="../../en/experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/hexagonal-architecture-business.html">RU</a><a href="hexagonal-architecture-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#foundations">Architecture foundations</a><p class="article-kicker"><span>5 min read</span></p><h1>Hexagonal Architecture: Why Separate Business Logic From Databases, APIs, and Frameworks</h1><p class="article-summary">Databases, HTTP frameworks, and message brokers change. Business rules usually live longer. Hexagonal Architecture makes that difference explicit and stops technical details from shaping the whole system.</p></div></header>
+      <article class="article-content">
+        <p>In many systems, business logic quickly becomes mixed with technical details. Pricing rules know about database tables, HTTP handlers contain domain decisions, and testing requires half the infrastructure to be running.</p>
+        <p>While the product is small, this feels efficient: fewer layers, interfaces, and files. The problem appears later when changing storage, an interface, or an external integration touches rules that should never have depended on that technology.</p>
+        <h2>What problem are we solving?</h2>
+        <p>Hexagonal Architecture, also called Ports and Adapters, puts business logic in the center. It talks to the outside world through explicit ports: contracts describing what the core needs.</p>
+        <p>Databases, HTTP APIs, queues, and external providers become adapters. They translate a technical protocol into a call the core understands and translate the result back.</p>
+        <p>Ideally, a business rule can be tested without a real database, network, or framework. Technical details attach from the outside instead of growing through the core.</p>
+        <h2>What the business gets</h2>
+        <p>The main benefit is a lower cost of change where technology evolves faster than business rules.</p>
+        <p>In a long-lived product, the probability of replacing a database, provider, integration channel, or interface protocol increases. A well-isolated core reduces the chance that such a change becomes a rewrite of key logic.</p>
+        <p>The architecture can also support multiple channels more cheaply. The same business use case can be invoked through web, API, or messaging without creating a separate copy of the rules for each entry point.</p>
+        <p>The company pays for this flexibility in advance. If the system is short-lived and simple, the abstraction may never earn back its cost.</p>
+        <h2>What the team gets</h2>
+        <p>The team gets a clearer boundary between domain rules and infrastructure.</p>
+        <p>Unit tests are easier because the outside world can be replaced with test adapters. Technical components can be changed with fewer cascading edits.</p>
+        <p>There is also a risk of architectural formalism: an interface for every class, unnecessary DTOs, and lots of code that protects nothing. Ports are useful only at meaningful boundaries.</p>
+        <h2>What the customer gets</h2>
+        <p>Customers rarely see the architecture style directly. They receive an indirect benefit: channel and integration changes are less likely to break business rules, and new interaction paths may be easier to add.</p>
+        <p>Hexagonal Architecture does not automatically make a product faster or more reliable. It is a way to manage change, not a customer feature.</p>
+        <h2>What we pay for it</h2>
+        <p>The codebase becomes more structured and sometimes more verbose. Contracts, mappings, and dependencies need explicit design.</p>
+        <p>The team needs discipline to keep infrastructure types from leaking back into the core.</p>
+        <p>Applied mechanically, the pattern can become ceremony: many abstractions while technical choices still leak across every layer.</p>
+        <h2>When Hexagonal Architecture is not needed</h2>
+        <p>For a small CRUD service with a short life, a direct path from HTTP to the database may be cheaper.</p>
+        <p>The approach becomes more valuable when there is meaningful domain logic, several external interfaces, a long system lifetime, or a high probability of infrastructure changes.</p>
+        <h2>Questions to ask before the decision</h2>
+        <ul><li>Which business rules should survive a technology replacement?</li><li>Which external systems are truly replaceable adapters?</li><li>Does one use case need several entry points such as API, messaging, or batch?</li><li>How much integration pain do technical dependencies already create?</li><li>Are we building abstractions for changes that are unlikely to happen?</li></ul>
+        <h2>In the end</h2>
+        <p>Hexagonal Architecture is not valuable simply because it looks cleaner. It is valuable when business rules need to outlive the technology around them.</p>
+        <p><strong>For the business, it is an investment in cheaper technology change — but only where those changes are actually likely and expensive.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
