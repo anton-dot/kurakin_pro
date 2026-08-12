@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Что такое Strangler Pattern, как постепенно заменять legacy-систему без большой одномоментной миграции и чем бизнес платит за постепенный переход.">
+    <meta name="author" content="Антон Куракин">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Strangler Pattern: как заменить legacy-систему без большого взрыва">
+    <meta property="og:description" content="Strangler Pattern на языке бизнеса: как переносить функции постепенно, снижая риск большого переписывания и сохраняя работу продукта.">
+    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/strangler-pattern-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Strangler Pattern: как заменить legacy-систему без большого взрыва - Антон Куракин</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/strangler-pattern-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/strangler-pattern-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/strangler-pattern-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Strangler Pattern: как заменить legacy-систему без большого взрыва","description":"Что такое Strangler Pattern, как постепенно заменять legacy-систему без большой одномоментной миграции и чем бизнес платит за постепенный переход.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/strangler-pattern-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="ru">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <header class="site-header">
+      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <div class="lang-switcher" aria-label="Выбор языка"><a href="strangler-pattern-business.html" aria-current="page">RU</a><a href="../../en/articles/strangler-pattern-business.html">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy и миграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Strangler Pattern: как заменить legacy-систему без большого взрыва</h1><p class="article-summary">Полное переписывание выглядит чисто на схеме и рискованно в бизнесе. Strangler Pattern позволяет переносить систему по частям, сохраняя работающий продукт между этапами.</p></div></header>
+      <article class="article-content">
+        <p>Когда старая система начинает мешать развитию, идея переписать её целиком кажется привлекательной. Новая архитектура, чистый код, современные технологии — и однажды мы просто переключимся.</p>
+        <p>Проблема в слове «однажды». Пока новая система строится, старая продолжает меняться, бизнес ждёт, а риск большого переключения растёт.</p>
+        <p>Strangler Pattern предлагает другую стратегию: не заменять всё сразу, а постепенно переносить функции из старой системы в новую.</p>
+
+        <h2>Какую проблему мы решаем</h2>
+        <p>Снаружи пользователи продолжают работать с привычным продуктом. Но отдельные запросы постепенно начинают обслуживаться новыми компонентами.</p>
+        <p>Сначала можно вынести один относительно независимый сценарий, затем второй. Старый код уменьшается по мере того, как его функции переходят в новую систему.</p>
+        <p>В результате миграция становится последовательностью небольших изменений вместо одного огромного события.</p>
+
+        <h2>Что получает бизнес</h2>
+        <p>Главная выгода — снижение ставки на один большой проект.</p>
+        <p>Компания начинает получать результат частями, а не ждёт несколько лет до полного переписывания. Каждый перенесённый сценарий можно отдельно проверить, измерить и при необходимости скорректировать направление.</p>
+        <p>Это уменьшает риск ситуации, когда бюджет уже потрачен, новая система ещё не готова, а старая всё равно должна продолжать развиваться.</p>
+        <p>Есть и возможность менять приоритеты. Если определённая часть legacy особенно дорого тормозит бизнес, её можно перенести раньше. То, что пока работает достаточно хорошо, оставить на потом.</p>
+        <p>То есть инвестиции идут туда, где старая система уже создаёт реальную цену.</p>
+
+        <h2>Что получает команда</h2>
+        <p>Команда может проверять новую архитектуру на реальных сценариях постепенно. Ошибка в одном этапе не обязательно ставит под угрозу всю миграцию.</p>
+        <p>Появляется возможность учиться по ходу проекта и уточнять границы новой системы, а не пытаться спроектировать всё идеально заранее.</p>
+        <p>Но некоторое время приходится поддерживать сразу два мира: старый и новый.</p>
+
+        <h2>Что получает клиент</h2>
+        <p>Клиент получает эволюцию вместо резкой смены всего продукта. Отдельные функции могут улучшаться постепенно, а большая часть привычных процессов остаётся стабильной.</p>
+        <p>Это снижает вероятность массового сбоя в день большой миграции и позволяет откатывать локальные изменения проще.</p>
+
+        <h2>Чем мы за это платим</h2>
+        <p>Цена постепенности — временная архитектурная сложность.</p>
+        <p>Нужно маршрутизировать запросы между старой и новой системами, синхронизировать данные, поддерживать совместимость и чётко понимать, где сейчас находится источник истины.</p>
+        <p>Есть и опасность, что «временное» состояние станет постоянным. Если у миграции нет понятного владельца и критериев завершения, компания может годами оплачивать две системы одновременно.</p>
+
+        <h2>Когда Strangler Pattern не нужен</h2>
+        <p>Если система небольшая, хорошо изолирована и её можно безопасно заменить за короткий срок, постепенная миграция может быть лишней.</p>
+        <p>Но чем критичнее система и чем больше вокруг неё интеграций, тем дороже становится ставка на одномоментный переход.</p>
+
+        <h2>Что стоит спросить перед решением</h2>
+        <ul>
+          <li>Какая часть legacy сегодня создаёт наибольшую цену для бизнеса?</li>
+          <li>Можно ли вынести её независимо от остальных функций?</li>
+          <li>Как будут сосуществовать старые и новые данные?</li>
+          <li>Как мы поймём, что конкретный кусок старой системы можно выключить?</li>
+          <li>Кто отвечает за то, чтобы временный переход действительно закончился?</li>
+        </ul>
+
+        <h2>В итоге</h2>
+        <p>Strangler Pattern не делает миграцию бесплатной. Он меняет профиль риска.</p>
+        <p><strong>Вместо одного большого обещания «перепишем всё» бизнес получает серию небольших инвестиций, каждая из которых должна приносить понятный результат.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+  </body>
+</html>
