@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What OAuth 2.0 gives the business, why partners and apps should not receive a user's password, and what delegated access costs to operate safely.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="OAuth 2.0: Why Partners Should Not Get Your System Password">
+    <meta property="og:description" content="OAuth 2.0 in business language: how to give an external app limited access without sharing the user's main password.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/oauth-access-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>OAuth 2.0: Why Partners Should Not Get Your System Password - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/oauth-access-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/oauth-access-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/oauth-access-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"OAuth 2.0: Why Partners Should Not Get Your System Password","description":"What OAuth 2.0 gives the business, why partners and apps should not receive a user's password, and what delegated access costs to operate safely.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/oauth-access-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/oauth-access-business.html">RU</a><a href="oauth-access-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>OAuth 2.0: Why Partners Should Not Get Your System Password</h1><p class="article-summary">Integrations often need to act on behalf of a user or company. The problem starts when an external application needs the full login and password to do it. OAuth lets you delegate only the required access and revoke it independently later.</p></div></header>
+      <article class="article-content">
+        <p>When an external service needs access to your data, the simplest path can look dangerously reasonable: give it the same credentials a person uses.</p>
+        <p>The integration then gets not only the function it needs, but too much authority. A password has to be stored by a third party, is hard to limit to one scenario, and is awkward to revoke without disrupting the user's primary access.</p>
+        <p>OAuth 2.0 addresses exactly this problem: one application can receive a limited right to act on behalf of a user or system without receiving the main password.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>The user approves a specific set of permissions, and the external application receives a token. That token can be limited by action, lifetime, and usage context.</p>
+        <p>If the integration is no longer needed, its access can be revoked separately. The user's main password does not need to change.</p>
+        <p>This turns access from a binary question — “does it know the password?” — into a managed agreement about what is allowed.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The main benefit is that partnerships and integrations can grow without giving external systems full access to customer accounts.</p>
+        <p>This reduces the blast radius when one partner is compromised: a stolen token can be limited to particular actions instead of opening the entire account.</p>
+        <p>A second benefit is lifecycle control. The company can disconnect one vendor, application, or channel without forcing the customer to change the password for the core product.</p>
+        <p>For a B2B product this also becomes a scaling mechanism: the more partners you have, the more valuable a standard process for issuing and revoking access becomes.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>The team gets a standard model for tokens, scopes, expiration, and access renewal instead of inventing a custom authorization scheme for every integration.</p>
+        <p>But OAuth does not make everything simple automatically. Scopes must be designed well, client secrets protected, redirect URIs secured, and the correct flow selected for each scenario.</p>
+        <p>Bad permission design can erase the benefit. If one scope means “everything,” the token is not very different from a password in practice.</p>
+
+        <h2>What does the customer gain?</h2>
+        <p>The customer can see what an external application wants to access and approve it without sharing the main password.</p>
+        <p>They can also revoke one integration without breaking the others.</p>
+        <p>A good implementation makes security understandable: the user knows who has access and what that access allows.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is a more complex identity and authorization model.</p>
+        <p>You now have tokens, refresh logic, expiration, scopes, consent, client registration, and revocation scenarios. Mistakes in this infrastructure can affect many products and partners at once.</p>
+        <p>OAuth is not a security checkbox. It is a critical platform capability that needs audit, documentation, and disciplined permission design.</p>
+
+        <h2>When do you not need OAuth 2.0?</h2>
+        <p>If one internal service calls another entirely on its own behalf and user delegation is not required, a full OAuth scenario may be unnecessary.</p>
+        <p>Sometimes simpler service-to-service authentication is enough. The goal is to solve the real access problem, not adopt a protocol for its own sake.</p>
+
+        <h2>What should we ask before deciding?</h2>
+        <ul>
+          <li>Who is giving access to whom, and on whose behalf?</li>
+          <li>Which actions does the integration actually need?</li>
+          <li>Can one integration be revoked without changing the user's password?</li>
+          <li>Can we see which applications currently have permission?</li>
+          <li>What happens if a token is stolen?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>OAuth 2.0 matters not because tokens are more modern than passwords. Its value is that delegated access can be limited and managed independently.</p>
+        <p><strong>For the business, it is a way to grow an integration ecosystem without turning every new service into another place that stores the customer's full password.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
