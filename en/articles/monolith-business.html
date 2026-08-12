@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why a monolith can be a sensible business architecture: where it improves speed and cost, and when it starts limiting growth.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Monolith: Why Simple Architecture Sometimes Wins">
+    <meta property="og:description" content="A monolith in business language: when simplicity helps the product move faster and when one system becomes a constraint.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/monolith-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Monolith: Why Simple Architecture Sometimes Wins - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/monolith-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/monolith-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/monolith-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Monolith: Why Simple Architecture Sometimes Wins","description":"Why a monolith can be a sensible business architecture: where it improves speed and cost, and when it starts limiting growth.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/monolith-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/monolith-business.html">RU</a><a href="monolith-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#foundations">Architecture foundations</a><p class="article-kicker"><span>4 min read</span></p><h1>Monolith: Why Simple Architecture Sometimes Wins</h1><p class="article-summary">A monolith is often treated as a temporary stage before “real” architecture. For many products, however, one system remains the fastest and cheapest way to grow for a long time.</p></div></header>
+      <article class="article-content">
+        <p>In software, the word “monolith” often sounds like a criticism. One large system, one release, one codebase, many dependencies — and the assumed next step is microservices.</p>
+        <p>But a monolith is not automatically a problem. It becomes a problem when its structure starts slowing down the business.</p>
+
+        <h2>What is a monolith?</h2>
+        <p>In simple terms, it is an application whose main parts are developed and deployed together. Users, catalog, orders, payments, and other functions may live in one system and share infrastructure.</p>
+        <p>That limits independence between parts, but it also removes many problems that come with distributed systems.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>Early in a product’s life, the main challenge is usually not independent scaling for dozens of services. It is validating ideas quickly, shipping changes, and avoiding a large infrastructure burden.</p>
+        <p>A monolith gives a simpler operating model: fewer components, fewer network interactions, one delivery process, and fewer places where complexity itself can cause failure.</p>
+
+        <h2>What does the business get?</h2>
+        <p>The biggest benefit is speed at a relatively low architectural cost.</p>
+        <p>A small team can evolve the product without a dedicated platform function, complex observability, or a large set of infrastructure components. More time and money can go into the product rather than into operating distribution.</p>
+        <p>This matters especially when the product, market, or business model is still changing. In that environment, the ability to reshape the system quickly can be more valuable than independently deploying one service.</p>
+        <p>A monolith can also make costs easier to predict: less infrastructure, fewer operational dependencies, and usually fewer specialized capabilities that must be maintained continuously.</p>
+
+        <h2>What does the team get?</h2>
+        <p>Developers can usually run the system locally, follow a business flow end to end, and change several related parts in one codebase.</p>
+        <p>Transactions and data consistency are often simpler too. A normal business operation does not need to become a chain of network calls with recovery logic for the third step out of five.</p>
+        <p>But the simplicity disappears if the monolith has no internal boundaries. When every part can reach into every other part, one codebase becomes a source of risk instead of an advantage.</p>
+
+        <h2>What does the customer get?</h2>
+        <p>The customer does not care how many applications run inside the company.</p>
+        <p>If simpler architecture lets the team fix issues faster, release features sooner, and avoid failures across service boundaries, the customer benefits.</p>
+        <p>Complex architecture does not create customer value by itself.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price appears as the system grows.</p>
+        <p>Independent teams may start blocking each other. A shared release becomes heavier. One hot area cannot be scaled as independently. A failure in one process may affect the whole application.</p>
+        <p>The more dangerous cost is internal coupling. Without clear boundaries, every change can touch more and more of the system over time.</p>
+
+        <h2>When does a monolith stop paying off?</h2>
+        <ul>
+          <li>Several teams regularly block each other’s releases.</li>
+          <li>Different parts need fundamentally different scaling.</li>
+          <li>The shared release noticeably slows product delivery.</li>
+          <li>A failure in one area too often affects the whole product.</li>
+          <li>The cost of change grows because of coupling rather than because the feature itself is difficult.</li>
+        </ul>
+
+        <h2>Questions to ask before changing it</h2>
+        <ul>
+          <li>Which specific monolith problem is already costing the business money or speed?</li>
+          <li>Can better module boundaries solve it?</li>
+          <li>Do teams truly need independent releases?</li>
+          <li>Will the new architecture cost less than the problem we are trying to remove?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>A monolith is not a sign of technical immaturity. It is one architecture option with a valid range of use.</p>
+        <p><strong>If a simple system lets the business move quickly without creating real constraints, making it more complex just to look modern is a poor investment.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
