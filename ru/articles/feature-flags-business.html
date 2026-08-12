@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Что такое feature flags, как они позволяют отделить выпуск кода от включения функции и почему временная гибкость легко превращается в постоянную сложность.">
+    <meta name="author" content="Антон Куракин">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Feature Flags: почему новую функцию не обязательно включать всем сразу">
+    <meta property="og:description" content="Feature Flags на языке бизнеса: постепенные запуски, быстрый откат без нового релиза и цена в виде множества временных состояний системы.">
+    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/feature-flags-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Feature Flags: почему новую функцию не обязательно включать всем сразу - Антон Куракин</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/feature-flags-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/feature-flags-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/feature-flags-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Feature Flags: почему новую функцию не обязательно включать всем сразу","description":"Что такое feature flags, как они позволяют отделить выпуск кода от включения функции и почему временная гибкость легко превращается в постоянную сложность.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/feature-flags-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="ru">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <header class="site-header">
+      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <div class="lang-switcher" aria-label="Выбор языка"><a href="feature-flags-business.html" aria-current="page">RU</a><a href="../../en/articles/feature-flags-business.html">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy и миграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Feature Flags: почему новую функцию не обязательно включать всем сразу</h1><p class="article-summary">Код можно уже доставить в продукт, но функцию оставить выключенной. Feature Flags разделяют технический релиз и бизнес-запуск — и дают больше контроля над риском изменений.</p></div></header>
+      <article class="article-content">
+        <p>Обычный релиз часто выглядит бинарно: новая функция либо уже в продакшене и доступна всем, либо её там нет.</p>
+        <p>Это неудобно, когда изменение рискованное, требует постепенного запуска или должно включиться в конкретный момент без нового деплоя.</p>
+        <p>Feature Flag добавляет переключатель: код уже может находиться в системе, но доступ к функции определяется отдельно.</p>
+
+        <h2>Какую проблему мы решаем</h2>
+        <p>Флаг позволяет включить новую возможность только сотрудникам, небольшой группе клиентов, конкретному рынку или заданному проценту аудитории.</p>
+        <p>Если появляются проблемы, функцию можно выключить без отката всей версии приложения.</p>
+        <p>Это делает запуск более управляемым и уменьшает размер ставки в каждом отдельном изменении.</p>
+
+        <h2>Что получает бизнес</h2>
+        <p>Главная выгода — меньше риска при запуске изменений.</p>
+        <p>Вместо сценария «включили всем и надеемся» компания может постепенно расширять аудиторию и смотреть на реальные показатели, обращения и ошибки.</p>
+        <p>Вторая выгода — бизнес-момент запуска можно отделить от технического релиза. Команда заранее доставляет код, а функция включается тогда, когда готовы маркетинг, поддержка или партнёры.</p>
+        <p>Третья — быстрее остановить неудачный эксперимент. Иногда выключить один флаг гораздо дешевле, чем откатывать целый релиз с другими полезными изменениями.</p>
+
+        <h2>Что получает команда</h2>
+        <p>Команда получает более безопасный способ интегрировать большие изменения частями и раньше доставлять код в рабочую среду.</p>
+        <p>Флаги также помогают тестировать новые пути на реальной инфраструктуре без немедленного открытия функции всем пользователям.</p>
+        <p>Но каждое условие создаёт ещё один вариант поведения системы. Если флаги не удалять, количество комбинаций быстро становится трудно контролировать.</p>
+
+        <h2>Что получает клиент</h2>
+        <p>Клиент получает более плавные запуски и меньше вероятность массовой проблемы из-за одной новой функции.</p>
+        <p>При этом разные пользователи могут видеть разный продукт. Это требует аккуратности от поддержки и документации: нельзя предполагать, что у всех сейчас одинаковый интерфейс и набор возможностей.</p>
+
+        <h2>Чем мы за это платим</h2>
+        <p>Цена — временная сложность, которая очень легко становится постоянной.</p>
+        <p>Для каждого флага нужен владелец, понятная цель и дата удаления. Иначе через год никто не понимает, почему условие ещё существует и можно ли его удалить.</p>
+        <p>Флаги также не заменяют нормальный rollback и тестирование. Они уменьшают радиус ошибки, но не делают плохой код безопасным автоматически.</p>
+
+        <h2>Когда feature flags не нужны</h2>
+        <p>Для маленького и легко обратимого изменения отдельный флаг может добавить больше работы, чем пользы.</p>
+        <p>Не каждую кнопку стоит превращать в конфигурацию. Флаг оправдан, когда действительно нужно независимо управлять моментом включения или аудиторией.</p>
+
+        <h2>Что стоит спросить перед решением</h2>
+        <ul>
+          <li>Нужно ли отделить релиз кода от момента бизнес-запуска?</li>
+          <li>Можно ли безопасно включать функцию постепенно?</li>
+          <li>Как быстро мы сможем выключить её при проблеме?</li>
+          <li>Кто отвечает за удаление флага после завершения запуска?</li>
+          <li>Какие метрики покажут, что функцию можно открыть всем?</li>
+        </ul>
+
+        <h2>В итоге</h2>
+        <p>Feature Flags превращают релиз из одного большого переключателя в управляемый процесс.</p>
+        <p><strong>Для бизнеса ценность в том, что новую функцию можно выпускать маленькими ставками. Цена — необходимость потом убрать временные переключатели, пока они сами не стали частью legacy.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+  </body>
+</html>
