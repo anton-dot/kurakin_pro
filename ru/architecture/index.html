@@ -17,6 +17,7 @@
     <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/architecture/">
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
+    <link rel="stylesheet" href="../../assets/architecture.css">
   </head>
   <body data-page="architecture" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -40,70 +41,121 @@
     </header>
 
     <main id="main">
-      <section class="section">
-        <div class="section-heading wide">
+      <header class="architecture-hero">
+        <div class="architecture-hero-inner">
           <div>
             <p class="eyebrow">ИТ-архитектура для всех</p>
-            <h1>Архитектура без перевода на технический</h1>
+            <h1>Архитектурные решения на языке бизнеса</h1>
           </div>
-          <p>Что архитектурные решения дают бизнесу, компании, командам и клиентам — и чем за эти преимущества приходится платить.</p>
+          <p class="architecture-hero-lead">Что дают архитектурные решения бизнесу, командам и клиентам — и чем за эти преимущества приходится платить.</p>
         </div>
+      </header>
+
+      <section class="architecture-start" aria-labelledby="start-title">
+        <article class="architecture-feature">
+          <div class="architecture-feature-meta">
+            <span class="architecture-feature-label">С чего начать</span>
+            <time datetime="2026-08-12">12.08.2026</time>
+            <span>2 мин чтения</span>
+          </div>
+          <div class="architecture-feature-copy">
+            <h2 id="start-title"><a href="../articles/it-architecture-for-business.html">Зачем бизнесу вникать в ИТ-архитектуру?</a></h2>
+            <p>Не чтобы выбирать технологии вместо CTO. А чтобы понимать, как архитектура влияет на скорость изменений, стоимость, риски, работу команд и клиентский опыт.</p>
+          </div>
+          <a class="architecture-feature-action" href="../articles/it-architecture-for-business.html">Читать →</a>
+        </article>
       </section>
 
-      <section class="section muted" aria-labelledby="start-title">
+      <section class="architecture-nav-section" aria-labelledby="nav-title">
         <div class="section-heading">
-          <p class="eyebrow">С чего начать</p>
-          <h2 id="start-title">Зачем бизнесу вникать в ИТ-архитектуру?</h2>
-          <p>Короткое введение в логику этого раздела: какие вопросы стоит задавать к любому архитектурному решению и почему обсуждать нужно не только технологию, но и её последствия.</p>
-        </div>
-        <div class="publication-list">
-          <article class="publication-item">
-            <div class="publication-meta"><time datetime="2026-08-12">12.08.2026</time><span>2 мин</span></div>
-            <div class="publication-copy">
-              <p class="publication-source">Kurakin.pro · вводная</p>
-              <h3><a href="../articles/it-architecture-for-business.html">Зачем бизнесу вникать в ИТ-архитектуру?</a></h3>
-              <p>Не чтобы выбирать технологии вместо CTO, а чтобы понимать влияние архитектуры на скорость изменений, стоимость, риски, команды и клиентский опыт.</p>
-            </div>
-            <nav class="publication-versions" aria-label="Доступные языковые версии">
-              <a href="../articles/it-architecture-for-business.html" aria-current="true">RU</a>
-              <a href="../../en/articles/it-architecture-for-business.html">EN</a>
-            </nav>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="nav-title">
-        <div class="section-heading">
-          <p class="eyebrow">Навигация</p>
+          <p class="eyebrow">Быстрая навигация</p>
           <h2 id="nav-title">Темы</h2>
-          <p>Раздел будет расти по категориям. Можно сразу перейти к нужному классу архитектурных решений.</p>
+          <p>От API Gateway и очередей до выбора базы данных, cloud и AI-архитектуры.</p>
         </div>
-        <div class="catalog-grid">
-          <article class="catalog-card"><h3><a href="#foundations">Архитектурные основы</a></h3><p>Монолит, модульность, микросервисы, границы систем и базовые архитектурные подходы.</p></article>
-          <article class="catalog-card"><h3><a href="#api">API и интеграции</a></h3><p>REST, GraphQL, gRPC, API Gateway, BFF, webhooks и взаимодействие между системами.</p></article>
-          <article class="catalog-card"><h3><a href="#events">События и очереди</a></h3><p>Event-driven architecture, брокеры, Kafka, Saga, Outbox, CQRS и согласованность.</p></article>
-          <article class="catalog-card"><h3><a href="#data">Данные и базы</a></h3><p>Выбор БД, SQL и NoSQL, кэширование, репликация, шардинг и модели консистентности.</p></article>
-          <article class="catalog-card"><h3><a href="#scale">Масштабирование и надёжность</a></h3><p>Load balancing, autoscaling, отказоустойчивость, graceful degradation и disaster recovery.</p></article>
-          <article class="catalog-card"><h3><a href="#cloud">Cloud и инфраструктура</a></h3><p>Контейнеры, Kubernetes, serverless, multi-region, edge и инфраструктурные компромиссы.</p></article>
-          <article class="catalog-card"><h3><a href="#security">Безопасность</a></h3><p>Identity, Zero Trust, управление доступом, секретами и архитектурными рисками.</p></article>
-          <article class="catalog-card"><h3><a href="#domain">Домены и команды</a></h3><p>DDD, bounded contexts, Conway’s Law, ownership, platform engineering и устройство команд.</p></article>
-          <article class="catalog-card"><h3><a href="#legacy">Legacy и миграции</a></h3><p>Strangler, постепенные миграции, совместимость, feature flags и безопасное развитие систем.</p></article>
-          <article class="catalog-card"><h3><a href="#analytics">Данные и аналитика</a></h3><p>Warehouse, lake, streaming, ETL/ELT, Data Mesh и архитектура аналитических платформ.</p></article>
-          <article class="catalog-card"><h3><a href="#ai">AI-архитектура</a></h3><p>RAG, vector search, LLM Gateway, агенты, guardrails и архитектурные решения вокруг AI.</p></article>
-        </div>
+        <nav class="architecture-jump-nav" aria-label="Категории архитектуры">
+          <a href="#foundations">Основы</a>
+          <a href="#api">API и интеграции</a>
+          <a href="#events">События и очереди</a>
+          <a href="#data">Базы данных</a>
+          <a href="#scale">Масштабирование</a>
+          <a href="#cloud">Cloud</a>
+          <a href="#security">Безопасность</a>
+          <a href="#domain">Домены и команды</a>
+          <a href="#legacy">Legacy</a>
+          <a href="#analytics">Аналитика</a>
+          <a href="#ai">AI</a>
+        </nav>
       </section>
 
-      <section class="section muted" id="foundations"><div class="section-heading"><p class="eyebrow">01</p><h2>Архитектурные основы</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section" id="api"><div class="section-heading"><p class="eyebrow">02</p><h2>API и интеграции</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section muted" id="events"><div class="section-heading"><p class="eyebrow">03</p><h2>События и очереди</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section" id="data"><div class="section-heading"><p class="eyebrow">04</p><h2>Данные и базы</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section muted" id="scale"><div class="section-heading"><p class="eyebrow">05</p><h2>Масштабирование и надёжность</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section" id="cloud"><div class="section-heading"><p class="eyebrow">06</p><h2>Cloud и инфраструктура</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section muted" id="security"><div class="section-heading"><p class="eyebrow">07</p><h2>Безопасность</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section" id="domain"><div class="section-heading"><p class="eyebrow">08</p><h2>Домены и команды</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section muted" id="legacy"><div class="section-heading"><p class="eyebrow">09</p><h2>Legacy и миграции</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section" id="analytics"><div class="section-heading"><p class="eyebrow">10</p><h2>Данные и аналитика</h2><p>Статьи появятся здесь.</p></div></section>
-      <section class="section muted" id="ai"><div class="section-heading"><p class="eyebrow">11</p><h2>AI-архитектура</h2><p>Статьи появятся здесь.</p></div></section>
+      <section class="architecture-categories" aria-label="Категории статей">
+        <div class="architecture-category-list">
+          <section class="architecture-category" id="foundations">
+            <span class="architecture-category-index">01</span>
+            <h2>Архитектурные основы</h2>
+            <p>Монолит, modular monolith, микросервисы, слои, границы систем и базовые архитектурные подходы.</p>
+          </section>
+
+          <section class="architecture-category" id="api">
+            <span class="architecture-category-index">02</span>
+            <h2>API и интеграции</h2>
+            <p>REST, GraphQL, gRPC, API Gateway, BFF, webhooks и способы связывать системы без лишней зависимости.</p>
+          </section>
+
+          <section class="architecture-category" id="events">
+            <span class="architecture-category-index">03</span>
+            <h2>События и очереди</h2>
+            <p>Event-driven architecture, брокеры сообщений, Kafka, Saga, Outbox, CQRS и eventual consistency.</p>
+          </section>
+
+          <section class="architecture-category" id="data">
+            <span class="architecture-category-index">04</span>
+            <h2>Данные и базы</h2>
+            <p>Как выбирать БД, когда нужен SQL или NoSQL, кэширование, репликация, шардинг и модели консистентности.</p>
+          </section>
+
+          <section class="architecture-category" id="scale">
+            <span class="architecture-category-index">05</span>
+            <h2>Масштабирование и надёжность</h2>
+            <p>Load balancing, autoscaling, fault tolerance, graceful degradation, multi-region и disaster recovery.</p>
+          </section>
+
+          <section class="architecture-category" id="cloud">
+            <span class="architecture-category-index">06</span>
+            <h2>Cloud и инфраструктура</h2>
+            <p>Контейнеры, Kubernetes, serverless, service mesh, edge и инфраструктурные компромиссы.</p>
+          </section>
+
+          <section class="architecture-category" id="security">
+            <span class="architecture-category-index">07</span>
+            <h2>Безопасность</h2>
+            <p>Identity, Zero Trust, управление доступом, секретами и рисками, которые закладываются ещё на уровне архитектуры.</p>
+          </section>
+
+          <section class="architecture-category" id="domain">
+            <span class="architecture-category-index">08</span>
+            <h2>Домены и команды</h2>
+            <p>DDD, bounded contexts, Conway’s Law, ownership, platform engineering и связь архитектуры с устройством компании.</p>
+          </section>
+
+          <section class="architecture-category" id="legacy">
+            <span class="architecture-category-index">09</span>
+            <h2>Legacy и миграции</h2>
+            <p>Strangler, постепенные миграции, backward compatibility, feature flags и безопасное развитие старых систем.</p>
+          </section>
+
+          <section class="architecture-category" id="analytics">
+            <span class="architecture-category-index">10</span>
+            <h2>Данные и аналитика</h2>
+            <p>Data Warehouse, Lake, streaming, ETL/ELT, Data Mesh и архитектура аналитических платформ.</p>
+          </section>
+
+          <section class="architecture-category" id="ai">
+            <span class="architecture-category-index">11</span>
+            <h2>AI-архитектура</h2>
+            <p>RAG, vector search, LLM Gateway, агенты, guardrails и архитектурные решения вокруг AI-продуктов.</p>
+          </section>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
