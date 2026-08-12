@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What idempotency means, why a repeated request must not create a second payment or order, and how it reduces business risk in distributed systems.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Idempotency: Why a Repeated Request Must Not Create a Second Payment">
+    <meta property="og:description" content="Idempotency in business terms: how to retry operations after network failures without turning a technical retry into a duplicate order or charge.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/idempotency-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Idempotency: Why a Repeated Request Must Not Create a Second Payment - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/idempotency-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/idempotency-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/idempotency-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Idempotency: Why a Repeated Request Must Not Create a Second Payment","description":"What idempotency means, why a repeated request must not create a second payment or order, and how it reduces business risk in distributed systems.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/idempotency-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/idempotency-business.html">RU</a><a href="idempotency-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">APIs and integrations</a><p class="article-kicker"><span>5 min read</span></p><h1>Idempotency: Why a Repeated Request Must Not Create a Second Payment</h1><p class="article-summary">A network connection can fail after an operation has already succeeded. The user presses the button again, the client retries — and the system must understand that this is still one operation, not two.</p></div></header>
+      <article class="article-content">
+        <p>One of the most unpleasant classes of failures looks harmless: a client sends a request, gets no response, and sends it again. The problem is that the first request may already have succeeded.</p>
+        <p>For reading data, that is usually fine. For payments, order creation, bookings, or loyalty rewards, a retry can become real money and a real customer complaint.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>An idempotent operation produces the same business outcome even if the same request arrives several times.</p>
+        <p>Typically the client sends a unique operation identifier. The system remembers that the request has already been processed and returns the previous result instead of creating another order or charge.</p>
+        <p>This matters anywhere retries are unavoidable: mobile networks fail, services retry temporary errors, and queues may deliver the same message more than once.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The main benefit is lower risk of duplicate operations where a technical error directly becomes money, refunds, support work, and lost trust.</p>
+        <p>The company can safely use automatic retries after temporary failures. That improves completion rates without forcing a choice between two bad options: never retry and lose transactions, or retry and sometimes create duplicates.</p>
+        <p>It also reduces the cost of incident handling. A duplicate payment is not just a software defect; it involves support, refunds, accounting, and customer experience.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>The team gets a more predictable retry model. Retrying a critical operation no longer has to be dangerous by default.</p>
+        <p>But the team must define the business operation boundary, how idempotency keys are stored, how long they live, and what happens after partial execution.</p>
+        <p>It is important not to confuse an identical HTTP request with one business intent. The key should represent the intent of the user or calling system.</p>
+
+        <h2>What does the customer gain?</h2>
+        <p>The customer gets a calmer product: pressing the button twice or recovering from a network error should not create a second order.</p>
+        <p>Well-designed idempotency is almost invisible. The user simply sees one completed operation, regardless of how many technical attempts happened underneath.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is state that the system has to store and check. There are idempotency tables or caches, cleanup rules, and races between concurrent requests.</p>
+        <p>The system also needs a rule for what happens if the same key arrives with different parameters. Silently accepting that case can hide a client-side error.</p>
+
+        <h2>When do you not need idempotency?</h2>
+        <p>Not every action needs a dedicated mechanism. Read operations are usually naturally safe to repeat. For simple internal actions, the cost of extra state may exceed the risk of duplication.</p>
+        <p>But if repeating one operation can create a second financial or legally meaningful result, idempotency should be discussed before production.</p>
+
+        <h2>What should we ask before deciding?</h2>
+        <ul>
+          <li>Which operations cannot safely happen twice?</li>
+          <li>Who creates the unique business-operation identifier?</li>
+          <li>How long do we need to remember processed requests?</li>
+          <li>What happens when two requests with the same key arrive in parallel?</li>
+          <li>Can we safely retry after a timeout?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Idempotency is not a way to prevent retries. Retries will still happen.</p>
+        <p><strong>Its business value is making sure a technical retry stays a technical event instead of becoming a second payment, order, or real-world obligation.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
