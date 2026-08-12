@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How Saga coordinates one business process across several services without one shared transaction, what it gives the company, and why compensation is harder than rollback.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Saga: How to Run One Business Process Across Several Services Without One Transaction">
+    <meta property="og:description" content="Saga in business language: distributed processes, compensating actions, service independence, and the cost of eventual consistency.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/saga-pattern-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Saga: How to Run One Business Process Across Several Services Without One Transaction - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/saga-pattern-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/saga-pattern-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/saga-pattern-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Saga: How to Run One Business Process Across Several Services Without One Transaction","description":"How Saga coordinates one business process across several services without one shared transaction, what it gives the company, and why compensation is harder than rollback.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/saga-pattern-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/saga-pattern-business.html">RU</a><a href="saga-pattern-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>6 min read</span></p><h1>Saga: How to Run One Business Process Across Several Services Without One Transaction</h1><p class="article-summary">In a distributed system, orders, payment, inventory, and delivery may live in different services. Saga connects them into one process — but a simple rollback is replaced by business compensation.</p></div></header>
+      <article class="article-content">
+        <p>In a monolith, many operations can run inside one transaction: change several records, something fails, roll everything back.</p>
+        <p>In a microservice system, the same business process may span several independent services and databases. The order is created. Payment is captured. Stock is reserved. Delivery is not yet booked. Then one step fails.</p>
+        <p>There is no single transaction to roll back. The system has to decide what to do with actions that already happened. That is where Saga appears.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>A Saga splits a long business process into a sequence of local operations. Each service performs its part and reports the result.</p>
+        <p>If all steps succeed, the process completes. If one fails, compensating actions are started for operations that have already happened.</p>
+        <p>For example, if payment was captured but inventory cannot be reserved, the compensation may be a refund. That is not a technical database rollback. It is another business action.</p>
+
+        <h2>What does the business get?</h2>
+        <p>The business can run end-to-end processes across independent systems without merging them back into one technical monolith.</p>
+        <p>Teams can evolve payments, orders, logistics, or other domains separately while the company still presents one customer journey.</p>
+        <p>This becomes useful when parts of the process belong to different teams, scale differently, or even depend on external providers.</p>
+        <p>There is an organizational benefit too: exception handling becomes explicit. What happens if money is captured but the order is not created? How long do we wait for confirmation? When do we refund? Who owns a stuck operation?</p>
+        <p>Saga forces these questions to move from “rare incident” into the design of the business process itself.</p>
+
+        <h2>What does the team get?</h2>
+        <p>Teams keep local transactions inside their services and avoid one distributed transaction spanning the whole system.</p>
+        <p>A Saga may be coordinated by a central orchestrator or through events where services react to one another.</p>
+        <p>But engineering complexity grows. The system must track process state, handle duplicate messages, ensure idempotency, resume after failures, and show where a process stopped.</p>
+
+        <h2>What does the customer get?</h2>
+        <p>The customer can complete a complex journey across several systems as one product experience.</p>
+        <p>But intermediate states may become visible: “order processing,” “refund initiated,” “waiting for warehouse confirmation.” In a distributed system, every step does not have to become final instantly.</p>
+        <p>So customer experience depends not only on technical correctness but also on clear communication of process state.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The biggest price is that compensation is not always the same as undo.</p>
+        <p>An email that was sent cannot be unsent. Physical delivery cannot be rolled back like a database row. A refund may itself take time or fail.</p>
+        <p>Every step needs consequences designed in advance, and some failed processes may require manual intervention.</p>
+        <p>The business also has to accept eventual consistency: for some period of time, different systems can show different stages of the same operation.</p>
+
+        <h2>When is Saga unnecessary?</h2>
+        <p>If the whole process lives in one application and one database, a normal transaction is usually simpler and more reliable.</p>
+        <p>Do not build a distributed workflow for architectural appearance. Saga makes sense when service boundaries already exist for other reasons and an end-to-end process must cross them.</p>
+
+        <h2>Questions to ask before choosing it</h2>
+        <ul>
+          <li>Which steps of the business process already live in different systems?</li>
+          <li>How do we compensate each step if the next one fails?</li>
+          <li>Which actions are irreversible or require manual handling?</li>
+          <li>What intermediate state will the customer see?</li>
+          <li>Who owns a process that gets stuck between services?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Saga lets systems remain independent while still participating in one business process.</p>
+        <p><strong>The price of that independence is having to design not only the happy path, but exactly what the business does when the process stops halfway through.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
