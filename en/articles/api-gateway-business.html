@@ -8,7 +8,7 @@
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="API Gateway: Why Add Another Layer Between the Customer and the System?">
-    <meta property="og:description" content="API Gateway in business language: one entry point, controlled change, protection of internal services, and the cost of an extra layer.">
+    <meta property="og:description" content="API Gateway in business language: how it can reduce the cost of change, simplify integration growth, and what new risks it creates.">
     <meta property="og:url" content="https://kurakin-anton.ru/en/articles/api-gateway-business.html">
     <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
@@ -66,13 +66,9 @@
       <header class="article-hero">
         <div class="article-hero-copy">
           <a class="article-back-link" href="../architecture/index.html#api">APIs and integrations</a>
-          <p class="article-kicker">
-            <time datetime="2026-08-12">August 12, 2026</time>
-            <span aria-hidden="true">·</span>
-            <span>5 min read</span>
-          </p>
+          <p class="article-kicker"><span>5 min read</span></p>
           <h1>API Gateway: Why Add Another Layer Between the Customer and the System?</h1>
-          <p class="article-summary">An API Gateway can look like just another technical component. In practice, it can give a company one place to control external APIs — or simply add complexity before there is a real problem to solve.</p>
+          <p class="article-summary">An API Gateway can help a company change internal systems and grow integrations faster — or simply add complexity before there is a real problem to solve.</p>
         </div>
       </header>
 
@@ -87,10 +83,11 @@
         <p>That is already more than a technical convenience.</p>
 
         <h2>What does the business get?</h2>
-        <p>The main value is control.</p>
-        <p>The company gets a place where API access rules can be changed centrally, limits can be introduced, traffic can be routed differently, multiple versions can be supported, and the internal architecture can evolve without forcing every external client to evolve at the same pace.</p>
-        <p>This becomes particularly valuable when mobile applications, partner integrations, public APIs, or several product teams appear.</p>
-        <p>Internal services can change while the external contract remains much more stable.</p>
+        <p>For the business, the value of an API Gateway is not that requests now pass through one more component.</p>
+        <p>The value appears when the company can change the product and add new channels faster without forcing every integration to change whenever the internal architecture changes.</p>
+        <p>A new partner, mobile app, public API, or customer channel gets a stable entry point. Internally, the company can split, combine, replace, or move services without turning every internal change into a separate migration project for external consumers.</p>
+        <p>This can reduce the cost of change, lower the risk of breaking partner integrations, and make it easier to launch new channels and products.</p>
+        <p>But that effect only appears when there are enough external clients and integrations to justify the extra layer. With two or three integrations, there may be no business saving at all.</p>
 
         <h2>What does the team get?</h2>
         <p>Teams do not have to implement the same infrastructure concerns separately in every service.</p>
