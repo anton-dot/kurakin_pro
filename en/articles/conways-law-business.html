@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What Conway’s Law means, why company structure appears in architecture, and how organizational boundaries affect delivery speed and ownership.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Conway’s Law: Why Company Structure Appears in Architecture Anyway">
+    <meta property="og:description" content="Conway’s Law in business language: how team design shapes system boundaries and why reorganizations can change architecture more than expected.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/conways-law-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Conway’s Law: Why Company Structure Appears in Architecture Anyway - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/conways-law-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/conways-law-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/conways-law-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Conway’s Law: Why Company Structure Appears in Architecture Anyway","description":"What Conway’s Law means, why company structure appears in architecture, and how organizational boundaries affect delivery speed and ownership.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/conways-law-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/conways-law-business.html">RU</a><a href="conways-law-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#domain">Domains and teams</a><p class="article-kicker"><span>5 min read</span></p><h1>Conway’s Law: Why Company Structure Appears in Architecture Anyway</h1><p class="article-summary">You can draw an ideal system diagram, but if the teams are organized differently, the real architecture will gradually reflect their boundaries, communication paths, and ownership.</p></div></header>
+      <article class="article-content">
+        <p>Architecture is often discussed as if it exists separately from the company. There are services, databases, and APIs on one side, and departments and managers on the other.</p>
+        <p>In practice, those two maps constantly shape each other. Teams change what they own more easily. Interfaces and coordination appear between departments. Communication inside one team is usually simpler.</p>
+        <p>This relationship is commonly described through Conway’s Law.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>If one business feature has to pass through five teams, even a small change can become a coordination project.</p>
+        <p>If one team owns a complete slice of the product and most of the technology needed to change it, delivery is usually faster and involves fewer handoffs.</p>
+        <p>Conway’s Law is useful not as theory, but as a reminder that team boundaries eventually become system boundaries.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The main business benefit of aligning architecture and team structure is lower coordination cost.</p>
+        <p>When one team can take a change from idea to production without a queue of approvals, time to market improves and ownership becomes clearer.</p>
+        <p>This matters especially as companies grow. Adding people does not automatically increase delivery speed if every decision still requires synchronization across multiple departments.</p>
+        <p>A good organizational boundary gives the business not only ownership, but a more independent pace of change.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>The team gets a clear area of responsibility and fewer day-to-day dependencies on neighboring teams.</p>
+        <p>Technical interfaces begin to match real agreements between people: who changes a contract, who owns the data, and who makes decisions during incidents.</p>
+        <p>But boundaries can become too rigid. Teams may optimize only their own area and create unnecessary duplication.</p>
+
+        <h2>What does the customer gain?</h2>
+        <p>Customers benefit indirectly: changes reach the product faster and responsibility for problems is less likely to disappear between departments.</p>
+        <p>Customers do not care what the internal teams are called. If company structure forces them through disconnected processes and inconsistent rules, internal optimization has become their problem.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is that architecture design also becomes organization design.</p>
+        <p>Sometimes good technical boundaries require changes in ownership, team composition, or responsibility. That is much harder than drawing a new diagram.</p>
+        <p>There is also an opposite risk: reorganizing the company around an architecture that is already outdated.</p>
+
+        <h2>When does Conway’s Law matter most?</h2>
+        <p>It becomes visible as the company grows, independent product areas appear, or the organization adopts microservices and platform teams.</p>
+        <p>If every change still depends on the same central people, the bottleneck may not be only technical. The responsibility boundaries may simply not match the product boundaries.</p>
+
+        <h2>What should we ask before deciding?</h2>
+        <ul>
+          <li>How many teams are needed for a typical product change?</li>
+          <li>Who owns the outcome end to end, not just one technical component?</li>
+          <li>Do service boundaries match real ownership boundaries?</li>
+          <li>Where do approval queues appear most often?</li>
+          <li>Are we trying to solve an organizational problem with another technical layer?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Conway’s Law points to a simple idea: architecture is also a map of communication inside the company.</p>
+        <p><strong>For the business, it is not enough to divide the system well. The team structure must allow those parts to change independently, or technical modularity remains on the diagram instead of showing up in company speed.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
