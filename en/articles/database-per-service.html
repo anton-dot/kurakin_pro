@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why independent services and teams often need independent data ownership, what Database per Service gives the business, and what complexity comes with that autonomy.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Database per Service: Why Independent Teams Often Need Independent Databases">
+    <meta property="og:description" content="Database per Service in business language: team autonomy, independent change, and the cost of distributed data.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/database-per-service.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Database per Service: Why Independent Teams Often Need Independent Databases - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/database-per-service.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/database-per-service.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/database-per-service.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Database per Service: Why Independent Teams Often Need Independent Databases","description":"Why independent services and teams often need independent data ownership, what Database per Service gives the business, and what complexity comes with that autonomy.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/database-per-service.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/database-per-service.html">RU</a><a href="database-per-service.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Database per Service: Why Independent Teams Often Need Independent Databases</h1><p class="article-summary">A team cannot be truly independent if every data change must be coordinated with all its neighbors. Database per Service breaks that dependency — and creates new complexity around distributed data.</p></div></header>
+      <article class="article-content">
+        <p>Microservices are often introduced to create autonomous teams. But if every service still shares one database and directly reads other services’ tables, that autonomy disappears quickly.</p>
+        <p>A team wants to change its data model and first has to discover who else queries the table. One service release depends on another service’s SQL. A schema mistake becomes everybody’s problem.</p>
+        <p>Database per Service creates a harder boundary: each service owns its data, and other services consume it through a contract rather than by reaching into internal tables.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>A shared database creates hidden coupling. Services can look independent on an architecture diagram while remaining tightly connected through the schema.</p>
+        <p>If the order service owns its data and the payment service owns its own, internal changes in one domain are less likely to break the other. Interaction happens through APIs, events, or other agreed interfaces.</p>
+        <p>Ownership becomes technical as well as organizational.</p>
+
+        <h2>What does the business get?</h2>
+        <p>The main business benefit is less coordination around change.</p>
+        <p>When teams genuinely own their data, they can release changes more independently instead of turning every database migration into a cross-department project.</p>
+        <p>This matters in larger product organizations where speed is lost not in coding but in the number of dependencies between teams.</p>
+        <p>There is a risk benefit too: one team’s mistake is less likely to directly damage another domain’s data.</p>
+        <p>But autonomy is not free. The more data is separated, the more work appears whenever the company needs a complete view across several domains.</p>
+
+        <h2>What does the team get?</h2>
+        <p>A team can change its own data model without constantly worrying about breaking somebody else’s SQL query.</p>
+        <p>It can design storage for its workload, plan migrations on its own schedule, and control the performance characteristics of its service more directly.</p>
+        <p>Responsibility becomes clearer: if the service owns the data, it is accountable for its quality and exposes an agreed way for others to consume it.</p>
+
+        <h2>What does the customer get?</h2>
+        <p>Customers rarely see how databases are separated. They see the indirect effect: teams can change parts of the product faster and block each other less often.</p>
+        <p>They may also see the cost: some information may update with a delay when services exchange data asynchronously.</p>
+        <p>Architecture autonomy therefore has to respect real customer expectations about data freshness.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The largest price is losing the simplicity of one shared transaction and one SQL query across everything.</p>
+        <p>If orders, payments, and delivery live separately, you cannot simply JOIN all tables. You need APIs, events, read models, data products, or another way to combine information.</p>
+        <p>Eventual consistency appears: different parts of the system may temporarily see different states of the same business process.</p>
+        <p>Analytics, backup, recovery, migration, and incident investigation across multiple services also become harder.</p>
+
+        <h2>When is a separate database per service unnecessary?</h2>
+        <p>If one small team effectively owns all services, releases them together, and does not need independent evolution, strict data isolation may be unnecessary.</p>
+        <p>A shared database with clearly defined schema ownership can sometimes provide enough structure without full distribution.</p>
+
+        <h2>Questions to ask before choosing it</h2>
+        <ul>
+          <li>Are shared-schema changes actually slowing us down?</li>
+          <li>Do teams need to release independently?</li>
+          <li>Which business processes need data from several domains at once?</li>
+          <li>Is temporary inconsistency acceptable?</li>
+          <li>Are we ready to build separate mechanisms for analytics and cross-domain queries?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Database per Service does not mean “every microservice must run its own PostgreSQL.” The important part is ownership: other services should not depend on internal tables they do not own.</p>
+        <p><strong>The business buys team autonomy and pays for it with more complex data movement across boundaries. If autonomy is not needed, the price can exceed the value.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
