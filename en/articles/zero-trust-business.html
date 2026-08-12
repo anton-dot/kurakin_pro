@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What Zero Trust means, why being inside the corporate network no longer means trusted, and how the approach affects risk, teams, and users.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Zero Trust: Why Access Inside the Company Still Needs Verification">
+    <meta property="og:description" content="Zero Trust in business language: how to limit the damage when one account, device, or service is compromised.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/zero-trust-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Zero Trust: Why Access Inside the Company Still Needs Verification - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/zero-trust-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/zero-trust-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/zero-trust-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Zero Trust: Why Access Inside the Company Still Needs Verification","description":"What Zero Trust means, why being inside the corporate network no longer means trusted, and how the approach affects risk, teams, and users.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/zero-trust-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/zero-trust-business.html">RU</a><a href="zero-trust-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>Zero Trust: Why Access Inside the Company Still Needs Verification</h1><p class="article-summary">The old model assumed outside was dangerous and inside was safe. Zero Trust assumes every access request should be verified regardless of where it comes from.</p></div></header>
+      <article class="article-content">
+        <p>Corporate systems were traditionally built like a fortress: a strong external perimeter, with much more trust once a user or service was inside the network.</p>
+        <p>The problem is that one stolen account, infected laptop, or compromised service can then receive far more access than it should.</p>
+        <p>Zero Trust removes the assumption that location automatically means trust.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>With Zero Trust, every request is considered in context: who is asking, from which device, for which resource, with which permissions, and whether that access is actually needed.</p>
+        <p>A user does not receive broad access just because they connected to a VPN. A service should not be able to read everything simply because it runs in the same data center.</p>
+        <p>The idea is simple: even if one element is compromised, the attacker should not automatically be free to move further.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The business primarily gains a smaller potential blast radius.</p>
+        <p>No company can promise that a password will never be stolen or a device will never be infected. It can, however, avoid turning one compromise into access to the entire organization.</p>
+        <p>This can reduce the potential cost of an incident because fewer systems and data sets are exposed at the same time, while critical resources can be protected independently of where an employee works.</p>
+        <p>It also fits organizations where people work remotely, services live across several clouds, and partners connect from outside. Security no longer depends on one physical perimeter.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>Teams get a more explicit access model. A user or service receives specific permissions instead of the abstract privilege of being “inside the network.”</p>
+        <p>This makes it easier to understand who can access what and reduces hidden trust relationships.</p>
+        <p>But it adds work around identity, policies, device management, secrets, service authentication, and access logging.</p>
+
+        <h2>What does the user gain?</h2>
+        <p>Well-designed Zero Trust can make secure work possible from more places because access follows identity and context rather than a particular office network.</p>
+        <p>Poorly designed Zero Trust becomes an endless sequence of prompts and blocks. Security has to be strict enough to protect the company and usable enough that employees do not constantly work around it.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is the complexity of identity and policy management.</p>
+        <p>The company needs to know which roles exist, which resources they really need, and how to revoke access quickly. Without that discipline, Zero Trust can turn into a large set of exceptions that nobody understands.</p>
+        <p>Legacy systems may also integrate poorly with modern identity mechanisms and require additional work.</p>
+
+        <h2>When should technology not come first?</h2>
+        <p>If the company does not know which users and services have access to critical systems, buying another security product will not solve the core problem.</p>
+        <p>Zero Trust starts with understanding resources, identities, and least-necessary access—not with a particular vendor.</p>
+
+        <h2>Questions to ask before deciding</h2>
+        <ul>
+          <li>Which systems and data are truly critical?</li>
+          <li>What happens if one employee account is compromised?</li>
+          <li>Do services have more permissions than they actually need?</li>
+          <li>Can we revoke access for a person, device, or application quickly?</li>
+          <li>Are we creating security controls that employees will constantly bypass?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Zero Trust does not mean distrusting people in the human sense.</p>
+        <p><strong>For the business, it means not turning one mistake, stolen account, or infected device into a pass to the whole company.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
