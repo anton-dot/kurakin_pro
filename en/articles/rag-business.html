@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What RAG is, how to give AI access to company knowledge without retraining the model, and which trade-offs appear around quality, freshness, and data access.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="RAG: How to Give AI Company Knowledge Without Retraining the Model">
+    <meta property="og:description" content="RAG in business language: how to connect internal knowledge to AI, update information faster, and manage the price of retrieval quality and access control.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/rag-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>RAG: How to Give AI Company Knowledge Without Retraining the Model - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/rag-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/rag-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/rag-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RAG: How to Give AI Company Knowledge Without Retraining the Model","description":"What RAG is, how to give AI access to company knowledge without retraining the model, and which trade-offs appear around quality, freshness, and data access.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/rag-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/rag-business.html">RU</a><a href="rag-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>RAG: How to Give AI Company Knowledge Without Retraining the Model</h1><p class="article-summary">A model may be excellent at language and know nothing about your contracts, products, or internal policies. RAG finds relevant company information first and gives it to the model when producing an answer.</p></div></header>
+      <article class="article-content">
+        <p>A large language model knows what was available during training. It does not automatically know today's price list, an internal instruction, or the contents of a new contract.</p>
+        <p>The company can try to train a model on internal data, but those data change constantly. In many cases the business needs a simpler mechanism: provide the right information at the moment of the request.</p>
+        <p>RAG—Retrieval-Augmented Generation—is built around that idea.</p>
+
+        <h2>What problem are we solving?</h2>
+        <p>Before the model answers, the system searches internal sources such as documents, knowledge bases, product catalogs, or other data.</p>
+        <p>The relevant context is then sent to the model together with the user's question. The model does not have to store company knowledge inside itself; it receives that knowledge when needed.</p>
+        <p>This separates the general language capability of the model from the specific information of the business.</p>
+
+        <h2>What does the business gain?</h2>
+        <p>The main benefit is that company knowledge can change without retraining the model.</p>
+        <p>When a policy changes, a new product appears, or terms are updated, the source can be changed independently. This shortens the time between an information change and the moment the AI can use it.</p>
+        <p>RAG also makes specialized AI scenarios easier to launch: support assistants, internal search, documentation help, or product Q&A without building a separate model for every knowledge set.</p>
+        <p>There is a governance benefit too. Answers can be connected to specific documents and access rights, so quality discussions move beyond “the model invented something” toward the quality of retrieval and source data.</p>
+
+        <h2>What does the team gain?</h2>
+        <p>The team can evolve retrieval, the model, and data sources separately. The LLM can change without rebuilding the knowledge base, or the index can improve without retraining the model.</p>
+        <p>But a new chain appears: document preparation, chunking, indexing, retrieval, context assembly, and generation.</p>
+        <p>Failures can now happen outside the model. The system may fail to find the right document, choose an outdated version, or provide too little context.</p>
+
+        <h2>What does the user gain?</h2>
+        <p>Users receive answers grounded in knowledge specific to the company instead of only the model's general knowledge.</p>
+        <p>The experience is especially useful when sources are shown so a user can open the document and verify the basis of the answer.</p>
+        <p>RAG still does not guarantee truth. Even with the correct document, a model may interpret it incorrectly.</p>
+
+        <h2>What do we pay for it?</h2>
+        <p>The price is data quality, retrieval quality, and access control.</p>
+        <p>If the knowledge base contains contradictory or outdated documents, the AI may confidently use them. If permissions are ignored during retrieval, a user may receive context they should never have seen.</p>
+        <p>The team needs retrieval metrics, source update processes, and tests based on real user questions.</p>
+
+        <h2>When is RAG unnecessary?</h2>
+        <p>If the task does not require company-specific or fast-changing knowledge, retrieval may only add latency and complexity.</p>
+        <p>Sometimes a good system prompt and a small fixed context are enough.</p>
+
+        <h2>Questions to ask before deciding</h2>
+        <ul>
+          <li>Which knowledge does the AI actually need, and how often does it change?</li>
+          <li>Do we have a reliable source of truth for that information?</li>
+          <li>How will retrieval enforce access permissions?</li>
+          <li>How can users verify the source behind an answer?</li>
+          <li>How will we measure retrieval quality separately from model quality?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>RAG is not a way to make a model “smarter in general.” It makes the model more useful in a specific information context.</p>
+        <p><strong>For the business, its value is that company knowledge can change independently of the model—faster, cheaper, and with clearer control over sources.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
