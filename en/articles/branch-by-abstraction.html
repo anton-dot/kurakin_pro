@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How Branch by Abstraction supports gradual legacy replacement without long-lived branches, a big-bang release, or stopping ongoing product delivery.">
+<meta name="author" content="Anton Kurakin"><meta name="color-scheme" content="light">
+<meta property="og:type" content="article"><meta property="og:title" content="Branch by Abstraction: How to Replace Part of a System Without One Big Switch"><meta property="og:description" content="Branch by Abstraction keeps old and new implementations behind one stable boundary so migration can happen gradually and reversibly."><meta property="og:url" content="https://kurakin-anton.ru/en/articles/branch-by-abstraction.html"><meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-08-12">
+<title>Branch by Abstraction: How to Replace Part of a System Without One Big Switch - Anton Kurakin</title>
+<link rel="canonical" href="https://kurakin-anton.ru/en/articles/branch-by-abstraction.html"><link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/branch-by-abstraction.html"><link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/branch-by-abstraction.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Branch by Abstraction: How to Replace Part of a System Without One Big Switch","description":"How Branch by Abstraction supports gradual legacy replacement without long-lived branches, a big-bang release, or stopping ongoing product delivery.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/branch-by-abstraction.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+<link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en"><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/branch-by-abstraction.html">RU</a><a href="branch-by-abstraction.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy and migration</a><p class="article-kicker"><span>5 min read</span></p><h1>Branch by Abstraction: How to Replace Part of a System Without One Big Switch</h1><p class="article-summary">The most dangerous part of a large migration is often not building the new implementation, but the day everything must switch at once. Branch by Abstraction replaces one large cutover with a sequence of smaller, reversible steps.</p></div></header>
+<article class="article-content">
+<p>When a company needs to replace an important part of an old system, a natural approach is a separate development branch: build the new implementation in parallel, then merge it and replace the old one.</p>
+<p>In practice those branches can live for months. The main product keeps changing, the new version falls behind, conflicts grow, and the final cutover becomes increasingly risky.</p>
+<h2>What problem are we solving?</h2>
+<p>Branch by Abstraction separates consumers from the concrete implementation through a stable boundary. First, the system stops calling the old component directly and goes through an abstraction. Then a new implementation is added behind that boundary.</p>
+<p>For a period, old and new implementations can coexist. Traffic can move gradually by feature, customer group, environment, or scenario. Once the new implementation proves itself, the old one is removed.</p>
+<p>This is not abstraction for elegance. Its purpose is to make migration reversible and reduce the size of each risky step.</p>
+<h2>What does the business get?</h2>
+<p>The business can modernize a critical component without betting on one large release. A defect in the new implementation does not have to invalidate months of migration work.</p>
+<p>Just as importantly, product delivery can continue. The organization does not have to freeze the main system while a rewrite is in progress or constantly synchronize a massive long-lived branch.</p>
+<p>The migration can be slowed, paused, or reconsidered if the economics turn out worse than expected. That reduces sunk-cost pressure: the company is not forced to finish a huge technical program simply because it has already invested heavily.</p>
+<h2>What does the team get?</h2>
+<p>The team gets shorter feedback cycles. The new implementation can be connected earlier and validated on real scenarios in limited scope.</p>
+<p>Failures are easier to localize because it is clear which implementation served a request and where behavior differs.</p>
+<p>The approach also supports continuous work on the main branch and avoids months of merge conflict. The price is that the abstraction boundary must be chosen carefully enough to support both implementations.</p>
+<h2>What does the customer get?</h2>
+<p>Customers mainly benefit from lower cutover risk. The new implementation can be exposed gradually, and traffic can return to the old one if problems appear.</p>
+<p>If the migration is designed well, customers should not need to know that an important internal component is being replaced.</p>
+<h2>What do we pay for it?</h2>
+<p>For a while, the system contains two implementations. That temporary complexity has to be operated: both versions need support, behavior may need comparison, routing must be controlled, and data ownership must stay clear.</p>
+<p>The abstraction itself can also be wrong. If it simply copies the old system's details, the new implementation inherits legacy constraints instead of escaping them.</p>
+<p>There is also a risk of an endless migration. If the old implementation remains “just in case” for years, temporary architecture becomes permanent and can cost more than the original problem.</p>
+<h2>When is the approach unnecessary?</h2>
+<p>If the component is small, easy to test, and safe to replace in one short release, the extra boundary may add more complexity than value.</p>
+<p>Branch by Abstraction is useful when migration is long-running, the component is critical, the product must keep evolving, and one large switch carries significant business risk.</p>
+<h2>What should we ask before using it?</h2>
+<ul><li>Where is the smallest stable boundary around the implementation we want to replace?</li><li>Can the new version be enabled gradually?</li><li>How quickly can traffic return to the old implementation?</li><li>How will behavior between the two versions be compared?</li><li>What condition means the old implementation must finally be removed?</li></ul>
+<h2>In the end</h2>
+<p>A large migration does not have to become a large release.</p>
+<p><strong>Branch by Abstraction lets the company buy a new system in small units of risk while the old implementation gradually disappears without stopping the business.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer></body></html>
