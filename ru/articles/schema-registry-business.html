@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Зачем нужен Schema Registry в event-driven системах: как менять формат событий, проверять совместимость и не ломать десятки независимых потребителей.">
+    <meta name="author" content="Антон Куракин">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Schema Registry: как менять события, не ломая десятки потребителей">
+    <meta property="og:description" content="Событие быстро становится контрактом между командами. Schema Registry помогает управлять его изменениями и заранее ловить несовместимость.">
+    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/schema-registry-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Schema Registry: как менять события, не ломая десятки потребителей - Антон Куракин</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/schema-registry-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/schema-registry-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/schema-registry-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Schema Registry: как менять события, не ломая десятки потребителей","description":"Зачем нужен Schema Registry в event-driven системах: как менять формат событий, проверять совместимость и не ломать десятки независимых потребителей.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/schema-registry-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="ru">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <header class="site-header">
+      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <div class="lang-switcher" aria-label="Выбор языка"><a href="schema-registry-business.html" aria-current="page">RU</a><a href="../../en/articles/schema-registry-business.html">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Schema Registry: как менять события, не ломая десятки потребителей</h1><p class="article-summary">В event-driven системе событие перестаёт принадлежать только отправителю. На него начинают зависеть другие команды и продукты. Schema Registry делает этот контракт явным и помогает понять несовместимость до того, как она попадёт в production.</p></div></header>
+      <article class="article-content">
+        <p>Очереди хорошо уменьшают прямую связанность между системами. Отправителю не нужно знать всех получателей. Но это не означает, что зависимости исчезают.</p>
+        <p>Если событие «Заказ создан» меняет структуру, смысл поля или обязательность данных, десятки потребителей могут неожиданно перестать его понимать. В такой архитектуре простой rename поля иногда становится организационной миграцией.</p>
+        <h2>Какую проблему мы решаем</h2>
+        <p>Schema Registry хранит формальные схемы событий и их версии. Продюсеры и потребители могут проверять, соответствует ли сообщение ожидаемому контракту и совместима ли новая версия со старой.</p>
+        <p>Вместо надежды «кажется, никто это поле не использует» появляется проверяемое правило: допустимо ли удалить поле, изменить тип или сделать ранее необязательное значение обязательным.</p>
+        <p>Registry не отменяет коммуникацию между командами. Он переносит часть договорённостей из документации и памяти людей в механизм, который можно автоматически проверить.</p>
+        <h2>Что получает бизнес</h2>
+        <p>Главный эффект — снижение риска скрытой стоимости изменений.</p>
+        <p>Когда одно событие используется множеством продуктов, несовместимое изменение может остановить не один сервис, а сразу несколько бизнес-процессов. Формальная проверка совместимости уменьшает вероятность такого каскада.</p>
+        <p>Это также помогает масштабировать количество команд. Каждое изменение не требует вручную находить всех потребителей и договариваться с ними о синхронном релизе.</p>
+        <p>Бизнес получает более дешёвую эволюцию интеграционного слоя — но только если правила схем действительно соблюдаются всеми участниками.</p>
+        <h2>Что получает команда</h2>
+        <p>Команда получает версионируемый контракт и раннюю обратную связь. Несовместимость можно обнаружить в CI или при публикации схемы, а не после падения чужого consumer.</p>
+        <p>Проще генерировать типы, документировать события и понимать историю их развития.</p>
+        <p>Но Schema Registry не решает смысловую несовместимость автоматически. Поле может остаться строкой и формально пройти проверку, хотя бизнес-смысл изменился полностью.</p>
+        <h2>Что получает клиент</h2>
+        <p>Клиент почти никогда не видит Schema Registry напрямую. Он получает меньше интеграционных сбоев и меньше ситуаций, когда одна внутренняя миграция ломает заказ, уведомление или расчёт в другой части системы.</p>
+        <p>Для внешних клиентов и партнёров эффект особенно заметен там, где внутренние события в итоге питают API, отчёты и уведомления.</p>
+        <h2>Чем мы за это платим</h2>
+        <p>Появляется ещё один инфраструктурный компонент и правила работы с ним. Нужно выбрать формат схем, режимы совместимости и встроить проверки в delivery pipeline.</p>
+        <p>Команды должны перестать относиться к событию как к внутренней структуре одного сервиса. Как только событие публично внутри компании, его изменение требует дисциплины.</p>
+        <p>Есть риск и обратной крайности: страх изменить схему вообще. Совместимость должна помогать развитию, а не превращать каждое старое поле в вечный legacy.</p>
+        <h2>Когда Schema Registry не нужен</h2>
+        <p>Если события используются одной командой и число интеграций невелико, простая договорённость и тесты могут быть дешевле отдельной платформы.</p>
+        <p>Registry начинает окупаться, когда события живут долго, потребителей много, команды независимы, а цена несовместимого изменения заметна.</p>
+        <h2>Что стоит спросить перед решением</h2>
+        <ul><li>Сколько независимых потребителей у ключевых событий?</li><li>Кто владеет контрактом события и принимает решения об изменениях?</li><li>Какая совместимость нужна: backward, forward или обе?</li><li>Можно ли автоматически блокировать несовместимое изменение до production?</li><li>Как мы удаляем устаревшие поля и версии, чтобы контракт не рос бесконечно?</li></ul>
+        <h2>В итоге</h2>
+        <p>Schema Registry нужен не потому, что события должны быть «строго типизированы». Он нужен, когда изменение одного сообщения стало риском для многих независимых систем.</p>
+        <p><strong>Для бизнеса это способ уменьшить цену координации и не превращать развитие event-driven платформы в цепочку неожиданных поломок.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+  </body>
+</html>
