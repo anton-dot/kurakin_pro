@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How semantic caching reduces AI cost and latency, why similar questions do not always deserve the same answer, and where caching creates stale or unsafe results.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Semantic Cache: When AI Should Not Answer Almost the Same Question Again">
+    <meta property="og:description" content="Users often ask AI nearly identical questions in different words. A Semantic Cache can reuse a previous answer without another model call—faster and cheaper, but only when the system can tell when answers are truly interchangeable.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/semantic-cache-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Semantic Cache: When AI Should Not Answer Almost the Same Question Again - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/semantic-cache-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/semantic-cache-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/semantic-cache-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Semantic Cache: When AI Should Not Answer Almost the Same Question Again","description":"How semantic caching reduces AI cost and latency, why similar questions do not always deserve the same answer, and where caching creates stale or unsafe results.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/semantic-cache-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/semantic-cache-business.html">RU</a><a href="semantic-cache-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>Semantic Cache: When AI Should Not Answer Almost the Same Question Again</h1><p class="article-summary">Users often ask AI nearly identical questions in different words. A Semantic Cache can reuse a previous answer without another model call—faster and cheaper, but only when the system can tell when answers are truly interchangeable.</p></div></header>
+      <article class="article-content">
+        <p>Traditional caching works when two requests are identical. AI products are different: users rarely phrase the same intent in exactly the same words. “How do I cancel an order?” and “Can I undo my purchase?” may be semantically equivalent.</p>
+        <p>If every similar request goes back to the LLM, the company pays again for nearly the same computation and waits for model latency again.</p>
+        <h2>What problem are we solving?</h2>
+        <p>A Semantic Cache compares meaning rather than the exact request string. If a new request is close enough to one that was already answered, the system can reuse the stored result.</p>
+        <p>This can work well for repetitive support questions, classification, and stable RAG scenarios.</p>
+        <p>But similar does not mean identical. For prices, order status, permissions, or fresh data, reusing an old answer can be dangerous.</p>
+        <h2>What does the business get?</h2>
+        <p>The main benefit is lower model cost and lower latency.</p>
+        <p>At scale, that can make the economics of an AI feature more predictable. A cache can also reduce dependence on short-lived problems at an external LLM provider.</p>
+        <p>The saving only matters while quality remains acceptable. One wrongly reused answer in a critical flow can cost more than thousands of saved model calls.</p>
+        <h2>What does the team get?</h2>
+        <p>The team gains another control layer between the product and the model: similarity thresholds, TTLs, exclusion rules, and cache observability.</p>
+        <p>Engineers must measure not only hit rate but answer quality. A very high hit rate can be a bad sign if the system is too eager to treat different questions as the same.</p>
+        <h2>What does the customer get?</h2>
+        <p>Customers get faster responses in repetitive scenarios and feel less of the model's own latency.</p>
+        <p>The risk is stale or only approximately relevant content. Personalized, dynamic, or sensitive requests therefore need stricter rules or no semantic caching at all.</p>
+        <h2>What do we pay for it?</h2>
+        <p>Embeddings or another semantic representation, storage, invalidation logic, security rules, and continuous quality evaluation.</p>
+        <p>Access control also matters: an answer generated for one user must not be reused for another if context or permissions differ.</p>
+        <h2>When is a Semantic Cache unnecessary?</h2>
+        <p>At low request volume, the savings may not justify the added architecture.</p>
+        <p>It is also a poor fit for highly personalized, rapidly changing, or transactional responses where freshness matters more than model-call cost.</p>
+        <h2>What should we ask before deciding?</h2>
+        <ul><li>Which requests actually repeat by meaning?</li><li>How long does an answer remain valid?</li><li>Can an answer be safely reused across users?</li><li>How will false hits be measured?</li><li>What matters most here: cost, latency, or maximum freshness?</li></ul>
+        <h2>In the end</h2>
+        <p>Semantic Cache is not just an LLM cost optimization. It is a policy for deciding when two different user requests are similar enough to share an answer.</p>
+        <p><strong>For the business, it is useful where repetition is high, model cost is meaningful, and stale-answer risk can be controlled.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
