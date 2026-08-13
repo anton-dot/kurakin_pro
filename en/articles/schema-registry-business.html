@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why event-driven systems may need a schema registry: evolve event formats, check compatibility, and avoid breaking dozens of independent consumers.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Schema Registry: How to Change Events Without Breaking Dozens of Consumers">
+    <meta property="og:description" content="An event quickly becomes a contract between teams. A schema registry makes that contract explicit and catches incompatible changes early.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/schema-registry-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Schema Registry: How to Change Events Without Breaking Dozens of Consumers - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/schema-registry-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/schema-registry-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/schema-registry-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Schema Registry: How to Change Events Without Breaking Dozens of Consumers","description":"Why event-driven systems may need a schema registry: evolve event formats, check compatibility, and avoid breaking dozens of independent consumers.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/schema-registry-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/schema-registry-business.html">RU</a><a href="schema-registry-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Schema Registry: How to Change Events Without Breaking Dozens of Consumers</h1><p class="article-summary">In an event-driven system, an event stops belonging only to its producer. Other teams and products start depending on it. A schema registry makes that contract explicit and helps detect incompatibility before production.</p></div></header>
+      <article class="article-content">
+        <p>Messaging reduces direct coupling between systems. A producer does not need to know every consumer. But that does not mean dependencies disappear.</p>
+        <p>If an “Order Created” event changes structure, field meaning, or required data, many consumers may suddenly stop understanding it. In that architecture, renaming one field can become an organizational migration.</p>
+        <h2>What problem are we solving?</h2>
+        <p>A schema registry stores formal event schemas and their versions. Producers and consumers can validate whether a message matches the expected contract and whether a new version remains compatible with previous ones.</p>
+        <p>Instead of relying on “I think nobody uses this field,” the team gets a checkable rule: can the field be removed, can its type change, or can an optional value become mandatory?</p>
+        <p>The registry does not replace communication between teams. It moves part of the agreement from documentation and memory into something software can verify automatically.</p>
+        <h2>What does the business get?</h2>
+        <p>The main benefit is lower hidden change risk.</p>
+        <p>When one event feeds many products, an incompatible change can stop several business processes at once. Formal compatibility checks reduce the chance of that cascade.</p>
+        <p>It also helps the organization scale the number of teams. Every change no longer requires manually finding all consumers and arranging a synchronized release.</p>
+        <p>The business gets a cheaper way to evolve its integration layer, but only if all teams actually follow the schema rules.</p>
+        <h2>What does the team get?</h2>
+        <p>The team gets a versioned contract and earlier feedback. Incompatibility can be found in CI or during schema publication rather than after another team’s consumer fails.</p>
+        <p>It becomes easier to generate types, document events, and understand their evolution over time.</p>
+        <p>But a schema registry cannot detect every semantic problem. A field may remain a string and pass compatibility checks even though its business meaning changed completely.</p>
+        <h2>What does the customer get?</h2>
+        <p>Customers rarely see a schema registry directly. They see fewer integration failures and fewer cases where one internal migration breaks an order, notification, or calculation elsewhere.</p>
+        <p>The effect also reaches external customers and partners when internal events feed APIs, reports, and notifications.</p>
+        <h2>What do we pay for it?</h2>
+        <p>The company adds another infrastructure component and a set of operating rules. It has to choose schema formats, compatibility modes, and integrate checks into the delivery pipeline.</p>
+        <p>Teams must stop treating a widely consumed event as an internal structure of one service. Once the event is shared, changing it requires discipline.</p>
+        <p>There is an opposite risk too: becoming afraid to change schemas at all. Compatibility should enable evolution, not turn every old field into permanent legacy.</p>
+        <h2>When is a schema registry unnecessary?</h2>
+        <p>If events are used by one team and integrations are few, simple agreements and tests may be cheaper than a separate platform component.</p>
+        <p>A registry becomes valuable when events live for a long time, consumers are numerous, teams are independent, and incompatible change has a meaningful business cost.</p>
+        <h2>What should we ask before deciding?</h2>
+        <ul><li>How many independent consumers depend on key events?</li><li>Who owns the event contract and approves changes?</li><li>Do we need backward compatibility, forward compatibility, or both?</li><li>Can incompatible changes be blocked automatically before production?</li><li>How do we retire old fields and versions instead of growing the contract forever?</li></ul>
+        <h2>In the end</h2>
+        <p>A schema registry is not valuable merely because events should be strictly typed. It matters when one message has become a shared dependency across many independent systems.</p>
+        <p><strong>For the business, it is a way to reduce coordination cost and keep an event-driven platform from evolving through a chain of unexpected breakages.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
