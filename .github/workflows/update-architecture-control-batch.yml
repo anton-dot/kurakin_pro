@@ -1,0 +1,93 @@
+name: Update architecture control batch
+
+on:
+  push:
+    paths:
+      - '.github/architecture-control-batch.trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update catalog and sitemap
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          cards = {
+              'ru/architecture/index.html': {
+                  'foundations': '''<article class="publication-item"><div class="publication-meta"><span>5 мин</span></div><div class="publication-copy"><p class="publication-source">Архитектура · статья</p><h3><a href="../articles/architecture-fitness-functions.html">Architecture Fitness Functions: как проверять архитектуру автоматически</a></h3><p>Как превратить важные архитектурные ограничения в автоматические проверки и замечать деградацию до того, как она станет дорогой.</p></div><nav class="publication-versions" aria-label="Доступные языковые версии"><a href="../articles/architecture-fitness-functions.html" aria-current="true">RU</a><a href="../../en/articles/architecture-fitness-functions.html">EN</a></nav></article>''',
+                  'api': '''<article class="publication-item"><div class="publication-meta"><span>5 мин</span></div><div class="publication-copy"><p class="publication-source">Архитектура · статья</p><h3><a href="../articles/api-composition-business.html">API Composition: почему клиент не должен собирать продукт из внутренних сервисов</a></h3><p>Как скрыть внутреннюю структуру сервисов за одним продуктовым контрактом и снизить стоимость координации клиентских команд.</p></div><nav class="publication-versions" aria-label="Доступные языковые версии"><a href="../articles/api-composition-business.html" aria-current="true">RU</a><a href="../../en/articles/api-composition-business.html">EN</a></nav></article>''',
+                  'data': '''<article class="publication-item"><div class="publication-meta"><span>5 мин</span></div><div class="publication-copy"><p class="publication-source">Архитектура · статья</p><h3><a href="../articles/connection-pooling-business.html">Connection Pooling: почему больше приложений не должно означать больше хаоса в базе</a></h3><p>Как ограничить конкуренцию за соединения с базой и не позволить горизонтальному масштабированию приложения перегрузить слой данных.</p></div><nav class="publication-versions" aria-label="Доступные языковые версии"><a href="../articles/connection-pooling-business.html" aria-current="true">RU</a><a href="../../en/articles/connection-pooling-business.html">EN</a></nav></article>''',
+                  'domain': '''<article class="publication-item"><div class="publication-meta"><span>5 мин</span></div><div class="publication-copy"><p class="publication-source">Архитектура · статья</p><h3><a href="../articles/service-ownership-business.html">Service Ownership: почему у каждого сервиса должен быть хозяин</a></h3><p>Как связать технические границы с явной командной ответственностью и уменьшить стоимость поиска, согласований и ничейных рисков.</p></div><nav class="publication-versions" aria-label="Доступные языковые версии"><a href="../articles/service-ownership-business.html" aria-current="true">RU</a><a href="../../en/articles/service-ownership-business.html">EN</a></nav></article>''',
+                  'ai': '''<article class="publication-item"><div class="publication-meta"><span>5 мин</span></div><div class="publication-copy"><p class="publication-source">Архитектура · статья</p><h3><a href="../articles/prompt-injection-defense.html">Prompt Injection: почему AI нельзя доверять любой инструкции, которую он прочитал</a></h3><p>Как отделять недоверенный внешний контент от полномочий модели и ограничивать последствия вредных инструкций.</p></div><nav class="publication-versions" aria-label="Доступные языковые версии"><a href="../articles/prompt-injection-defense.html" aria-current="true">RU</a><a href="../../en/articles/prompt-injection-defense.html">EN</a></nav></article>'''
+              },
+              'en/architecture/index.html': {
+                  'foundations': '''<article class="publication-item"><div class="publication-meta"><span>5 min</span></div><div class="publication-copy"><p class="publication-source">Architecture · article</p><h3><a href="../articles/architecture-fitness-functions.html">Architecture Fitness Functions: How to Check Architecture Automatically</a></h3><p>How to turn important architecture constraints into automated checks and detect degradation before it becomes expensive.</p></div><nav class="publication-versions" aria-label="Available language versions"><a href="../../ru/articles/architecture-fitness-functions.html">RU</a><a href="../articles/architecture-fitness-functions.html" aria-current="true">EN</a></nav></article>''',
+                  'api': '''<article class="publication-item"><div class="publication-meta"><span>5 min</span></div><div class="publication-copy"><p class="publication-source">Architecture · article</p><h3><a href="../articles/api-composition-business.html">API Composition: Why Clients Should Not Assemble the Product From Internal Services</a></h3><p>How to hide internal service structure behind one product contract and reduce coordination cost for client teams.</p></div><nav class="publication-versions" aria-label="Available language versions"><a href="../../ru/articles/api-composition-business.html">RU</a><a href="../articles/api-composition-business.html" aria-current="true">EN</a></nav></article>''',
+                  'data': '''<article class="publication-item"><div class="publication-meta"><span>5 min</span></div><div class="publication-copy"><p class="publication-source">Architecture · article</p><h3><a href="../articles/connection-pooling-business.html">Connection Pooling: Why More Application Instances Should Not Mean More Database Chaos</a></h3><p>How to control competition for database connections and stop horizontal application scaling from overwhelming the data layer.</p></div><nav class="publication-versions" aria-label="Available language versions"><a href="../../ru/articles/connection-pooling-business.html">RU</a><a href="../articles/connection-pooling-business.html" aria-current="true">EN</a></nav></article>''',
+                  'domain': '''<article class="publication-item"><div class="publication-meta"><span>5 min</span></div><div class="publication-copy"><p class="publication-source">Architecture · article</p><h3><a href="../articles/service-ownership-business.html">Service Ownership: Why Every Service Needs an Owner</a></h3><p>How to connect technical boundaries with explicit team accountability and reduce the cost of searching, coordinating, and carrying ownerless risk.</p></div><nav class="publication-versions" aria-label="Available language versions"><a href="../../ru/articles/service-ownership-business.html">RU</a><a href="../articles/service-ownership-business.html" aria-current="true">EN</a></nav></article>''',
+                  'ai': '''<article class="publication-item"><div class="publication-meta"><span>5 min</span></div><div class="publication-copy"><p class="publication-source">Architecture · article</p><h3><a href="../articles/prompt-injection-defense.html">Prompt Injection: Why AI Should Not Trust Every Instruction It Reads</a></h3><p>How to separate untrusted external content from model authority and limit the impact of malicious instructions.</p></div><nav class="publication-versions" aria-label="Available language versions"><a href="../../ru/articles/prompt-injection-defense.html">RU</a><a href="../articles/prompt-injection-defense.html" aria-current="true">EN</a></nav></article>'''
+              }
+          }
+
+          def insert_card(html, section_id, card):
+              if card.split('href="', 1)[1].split('"', 1)[0] in html:
+                  return html
+              marker = f"id='{section_id}'"
+              start = html.find(marker)
+              if start < 0:
+                  marker = f'id="{section_id}"'
+                  start = html.find(marker)
+              if start < 0:
+                  raise RuntimeError(f'section {section_id} not found')
+              next_single = html.find("<section class='architecture-category'", start + 1)
+              next_double = html.find('<section class="architecture-category"', start + 1)
+              candidates = [x for x in (next_single, next_double) if x >= 0]
+              end = min(candidates) if candidates else len(html)
+              section = html[start:end]
+              close = section.rfind('</div></section>')
+              if close < 0:
+                  raise RuntimeError(f'closing marker for {section_id} not found')
+              pos = start + close
+              return html[:pos] + card + html[pos:]
+
+          for path, section_cards in cards.items():
+              p = Path(path)
+              html = p.read_text(encoding='utf-8')
+              for section_id, card in section_cards.items():
+                  html = insert_card(html, section_id, card)
+              p.write_text(html, encoding='utf-8')
+
+          sitemap = Path('sitemap-architecture.xml')
+          xml = sitemap.read_text(encoding='utf-8')
+          slugs = [
+              'architecture-fitness-functions.html',
+              'api-composition-business.html',
+              'connection-pooling-business.html',
+              'service-ownership-business.html',
+              'prompt-injection-defense.html'
+          ]
+          additions = ''
+          for slug in slugs:
+              for lang in ('ru', 'en'):
+                  url = f'https://kurakin.pro/{lang}/articles/{slug}'
+                  if url not in xml:
+                      additions += f'<url><loc>{url}</loc></url>'
+          xml = xml.replace('</urlset>', additions + '</urlset>')
+          sitemap.write_text(xml, encoding='utf-8')
+
+          Path('.github/workflows/update-architecture-control-batch.yml').unlink(missing_ok=True)
+          Path('.github/architecture-control-batch.trigger').unlink(missing_ok=True)
+          PY
+      - name: Commit changes and clean helper files
+        run: |
+          git config user.name "anton-dot"
+          git config user.email "66353024+anton-dot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Update architecture catalog with control batch"
+          git push
