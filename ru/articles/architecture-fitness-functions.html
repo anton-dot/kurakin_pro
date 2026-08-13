@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Что дают Architecture Fitness Functions бизнесу: как автоматически проверять важные свойства архитектуры и не замечать деградацию только после инцидента.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Architecture Fitness Functions: как проверять архитектуру автоматически">
+  <meta property="og:description" content="Если архитектурное правило действительно важно, его полезно не только записать, но и регулярно проверять автоматически.">
+  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/architecture-fitness-functions.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>Architecture Fitness Functions: как проверять архитектуру автоматически - Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/architecture-fitness-functions.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/architecture-fitness-functions.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/architecture-fitness-functions.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Architecture Fitness Functions: как проверять архитектуру автоматически","description":"Что дают Architecture Fitness Functions бизнесу: как автоматически проверять важные свойства архитектуры и не замечать деградацию только после инцидента.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/architecture-fitness-functions.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="ru">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header">
+  <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+  <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+  <div class="lang-switcher" aria-label="Выбор языка"><a href="architecture-fitness-functions.html" aria-current="page">RU</a><a href="../../en/articles/architecture-fitness-functions.html">EN</a></div>
+</header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#foundations">Архитектурные основы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Architecture Fitness Functions: как проверять архитектуру автоматически</h1><p class="article-summary">Архитектурные правила часто выглядят убедительно на встрече и постепенно исчезают в реальной разработке. Fitness Functions превращают часть таких правил в автоматические проверки: система сама показывает, когда начинает отклоняться от выбранных ограничений.</p></div></header>
+<article class="article-content">
+<p>Архитектура редко ломается одним большим решением. Чаще она медленно размывается десятками локально разумных изменений. Один сервис начинает ходить напрямую в чужую базу, другой получает слишком много зависимостей, время ответа незаметно растёт, а критичный модуль постепенно становится связан со всем.</p>
+<p>Документы и ревью помогают, но не гарантируют, что важные свойства системы сохранятся через год. Если правило действительно критично, его полезно не только сформулировать, но и сделать проверяемым.</p>
+<h2>Как работает подход</h2>
+<p>Architecture Fitness Function — это автоматическая проверка архитектурного свойства. Она может запускаться в CI, мониторинге или другой части инженерного процесса.</p>
+<p>Проверять можно разные вещи: допустимые зависимости между модулями, максимальную задержку, наличие шифрования, ограничения на размер компонентов, правила доступа или другие характеристики, которые компания считает важными.</p>
+<p>Главная идея проста: вместо фразы «мы стараемся не нарушать это правило» появляется механизм, который показывает нарушение сразу.</p>
+<h2>Что получает бизнес</h2>
+<p>Бизнес получает более предсказуемую стоимость изменений. Если архитектурные ограничения проверяются автоматически, меньше вероятность накопить проблему, которую обнаружат только тогда, когда очередная функция потребует дорогой переделки.</p>
+<p>Это также снижает риск незаметной деградации важных свойств системы. Например, если скорость ответа или границы доступа действительно влияют на продукт, автоматическая проверка позволяет заметить ухудшение до того, как оно станет клиентским инцидентом.</p>
+<p>Ещё одна выгода — масштабирование инженерной дисциплины. Компания меньше зависит от того, присутствует ли конкретный архитектор на каждом ревью.</p>
+<h2>Что получает команда</h2>
+<p>Команда получает быстрый и однозначный feedback. Разработчику проще исправить нарушение в pull request, чем через полгода разбираться, почему система стала слишком связанной.</p>
+<p>Fitness Functions также делают архитектурные решения менее субъективными. Вместо спора «это хороший дизайн или нет» появляется конкретное ограничение, которое команда когда-то решила защищать.</p>
+<p>Но проверять стоит только действительно важные свойства. Если автоматизировать каждый вкусовой выбор, архитектура превращается в набор запретов, а команды начинают бороться с правилами вместо продукта.</p>
+<h2>Что получает клиент</h2>
+<p>Клиент напрямую не видит Fitness Functions. Он видит их последствия: более стабильную производительность, меньше регрессий, более предсказуемые релизы и реже возникающие проблемы из-за постепенного расползания системы.</p>
+<h2>Чем мы за это платим</h2>
+<p>Проверки нужно придумать, реализовать и поддерживать. Архитектура меняется, поэтому вчерашнее полезное ограничение завтра может стать препятствием.</p>
+<p>Есть риск ложной точности: то, что легко измерить, начинает казаться важнее того, что действительно важно. Не каждое архитектурное качество можно свести к одной метрике.</p>
+<p>Кроме того, слишком жёсткие проверки способны замедлить команду и закрепить старые решения только потому, что они уже автоматизированы.</p>
+<h2>Когда не нужно</h2>
+<p>Для небольшой системы и маленькой команды формальная система архитектурных проверок может быть избыточной. Иногда достаточно хорошего кода, ревью и понятных границ.</p>
+<p>Подход становится особенно полезен, когда команд много, архитектура сложна, система живёт долго, а нарушение конкретных свойств уже дорого обходилось бизнесу.</p>
+<h2>Что стоит спросить перед решением</h2>
+<ul><li>Какие архитектурные свойства действительно критичны для бизнеса?</li><li>Какие из них можно проверить автоматически?</li><li>Как быстро команда должна узнать о нарушении?</li><li>Кто пересматривает устаревшие ограничения?</li><li>Не превращаем ли мы полезное правило в догму?</li></ul>
+<h2>В итоге</h2>
+<p>Fitness Functions не заменяют архитектурное мышление. Они помогают не забывать о важных решениях после того, как встреча закончилась.</p>
+<p><strong>Для бизнеса это способ раньше замечать архитектурную деградацию и не платить за неё только тогда, когда изменения уже стали дорогими.</strong></p>
+</article>
+</main>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+</body>
+</html>
