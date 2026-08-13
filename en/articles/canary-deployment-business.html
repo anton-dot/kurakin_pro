@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What canary deployment gives the business: release a new version to a small share of traffic, measure real-world risk, and limit the impact of a bad release.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Canary Deployment: Why Release a New Version to a Small Share of Traffic First?">
+    <meta property="og:description" content="Canary deployment reduces the blast radius of a bad release by exposing the new version to limited traffic before everyone gets it.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/canary-deployment-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Canary Deployment: Why Release a New Version to a Small Share of Traffic First? - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/canary-deployment-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/canary-deployment-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/canary-deployment-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Canary Deployment: Why Release a New Version to a Small Share of Traffic First?","description":"What canary deployment gives the business: release a new version to a small share of traffic, measure real-world risk, and limit the impact of a bad release.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/canary-deployment-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/canary-deployment-business.html">RU</a><a href="canary-deployment-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#cloud">Cloud and infrastructure</a><p class="article-kicker"><span>5 min read</span></p><h1>Canary Deployment: Why Release a New Version to a Small Share of Traffic First?</h1><p class="article-summary">Tests reduce risk, but they cannot reproduce the entire real world. Canary deployment lets a new version reach a small share of users first, measure the impact, and expand only when the signals stay healthy.</p></div></header>
+      <article class="article-content">
+        <p>A big release creates a simple but uncomfortable bet: either the new version works, or the problem instantly becomes everybody’s problem.</p>
+        <p>Even good testing cannot reproduce every traffic pattern, data combination, device, or customer behavior. So the real question is often not whether errors can be eliminated, but how expensive an error will be if it still happens.</p>
+        <h2>What problem are we solving?</h2>
+        <p>Canary deployment changes how a release reaches production. The new version receives only a small share of real traffic while most users stay on the previous stable version.</p>
+        <p>The team compares errors, latency, technical signals, and sometimes business metrics between the two versions. If the results stay healthy, the new version receives more traffic. If not, traffic moves back.</p>
+        <p>This is not just another testing technique. It is a way to limit the blast radius of change.</p>
+        <h2>What does the business get?</h2>
+        <p>The main benefit is a smaller bet on each release.</p>
+        <p>If a defect appears only under real load or with rare production data, it affects a limited audience instead of the whole product. That lowers the maximum cost of a bad change.</p>
+        <p>Canary releases can also make smaller and more frequent deployments easier to accept. When rollback does not mean reversing a full public launch, the company can test hypotheses faster and treat releases as routine rather than exceptional events.</p>
+        <p>The benefit depends on observability. If the company cannot quickly tell whether the new version is better or worse, gradual rollout becomes merely a more complex deployment mechanism.</p>
+        <h2>What does the team get?</h2>
+        <p>The team gets production evidence before full exposure.</p>
+        <p>Rollout can stop automatically when error rate rises or latency degrades. For critical product flows, the team can also watch business signals such as completed orders, successful payments, or other key operations.</p>
+        <p>The trade-off is infrastructure complexity. Traffic needs to be split between versions, metrics need to be comparable, and the system must tolerate two versions operating at the same time.</p>
+        <h2>What does the customer get?</h2>
+        <p>Most customers are less likely to experience a widespread defect immediately after a release.</p>
+        <p>A small group effectively becomes the early cohort, so that group should be selected intentionally. Highly sensitive customers or critical operations may not belong in the first wave.</p>
+        <p>Customers do not care about the deployment pattern itself. They care that a bad release can be detected before it becomes a broad incident.</p>
+        <h2>What do we pay for it?</h2>
+        <p>The company needs traffic management, rollout automation, and strong observability.</p>
+        <p>Database and API changes must support multiple application versions at the same time. Otherwise the application can be deployed gradually while one incompatible schema change still creates a global point of failure.</p>
+        <p>There is also organizational cost: the team needs clear success and rollback criteria. If every rollout decision is made manually by intuition, much of the value disappears.</p>
+        <h2>When is canary deployment unnecessary?</h2>
+        <p>For a small internal service with low downtime cost, sophisticated traffic splitting may cost more than the risk it protects against.</p>
+        <p>The approach is especially useful for high-traffic products, frequent releases, critical customer journeys, and systems where production behavior differs significantly from test environments.</p>
+        <h2>What should we ask before deciding?</h2>
+        <ul><li>Which metrics will tell us the new version is worse?</li><li>What share of users is safe for the first wave?</li><li>Can traffic return to the previous version quickly?</li><li>Are data and API changes compatible with two versions running together?</li><li>Would a simple fast rollback be cheaper at our scale?</li></ul>
+        <h2>In the end</h2>
+        <p>Canary deployment does not make releases error-free. It makes the consequences of an error smaller.</p>
+        <p><strong>For the business, it is a way to reduce the maximum cost of one change and release more often without betting every customer on the same deployment.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
