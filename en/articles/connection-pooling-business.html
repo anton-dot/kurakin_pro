@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="What connection pooling gives the business: how to limit database connections, survive load growth, and avoid turning application scaling into database overload.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Connection Pooling: Why More Application Instances Should Not Mean More Database Chaos">
+  <meta property="og:description" content="A connection pool reuses a controlled set of database connections instead of allowing every new application instance to open an uncontrolled number of them.">
+  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/connection-pooling-business.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>Connection Pooling: Why More Application Instances Should Not Mean More Database Chaos - Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/connection-pooling-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/connection-pooling-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/connection-pooling-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Connection Pooling: Why More Application Instances Should Not Mean More Database Chaos","description":"What connection pooling gives the business: how to limit database connections, survive load growth, and avoid turning application scaling into database overload.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/connection-pooling-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/connection-pooling-business.html">RU</a><a href="connection-pooling-business.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Connection Pooling: Why More Application Instances Should Not Mean More Database Chaos</h1><p class="article-summary">Applications can scale quickly by adding instances, but the database does not automatically benefit from the same multiplication of connections. Connection Pooling introduces a boundary: applications reuse a managed set of connections instead of opening new ones without control.</p></div></header>
+<article class="article-content">
+<p>When load grows, companies often scale applications horizontally by running more instances and distributing traffic across them. At the application layer this makes sense. But each instance may open its own set of database connections, and eventually the database spends too much effort managing connections rather than doing useful work.</p>
+<p>Connection Pooling separates the number of application instances from the number of active database connections.</p>
+<h2>How the solution works</h2>
+<p>Instead of creating a new database connection for every request, the application borrows one from a pool, does the work, and returns it.</p>
+<p>The pool has a limit. When all connections are busy, new work waits or fails according to an explicit policy. That looks restrictive, but the restriction protects the database from uncontrolled concurrency.</p>
+<p>The pool can live inside the application or in a separate proxy layer. In both cases, the goal is to treat database connections as a finite resource.</p>
+<h2>What the business gets</h2>
+<p>The main benefit is more predictable scaling. Adding application instances is less likely to overload the central database unexpectedly.</p>
+<p>This reduces incident risk during traffic peaks, campaigns, and fast growth. The business can scale application capacity without increasing pressure on the data layer in the same proportion.</p>
+<p>It can also postpone unnecessary database upgrades that would otherwise compensate for inefficient connection usage rather than real business load.</p>
+<h2>What the team gets</h2>
+<p>The team gets a controlled model for database access. It can define limits, waiting behavior, reuse policies, and observe where requests begin competing for connections.</p>
+<p>The pool can reveal problems earlier. If the queue for connections keeps growing, the real issue may be slow queries, transactions held for too long, or database capacity that no longer matches demand.</p>
+<p>But pool sizing is a trade-off. Too small and it artificially limits throughput. Too large and the database is overloaded again.</p>
+<h2>What the customer gets</h2>
+<p>Customers get more stable behavior under load. Instead of a database collapsing under thousands of new connections and degrading for everyone, the system limits competition in a more controlled way.</p>
+<p>With good configuration, this reduces latency spikes and cascading failures.</p>
+<h2>What we pay for it</h2>
+<p>There is another set of parameters to understand and monitor. Pool size depends on query behavior, database capacity, the number of application instances, and actual concurrency.</p>
+<p>Pooling also does not fix slow queries or poor transaction design. It can protect the database from connection overload, but it cannot make inefficient work efficient.</p>
+<p>A separate pooler or proxy adds another operational component and another possible failure point.</p>
+<h2>When it is not needed</h2>
+<p>For a small application with few connections, the driver’s built-in pool is often enough and no separate infrastructure layer is necessary.</p>
+<p>The problem becomes more visible with horizontal scaling, serverless workloads, many services, or strict database connection limits.</p>
+<h2>What to ask before adopting it</h2>
+<ul><li>How many concurrent connections can the database handle without degradation?</li><li>How many application instances may run at once?</li><li>How long do queries and transactions hold connections?</li><li>What happens when the pool is exhausted?</li><li>Do we need a separate pooler or is the built-in pool sufficient?</li></ul>
+<h2>In the end</h2>
+<p>Connection Pooling is not a database accelerator by itself. It is a way to control competition for a finite resource and prevent application scaling from accidentally overwhelming the data layer.</p>
+<p><strong>For the business, it means more controlled growth and less risk that successful application scaling turns into a database outage.</strong></p>
+</article>
+</main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body>
+</html>
