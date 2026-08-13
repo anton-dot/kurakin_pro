@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="What prompt injection defense gives the business: how to limit the influence of external text on AI systems and protect data, tools, and critical actions.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Prompt Injection: Why AI Should Not Trust Every Instruction It Reads">
+  <meta property="og:description" content="If a model reads emails, documents, and web pages, some of that text may try to change its behavior. Architecture has to treat those instructions as untrusted.">
+  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/prompt-injection-defense.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>Prompt Injection: Why AI Should Not Trust Every Instruction It Reads - Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/prompt-injection-defense.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/prompt-injection-defense.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/prompt-injection-defense.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt Injection: Why AI Should Not Trust Every Instruction It Reads","description":"What prompt injection defense gives the business: how to limit the influence of external text on AI systems and protect data, tools, and critical actions.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/prompt-injection-defense.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/prompt-injection-defense.html">RU</a><a href="prompt-injection-defense.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>Prompt Injection: Why AI Should Not Trust Every Instruction It Reads</h1><p class="article-summary">An AI system may read documents, emails, pages, and user text. The problem is that some of that content can contain instructions aimed at the model itself. Prompt Injection begins when the system stops separating data from commands.</p></div></header>
+<article class="article-content">
+<p>Traditional software usually has a clearer distinction between code and data. An LLM is different: system instructions, a customer email, and a web page eventually become text inside one context.</p>
+<p>That means an external document can contain text trying to change model behavior: ignore previous rules, reveal data, call a tool, or perform an action the user never requested.</p>
+<p>Defense cannot rely only on the hope that a “better system prompt” will always beat a malicious instruction. Prompt Injection is an architecture problem about trust and authority.</p>
+<h2>How defense works</h2>
+<p>The first principle is to treat external content as untrusted. A document may contain facts, but it should not automatically gain authority over system behavior.</p>
+<p>The second principle is least privilege. Even if the model interprets malicious text as an instruction, it should not have access to every data source and tool.</p>
+<p>In practice this means checks before critical actions, constrained tools, context filtering, explicit access policies, human approval for dangerous operations, and detailed logging.</p>
+<h2>What the business gets</h2>
+<p>The main benefit is the ability to use AI in more serious workflows without expanding risk uncontrollably.</p>
+<p>If a model only drafts text, the consequences of a mistake are limited. If it reads internal data, sends emails, creates payments, or changes records, one malicious instruction can become a business incident.</p>
+<p>Architectural controls let the company expand AI capabilities gradually, granting more authority only where the risk is understood and bounded.</p>
+<h2>What the team gets</h2>
+<p>The team gets a clearer threat model. Instead of trying to invent the perfect prompt, it designs boundaries: which data is visible, which tools are available, which parameters can be passed, and which actions require extra confirmation.</p>
+<p>This also improves incident investigation. With logs of input content, model decisions, and tool calls, it is easier to understand where untrusted data turned into a dangerous action.</p>
+<h2>What the customer gets</h2>
+<p>Customers get less risk that somebody else’s document, message, or web page makes the AI act on their behalf in an unexpected way.</p>
+<p>It is especially important that the system does not mix data between users or allow external content to modify access rights.</p>
+<h2>What we pay for it</h2>
+<p>Defense adds friction. Confirmations, limits, filters, and additional checks reduce autonomy in some useful workflows.</p>
+<p>There is also technical cost: more logic around the model, separate policies, auditing, adversarial testing, and ongoing maintenance as new attack patterns appear.</p>
+<p>And there is no absolute guarantee. Prompt Injection is not a problem that one filter can permanently solve. Defense is layered and aims to reduce both the probability and the impact of a successful attack.</p>
+<h2>When it is not needed</h2>
+<p>If a model works only with trusted fixed content and has no access to sensitive data or tools, a complex defense layer may be unnecessary.</p>
+<p>The more external content, autonomous actions, and business authority an AI system receives, the more important this layer becomes.</p>
+<h2>What to ask before adopting it</h2>
+<ul><li>What untrusted text enters the model context?</li><li>What is the most dangerous action the model can take through its tools?</li><li>Which actions require human approval?</li><li>Can external content affect another user’s data access?</li><li>Can we reconstruct the full chain of events after an incident?</li></ul>
+<h2>In the end</h2>
+<p>Prompt Injection is not simply a problem of “bad text.” It is a trust-boundary problem in a system where untrusted data and privileged instructions can look similar to the model.</p>
+<p><strong>For the business, defense means giving AI more useful work without giving it unrestricted authority at the same time.</strong></p>
+</article>
+</main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body>
+</html>
