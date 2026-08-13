@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How Model Routing chooses AI models by task, quality, cost, and latency — and why routing needs measurable rules, evaluation, and fallback paths.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Model Routing: Why Every AI Request Should Not Go to the Most Expensive Model">
+    <meta property="og:description" content="Different AI requests need different levels of capability. Model Routing avoids paying the maximum price for every request and reserves expensive models for harder work.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/model-routing-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Model Routing: Why Every AI Request Should Not Go to the Most Expensive Model - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/model-routing-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/model-routing-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/model-routing-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Model Routing: Why Every AI Request Should Not Go to the Most Expensive Model","description":"How Model Routing chooses AI models by task, quality, cost, and latency — and why routing needs measurable rules, evaluation, and fallback paths.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/model-routing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/model-routing-business.html">RU</a><a href="model-routing-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>Model Routing: Why Every AI Request Should Not Go to the Most Expensive Model</h1><p class="article-summary">Sending every AI request to one strongest model keeps architecture simple, but cost and latency rise with usage. Model Routing chooses a model based on actual task difficulty and the cost of being wrong.</p></div></header>
+      <article class="article-content">
+        <h2>What problem are we solving?</h2><p>One AI product may contain simple classification, field extraction, document Q&A, and complex reasoning. Using the same model for all of them means paying the same price for very different levels of business value.</p><p>As usage grows, a small per-request cost difference becomes a meaningful permanent expense.</p><h2>How Model Routing works</h2><p>Before calling a model, the system identifies the task and selects an appropriate route. Simple work can go to a faster, cheaper model, while complex work goes to a stronger one. Low-confidence results can escalate or fall back.</p><p>Routing can also consider language, context size, latency requirements, data sensitivity, provider availability, and the acceptable cost of error.</p><h2>What the business gets</h2><p>The main benefit is scaling AI usage without paying the highest price linearly for every request. Expensive capability is purchased only where its incremental quality changes the outcome.</p><p>Routing can also reduce dependence on one provider. If model choice is already abstracted, switching or falling back during provider issues becomes easier.</p><h2>What the team gets</h2><p>Teams get a decision layer instead of hard-coding every product to one model. New models can be tested, routing rules can change based on evals, and traffic can shift gradually.</p><p>The routing layer must be observable: teams need to know which request went where, what it cost, and how quality changed.</p><h2>What the customer gets</h2><p>Customers can get faster answers for simple tasks and stronger processing where it matters. With a good abstraction, the internal model choice does not become part of the customer contract.</p><h2>What we pay for</h2><p>There is now another decision system that can be wrong. Bad routing can send a hard request to a weak model or waste money by sending simple work to an expensive one.</p><p>The company needs task-specific evals, cost and quality metrics, fallback rules, and model-version control. More routes also make individual outcomes harder to explain.</p><h2>When it is not needed</h2><p>If usage is small, the task is stable, and model cost is not material, a dedicated routing layer may be premature.</p><p>It becomes valuable when requests differ significantly in complexity, traffic grows, or cost and latency become product constraints.</p><h2>What to ask before deciding</h2><ul><li>Which classes of AI tasks exist in the product?</li><li>Where does extra model quality actually change the business result?</li><li>How do we measure quality for each route?</li><li>What happens when the selected model is unavailable?</li><li>Can routing violate data-location or sensitivity requirements?</li></ul><h2>In the end</h2><p>Model Routing is not about always choosing the cheapest model. It is about stopping the assumption that every AI request is the same.</p><p><strong>For the business, value appears when quality, latency, and cost become a managed portfolio of trade-offs rather than fixed properties of one chosen provider.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
