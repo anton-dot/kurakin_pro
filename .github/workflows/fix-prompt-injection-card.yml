@@ -1,0 +1,50 @@
+name: Fix Prompt Injection catalog card
+
+on:
+  push:
+    paths:
+      - '.github/fix-prompt-injection-card.trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Move Prompt Injection card into AI section
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          cards = {
+            'ru/architecture/index.html': '''<article class="publication-item"><div class="publication-meta"><span>5 мин</span></div><div class="publication-copy"><p class="publication-source">Архитектура · статья</p><h3><a href="../articles/prompt-injection-defense.html">Prompt Injection: почему AI нельзя доверять любой инструкции, которую он прочитал</a></h3><p>Как отделять недоверенный внешний контент от полномочий модели и ограничивать последствия вредных инструкций.</p></div><nav class="publication-versions" aria-label="Доступные языковые версии"><a href="../articles/prompt-injection-defense.html" aria-current="true">RU</a><a href="../../en/articles/prompt-injection-defense.html">EN</a></nav></article>''',
+            'en/architecture/index.html': '''<article class="publication-item"><div class="publication-meta"><span>5 min</span></div><div class="publication-copy"><p class="publication-source">Architecture · article</p><h3><a href="../articles/prompt-injection-defense.html">Prompt Injection: Why AI Should Not Trust Every Instruction It Reads</a></h3><p>How to separate untrusted external content from model authority and limit the impact of malicious instructions.</p></div><nav class="publication-versions" aria-label="Available language versions"><a href="../../ru/articles/prompt-injection-defense.html">RU</a><a href="../articles/prompt-injection-defense.html" aria-current="true">EN</a></nav></article>'''
+          }
+
+          for path, card in cards.items():
+              p = Path(path)
+              html = p.read_text(encoding='utf-8')
+              html = html.replace(card, '')
+              start = html.find("id='ai'")
+              if start < 0:
+                  start = html.find('id="ai"')
+              if start < 0:
+                  raise RuntimeError('AI section not found')
+              close = html.find('</div></section>', start)
+              if close < 0:
+                  raise RuntimeError('AI section closing marker not found')
+              html = html[:close] + card + html[close:]
+              p.write_text(html, encoding='utf-8')
+
+          Path('.github/workflows/fix-prompt-injection-card.yml').unlink(missing_ok=True)
+          Path('.github/fix-prompt-injection-card.trigger').unlink(missing_ok=True)
+          PY
+      - name: Commit fix and clean helper files
+        run: |
+          git config user.name "anton-dot"
+          git config user.email "66353024+anton-dot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Fix Prompt Injection catalog placement"
+          git push
