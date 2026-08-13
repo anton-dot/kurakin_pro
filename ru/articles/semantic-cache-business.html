@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Как Semantic Cache снижает стоимость и задержку AI-запросов, почему похожий вопрос не всегда означает одинаковый ответ и где кэширование создаёт риск устаревшего результата.">
+    <meta name="author" content="Антон Куракин">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос">
+    <meta property="og:description" content="Пользователи часто задают AI почти одинаковые вопросы разными словами. Semantic Cache может вернуть уже рассчитанный ответ без нового обращения к модели — быстрее и дешевле, но только если система умеет понимать, когда ответы действительно взаимозаменяемы.">
+    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/semantic-cache-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-12">
+    <title>Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос - Антон Куракин</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/semantic-cache-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/semantic-cache-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/semantic-cache-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос","description":"Как Semantic Cache снижает стоимость и задержку AI-запросов, почему похожий вопрос не всегда означает одинаковый ответ и где кэширование создаёт риск устаревшего результата.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/semantic-cache-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="ru">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <header class="site-header">
+      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <div class="lang-switcher" aria-label="Выбор языка"><a href="semantic-cache-business.html" aria-current="page">RU</a><a href="../../en/articles/semantic-cache-business.html">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос</h1><p class="article-summary">Пользователи часто задают AI почти одинаковые вопросы разными словами. Semantic Cache может вернуть уже рассчитанный ответ без нового обращения к модели — быстрее и дешевле, но только если система умеет понимать, когда ответы действительно взаимозаменяемы.</p></div></header>
+      <article class="article-content">
+        <p>Обычный cache хорошо работает, когда два запроса идентичны. В AI-продуктах пользователи редко формулируют одинаково: «как отменить заказ?» и «можно ли отказаться от покупки?» могут означать одно и то же.</p>
+        <p>Если каждый похожий вопрос снова отправлять в LLM, компания платит повторно за вычисление почти одинакового результата и снова принимает latency модели.</p>
+        <h2>Какую проблему мы решаем</h2>
+        <p>Semantic Cache сравнивает не точную строку запроса, а его смысловое представление. Если новый вопрос достаточно похож на уже обработанный, система может вернуть сохранённый ответ.</p>
+        <p>Это особенно полезно для повторяющихся справочных вопросов, классификации и стабильных RAG-сценариев.</p>
+        <p>Но «похожий» не означает «одинаковый». В вопросах о цене, статусе заказа, правах доступа или свежих данных повторное использование старого ответа может быть опасным.</p>
+        <h2>Что получает бизнес</h2>
+        <p>Главный эффект — снижение стоимости вызовов модели и уменьшение зависимости от её latency.</p>
+        <p>На больших объёмах это может сделать экономику AI-функции заметно более предсказуемой. Кэш также помогает переживать краткие проблемы внешнего LLM-провайдера.</p>
+        <p>Но экономия имеет смысл только пока качество не падает. Один неверно переиспользованный ответ в критичном сценарии может стоить дороже тысяч сэкономленных запросов.</p>
+        <h2>Что получает команда</h2>
+        <p>Команда получает ещё один слой контроля между продуктом и моделью: similarity threshold, TTL, правила исключений и наблюдаемость hit rate.</p>
+        <p>Нужно измерять не только долю попаданий в cache, но и качество. Высокий hit rate сам по себе может быть плохим показателем, если система слишком агрессивно считает разные вопросы одинаковыми.</p>
+        <h2>Что получает клиент</h2>
+        <p>Клиент получает более быстрые ответы в повторяющихся сценариях и менее заметную зависимость от загрузки модели.</p>
+        <p>Риск — получить устаревший или не совсем релевантный ответ. Поэтому персональные, динамические и чувствительные запросы требуют более строгих правил или полного отказа от кэша.</p>
+        <h2>Чем мы за это платим</h2>
+        <p>Дополнительное векторное представление запросов, хранение, инвалидация, правила безопасности и постоянная оценка качества.</p>
+        <p>Также появляется вопрос доступа: ответ, рассчитанный для одного пользователя, нельзя случайно вернуть другому, если контекст и права отличаются.</p>
+        <h2>Когда Semantic Cache не нужен</h2>
+        <p>При маленьком объёме запросов экономия может не оправдать сложность.</p>
+        <p>Он также плохо подходит для сильно персонализированных, быстро меняющихся или транзакционных ответов, где актуальность важнее стоимости вызова модели.</p>
+        <h2>Что стоит спросить перед решением</h2>
+        <ul><li>Какие вопросы действительно повторяются по смыслу?</li><li>Как долго ответ остаётся актуальным?</li><li>Можно ли безопасно переиспользовать ответ между пользователями?</li><li>Как измерять ошибки false hit?</li><li>Что важнее в этом сценарии: цена, latency или максимальная свежесть?</li></ul>
+        <h2>В итоге</h2>
+        <p>Semantic Cache — это не просто оптимизация LLM-затрат. Это решение о том, когда два разных пользовательских запроса считаются достаточно одинаковыми.</p>
+        <p><strong>Для бизнеса он полезен там, где повторяемость высока, цена модели заметна, а риск устаревшего ответа можно контролировать.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+  </body>
+</html>
