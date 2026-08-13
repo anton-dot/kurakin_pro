@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ETL vs ELT from a business perspective: where to transform data, and how that choice affects analytics speed, quality control, storage cost, and team ownership.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ETL vs ELT: Should Data Be Transformed Before or After Loading?">
+    <meta property="og:description" content="Why ETL vs ELT is not a debate about acronyms but a decision about access speed, data quality, and the price of flexibility.">
+    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/etl-vs-elt-business.html">
+    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-13">
+    <meta property="article:modified_time" content="2026-08-13">
+    <title>ETL vs ELT: Should Data Be Transformed Before or After Loading? - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/etl-vs-elt-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/etl-vs-elt-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/etl-vs-elt-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ETL vs ELT: Should Data Be Transformed Before or After Loading?","description":"ETL vs ELT from a business perspective: where to transform data, and how that choice affects analytics speed, quality control, storage cost, and team ownership.","inLanguage":"en","datePublished":"2026-08-13","dateModified":"2026-08-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/etl-vs-elt-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/etl-vs-elt-business.html">RU</a><a href="etl-vs-elt-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#analytics">Data and analytics</a><p class="article-kicker"><span>5 min read</span></p><h1>ETL vs ELT: Should Data Be Transformed Before or After Loading?</h1><p class="article-summary">ETL transforms data before loading it into an analytics system. ELT stores the source data first and transforms it inside the platform. The difference sounds technical, but it changes analytics speed, quality control, and the cost of future questions.</p></div></header>
+      <article class="article-content">
+        <p>The business rarely knows every question it will want to ask its data a year from now. At the same time, it does not want analysts to begin every project with chaotic raw data and a debate over what each metric means.</p>
+        <p>ETL and ELT handle that tension between control and flexibility differently.</p>
+        <h2>What problem are we solving?</h2>
+        <p>ETL means Extract, Transform, Load: data is pulled from a source, transformed, and only then loaded into the target analytics environment.</p>
+        <p>ELT changes the order: Extract, Load, Transform. Data is loaded first, often in a more raw form, and transformations happen inside the analytics platform.</p>
+        <p>Both approaches aim to make data useful for analysis. The difference is when structure and rules become fixed.</p>
+        <h2>What does the business get?</h2>
+        <p>ETL gives more control before data enters the main analytics environment. That helps when structure is well defined, quality must be checked early, or storing everything raw is expensive or undesirable.</p>
+        <p>ELT gives more speed and freedom for new questions. The source data is already available, so a new report or model does not always require rebuilding the ingestion pipeline from the source.</p>
+        <p>For the business, this is a choice between earlier standardization and a cheaper ability to reinterpret data later.</p>
+        <p>Neither approach fixes poor governance. Without owners for metric definitions, ELT quickly creates several versions of “revenue,” while ETL can turn into a queue for changes to a centralized pipeline.</p>
+        <h2>What does the team get?</h2>
+        <p>With ETL, most transformation logic lives in the pipeline before the warehouse. Errors can be filtered earlier, but every new field or rule may require changing that pipeline.</p>
+        <p>With ELT, data teams get more flexibility to work directly inside the analytics platform and reuse raw data.</p>
+        <p>The price is more storage, more compute, and a stronger need to separate raw, cleaned, and business-ready layers clearly.</p>
+        <h2>What does the customer get?</h2>
+        <p>The internal analytics customer gets either more pre-prepared datasets or more freedom to explore source data.</p>
+        <p>External customers feel the result indirectly: decisions, personalization, and product changes can use fresher and more accessible analytics — if data quality is preserved.</p>
+        <h2>What do we pay for it?</h2>
+        <p>ETL pays with lower flexibility: a wrong assumption during transformation may require going back to the source and rebuilding the pipeline.</p>
+        <p>ELT pays with storage, compute, and the risk of accumulating raw data without clear ownership.</p>
+        <p>Both approaches still need quality monitoring, lineage, access controls, and clear data owners.</p>
+        <h2>When is the ETL vs ELT debate unnecessary?</h2>
+        <p>Many modern platforms use both. Some sensitive or well-defined data is prepared strictly before loading, while other data is stored raw for later exploration.</p>
+        <p>The useful question is often not “which one do we choose forever?” but “where is it most valuable for us to lock in the rules?”</p>
+        <h2>What should we ask before deciding?</h2>
+        <ul><li>How often do analytical questions and models change?</li><li>Do we need to retain source data for future use cases?</li><li>Which data must be cleaned or masked before it is loaded?</li><li>Who owns business metric definitions?</li><li>What costs more for us: storing more data or changing pipelines more slowly?</li></ul>
+        <h2>In the end</h2>
+        <p>ETL and ELT are not competing religions. They choose different moments when a raw fact becomes a governed business model.</p>
+        <p><strong>The right choice depends on where the company prefers to pay: earlier for control, or later for storage and flexibility.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
