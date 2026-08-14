@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как проектировать AI Fallback Strategy, чтобы сбой модели, провайдера или guardrail не превращался в падение всего продукта, и чем платим за резервные сценарии.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Fallback Strategy: что должен делать продукт, когда модель недоступна или не уверена">
+  <meta property="og:description" content="Как сохранить полезный пользовательский сценарий при сбое AI и не делать генеративную модель единственной точкой отказа продукта.">
+  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/ai-fallback-business.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>AI Fallback Strategy: что должен делать продукт, когда модель недоступна или не уверена - Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/ai-fallback-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-fallback-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-fallback-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Fallback Strategy: что должен делать продукт, когда модель недоступна или не уверена","description":"Как проектировать AI Fallback Strategy, чтобы сбой модели, провайдера или guardrail не превращался в падение всего продукта, и чем платим за резервные сценарии.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/ai-fallback-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="ru">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="ai-fallback-business.html" aria-current="page">RU</a><a href="../../en/articles/ai-fallback-business.html">EN</a></div></header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>AI Fallback Strategy: что должен делать продукт, когда модель недоступна или не уверена</h1><p class="article-summary">Если AI становится частью ключевого сценария, нужно заранее решить, что произойдёт при таймауте, недоступности провайдера, слишком дорогом запросе или низком качестве ответа. Fallback — это не техническая мелочь, а часть продуктового обещания.</p></div></header>
+<article class="article-content">
+<h2>Какую проблему мы решаем</h2><p>Модель может отвечать медленно, вернуть ошибку, быть временно недоступной или не пройти guardrail. Даже если провайдер стабилен, зависимость от внешнего AI делает продукт уязвимым к тому, что команда не контролирует полностью.</p><p>Если единственный сценарий — ждать одну конкретную модель, локальный сбой быстро становится клиентским сбоем.</p>
+<h2>Как работает Fallback Strategy</h2><p>Для каждого критичного AI-сценария заранее определяется запасной путь. Это может быть другая модель, более простая функция без AI, кэшированный результат, поиск без генерации, ручная обработка или честный отказ с возможностью продолжить позже.</p><p>Fallback выбирается не только по доступности. Иногда основная модель слишком дорогая для конкретного запроса, слишком медленная или не уверена в результате.</p><p>Важно, чтобы запасной путь был частью архитектуры и продукта, а не импровизацией во время аварии.</p>
+<h2>Что получает бизнес</h2><p>Главный эффект — меньше зависимости выручки и ключевых процессов от одного AI-провайдера или одной модели. Компания может продолжать обслуживать клиента даже при частичной деградации AI.</p><p>Fallback также помогает контролировать расходы: дорогую модель не обязательно использовать, если более дешёвый или детерминированный путь даёт достаточный результат.</p><p>Это превращает AI из хрупкой внешней зависимости в управляемый компонент продукта.</p>
+<h2>Что получает команда</h2><p>Команда получает явные правила: когда переключаться на другой маршрут, какие ошибки считать временными, где применять timeout, когда использовать cache и когда передавать задачу человеку.</p><p>Появляются метрики не только качества основной модели, но и доли fallback, причин переключения и качества резервного сценария.</p>
+<h2>Что получает клиент</h2><p>Клиент реже видит полный отказ функции. Иногда ответ будет проще или медленнее, но основной процесс сохранится.</p><p>Для чувствительных сценариев хороший fallback может быть честным ограничением: лучше показать проверяемый результат без генерации, чем уверенно выдать сомнительный AI-ответ.</p>
+<h2>Чем мы за это платим</h2><p>Нужно поддерживать несколько путей выполнения и проверять каждый из них. Вторая модель, кэш или ручной процесс — это дополнительный код, наблюдаемость и тестирование.</p><p>Есть риск скрыть системную проблему постоянным fallback и долго не замечать деградацию основного маршрута. Поэтому переключение должно быть видимым в метриках.</p>
+<h2>Когда не нужно усложнять</h2><p>Если AI-функция экспериментальная, некритичная и отказ не блокирует клиента, сложная цепочка резервирования может стоить дороже самой проблемы.</p><p>Fallback становится важным, когда AI участвует в ключевом пользовательском или операционном процессе.</p>
+<h2>Что стоит спросить перед решением</h2><ul><li>Что клиент должен получить, если основная модель недоступна?</li><li>Можно ли выполнить сценарий без генеративного AI?</li><li>Какая деградация качества приемлема?</li><li>Когда дешевле переключиться на другую модель?</li><li>Как мы увидим, что продукт слишком часто живёт на fallback?</li></ul>
+<h2>В итоге</h2><p>Надёжный AI-продукт определяется не только тем, насколько хорошо работает модель в идеальных условиях. Важно, что происходит, когда идеальных условий нет.</p><p><strong>Для бизнеса Fallback Strategy означает не делать одну модель единственной точкой отказа для клиентского обещания.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+</body></html>
