@@ -10,6 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Complete category map for final generator
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/final_architecture_batch_a.py')
+          s=p.read_text(encoding='utf-8')
+          needle=" 'analytics':('Данные и аналитика','Data and analytics'),\n}"
+          replacement=" 'analytics':('Данные и аналитика','Data and analytics'),\n 'security':('Безопасность','Security'),\n 'cloud':('Cloud и инфраструктура','Cloud and infrastructure'),\n 'ai':('AI-архитектура','AI architecture'),\n}"
+          if needle not in s:
+              raise SystemExit('category map anchor not found')
+          p.write_text(s.replace(needle,replacement),encoding='utf-8')
+          PY
       - name: Generate final architecture articles and update catalog
         run: python scripts/final_architecture_batch_b.py
       - name: Validate final architecture batch
