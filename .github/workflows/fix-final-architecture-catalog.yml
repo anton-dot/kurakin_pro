@@ -1,0 +1,56 @@
+name: Final architecture catalog cleanup
+on:
+  push:
+    paths:
+      - '.architecture-catalog-fix-trigger'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Move AI Observability inside AI section
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          slug='ai-observability-business.html'
+          for lang in ('ru','en'):
+              p=Path(lang)/'architecture'/'index.html'
+              text=p.read_text(encoding='utf-8')
+              idx=text.find(slug)
+              if idx < 0: raise SystemExit(f'{lang}: card not found')
+              s1=text.rfind('<article class="publication-item">',0,idx)
+              s2=text.rfind("<article class='publication-item'>",0,idx)
+              start=max(s1,s2)
+              end=text.find('</article>',idx)
+              if start < 0 or end < 0: raise SystemExit(f'{lang}: card boundaries not found')
+              end += len('</article>')
+              card=text[start:end]
+              text=text[:start]+text[end:]
+              ai1=text.find("id='ai'")
+              ai2=text.find('id="ai"')
+              ai=max(ai1,ai2)
+              if ai < 0: raise SystemExit(f'{lang}: ai section not found')
+              pub=text.find('publication-list',ai)
+              close=text.find('</div></section>',pub)
+              if close < 0: raise SystemExit(f'{lang}: ai list close not found')
+              text=text[:close]+card+text[close:]
+              p.write_text(text,encoding='utf-8')
+              # Validate the card is inside the AI section, before its publication-list close.
+              check=p.read_text(encoding='utf-8')
+              ai=max(check.find("id='ai'"),check.find('id="ai"'))
+              pub=check.find('publication-list',ai)
+              close=check.find('</div></section>',pub)
+              pos=check.find(slug,ai)
+              assert ai < pos < close, (lang, ai, pos, close)
+          print('AI Observability catalog placement fixed')
+          PY
+      - name: Commit and clean workflow
+        run: |
+          git config user.name "anton-dot"
+          git config user.email "66353024+anton-dot@users.noreply.github.com"
+          rm -f .architecture-catalog-fix-trigger .github/workflows/fix-final-architecture-catalog.yml
+          git add -A
+          git commit -m "Fix AI Observability catalog placement"
+          git push
