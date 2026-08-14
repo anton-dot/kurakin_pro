@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как Transactional Inbox помогает надёжно принимать сообщения, переживать повторную доставку и не выполнять одну бизнес-операцию дважды.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Transactional Inbox: почему надёжно отправить сообщение недостаточно">
+  <meta property="og:description" content="Как сделать приём событий устойчивым к повторной доставке и не превращать retry в повторную бизнес-операцию.">
+  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/transactional-inbox-business.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>Transactional Inbox: почему надёжно отправить сообщение недостаточно - Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/transactional-inbox-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/transactional-inbox-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/transactional-inbox-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Transactional Inbox: почему надёжно отправить сообщение недостаточно","description":"Как Transactional Inbox помогает надёжно принимать сообщения, переживать повторную доставку и не выполнять одну бизнес-операцию дважды.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/transactional-inbox-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="ru">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="transactional-inbox-business.html" aria-current="page">RU</a><a href="../../en/articles/transactional-inbox-business.html">EN</a></div></header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Transactional Inbox: почему надёжно отправить сообщение недостаточно</h1><p class="article-summary">Очереди обычно выбирают ради надёжности, но надёжная доставка часто означает возможность получить одно сообщение повторно. Если получатель не умеет распознавать дубликаты, retry может превратиться в второй платёж, второй заказ или повторное изменение данных.</p></div></header>
+<article class="article-content">
+<h2>Какую проблему мы решаем</h2><p>В распределённой системе отправитель не всегда знает, обработал ли получатель сообщение. Соединение могло оборваться после обработки, подтверждение могло потеряться, а брокер — доставить событие ещё раз.</p><p>Поэтому обещание «доставить хотя бы один раз» полезно для надёжности, но автоматически создаёт риск повторной бизнес-операции.</p>
+<h2>Как работает Transactional Inbox</h2><p>Получатель сохраняет идентификатор входящего сообщения вместе с результатом обработки или в той же транзакционной границе. Перед повторной обработкой он проверяет, не видел ли это сообщение раньше.</p><p>Если сообщение уже обработано, повтор можно безопасно подтвердить без повторного изменения бизнес-состояния.</p><p>Это похоже на idempotency для API, но применяется к асинхронным сообщениям и событиям.</p>
+<h2>Что получает бизнес</h2><p>Главный эффект — меньше финансовых и операционных ошибок из-за повторной доставки. Надёжность транспорта перестаёт конфликтовать с корректностью бизнес-операции.</p><p>Компания может позволить брокеру и потребителям повторять доставку после сбоев, не превращая восстановление системы в источник новых инцидентов.</p>
+<h2>Что получает команда</h2><p>Команда получает явный механизм deduplication и может отделить вопрос доставки от вопроса бизнес-идемпотентности.</p><p>Проще строить retry, replay и восстановление после ошибок, потому что повторное сообщение становится ожидаемым сценарием, а не исключением.</p>
+<h2>Что получает клиент</h2><p>Клиент получает меньше дублей: повторных списаний, заказов, уведомлений или изменений состояния из-за технического retry.</p><p>Система может быть настойчивее в доставке, оставаясь корректной с точки зрения пользователя.</p>
+<h2>Чем мы за это платим</h2><p>Нужно хранить идентификаторы сообщений, управлять сроком их жизни и следить, чтобы идентификатор действительно был стабильным и уникальным для бизнес-операции.</p><p>Если Inbox хранится отдельно от бизнес-изменения, между ними снова появляется окно несогласованности. Поэтому важна правильная транзакционная граница.</p>
+<h2>Когда не нужно усложнять</h2><p>Если операция естественно идемпотентна и повтор не меняет результат, отдельный Inbox может быть лишним.</p><p>Он особенно полезен там, где повторное выполнение имеет реальную цену: деньги, лимиты, создание сущностей, внешние вызовы или изменение необратимого состояния.</p>
+<h2>Что стоит спросить перед решением</h2><ul><li>Может ли брокер доставить одно сообщение повторно?</li><li>Что произойдёт при повторном выполнении операции?</li><li>Есть ли у сообщения стабильный уникальный идентификатор?</li><li>Можно ли сохранить факт обработки и бизнес-изменение атомарно?</li><li>Как долго нужно помнить уже обработанные сообщения?</li></ul>
+<h2>В итоге</h2><p>Надёжная доставка не означает ровно одно выполнение. В реальных распределённых системах повтор — нормальный сценарий, который нужно проектировать заранее.</p><p><strong>Для бизнеса Transactional Inbox ценен тем, что позволяет восстанавливаться после сбоев настойчиво, но без повторного выполнения одной и той же бизнес-операции.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+</body></html>
