@@ -9,23 +9,30 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде">
     <meta property="og:description" content="Data Mesh на языке бизнеса: как распределить ответственность за данные между доменами, ускорить аналитику и не получить вместо централизации новый хаос.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/data-mesh-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/data-mesh-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/data-mesh-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/data-mesh-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/data-mesh-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде","description":"Что такое Data Mesh, когда централизованная data-команда становится бутылочным горлышком и почему владение данными бизнес-доменами требует общей платформы и стандартов.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/data-mesh-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/data-mesh-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/data-mesh-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/data-mesh-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде","description":"Что такое Data Mesh, когда централизованная data-команда становится бутылочным горлышком и почему владение данными бизнес-доменами требует общей платформы и стандартов.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/data-mesh-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
-    <header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="data-mesh-business.html" aria-current="page">RU</a><a href="../../en/articles/data-mesh-business.html">EN</a></div></header>
+    <header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="data-mesh-business.html" aria-current="page">RU</a><a href="../../en/articles/data-mesh-business.html">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#analytics">Данные и аналитика</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде</h1><p class="article-summary">Когда все данные компании проходят через одну центральную команду, она рано или поздно начинает одновременно обслуживать десятки доменов, которых не знает достаточно глубоко. Data Mesh предлагает распределить ответственность — но не отменяет общие правила.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#analytics">Данные и аналитика</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Data Mesh: почему данные иногда должны принадлежать бизнес-доменам, а не одной data-команде</h1><p class="article-summary">Когда все данные компании проходят через одну центральную команду, она рано или поздно начинает одновременно обслуживать десятки доменов, которых не знает достаточно глубоко. Data Mesh предлагает распределить ответственность — но не отменяет общие правила.</p></div></header>
       <article class="article-content">
         <p>Централизация аналитики выглядит логично: одна data-команда, единая платформа, общие специалисты. На небольшом масштабе это часто отлично работает.</p>
         <p>Проблема начинается, когда команда данных должна одновременно понимать продажи, логистику, финансы, продукт, поддержку и десятки локальных определений.</p>
@@ -71,6 +78,6 @@
         <p><strong>Для бизнеса он имеет смысл, когда централизованная работа с данными уже тормозит домены, а компания готова дать им не только автономию, но и реальную ответственность за качество данных.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

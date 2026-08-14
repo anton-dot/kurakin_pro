@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Saga: как провести один бизнес-процесс через несколько сервисов без общей транзакции">
     <meta property="og:description" content="Saga на языке бизнеса: распределённые процессы, компенсации, независимость сервисов и цена eventual consistency.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/saga-pattern-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/saga-pattern-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Saga: как провести один бизнес-процесс через несколько сервисов без общей транзакции - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/saga-pattern-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/saga-pattern-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/saga-pattern-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Saga: как провести один бизнес-процесс через несколько сервисов без общей транзакции","description":"Как Saga помогает провести один бизнес-процесс через несколько сервисов без общей транзакции, что это даёт компании и почему компенсации сложнее обычного rollback.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/saga-pattern-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/saga-pattern-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/saga-pattern-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/saga-pattern-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Saga: как провести один бизнес-процесс через несколько сервисов без общей транзакции","description":"Как Saga помогает провести один бизнес-процесс через несколько сервисов без общей транзакции, что это даёт компании и почему компенсации сложнее обычного rollback.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/saga-pattern-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="saga-pattern-business.html" aria-current="page">RU</a><a href="../../en/articles/saga-pattern-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">События и очереди</a><p class="article-kicker"><span>6 мин чтения</span></p><h1>Saga: как провести один бизнес-процесс через несколько сервисов без общей транзакции</h1><p class="article-summary">В распределённой системе заказ, оплата, резерв товара и доставка могут жить в разных сервисах. Saga помогает связать их в один процесс — но вместо простого rollback приходится проектировать бизнес-компенсации.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#events">События и очереди</a><p class="article-kicker"><span>6 мин чтения</span></p><h1>Saga: как провести один бизнес-процесс через несколько сервисов без общей транзакции</h1><p class="article-summary">В распределённой системе заказ, оплата, резерв товара и доставка могут жить в разных сервисах. Saga помогает связать их в один процесс — но вместо простого rollback приходится проектировать бизнес-компенсации.</p></div></header>
       <article class="article-content">
         <p>В монолите многие операции можно провести в одной транзакции: изменили несколько таблиц, что-то пошло не так — откатили всё назад.</p>
         <p>В микросервисной системе тот же бизнес-процесс может проходить через несколько независимых сервисов и баз. Заказ создан. Деньги списаны. Товар зарезервирован. Доставка ещё не оформлена. И именно в этот момент один шаг падает.</p>
@@ -81,6 +88,6 @@
         <p><strong>Цена этой независимости — необходимость заранее договориться не только о happy path, но и о том, что именно бизнес делает, когда процесс остановился посередине.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

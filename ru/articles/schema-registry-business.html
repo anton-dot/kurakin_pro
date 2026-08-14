@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Schema Registry: как менять события, не ломая десятки потребителей">
     <meta property="og:description" content="Событие быстро становится контрактом между командами. Schema Registry помогает управлять его изменениями и заранее ловить несовместимость.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/schema-registry-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/schema-registry-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Schema Registry: как менять события, не ломая десятки потребителей - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/schema-registry-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/schema-registry-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/schema-registry-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Schema Registry: как менять события, не ломая десятки потребителей","description":"Зачем нужен Schema Registry в event-driven системах: как менять формат событий, проверять совместимость и не ломать десятки независимых потребителей.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/schema-registry-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/schema-registry-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/schema-registry-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/schema-registry-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Schema Registry: как менять события, не ломая десятки потребителей","description":"Зачем нужен Schema Registry в event-driven системах: как менять формат событий, проверять совместимость и не ломать десятки независимых потребителей.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/schema-registry-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="schema-registry-business.html" aria-current="page">RU</a><a href="../../en/articles/schema-registry-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Schema Registry: как менять события, не ломая десятки потребителей</h1><p class="article-summary">В event-driven системе событие перестаёт принадлежать только отправителю. На него начинают зависеть другие команды и продукты. Schema Registry делает этот контракт явным и помогает понять несовместимость до того, как она попадёт в production.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Schema Registry: как менять события, не ломая десятки потребителей</h1><p class="article-summary">В event-driven системе событие перестаёт принадлежать только отправителю. На него начинают зависеть другие команды и продукты. Schema Registry делает этот контракт явным и помогает понять несовместимость до того, как она попадёт в production.</p></div></header>
       <article class="article-content">
         <p>Очереди хорошо уменьшают прямую связанность между системами. Отправителю не нужно знать всех получателей. Но это не означает, что зависимости исчезают.</p>
         <p>Если событие «Заказ создан» меняет структуру, смысл поля или обязательность данных, десятки потребителей могут неожиданно перестать его понимать. В такой архитектуре простой rename поля иногда становится организационной миграцией.</p>
@@ -63,6 +70,6 @@
         <p><strong>Для бизнеса это способ уменьшить цену координации и не превращать развитие event-driven платформы в цепочку неожиданных поломок.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

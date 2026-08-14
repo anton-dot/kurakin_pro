@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Database per Service: почему независимым командам часто нужны независимые базы данных">
     <meta property="og:description" content="Database per Service на языке бизнеса: автономность команд, независимые изменения и цена распределённых данных.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/database-per-service.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/database-per-service.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Database per Service: почему независимым командам часто нужны независимые базы данных - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/database-per-service.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/database-per-service.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/database-per-service.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Database per Service: почему независимым командам часто нужны независимые базы данных","description":"Почему независимым сервисам и командам часто нужны независимые базы данных, что это даёт бизнесу и какой ценой покупается автономность.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/database-per-service.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/database-per-service.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/database-per-service.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/database-per-service.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Database per Service: почему независимым командам часто нужны независимые базы данных","description":"Почему независимым сервисам и командам часто нужны независимые базы данных, что это даёт бизнесу и какой ценой покупается автономность.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/database-per-service.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="database-per-service.html" aria-current="page">RU</a><a href="../../en/articles/database-per-service.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Database per Service: почему независимым командам часто нужны независимые базы данных</h1><p class="article-summary">Команда не может быть по-настоящему независимой, если каждое изменение её данных нужно согласовывать со всеми соседями. Database per Service разрывает эту связь — и одновременно создаёт новую сложность вокруг данных.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Database per Service: почему независимым командам часто нужны независимые базы данных</h1><p class="article-summary">Команда не может быть по-настоящему независимой, если каждое изменение её данных нужно согласовывать со всеми соседями. Database per Service разрывает эту связь — и одновременно создаёт новую сложность вокруг данных.</p></div></header>
       <article class="article-content">
         <p>Микросервисы часто вводят ради автономности команд. Но если все сервисы продолжают работать с одной общей базой и напрямую читать таблицы друг друга, независимость быстро заканчивается.</p>
         <p>Команда хочет изменить структуру данных — и сначала должна проверить, кто ещё использует эту таблицу. Новый релиз одного сервиса зависит от запросов другого. Ошибка в схеме данных становится общей проблемой.</p>
@@ -81,6 +88,6 @@
         <p><strong>Бизнес покупает автономность команд, но платит за неё более сложной работой с данными между границами. Если независимость не нужна, цена может оказаться выше выгоды.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

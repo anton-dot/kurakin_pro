@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Service Discovery: Why Services Should Not Know Each Other’s Addresses in Advance">
   <meta property="og:description" content="How to remove manual service address management without turning discovery into a new critical dependency.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/service-discovery-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/service-discovery-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Service Discovery: Why Services Should Not Know Each Other’s Addresses in Advance - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/service-discovery-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/service-discovery-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/service-discovery-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Service Discovery: Why Services Should Not Know Each Other’s Addresses in Advance","description":"What Service Discovery gives dynamic infrastructure, how services find each other without hard-coded addresses, and what this automation costs.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/service-discovery-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/service-discovery-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/service-discovery-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/service-discovery-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Service Discovery: Why Services Should Not Know Each Other’s Addresses in Advance","description":"What Service Discovery gives dynamic infrastructure, how services find each other without hard-coded addresses, and what this automation costs.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/service-discovery-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/service-discovery-business.html">RU</a><a href="service-discovery-business.html" aria-current="page">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/service-discovery-business.html">RU</a><a href="service-discovery-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#cloud">Cloud and infrastructure</a><p class="article-kicker"><span>5 min read</span></p><h1>Service Discovery: Why Services Should Not Know Each Other’s Addresses in Advance</h1><p class="article-summary">In a small system, the address of another service can live in configuration. In dynamic infrastructure, instances appear, disappear, and move. Service Discovery keeps service relationships independent from a manually maintained list of addresses.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#cloud">Cloud and infrastructure</a><p class="article-kicker"><span>5 min read</span></p><h1>Service Discovery: Why Services Should Not Know Each Other’s Addresses in Advance</h1><p class="article-summary">In a small system, the address of another service can live in configuration. In dynamic infrastructure, instances appear, disappear, and move. Service Discovery keeps service relationships independent from a manually maintained list of addresses.</p></div></header>
 <article class="article-content">
 <h2>What problem are we solving?</h2><p>In static infrastructure, addresses rarely change. Autoscaling, containers, and orchestration make infrastructure fluid: a service may have three instances now, ten tomorrow, and a different set an hour later.</p><p>If every consumer stores concrete addresses, every infrastructure change becomes a configuration change across many clients.</p>
 <h2>How Service Discovery works</h2><p>Instead of knowing a concrete address, the client uses a logical service name. A registry or infrastructure mechanism resolves that name to healthy instances and traffic is routed to one of them.</p><p>Discovery may happen in the client, through a load balancer, DNS, or a platform layer. The principle is the same: the current address becomes an infrastructure detail rather than part of the business integration contract.</p>
@@ -37,5 +44,5 @@
 <h2>Questions to ask before deciding</h2><ul><li>How often do service instances appear and disappear?</li><li>Who updates consumer addresses today?</li><li>How do we decide whether an instance is healthy?</li><li>What happens if discovery is temporarily unavailable?</li><li>How quickly does a stale address disappear from routing?</li></ul>
 <h2>In the end</h2><p>Service Discovery does not make a system reliable by itself. It removes manual coupling between a logical service and its current instances.</p><p><strong>For the business, the value appears when infrastructure can scale and recover without a chain of manual reconfiguration across dependent systems.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body></html>

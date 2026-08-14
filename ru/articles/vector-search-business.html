@@ -9,23 +9,30 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Vector Search: когда искать по смыслу полезнее, чем по словам">
     <meta property="og:description" content="Как семантический поиск помогает находить похожие по смыслу данные и почему качество embeddings, индекса и прав доступа становится частью продукта.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/vector-search-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/vector-search-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Vector Search: когда искать по смыслу полезнее, чем по словам - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/vector-search-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/vector-search-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/vector-search-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Vector Search: когда искать по смыслу полезнее, чем по словам","description":"Vector Search на языке бизнеса: когда поиск по смыслу помогает находить нужные документы и товары лучше ключевых слов, и какой ценой приходится платить за качество поиска.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/vector-search-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/vector-search-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/vector-search-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/vector-search-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Vector Search: когда искать по смыслу полезнее, чем по словам","description":"Vector Search на языке бизнеса: когда поиск по смыслу помогает находить нужные документы и товары лучше ключевых слов, и какой ценой приходится платить за качество поиска.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/vector-search-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
-    <header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="vector-search-business.html" aria-current="page">RU</a><a href="../../en/articles/vector-search-business.html">EN</a></div></header>
+    <header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="vector-search-business.html" aria-current="page">RU</a><a href="../../en/articles/vector-search-business.html">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Vector Search: когда искать по смыслу полезнее, чем по словам</h1><p class="article-summary">Пользователь может искать «как вернуть деньги», а документ называться «регламент возврата платежа». Поиск по словам легко пропустит такой материал. Vector Search пытается найти смысловую близость, а не только совпадение текста.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Vector Search: когда искать по смыслу полезнее, чем по словам</h1><p class="article-summary">Пользователь может искать «как вернуть деньги», а документ называться «регламент возврата платежа». Поиск по словам легко пропустит такой материал. Vector Search пытается найти смысловую близость, а не только совпадение текста.</p></div></header>
       <article class="article-content">
         <p>Классический поиск хорошо работает, когда пользователь знает правильные слова. Но люди часто формулируют вопрос иначе, чем написано в документации, каталоге или базе знаний.</p>
         <p>Vector Search переводит текст, изображение или другой объект в числовое представление — embedding — и ищет объекты, которые находятся рядом по смыслу.</p>
@@ -67,6 +74,6 @@
         <p><strong>Для бизнеса его ценность не в векторах, а в том, что люди и системы быстрее находят нужное, даже если сформулировали запрос не теми словами, которыми написан ответ.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

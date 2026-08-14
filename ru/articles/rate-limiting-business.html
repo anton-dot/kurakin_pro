@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Rate Limiting: почему иногда выгоднее сказать клиенту «слишком много запросов»">
     <meta property="og:description" content="Rate Limiting на языке бизнеса: защита от перегрузки, контроль затрат и честные правила использования API.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/rate-limiting-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/rate-limiting-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Rate Limiting: почему иногда выгоднее сказать клиенту «слишком много запросов» - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/rate-limiting-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/rate-limiting-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/rate-limiting-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rate Limiting: почему иногда выгоднее сказать клиенту «слишком много запросов»","description":"Зачем нужен Rate Limiting, как ограничения запросов защищают продукт и бюджет, что получают бизнес, команды и клиенты и когда лимиты вредят больше, чем помогают.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/rate-limiting-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/rate-limiting-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/rate-limiting-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/rate-limiting-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rate Limiting: почему иногда выгоднее сказать клиенту «слишком много запросов»","description":"Зачем нужен Rate Limiting, как ограничения запросов защищают продукт и бюджет, что получают бизнес, команды и клиенты и когда лимиты вредят больше, чем помогают.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/rate-limiting-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="rate-limiting-business.html" aria-current="page">RU</a><a href="../../en/articles/rate-limiting-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">API и интеграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Rate Limiting: почему иногда выгоднее сказать клиенту «слишком много запросов»</h1><p class="article-summary">Неограниченный доступ звучит удобно, пока один клиент, бот или ошибка интеграции не начинают съедать ресурсы, предназначенные для всех. Rate Limiting вводит правила до того, как перегрузка превратится в аварию.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#api">API и интеграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Rate Limiting: почему иногда выгоднее сказать клиенту «слишком много запросов»</h1><p class="article-summary">Неограниченный доступ звучит удобно, пока один клиент, бот или ошибка интеграции не начинают съедать ресурсы, предназначенные для всех. Rate Limiting вводит правила до того, как перегрузка превратится в аварию.</p></div></header>
       <article class="article-content">
         <p>Представим публичный API. Один партнёр делает сто запросов в минуту, другой — тысячу, а у третьего сломался скрипт и он начал отправлять один и тот же запрос без остановки.</p>
         <p>Для системы все эти запросы выглядят одинаково. Если правил нет, самый активный потребитель может занять ресурсы, которыми должны пользоваться остальные.</p>
@@ -81,6 +88,6 @@
         <p><strong>Иногда лучше отказать части запросов одного клиента, чем позволить им ухудшить продукт для всех остальных и превратить чужую ошибку в собственную аварию.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

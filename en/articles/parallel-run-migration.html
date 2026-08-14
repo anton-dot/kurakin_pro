@@ -9,22 +9,29 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Parallel Run: Why Run the Old and New Systems at the Same Time for a While">
   <meta property="og:description" content="The riskiest moment in a large migration is when the new system is considered ready because tests passed. Parallel Run keeps old and new running together long enough to compare them before final cutover.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/parallel-run-migration.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/parallel-run-migration.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Parallel Run: Why Run the Old and New Systems at the Same Time for a While - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/parallel-run-migration.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/parallel-run-migration.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/parallel-run-migration.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Parallel Run: Why Run the Old and New Systems at the Same Time for a While","description":"How Parallel Run reduces legacy migration risk by comparing old and new systems on real scenarios and what the period of double operation costs.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/parallel-run-migration.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/parallel-run-migration.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/parallel-run-migration.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/parallel-run-migration.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Parallel Run: Why Run the Old and New Systems at the Same Time for a While","description":"How Parallel Run reduces legacy migration risk by comparing old and new systems on real scenarios and what the period of double operation costs.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/parallel-run-migration.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/parallel-run-migration.html">RU</a><a href="parallel-run-migration.html" aria-current="page">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy & migration</a><p class="article-kicker"><span>5 min read</span></p><h1>Parallel Run: Why Run the Old and New Systems at the Same Time for a While</h1><p class="article-summary">The riskiest moment in a large migration is when the new system is considered ready because tests passed. Parallel Run keeps old and new running together long enough to compare them before final cutover.</p></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/parallel-run-migration.html">RU</a><a href="parallel-run-migration.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#legacy">Legacy & migration</a><p class="article-kicker"><span>5 min read</span></p><h1>Parallel Run: Why Run the Old and New Systems at the Same Time for a While</h1><p class="article-summary">The riskiest moment in a large migration is when the new system is considered ready because tests passed. Parallel Run keeps old and new running together long enough to compare them before final cutover.</p></div></header>
 <article class="article-content">
 <h2>What problem are we solving?</h2>
 <p>Legacy systems often contain years of accumulated rules, exceptions, and behavior that is not fully documented anywhere. A new implementation can pass tests and still differ on rare real-world scenarios.</p>
@@ -54,5 +61,5 @@
 <p>Parallel Run buys confidence by comparing new-system behavior with reality rather than trusting readiness claims.</p>
 <p><strong>For the business, it is a way to pay for a short period of double operation instead of paying much more for a failed final cutover.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body></html>

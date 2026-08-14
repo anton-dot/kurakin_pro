@@ -9,31 +9,38 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Expand–Contract: как менять схему данных без общего дня переключения">
     <meta property="og:description" content="Expand–Contract заменяет большой день миграции последовательностью совместимых шагов и снижает риск синхронного переключения множества систем.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/expand-contract-migration.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/expand-contract-migration.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Expand–Contract: как менять схему данных без общего дня переключения - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/expand-contract-migration.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/expand-contract-migration.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/expand-contract-migration.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Expand–Contract: как менять схему данных без общего дня переключения","description":"Как Expand–Contract помогает безопасно менять схемы данных и контракты: сначала добавить новое, затем перевести потребителей и только потом удалить старое.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/expand-contract-migration.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/expand-contract-migration.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/expand-contract-migration.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/expand-contract-migration.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Expand–Contract: как менять схему данных без общего дня переключения","description":"Как Expand–Contract помогает безопасно менять схемы данных и контракты: сначала добавить новое, затем перевести потребителей и только потом удалить старое.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/expand-contract-migration.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="expand-contract-migration.html" aria-current="page">RU</a><a href="../../en/articles/expand-contract-migration.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy и миграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Expand–Contract: как менять схему данных без общего дня переключения</h1><p class="article-summary">Опасные миграции часто требуют, чтобы база, сервисы и клиенты обновились одновременно. Expand–Contract разбивает такое изменение на совместимые этапы: сначала расширить систему, потом перевести потребителей и только после этого удалить старое.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#legacy">Legacy и миграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Expand–Contract: как менять схему данных без общего дня переключения</h1><p class="article-summary">Опасные миграции часто требуют, чтобы база, сервисы и клиенты обновились одновременно. Expand–Contract разбивает такое изменение на совместимые этапы: сначала расширить систему, потом перевести потребителей и только после этого удалить старое.</p></div></header>
       <article class="article-content">
         <h2>Какую проблему мы решаем</h2><p>Чем больше потребителей у таблицы, события или API, тем опаснее изменение, которое ломает старый формат. Если новая колонка, новое имя поля или новая структура требуют общего переключения, релиз превращается в организационную операцию.</p><p>Проблема не в самой миграции, а в необходимости синхронизировать слишком много независимых частей в один момент.</p><h2>Как работает Expand–Contract</h2><p>На этапе expand система становится совместимой и со старым, и с новым способом работы. Добавляется новое поле, новый контракт или новая структура, но старое ещё остаётся доступным.</p><p>Затем потребители постепенно переходят на новый вариант. Только когда старый путь действительно больше не используется, начинается contract: старую структуру удаляют.</p><p>Вместо одного большого риска появляется несколько меньших шагов, каждый из которых можно наблюдать и при необходимости остановить.</p><h2>Что получает бизнес</h2><p>Главная выгода — меньше релизов, требующих общей даты и большого количества координации. Команды могут мигрировать в своём темпе, а критическое изменение не обязано становиться событием для всей компании.</p><p>Снижается риск простоя из-за несовместимости и легче откатывать отдельные шаги. Это особенно ценно в системах, где вынужденный synchronized cutover влияет на продажи или операции.</p><h2>Что получает команда</h2><p>Команды получают временное окно совместимости. Можно сначала подготовить инфраструктуру, затем обновить код чтения и записи, после чего безопасно убрать старый путь.</p><p>Но появляется дисциплина: нужно отслеживать использование старого контракта, не забывать завершать миграцию и явно управлять переходным состоянием.</p><h2>Что получает клиент</h2><p>Клиент получает меньше технических окон и меньше ситуаций, когда все должны обновиться одновременно. Для внешних интеграций это означает возможность мигрировать по согласованному периоду, а не в одну ночь.</p><h2>Чем мы за это платим</h2><p>Во время перехода система сложнее: некоторое время существуют два поля, два формата или два пути обработки. Нужно поддерживать совместимость, тестировать оба варианта и следить, чтобы данные не расходились.</p><p>Если contract постоянно откладывать, временная совместимость превращается в постоянный legacy.</p><h2>Когда не нужно</h2><p>Если изменение полностью локально и имеет одного контролируемого потребителя, многоэтапная миграция может быть избыточной. Иногда простой атомарный change действительно дешевле.</p><p>Подход нужен там, где невозможно или слишком рискованно обновить всех потребителей одновременно.</p><h2>Что стоит спросить перед решением</h2><ul><li>Сколько независимых потребителей затрагивает изменение?</li><li>Можно ли некоторое время поддерживать старый и новый формат одновременно?</li><li>Как поймём, что старый путь больше никто не использует?</li><li>Что будет источником истины во время переходного периода?</li><li>Кто отвечает за завершение contract-этапа?</li></ul><h2>В итоге</h2><p>Expand–Contract не делает миграцию бесплатной. Он меняет форму риска: вместо одного большого переключения компания оплачивает временную совместимость.</p><p><strong>Для бизнеса это часто выгодный обмен — немного больше технической работы сегодня ради отсутствия общего дня, когда ошибка может остановить сразу всех.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Single Sign-On: почему один вход лучше десятка независимых паролей">
     <meta property="og:description" content="SSO упрощает доступ между продуктами и централизует управление учётными записями, но делает систему идентификации критической общей зависимостью.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/single-sign-on-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/single-sign-on-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Single Sign-On: почему один вход лучше десятка независимых паролей - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/single-sign-on-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/single-sign-on-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/single-sign-on-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Single Sign-On: почему один вход лучше десятка независимых паролей","description":"Что даёт Single Sign-On бизнесу: единый вход, централизованное управление доступом, меньше разрозненных учётных записей и понятная цена общей точки зависимости.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/single-sign-on-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/single-sign-on-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/single-sign-on-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/single-sign-on-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Single Sign-On: почему один вход лучше десятка независимых паролей","description":"Что даёт Single Sign-On бизнесу: единый вход, централизованное управление доступом, меньше разрозненных учётных записей и понятная цена общей точки зависимости.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/single-sign-on-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="single-sign-on-business.html" aria-current="page">RU</a><a href="../../en/articles/single-sign-on-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Безопасность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Single Sign-On: почему один вход лучше десятка независимых паролей</h1><p class="article-summary">Когда у компании появляется много продуктов и внутренних систем, отдельная учётная запись в каждом из них перестаёт быть простотой. Single Sign-On делает идентификацию общей платформенной функцией — и вместе с удобством создаёт критическую общую зависимость.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#security">Безопасность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Single Sign-On: почему один вход лучше десятка независимых паролей</h1><p class="article-summary">Когда у компании появляется много продуктов и внутренних систем, отдельная учётная запись в каждом из них перестаёт быть простотой. Single Sign-On делает идентификацию общей платформенной функцией — и вместе с удобством создаёт критическую общую зависимость.</p></div></header>
       <article class="article-content">
         <p>Пока систем немного, независимый логин в каждом продукте выглядит естественно. Но по мере роста компании появляются десятки учётных записей, отдельные правила паролей, разные процедуры блокировки и постоянный вопрос: где именно нужно отключить доступ сотруднику, партнёру или клиенту.</p>
         <p>Проблема уже не только в неудобстве. Разрозненная идентификация увеличивает стоимость администрирования и делает жизненный цикл доступа непредсказуемым.</p>
@@ -60,6 +67,6 @@
         <p><strong>Бизнес получает более управляемый доступ и меньше дублирования, но платит за это критичностью общей identity-платформы.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

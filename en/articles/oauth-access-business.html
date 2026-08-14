@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="OAuth 2.0: Why Partners Should Not Get Your System Password">
     <meta property="og:description" content="OAuth 2.0 in business language: how to give an external app limited access without sharing the user's main password.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/oauth-access-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/oauth-access-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>OAuth 2.0: Why Partners Should Not Get Your System Password - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/oauth-access-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/oauth-access-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/oauth-access-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"OAuth 2.0: Why Partners Should Not Get Your System Password","description":"What OAuth 2.0 gives the business, why partners and apps should not receive a user's password, and what delegated access costs to operate safely.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/oauth-access-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/oauth-access-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/oauth-access-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/oauth-access-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"OAuth 2.0: Why Partners Should Not Get Your System Password","description":"What OAuth 2.0 gives the business, why partners and apps should not receive a user's password, and what delegated access costs to operate safely.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/oauth-access-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/oauth-access-business.html">RU</a><a href="oauth-access-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>OAuth 2.0: Why Partners Should Not Get Your System Password</h1><p class="article-summary">Integrations often need to act on behalf of a user or company. The problem starts when an external application needs the full login and password to do it. OAuth lets you delegate only the required access and revoke it independently later.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>OAuth 2.0: Why Partners Should Not Get Your System Password</h1><p class="article-summary">Integrations often need to act on behalf of a user or company. The problem starts when an external application needs the full login and password to do it. OAuth lets you delegate only the required access and revoke it independently later.</p></div></header>
       <article class="article-content">
         <p>When an external service needs access to your data, the simplest path can look dangerously reasonable: give it the same credentials a person uses.</p>
         <p>The integration then gets not only the function it needs, but too much authority. A password has to be stored by a third party, is hard to limit to one scenario, and is awkward to revoke without disrupting the user's primary access.</p>
@@ -79,6 +86,6 @@
         <p><strong>For the business, it is a way to grow an integration ecosystem without turning every new service into another place that stores the customer's full password.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

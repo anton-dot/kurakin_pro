@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Prompt Injection: Why AI Should Not Trust Every Instruction It Reads">
   <meta property="og:description" content="If a model reads emails, documents, and web pages, some of that text may try to change its behavior. Architecture has to treat those instructions as untrusted.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/prompt-injection-defense.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/prompt-injection-defense.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Prompt Injection: Why AI Should Not Trust Every Instruction It Reads - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/prompt-injection-defense.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/prompt-injection-defense.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/prompt-injection-defense.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt Injection: Why AI Should Not Trust Every Instruction It Reads","description":"What prompt injection defense gives the business: how to limit the influence of external text on AI systems and protect data, tools, and critical actions.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/prompt-injection-defense.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/prompt-injection-defense.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/prompt-injection-defense.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/prompt-injection-defense.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt Injection: Why AI Should Not Trust Every Instruction It Reads","description":"What prompt injection defense gives the business: how to limit the influence of external text on AI systems and protect data, tools, and critical actions.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/prompt-injection-defense.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/prompt-injection-defense.html">RU</a><a href="prompt-injection-defense.html" aria-current="page">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/prompt-injection-defense.html">RU</a><a href="prompt-injection-defense.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>Prompt Injection: Why AI Should Not Trust Every Instruction It Reads</h1><p class="article-summary">An AI system may read documents, emails, pages, and user text. The problem is that some of that content can contain instructions aimed at the model itself. Prompt Injection begins when the system stops separating data from commands.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>Prompt Injection: Why AI Should Not Trust Every Instruction It Reads</h1><p class="article-summary">An AI system may read documents, emails, pages, and user text. The problem is that some of that content can contain instructions aimed at the model itself. Prompt Injection begins when the system stops separating data from commands.</p></div></header>
 <article class="article-content">
 <p>Traditional software usually has a clearer distinction between code and data. An LLM is different: system instructions, a customer email, and a web page eventually become text inside one context.</p>
 <p>That means an external document can contain text trying to change model behavior: ignore previous rules, reveal data, call a tool, or perform an action the user never requested.</p>
@@ -58,6 +65,6 @@
 <p><strong>For the business, defense means giving AI more useful work without giving it unrestricted authority at the same time.</strong></p>
 </article>
 </main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body>
 </html>

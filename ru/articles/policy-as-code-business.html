@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Policy as Code: почему правила безопасности не должны жить только в документах">
     <meta property="og:description" content="Если правило важно, его полезно не только написать, но и автоматически проверить. Policy as Code превращает часть governance в исполняемые ограничения.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/policy-as-code-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/policy-as-code-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Policy as Code: почему правила безопасности не должны жить только в документах - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/policy-as-code-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/policy-as-code-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/policy-as-code-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Policy as Code: почему правила безопасности не должны жить только в документах","description":"Что даёт Policy as Code бизнесу: как превратить правила безопасности и инфраструктуры в проверяемые, версионируемые политики и уменьшить зависимость от ручного контроля.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/policy-as-code-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/policy-as-code-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/policy-as-code-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/policy-as-code-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Policy as Code: почему правила безопасности не должны жить только в документах","description":"Что даёт Policy as Code бизнесу: как превратить правила безопасности и инфраструктуры в проверяемые, версионируемые политики и уменьшить зависимость от ручного контроля.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/policy-as-code-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="policy-as-code-business.html" aria-current="page">RU</a><a href="../../en/articles/policy-as-code-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Безопасность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Policy as Code: почему правила безопасности не должны жить только в документах</h1><p class="article-summary">Политика в PDF может быть правильной и при этом никак не влиять на реальную систему. Policy as Code превращает часть требований безопасности, инфраструктуры и compliance в правила, которые можно автоматически проверять до изменения.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#security">Безопасность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Policy as Code: почему правила безопасности не должны жить только в документах</h1><p class="article-summary">Политика в PDF может быть правильной и при этом никак не влиять на реальную систему. Policy as Code превращает часть требований безопасности, инфраструктуры и compliance в правила, которые можно автоматически проверять до изменения.</p></div></header>
       <article class="article-content">
         <p>В компаниях легко накопить десятки правил: базы не должны быть публичными, ресурсы должны иметь владельца, production-доступ ограничен, определённые данные нельзя хранить в неподходящем регионе.</p>
         <p>Проблема не в том, что эти правила неизвестны. Проблема в разрыве между документом и реальным изменением. Инженер может не знать правило, забыть его или понять иначе. Ручная проверка помогает, пока изменений немного.</p>
@@ -64,6 +71,6 @@
         <p><strong>Для бизнеса это способ масштабировать безопасность и compliance быстрее, чем растёт количество ручных согласований.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

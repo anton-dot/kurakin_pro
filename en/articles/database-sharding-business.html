@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Sharding: What Happens When a Database Becomes Too Large for One Server">
     <meta property="og:description" content="Sharding in business language: growth beyond one bottleneck, independent data scaling, and the price of distribution.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/database-sharding-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/database-sharding-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Sharding: What Happens When a Database Becomes Too Large for One Server - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/database-sharding-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/database-sharding-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/database-sharding-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Sharding: What Happens When a Database Becomes Too Large for One Server","description":"What happens when one database can no longer handle the scale: how sharding works, what it gives the business, and why distributed data sharply increases complexity.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/database-sharding-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/database-sharding-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/database-sharding-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/database-sharding-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Sharding: What Happens When a Database Becomes Too Large for One Server","description":"What happens when one database can no longer handle the scale: how sharding works, what it gives the business, and why distributed data sharply increases complexity.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/database-sharding-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/database-sharding-business.html">RU</a><a href="database-sharding-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Sharding: What Happens When a Database Becomes Too Large for One Server</h1><p class="article-summary">As long as one stronger server solves the problem, that is usually simpler. Sharding becomes interesting later — when data and workload have to be physically distributed across several nodes.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Sharding: What Happens When a Database Becomes Too Large for One Server</h1><p class="article-summary">As long as one stronger server solves the problem, that is usually simpler. Sharding becomes interesting later — when data and workload have to be physically distributed across several nodes.</p></div></header>
       <article class="article-content">
         <p>Database growth can be handled quite directly for a long time: more memory, faster disks, a stronger server, read replicas.</p>
         <p>But vertical scaling has limits. At some point one node becomes too expensive, too risky, or simply unable to handle the amount of data and operations.</p>
@@ -81,6 +88,6 @@
         <p><strong>The business gets a new growth horizon and pays for it with more complexity in every cross-shard query, operation, and migration. Shard when the future has already reached the limits of one server — not merely because it might someday.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

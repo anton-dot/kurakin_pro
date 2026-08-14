@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Bulkhead Pattern: Why One Overloaded Function Should Not Consume the Whole Product">
     <meta property="og:description" content="How resource isolation limits the blast radius of overload and helps keep critical business flows available when one part of the system is under stress.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/bulkhead-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/bulkhead-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Bulkhead Pattern: Why One Overloaded Function Should Not Consume the Whole Product - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/bulkhead-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/bulkhead-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/bulkhead-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bulkhead Pattern: Why One Overloaded Function Should Not Consume the Whole Product","description":"What the Bulkhead Pattern is, how resource isolation limits overload impact, and why a business should decide which capabilities must survive independently.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/bulkhead-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/bulkhead-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bulkhead-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bulkhead-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bulkhead Pattern: Why One Overloaded Function Should Not Consume the Whole Product","description":"What the Bulkhead Pattern is, how resource isolation limits overload impact, and why a business should decide which capabilities must survive independently.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/bulkhead-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Primary navigation"><a href="../../en/index.html">Home</a><a href="../../en/projects.html">Projects</a><a href="../../en/experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/bulkhead-business.html">RU</a><a href="bulkhead-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Scaling and reliability</a><p class="article-kicker"><span>5 min read</span></p><h1>Bulkhead Pattern: Why One Overloaded Function Should Not Consume the Whole Product</h1><p class="article-summary">If one heavy capability can consume every connection, thread, or worker, a local problem quickly becomes a product-wide outage. Bulkheads separate resources so one overloaded area cannot starve everything else.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><span>5 min read</span></p><h1>Bulkhead Pattern: Why One Overloaded Function Should Not Consume the Whole Product</h1><p class="article-summary">If one heavy capability can consume every connection, thread, or worker, a local problem quickly becomes a product-wide outage. Bulkheads separate resources so one overloaded area cannot starve everything else.</p></div></header>
       <article class="article-content">
         <p>In a distributed system, failure rarely stays neatly inside one component. If every capability shares the same resource pool, one slow dependency or traffic spike can consume all available connections, threads, or workers.</p>
         <p>Then the problem stops being local. Ordinary requests wait for capacity, queues grow, timeouts create retries, and one overloaded path turns into broad degradation.</p>
@@ -62,6 +69,6 @@
         <p><strong>The business value appears when one overloaded capability is no longer allowed to take capacity away from the entire product.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

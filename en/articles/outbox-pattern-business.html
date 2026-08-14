@@ -9,23 +9,30 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Outbox Pattern: How Not to Lose an Event Between the Database and the Queue">
     <meta property="og:description" content="The Outbox Pattern in business terms: how to keep data changes and events aligned without one distributed transaction.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/outbox-pattern-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/outbox-pattern-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Outbox Pattern: How Not to Lose an Event Between the Database and the Queue - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/outbox-pattern-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/outbox-pattern-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/outbox-pattern-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Outbox Pattern: How Not to Lose an Event Between the Database and the Queue","description":"What the Outbox Pattern is, how it prevents events from being lost between a database write and message publication, and what reliability trade-offs it creates.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/outbox-pattern-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/outbox-pattern-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/outbox-pattern-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/outbox-pattern-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Outbox Pattern: How Not to Lose an Event Between the Database and the Queue","description":"What the Outbox Pattern is, how it prevents events from being lost between a database write and message publication, and what reliability trade-offs it creates.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/outbox-pattern-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/outbox-pattern-business.html">RU</a><a href="outbox-pattern-business.html" aria-current="page">EN</a></div></header>
+    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/outbox-pattern-business.html">RU</a><a href="outbox-pattern-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Outbox Pattern: How Not to Lose an Event Between the Database and the Queue</h1><p class="article-summary">A system can save an order successfully and fail a millisecond before publishing the event. One part of the business knows the order exists; another behaves as if it never happened. The Outbox Pattern closes that gap.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Outbox Pattern: How Not to Lose an Event Between the Database and the Queue</h1><p class="article-summary">A system can save an order successfully and fail a millisecond before publishing the event. One part of the business knows the order exists; another behaves as if it never happened. The Outbox Pattern closes that gap.</p></div></header>
       <article class="article-content">
         <p>Event-driven systems often need to do two things together: change business data and tell other systems about it.</p>
         <p>For example, create an order in the database and publish an <em>OrderCreated</em> event. Those are still two separate operations.</p>
@@ -54,6 +61,6 @@
         <p><strong>Its business value is preventing an important process from disappearing in the tiny technical gap between a database and a message broker.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

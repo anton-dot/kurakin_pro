@@ -9,22 +9,29 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="AI Observability: Why a Successful Request Is Not Enough for AI">
   <meta property="og:description" content="A conventional service can return 200 OK and genuinely complete the task. AI can return 200 OK and still produce a useless, expensive, or risky answer. Production observability for AI must see more than technical request success.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/ai-observability-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>AI Observability: Why a Successful Request Is Not Enough for AI - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Observability: Why a Successful Request Is Not Enough for AI","description":"How to observe an AI product in production through quality, cost, latency, retrieval, tool calls, and guardrails instead of only HTTP errors and uptime.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/ai-observability-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-observability-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Observability: Why a Successful Request Is Not Enough for AI","description":"How to observe an AI product in production through quality, cost, latency, retrieval, tool calls, and guardrails instead of only HTTP errors and uptime.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/ai-observability-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/ai-observability-business.html">RU</a><a href="ai-observability-business.html" aria-current="page">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>AI Observability: Why a Successful Request Is Not Enough for AI</h1><p class="article-summary">A conventional service can return 200 OK and genuinely complete the task. AI can return 200 OK and still produce a useless, expensive, or risky answer. Production observability for AI must see more than technical request success.</p></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/ai-observability-business.html">RU</a><a href="ai-observability-business.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>AI Observability: Why a Successful Request Is Not Enough for AI</h1><p class="article-summary">A conventional service can return 200 OK and genuinely complete the task. AI can return 200 OK and still produce a useless, expensive, or risky answer. Production observability for AI must see more than technical request success.</p></div></header>
 <article class="article-content">
 <h2>What problem are we solving?</h2>
 <p>In conventional systems, technical metrics often reveal the problem clearly: errors rise, latency worsens, or a database is unavailable. In an AI product, a request can complete successfully while answer quality degrades after a model, prompt, retrieval, or data change.</p>
@@ -54,5 +61,5 @@
 <p>For AI, a technically successful request is only the beginning of understanding system quality.</p>
 <p><strong>For the business, AI Observability means seeing not only model availability, but the value, cost, and risk it actually creates in production.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body></html>

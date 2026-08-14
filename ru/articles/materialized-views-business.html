@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Materialized Views: когда выгоднее заранее подготовить ответ, чем каждый раз считать заново">
   <meta property="og:description" content="Как ускорить тяжёлое чтение за счёт заранее рассчитанного представления и не забыть о цене обновления и устаревания данных.">
-  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/materialized-views-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/ru/articles/materialized-views-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Materialized Views: когда выгоднее заранее подготовить ответ, чем каждый раз считать заново - Антон Куракин</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/materialized-views-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/materialized-views-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/materialized-views-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Materialized Views: когда выгоднее заранее подготовить ответ, чем каждый раз считать заново","description":"Когда Materialized Views ускоряют чтение и аналитику, почему данные приходится хранить в заранее подготовленном виде и чем платим за скорость.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/materialized-views-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/ru/articles/materialized-views-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/materialized-views-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/materialized-views-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Materialized Views: когда выгоднее заранее подготовить ответ, чем каждый раз считать заново","description":"Когда Materialized Views ускоряют чтение и аналитику, почему данные приходится хранить в заранее подготовленном виде и чем платим за скорость.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/materialized-views-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="ru">
 <a class="skip-link" href="#main">Перейти к содержанию</a>
-<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="materialized-views-business.html" aria-current="page">RU</a><a href="../../en/articles/materialized-views-business.html">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="materialized-views-business.html" aria-current="page">RU</a><a href="../../en/articles/materialized-views-business.html">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Materialized Views: когда выгоднее заранее подготовить ответ, чем каждый раз считать заново</h1><p class="article-summary">Некоторые запросы слишком дороги, чтобы собирать результат из исходных таблиц при каждом открытии экрана или отчёта. Materialized View хранит заранее рассчитанный результат и меняет баланс: чтение становится дешевле, а обновление данных — сложнее.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Materialized Views: когда выгоднее заранее подготовить ответ, чем каждый раз считать заново</h1><p class="article-summary">Некоторые запросы слишком дороги, чтобы собирать результат из исходных таблиц при каждом открытии экрана или отчёта. Materialized View хранит заранее рассчитанный результат и меняет баланс: чтение становится дешевле, а обновление данных — сложнее.</p></div></header>
 <article class="article-content">
 <h2>Какую проблему мы решаем</h2><p>По мере роста данных один пользовательский экран или отчёт может требовать нескольких join, агрегаций и фильтров по большим таблицам. Даже хороший индекс не всегда делает такой запрос дешёвым.</p><p>Если один и тот же сложный результат читают тысячи раз, бессмысленно каждый раз выполнять всю работу заново.</p>
 <h2>Как работает Materialized View</h2><p>Система заранее вычисляет нужное представление данных и сохраняет результат как отдельную структуру для чтения. При запросе клиент получает уже подготовленный набор вместо тяжёлого вычисления.</p><p>Обновление может происходить по расписанию, после изменений или инкрементально. От этого зависит, насколько свежими будут данные и сколько ресурсов потребуется для поддержания представления.</p>
@@ -37,5 +44,5 @@
 <h2>Что стоит спросить перед решением</h2><ul><li>Как часто выполняется этот тяжёлый запрос?</li><li>Насколько свежим должен быть результат?</li><li>Можно ли обновлять представление инкрементально?</li><li>Что произойдёт, если обновление временно остановится?</li><li>Не дешевле ли сначала оптимизировать исходный запрос?</li></ul>
 <h2>В итоге</h2><p>Materialized View — это сознательный обмен: мы тратим хранение и сложность обновления, чтобы не платить вычислением при каждом чтении.</p><p><strong>Для бизнеса этот подход полезен тогда, когда быстрый доступ к часто повторяющемуся результату важнее абсолютной простоты модели хранения.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
 </body></html>

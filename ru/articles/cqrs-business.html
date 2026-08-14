@@ -9,23 +9,30 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="CQRS: почему системе иногда выгодно читать данные совсем не так, как она их записывает">
     <meta property="og:description" content="CQRS на языке бизнеса: когда разделение записи и чтения ускоряет продукт и чем приходится платить за дополнительные модели и согласованность данных.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/cqrs-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/cqrs-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>CQRS: почему системе иногда выгодно читать данные совсем не так, как она их записывает - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/cqrs-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/cqrs-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/cqrs-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"CQRS: почему системе иногда выгодно читать данные совсем не так, как она их записывает","description":"Что такое CQRS, почему системе иногда выгодно читать данные не так, как она их записывает, и какие бизнес-компромиссы появляются у такого разделения.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/cqrs-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/cqrs-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cqrs-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cqrs-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"CQRS: почему системе иногда выгодно читать данные совсем не так, как она их записывает","description":"Что такое CQRS, почему системе иногда выгодно читать данные не так, как она их записывает, и какие бизнес-компромиссы появляются у такого разделения.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/cqrs-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
-    <header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="cqrs-business.html" aria-current="page">RU</a><a href="../../en/articles/cqrs-business.html">EN</a></div></header>
+    <header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="cqrs-business.html" aria-current="page">RU</a><a href="../../en/articles/cqrs-business.html">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>CQRS: почему системе иногда выгодно читать данные совсем не так, как она их записывает</h1><p class="article-summary">Запись данных требует проверки правил и целостности. Чтение часто требует совсем другого: быстро собрать удобный экран, отчёт или поиск. CQRS разделяет эти две задачи.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>CQRS: почему системе иногда выгодно читать данные совсем не так, как она их записывает</h1><p class="article-summary">Запись данных требует проверки правил и целостности. Чтение часто требует совсем другого: быстро собрать удобный экран, отчёт или поиск. CQRS разделяет эти две задачи.</p></div></header>
       <article class="article-content">
         <p>Во многих системах одна модель данных обслуживает всё сразу: создание заказа, изменение статуса, список заказов, отчёты и поиск.</p>
         <p>Пока продукт небольшой, это удобно. Но по мере роста требования к записи и чтению начинают расходиться.</p>
@@ -67,6 +74,6 @@
         <p><strong>Для бизнеса смысл появляется тогда, когда это разделение ускоряет развитие продукта или снимает реальное ограничение, а не просто делает архитектуру интереснее.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

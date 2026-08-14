@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Layered Architecture: почему иногда полезно разделить систему на понятные уровни">
     <meta property="og:description" content="Layered Architecture на языке бизнеса: как локализовать изменения и чем платить за дополнительные границы внутри системы.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/layered-architecture-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/layered-architecture-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Layered Architecture: почему иногда полезно разделить систему на понятные уровни - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/layered-architecture-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/layered-architecture-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/layered-architecture-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Layered Architecture: почему иногда полезно разделить систему на понятные уровни","description":"Что даёт layered architecture бизнесу и командам, когда разделение системы на уровни снижает стоимость изменений и когда слои превращаются в лишнюю бюрократию.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/layered-architecture-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/layered-architecture-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/layered-architecture-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/layered-architecture-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Layered Architecture: почему иногда полезно разделить систему на понятные уровни","description":"Что даёт layered architecture бизнесу и командам, когда разделение системы на уровни снижает стоимость изменений и когда слои превращаются в лишнюю бюрократию.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/layered-architecture-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="layered-architecture-business.html" aria-current="page">RU</a><a href="../../en/articles/layered-architecture-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#foundations">Архитектурные основы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Layered Architecture: почему иногда полезно разделить систему на понятные уровни</h1><p class="article-summary">Когда пользовательский интерфейс, бизнес-правила и работа с данными смешаны в одном месте, даже небольшое изменение начинает затрагивать слишком много кода. Слои помогают локализовать изменения — если сами не превращаются в церемонию.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#foundations">Архитектурные основы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Layered Architecture: почему иногда полезно разделить систему на понятные уровни</h1><p class="article-summary">Когда пользовательский интерфейс, бизнес-правила и работа с данными смешаны в одном месте, даже небольшое изменение начинает затрагивать слишком много кода. Слои помогают локализовать изменения — если сами не превращаются в церемонию.</p></div></header>
       <article class="article-content">
         <p>Небольшая система часто начинается просто: экран вызывает код, код работает с базой, всё находится рядом и быстро меняется.</p>
         <p>Проблема появляется позже, когда бизнес-правила, интерфейс, интеграции и данные начинают зависеть друг от друга настолько, что любое изменение требует осторожно трогать сразу несколько частей системы.</p>
@@ -78,6 +85,6 @@
         <p><strong>Для бизнеса хороший слой — тот, который делает будущие изменения локальнее и дешевле. Плохой — тот, который просто добавляет ещё один файл между двумя уже понятными частями системы.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

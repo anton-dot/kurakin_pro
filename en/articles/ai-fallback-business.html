@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="AI Fallback Strategy: What Should the Product Do When the Model Is Unavailable or Uncertain?">
   <meta property="og:description" content="How to preserve a useful customer journey during AI failures instead of making one generative model a single point of product failure.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/ai-fallback-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/ai-fallback-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>AI Fallback Strategy: What Should the Product Do When the Model Is Unavailable or Uncertain? - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/ai-fallback-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-fallback-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-fallback-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Fallback Strategy: What Should the Product Do When the Model Is Unavailable or Uncertain?","description":"How to design an AI Fallback Strategy so model, provider, or guardrail failures do not take down the whole product, and what backup paths cost.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/ai-fallback-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/ai-fallback-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-fallback-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-fallback-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Fallback Strategy: What Should the Product Do When the Model Is Unavailable or Uncertain?","description":"How to design an AI Fallback Strategy so model, provider, or guardrail failures do not take down the whole product, and what backup paths cost.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/ai-fallback-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/ai-fallback-business.html">RU</a><a href="ai-fallback-business.html" aria-current="page">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/ai-fallback-business.html">RU</a><a href="ai-fallback-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>AI Fallback Strategy: What Should the Product Do When the Model Is Unavailable or Uncertain?</h1><p class="article-summary">If AI becomes part of a critical flow, the product needs a predefined response to timeouts, provider outages, expensive requests, or low-confidence results. Fallback is not an implementation detail. It is part of the product promise.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>AI Fallback Strategy: What Should the Product Do When the Model Is Unavailable or Uncertain?</h1><p class="article-summary">If AI becomes part of a critical flow, the product needs a predefined response to timeouts, provider outages, expensive requests, or low-confidence results. Fallback is not an implementation detail. It is part of the product promise.</p></div></header>
 <article class="article-content">
 <h2>What problem are we solving?</h2><p>A model can be slow, return an error, become temporarily unavailable, or fail a guardrail. Even a stable provider is still an external AI dependency the product team does not fully control.</p><p>If the only path is to wait for one specific model, a local AI failure quickly becomes a customer-facing failure.</p>
 <h2>How a Fallback Strategy works</h2><p>Every critical AI flow gets a predefined backup path. It may be another model, a simpler non-AI function, a cached result, retrieval without generation, human handling, or a clear failure mode that lets the user continue later.</p><p>Fallback is not selected only by availability. The primary model may also be too expensive, too slow, or insufficiently reliable for a specific request.</p><p>The backup path should be part of product and architecture design, not improvised during an outage.</p>
@@ -37,5 +44,5 @@
 <h2>Questions to ask before deciding</h2><ul><li>What should the customer get if the primary model is unavailable?</li><li>Can the flow complete without generative AI?</li><li>What quality degradation is acceptable?</li><li>When is another model cheaper than waiting or retrying?</li><li>How will we detect that the product is relying on fallback too often?</li></ul>
 <h2>In the end</h2><p>A reliable AI product is not defined only by how well the model works under ideal conditions. It is also defined by what happens when those conditions disappear.</p><p><strong>For the business, a Fallback Strategy means not making one model the single point of failure for the customer promise.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body></html>

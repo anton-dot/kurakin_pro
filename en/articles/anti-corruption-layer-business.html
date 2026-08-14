@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Anti-Corruption Layer: How to Integrate Legacy or an External System Without Importing Its Model">
     <meta property="og:description" content="How to isolate another system's contracts, terminology, and historical constraints so they do not become the architecture of your product.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/anti-corruption-layer-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/anti-corruption-layer-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-13">
     <meta property="article:modified_time" content="2026-08-13">
     <title>Anti-Corruption Layer: How to Integrate Legacy or an External System Without Importing Its Model - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/anti-corruption-layer-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/anti-corruption-layer-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/anti-corruption-layer-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Anti-Corruption Layer: How to Integrate Legacy or an External System Without Importing Its Model","description":"Why an Anti-Corruption Layer helps when integrating legacy and external systems: keep another system's model from spreading through your product and understand the cost of isolation.","inLanguage":"en","datePublished":"2026-08-13","dateModified":"2026-08-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/anti-corruption-layer-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/anti-corruption-layer-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/anti-corruption-layer-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/anti-corruption-layer-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Anti-Corruption Layer: How to Integrate Legacy or an External System Without Importing Its Model","description":"Why an Anti-Corruption Layer helps when integrating legacy and external systems: keep another system's model from spreading through your product and understand the cost of isolation.","inLanguage":"en","datePublished":"2026-08-13","dateModified":"2026-08-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/anti-corruption-layer-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/anti-corruption-layer-business.html">RU</a><a href="anti-corruption-layer-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy and migration</a><p class="article-kicker"><span>5 min read</span></p><h1>Anti-Corruption Layer: How to Integrate Legacy or an External System Without Importing Its Model</h1><p class="article-summary">An integration brings more than an API. It brings another system's terms, constraints, and historical decisions. An Anti-Corruption Layer keeps that foreign model from becoming the internal model of your product.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#legacy">Legacy and migration</a><p class="article-kicker"><span>5 min read</span></p><h1>Anti-Corruption Layer: How to Integrate Legacy or an External System Without Importing Its Model</h1><p class="article-summary">An integration brings more than an API. It brings another system's terms, constraints, and historical decisions. An Anti-Corruption Layer keeps that foreign model from becoming the internal model of your product.</p></div></header>
       <article class="article-content">
         <p>A legacy system may call a customer a “counterparty,” store order state as numeric codes, and require a strange sequence of calls. An external SaaS product may have its own model for accounts, roles, and payments.</p>
         <p>The fastest approach is to let all of that leak directly into new code. A year later, half the product knows that status 17 means “active,” and replacing the external system becomes a multi-month project.</p>
@@ -63,6 +70,6 @@
         <p><strong>A good integration connects systems without forcing one of them to live according to the other's rules.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

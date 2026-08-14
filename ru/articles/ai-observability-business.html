@@ -9,22 +9,29 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="AI Observability: почему для AI недостаточно знать, что запрос завершился успешно">
   <meta property="og:description" content="Обычный сервис может вернуть 200 OK и действительно выполнить задачу. AI тоже может вернуть 200 OK — и при этом дать бесполезный, дорогой или рискованный ответ. Поэтому production-наблюдаемость для AI должна видеть больше, чем технический успех запроса.">
-  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/ru/articles/ai-observability-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>AI Observability: почему для AI недостаточно знать, что запрос завершился успешно - Антон Куракин</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Observability: почему для AI недостаточно знать, что запрос завершился успешно","description":"Как наблюдать AI-продукт в production через качество, стоимость, latency, retrieval, tool calls и guardrails, а не только через HTTP-ошибки и uptime.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/ai-observability-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/ru/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-observability-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Observability: почему для AI недостаточно знать, что запрос завершился успешно","description":"Как наблюдать AI-продукт в production через качество, стоимость, latency, retrieval, tool calls и guardrails, а не только через HTTP-ошибки и uptime.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/ai-observability-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="ru">
 <a class="skip-link" href="#main">Перейти к содержанию</a>
-<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="ai-observability-business.html" aria-current="page">RU</a><a href="../../en/articles/ai-observability-business.html">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>AI Observability: почему для AI недостаточно знать, что запрос завершился успешно</h1><p class="article-summary">Обычный сервис может вернуть 200 OK и действительно выполнить задачу. AI тоже может вернуть 200 OK — и при этом дать бесполезный, дорогой или рискованный ответ. Поэтому production-наблюдаемость для AI должна видеть больше, чем технический успех запроса.</p></div></header>
+<header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="ai-observability-business.html" aria-current="page">RU</a><a href="../../en/articles/ai-observability-business.html">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>AI Observability: почему для AI недостаточно знать, что запрос завершился успешно</h1><p class="article-summary">Обычный сервис может вернуть 200 OK и действительно выполнить задачу. AI тоже может вернуть 200 OK — и при этом дать бесполезный, дорогой или рискованный ответ. Поэтому production-наблюдаемость для AI должна видеть больше, чем технический успех запроса.</p></div></header>
 <article class="article-content">
 <h2>Какую проблему мы решаем</h2>
 <p>В обычной системе технические метрики часто хорошо показывают проблему: ошибки выросли, latency ухудшилась, база недоступна. В AI-продукте запрос может технически завершиться успешно, но ответ стать хуже после смены модели, prompt, retrieval или данных.</p>
@@ -54,5 +61,5 @@
 <p>Для AI технически успешный запрос — только начало ответа на вопрос о качестве системы.</p>
 <p><strong>Для бизнеса AI Observability означает видеть не только доступность модели, но и то, какую ценность, стоимость и риск она реально создаёт в production.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
 </body></html>

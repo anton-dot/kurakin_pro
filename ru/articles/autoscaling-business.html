@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Autoscaling: почему инфраструктура должна расти вместе с нагрузкой, а не заранее">
     <meta property="og:description" content="Autoscaling на языке бизнеса: как переживать пики без постоянной оплаты максимальной мощности и чем платить за автоматизацию.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/autoscaling-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/autoscaling-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Autoscaling: почему инфраструктура должна расти вместе с нагрузкой, а не заранее - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/autoscaling-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/autoscaling-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/autoscaling-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Autoscaling: почему инфраструктура должна расти вместе с нагрузкой, а не заранее","description":"Что такое autoscaling, как инфраструктура может автоматически расти вместе с нагрузкой и почему экономия на запасе мощности требует хороших метрик и ограничений.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/autoscaling-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/autoscaling-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/autoscaling-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/autoscaling-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Autoscaling: почему инфраструктура должна расти вместе с нагрузкой, а не заранее","description":"Что такое autoscaling, как инфраструктура может автоматически расти вместе с нагрузкой и почему экономия на запасе мощности требует хороших метрик и ограничений.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/autoscaling-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="autoscaling-business.html" aria-current="page">RU</a><a href="../../en/articles/autoscaling-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Масштабирование и надёжность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Autoscaling: почему инфраструктура должна расти вместе с нагрузкой, а не заранее</h1><p class="article-summary">Можно купить мощность с большим запасом и большую часть времени за неё платить. А можно автоматически добавлять ресурсы, когда нагрузка растёт, и убирать их после пика. Autoscaling делает второй вариант возможным — если система умеет масштабироваться без сюрпризов.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#scale">Масштабирование и надёжность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Autoscaling: почему инфраструктура должна расти вместе с нагрузкой, а не заранее</h1><p class="article-summary">Можно купить мощность с большим запасом и большую часть времени за неё платить. А можно автоматически добавлять ресурсы, когда нагрузка растёт, и убирать их после пика. Autoscaling делает второй вариант возможным — если система умеет масштабироваться без сюрпризов.</p></div></header>
       <article class="article-content">
         <p>У многих продуктов нагрузка неровная. Днём пользователей больше, ночью меньше. Маркетинговая кампания создаёт всплеск. Отчётный период резко увеличивает количество операций. Если инфраструктура всегда рассчитана на пик, большую часть времени компания оплачивает неиспользуемый запас.</p>
         <p>Если запаса нет, следующий пик может превратить успешный рост трафика в деградацию продукта.</p>
@@ -75,6 +82,6 @@
         <p><strong>Для бизнеса его ценность в том, чтобы не выбирать постоянно между переплатой за запас и риском не пережить пик — при условии, что автоматизация сама не превращается в неконтролируемый источник расходов.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

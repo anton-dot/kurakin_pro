@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Database Replication: Why the Business May Need Several Copies of the Same Data">
     <meta property="og:description" content="Database replication in business language: availability, read scaling, recovery, and the cost of lag and extra operational complexity.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/database-replication-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/database-replication-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Database Replication: Why the Business May Need Several Copies of the Same Data - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/database-replication-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/database-replication-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/database-replication-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Database Replication: Why the Business May Need Several Copies of the Same Data","description":"Why database replication exists, how multiple copies improve availability and read capacity, and why replication lag becomes a business trade-off of its own.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/database-replication-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/database-replication-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/database-replication-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/database-replication-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Database Replication: Why the Business May Need Several Copies of the Same Data","description":"Why database replication exists, how multiple copies improve availability and read capacity, and why replication lag becomes a business trade-off of its own.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/database-replication-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/database-replication-business.html">RU</a><a href="database-replication-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Database Replication: Why the Business May Need Several Copies of the Same Data</h1><p class="article-summary">One database is simpler. But once it becomes critical to the product, one copy means one failure point and one read-capacity limit. Replication adds copies — together with a new cost: those copies are not always updated at exactly the same moment.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Database Replication: Why the Business May Need Several Copies of the Same Data</h1><p class="article-summary">One database is simpler. But once it becomes critical to the product, one copy means one failure point and one read-capacity limit. Replication adds copies — together with a new cost: those copies are not always updated at exactly the same moment.</p></div></header>
       <article class="article-content">
         <p>While a system is small, one database is usually the natural choice. Everyone reads and writes in one place, data has one obvious state, and the infrastructure is easy to understand.</p>
         <p>But if that server becomes unavailable, the product may stop. And when most of the load is reading, one server can become a bottleneck even while writes are still manageable.</p>
@@ -77,6 +84,6 @@
         <p><strong>Its business value is reducing the cost of a single failure and increasing capacity, while accepting that several copies create a new problem: they may not be perfectly synchronized.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

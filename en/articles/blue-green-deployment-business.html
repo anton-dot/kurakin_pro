@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Blue-Green Deployment: How to Change a System Without Betting Everything on One Release">
     <meta property="og:description" content="When parallel environments reduce release risk and why safe rollback is harder than simply switching traffic back.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/blue-green-deployment-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/blue-green-deployment-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-13">
     <meta property="article:modified_time" content="2026-08-13">
     <title>Blue-Green Deployment: How to Change a System Without Betting Everything on One Release - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/blue-green-deployment-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/blue-green-deployment-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/blue-green-deployment-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Blue-Green Deployment: How to Change a System Without Betting Everything on One Release","description":"How Blue-Green Deployment reduces release risk: two environments, fast switching and rollback, plus the cost of duplicate infrastructure and data compatibility.","inLanguage":"en","datePublished":"2026-08-13","dateModified":"2026-08-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/blue-green-deployment-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/blue-green-deployment-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/blue-green-deployment-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/blue-green-deployment-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Blue-Green Deployment: How to Change a System Without Betting Everything on One Release","description":"How Blue-Green Deployment reduces release risk: two environments, fast switching and rollback, plus the cost of duplicate infrastructure and data compatibility.","inLanguage":"en","datePublished":"2026-08-13","dateModified":"2026-08-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/blue-green-deployment-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav>
+      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/blue-green-deployment-business.html">RU</a><a href="blue-green-deployment-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#cloud">Cloud and infrastructure</a><p class="article-kicker"><span>5 min read</span></p><h1>Blue-Green Deployment: How to Change a System Without Betting Everything on One Release</h1><p class="article-summary">Updating production does not have to mean replacing the running version in place. Blue-Green Deployment keeps the old and new environments side by side so a switch can be tested and reversed quickly when needed.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#cloud">Cloud and infrastructure</a><p class="article-kicker"><span>5 min read</span></p><h1>Blue-Green Deployment: How to Change a System Without Betting Everything on One Release</h1><p class="article-summary">Updating production does not have to mean replacing the running version in place. Blue-Green Deployment keeps the old and new environments side by side so a switch can be tested and reversed quickly when needed.</p></div></header>
       <article class="article-content">
         <p>A release becomes especially risky when the new version replaces the old one immediately and going back requires another full deployment.</p>
         <p>If a problem appears after the switch, the company pays with downtime, manual work, and an urgent search for the answer to one question: “how do we get the previous version back?”</p>
@@ -63,6 +70,6 @@
         <p><strong>The business value is not in having two colored environments. It is in preventing a bad update from automatically becoming a long emergency operation.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

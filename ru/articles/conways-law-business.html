@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Conway’s Law: почему структура компании всё равно появляется в архитектуре">
     <meta property="og:description" content="Закон Конвея на языке бизнеса: как устройство команд формирует границы систем и почему реорганизация может менять архитектуру сильнее, чем кажется.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/conways-law-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/conways-law-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Conway’s Law: почему структура компании всё равно появляется в архитектуре - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/conways-law-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/conways-law-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/conways-law-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Conway’s Law: почему структура компании всё равно появляется в архитектуре","description":"Что означает закон Конвея, почему структура компании отражается в архитектуре и как организационные границы влияют на скорость изменений и ответственность.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/conways-law-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/conways-law-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/conways-law-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/conways-law-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Conway’s Law: почему структура компании всё равно появляется в архитектуре","description":"Что означает закон Конвея, почему структура компании отражается в архитектуре и как организационные границы влияют на скорость изменений и ответственность.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/conways-law-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="conways-law-business.html" aria-current="page">RU</a><a href="../../en/articles/conways-law-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#domain">Домены и команды</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Conway’s Law: почему структура компании всё равно появляется в архитектуре</h1><p class="article-summary">Можно нарисовать идеальную схему системы, но если команды устроены иначе, реальная архитектура постепенно начнёт отражать именно их границы, коммуникации и зоны ответственности.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#domain">Домены и команды</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Conway’s Law: почему структура компании всё равно появляется в архитектуре</h1><p class="article-summary">Можно нарисовать идеальную схему системы, но если команды устроены иначе, реальная архитектура постепенно начнёт отражать именно их границы, коммуникации и зоны ответственности.</p></div></header>
       <article class="article-content">
         <p>Архитектуру часто обсуждают так, будто она существует отдельно от компании. Есть сервисы, базы, API — и есть организационная структура с отделами и руководителями.</p>
         <p>На практике эти две карты постоянно влияют друг на друга. Команды чаще меняют то, чем они владеют. Между отделами появляются интерфейсы, согласования и зависимости. Внутри одной команды связь обычно проще.</p>
@@ -78,6 +85,6 @@
         <p><strong>Для бизнеса важно не только как разделена система, но и позволяет ли структура команд менять эти части независимо. Иначе техническая модульность остаётся на схеме, а не в скорости компании.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

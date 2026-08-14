@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Domain-Driven Design: почему архитектура должна говорить на языке бизнеса">
     <meta property="og:description" content="Как DDD помогает связать бизнес-модель, ответственность команд и структуру системы — и когда эта дисциплина становится лишней.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/domain-driven-design-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/domain-driven-design-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-13">
     <meta property="article:modified_time" content="2026-08-13">
     <title>Domain-Driven Design: почему архитектура должна говорить на языке бизнеса - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/domain-driven-design-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/domain-driven-design-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/domain-driven-design-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Domain-Driven Design: почему архитектура должна говорить на языке бизнеса","description":"Что даёт Domain-Driven Design бизнесу и командам: единый язык, понятные границы ответственности, меньше скрытых зависимостей и цена такого подхода.","inLanguage":"ru","datePublished":"2026-08-13","dateModified":"2026-08-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/domain-driven-design-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/domain-driven-design-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/domain-driven-design-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/domain-driven-design-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Domain-Driven Design: почему архитектура должна говорить на языке бизнеса","description":"Что даёт Domain-Driven Design бизнесу и командам: единый язык, понятные границы ответственности, меньше скрытых зависимостей и цена такого подхода.","inLanguage":"ru","datePublished":"2026-08-13","dateModified":"2026-08-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/domain-driven-design-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="domain-driven-design-business.html" aria-current="page">RU</a><a href="../../en/articles/domain-driven-design-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#domain">Домены и команды</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Domain-Driven Design: почему архитектура должна говорить на языке бизнеса</h1><p class="article-summary">Проблемы больших систем часто начинаются не с технологий, а с того, что бизнес и разработка по-разному понимают одни и те же слова. DDD пытается сделать модель бизнеса частью архитектуры, а не оставить её только в презентациях и головах экспертов.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#domain">Домены и команды</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Domain-Driven Design: почему архитектура должна говорить на языке бизнеса</h1><p class="article-summary">Проблемы больших систем часто начинаются не с технологий, а с того, что бизнес и разработка по-разному понимают одни и те же слова. DDD пытается сделать модель бизнеса частью архитектуры, а не оставить её только в презентациях и головах экспертов.</p></div></header>
       <article class="article-content">
         <p>Когда продукт растёт, слова вроде «клиент», «заказ», «договор» или «платёж» перестают быть очевидными. Для разных подразделений один термин может означать разные вещи, а система тем временем пытается свести всё к одной универсальной модели.</p>
         <p>В результате простое изменение начинает требовать переговоров между несколькими командами, а бизнес-правила оказываются размазаны по сервисам, таблицам и интеграциям.</p>
@@ -63,6 +70,6 @@
         <p><strong>Хороший результат DDD — когда бизнес, команда и код начинают говорить об одной и той же реальности примерно одним языком.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

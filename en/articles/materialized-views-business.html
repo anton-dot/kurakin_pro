@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time">
   <meta property="og:description" content="How to speed up expensive reads with precomputed data without forgetting the cost of refreshes and stale results.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/materialized-views-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/materialized-views-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/materialized-views-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/materialized-views-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/materialized-views-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time","description":"When Materialized Views make reads and analytics faster, why data is stored in a precomputed form, and what we pay for that speed.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/materialized-views-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/materialized-views-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/materialized-views-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/materialized-views-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time","description":"When Materialized Views make reads and analytics faster, why data is stored in a precomputed form, and what we pay for that speed.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/materialized-views-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/materialized-views-business.html">RU</a><a href="materialized-views-business.html" aria-current="page">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/materialized-views-business.html">RU</a><a href="materialized-views-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time</h1><p class="article-summary">Some queries are too expensive to rebuild from source tables every time a screen or report opens. A Materialized View stores a precomputed result and changes the trade-off: reads get cheaper while keeping the result fresh becomes more complex.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time</h1><p class="article-summary">Some queries are too expensive to rebuild from source tables every time a screen or report opens. A Materialized View stores a precomputed result and changes the trade-off: reads get cheaper while keeping the result fresh becomes more complex.</p></div></header>
 <article class="article-content">
 <h2>What problem are we solving?</h2><p>As data grows, one screen or report may require several joins, aggregations, and filters across large tables. Even good indexes do not always make that query cheap.</p><p>If the same expensive result is read thousands of times, repeating all of that work for every request is wasteful.</p>
 <h2>How a Materialized View works</h2><p>The system computes a useful representation in advance and stores it as a separate read structure. The client reads a prepared result instead of running the full expensive calculation.</p><p>Refresh can happen on a schedule, after changes, or incrementally. That choice determines how fresh the result is and how much work is required to maintain it.</p>
@@ -37,5 +44,5 @@
 <h2>Questions to ask before deciding</h2><ul><li>How often is this expensive query executed?</li><li>How fresh must the result be?</li><li>Can the view be refreshed incrementally?</li><li>What happens if refresh stops temporarily?</li><li>Would optimizing the source query be cheaper first?</li></ul>
 <h2>In the end</h2><p>A Materialized View is a deliberate trade: spend storage and refresh complexity so every read does not have to pay the full computation cost.</p><p><strong>For the business, it is useful when fast access to a frequently repeated result matters more than keeping the storage model absolutely simple.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body></html>

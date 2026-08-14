@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Service Discovery: почему сервисы не должны знать адреса друг друга заранее">
   <meta property="og:description" content="Как убрать ручное управление адресами сервисов и не превратить механизм обнаружения в новую критическую зависимость.">
-  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/service-discovery-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/ru/articles/service-discovery-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Service Discovery: почему сервисы не должны знать адреса друг друга заранее - Антон Куракин</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/service-discovery-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/service-discovery-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/service-discovery-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Service Discovery: почему сервисы не должны знать адреса друг друга заранее","description":"Что даёт Service Discovery в динамической инфраструктуре, как сервисы находят друг друга без ручных адресов и чем бизнес платит за эту автоматизацию.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/service-discovery-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/ru/articles/service-discovery-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/service-discovery-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/service-discovery-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Service Discovery: почему сервисы не должны знать адреса друг друга заранее","description":"Что даёт Service Discovery в динамической инфраструктуре, как сервисы находят друг друга без ручных адресов и чем бизнес платит за эту автоматизацию.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/service-discovery-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="ru">
 <a class="skip-link" href="#main">Перейти к содержанию</a>
-<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="service-discovery-business.html" aria-current="page">RU</a><a href="../../en/articles/service-discovery-business.html">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="service-discovery-business.html" aria-current="page">RU</a><a href="../../en/articles/service-discovery-business.html">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#cloud">Cloud и инфраструктура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Service Discovery: почему сервисы не должны знать адреса друг друга заранее</h1><p class="article-summary">Пока система маленькая, адрес соседнего сервиса можно записать в конфигурации. В динамической инфраструктуре экземпляры появляются, исчезают и переезжают. Service Discovery нужен, чтобы связи между сервисами не зависели от ручного списка адресов.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#cloud">Cloud и инфраструктура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Service Discovery: почему сервисы не должны знать адреса друг друга заранее</h1><p class="article-summary">Пока система маленькая, адрес соседнего сервиса можно записать в конфигурации. В динамической инфраструктуре экземпляры появляются, исчезают и переезжают. Service Discovery нужен, чтобы связи между сервисами не зависели от ручного списка адресов.</p></div></header>
 <article class="article-content">
 <h2>Какую проблему мы решаем</h2><p>В статичной системе адреса меняются редко. Но autoscaling, контейнеры и оркестрация делают инфраструктуру подвижной: сегодня у сервиса три экземпляра, завтра десять, а через час часть из них заменена.</p><p>Если каждая система хранит конкретные адреса соседей, любое изменение инфраструктуры превращается в изменение конфигурации множества клиентов.</p>
 <h2>Как работает Service Discovery</h2><p>Вместо знания конкретного адреса клиент обращается к логическому имени сервиса. Реестр или инфраструктурный механизм возвращает доступные экземпляры, а дальше запрос направляется к одному из них.</p><p>Обнаружение может происходить на стороне клиента, через балансировщик, DNS или платформенный слой. Принцип один: адрес становится динамической деталью инфраструктуры, а не частью бизнес-интеграции.</p>
@@ -37,5 +44,5 @@
 <h2>Что стоит спросить перед решением</h2><ul><li>Как часто появляются и исчезают экземпляры сервисов?</li><li>Кто сегодня обновляет адреса потребителей?</li><li>Как определяется, что экземпляр действительно здоров?</li><li>Что произойдёт, если механизм обнаружения временно недоступен?</li><li>Как быстро устаревший адрес исчезнет из маршрутизации?</li></ul>
 <h2>В итоге</h2><p>Service Discovery не делает систему надёжной сам по себе. Он убирает ручную связь между логическим сервисом и его текущими экземплярами.</p><p><strong>Для бизнеса ценность появляется тогда, когда инфраструктура может масштабироваться и восстанавливаться без цепочки ручных перенастроек во всех зависимых системах.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
 </body></html>

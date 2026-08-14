@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Transactional Inbox: Why Reliable Delivery Is Not Enough">
   <meta property="og:description" content="How to make message consumption resilient to redelivery without turning retries into duplicate business operations.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/transactional-inbox-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/transactional-inbox-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Transactional Inbox: Why Reliable Delivery Is Not Enough - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/transactional-inbox-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/transactional-inbox-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/transactional-inbox-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Transactional Inbox: Why Reliable Delivery Is Not Enough","description":"How Transactional Inbox helps receive messages reliably, survive redelivery, and avoid executing one business operation twice.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/transactional-inbox-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/transactional-inbox-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/transactional-inbox-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/transactional-inbox-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Transactional Inbox: Why Reliable Delivery Is Not Enough","description":"How Transactional Inbox helps receive messages reliably, survive redelivery, and avoid executing one business operation twice.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/transactional-inbox-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/transactional-inbox-business.html">RU</a><a href="transactional-inbox-business.html" aria-current="page">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/transactional-inbox-business.html">RU</a><a href="transactional-inbox-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Transactional Inbox: Why Reliable Delivery Is Not Enough</h1><p class="article-summary">Queues are often chosen for reliability, but reliable delivery frequently means the same message may arrive again. If the consumer cannot recognize duplicates, a retry can become a second payment, a second order, or another state change.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Transactional Inbox: Why Reliable Delivery Is Not Enough</h1><p class="article-summary">Queues are often chosen for reliability, but reliable delivery frequently means the same message may arrive again. If the consumer cannot recognize duplicates, a retry can become a second payment, a second order, or another state change.</p></div></header>
 <article class="article-content">
 <h2>What problem are we solving?</h2><p>In a distributed system, a sender does not always know whether a consumer processed a message. The connection may fail after processing, the acknowledgement may be lost, or the broker may deliver the event again.</p><p>That is why “at least once” delivery is useful for reliability but automatically creates a risk of duplicate business execution.</p>
 <h2>How Transactional Inbox works</h2><p>The consumer stores the incoming message identifier together with the processing result or inside the same transaction boundary. Before processing a redelivery, it checks whether the message has already been seen.</p><p>If it has, the consumer can acknowledge the message without applying the business change again.</p><p>The idea is similar to API idempotency, but applied to asynchronous messages and events.</p>
@@ -37,5 +44,5 @@
 <h2>Questions to ask before deciding</h2><ul><li>Can the broker deliver the same message again?</li><li>What happens if the operation runs twice?</li><li>Does the message have a stable unique identifier?</li><li>Can the processed marker and business change be stored atomically?</li><li>How long must processed identifiers be remembered?</li></ul>
 <h2>In the end</h2><p>Reliable delivery does not mean exactly one execution. In real distributed systems, redelivery is normal and should be designed for.</p><p><strong>For the business, Transactional Inbox is valuable because it lets the system recover persistently without executing the same business operation twice.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body></html>

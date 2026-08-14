@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Hexagonal Architecture: зачем отделять бизнес-логику от базы данных, API и фреймворков">
     <meta property="og:description" content="Как Ports and Adapters помогают бизнес-правилам жить дольше конкретных технологий и когда эта гибкость окупает дополнительную структуру.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/hexagonal-architecture-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/hexagonal-architecture-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Hexagonal Architecture: зачем отделять бизнес-логику от базы данных, API и фреймворков - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/hexagonal-architecture-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/hexagonal-architecture-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/hexagonal-architecture-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Hexagonal Architecture: зачем отделять бизнес-логику от базы данных, API и фреймворков","description":"Что такое Hexagonal Architecture, как порты и адаптеры защищают бизнес-логику от технических деталей и когда эта изоляция окупает дополнительную структуру кода.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/hexagonal-architecture-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/hexagonal-architecture-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/hexagonal-architecture-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/hexagonal-architecture-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Hexagonal Architecture: зачем отделять бизнес-логику от базы данных, API и фреймворков","description":"Что такое Hexagonal Architecture, как порты и адаптеры защищают бизнес-логику от технических деталей и когда эта изоляция окупает дополнительную структуру кода.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/hexagonal-architecture-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="hexagonal-architecture-business.html" aria-current="page">RU</a><a href="../../en/articles/hexagonal-architecture-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#foundations">Архитектурные основы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Hexagonal Architecture: зачем отделять бизнес-логику от базы данных, API и фреймворков</h1><p class="article-summary">База данных, HTTP-фреймворк и брокер сообщений могут меняться. Бизнес-правила обычно живут дольше. Hexagonal Architecture предлагает сделать это различие явным и не позволять техническим деталям диктовать форму всей системы.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#foundations">Архитектурные основы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Hexagonal Architecture: зачем отделять бизнес-логику от базы данных, API и фреймворков</h1><p class="article-summary">База данных, HTTP-фреймворк и брокер сообщений могут меняться. Бизнес-правила обычно живут дольше. Hexagonal Architecture предлагает сделать это различие явным и не позволять техническим деталям диктовать форму всей системы.</p></div></header>
       <article class="article-content">
         <p>Во многих системах бизнес-логика быстро смешивается с техническими деталями. Правило расчёта цены знает о таблице базы, обработчик API сам решает бизнес-условия, а тестирование требует поднять половину инфраструктуры.</p>
         <p>Пока продукт маленький, это кажется удобным: меньше слоёв, меньше интерфейсов, меньше файлов. Проблема появляется позже, когда смена хранения, интерфейса или интеграции затрагивает правила, которые вообще не должны были зависеть от этой технологии.</p>
@@ -63,6 +70,6 @@
         <p><strong>Для бизнеса это инвестиция в более дешёвую смену технических деталей — но только там, где такие изменения действительно вероятны и дороги.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Sharding: что происходит, когда база данных становится слишком большой для одного сервера">
     <meta property="og:description" content="Шардирование на языке бизнеса: рост без одного узкого места, отдельное масштабирование данных и цена распределённости.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/database-sharding-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/database-sharding-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Sharding: что происходит, когда база данных становится слишком большой для одного сервера - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/database-sharding-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/database-sharding-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/database-sharding-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Sharding: что происходит, когда база данных становится слишком большой для одного сервера","description":"Что делать, когда одна база данных перестаёт справляться: как работает шардирование, что оно даёт бизнесу и почему распределение данных резко повышает сложность.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/database-sharding-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/database-sharding-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/database-sharding-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/database-sharding-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Sharding: что происходит, когда база данных становится слишком большой для одного сервера","description":"Что делать, когда одна база данных перестаёт справляться: как работает шардирование, что оно даёт бизнесу и почему распределение данных резко повышает сложность.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/database-sharding-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="database-sharding-business.html" aria-current="page">RU</a><a href="../../en/articles/database-sharding-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Sharding: что происходит, когда база данных становится слишком большой для одного сервера</h1><p class="article-summary">Пока базу можно усилить одним более мощным сервером, это обычно проще. Sharding становится интересен позже — когда данные и нагрузку приходится физически распределять между несколькими узлами.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Sharding: что происходит, когда база данных становится слишком большой для одного сервера</h1><p class="article-summary">Пока базу можно усилить одним более мощным сервером, это обычно проще. Sharding становится интересен позже — когда данные и нагрузку приходится физически распределять между несколькими узлами.</p></div></header>
       <article class="article-content">
         <p>Рост базы данных долго можно решать довольно прямолинейно: больше памяти, быстрее диски, мощнее сервер, реплики для чтения.</p>
         <p>Но у вертикального масштабирования есть предел. В какой-то момент один узел становится слишком дорогим, слишком большим риском или просто перестаёт справляться с объёмом данных и операций.</p>
@@ -81,6 +88,6 @@
         <p><strong>Бизнес получает новый горизонт роста и платит за него сложностью каждого сквозного запроса, операции и миграции. Поэтому шардировать стоит не «на будущее», а когда будущее уже упёрлось в один сервер.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

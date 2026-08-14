@@ -9,23 +9,30 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Webhooks: почему системе выгоднее сообщить об изменении, чем ждать очередного вопроса">
     <meta property="og:description" content="Webhooks на языке бизнеса: как уменьшить задержки и лишние запросы между системами и чем платить за доставку событий и повторные попытки.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/webhooks-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/webhooks-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Webhooks: почему системе выгоднее сообщить об изменении, чем ждать очередного вопроса - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/webhooks-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/webhooks-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/webhooks-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Webhooks: почему системе выгоднее сообщить об изменении, чем ждать очередного вопроса","description":"Что такое Webhooks, почему системам выгоднее сообщать об изменениях самим, чем постоянно опрашивать друг друга, и какие компромиссы появляются для бизнеса и команды.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/webhooks-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/webhooks-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/webhooks-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/webhooks-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Webhooks: почему системе выгоднее сообщить об изменении, чем ждать очередного вопроса","description":"Что такое Webhooks, почему системам выгоднее сообщать об изменениях самим, чем постоянно опрашивать друг друга, и какие компромиссы появляются для бизнеса и команды.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/webhooks-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
-    <header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="webhooks-business.html" aria-current="page">RU</a><a href="../../en/articles/webhooks-business.html">EN</a></div></header>
+    <header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="webhooks-business.html" aria-current="page">RU</a><a href="../../en/articles/webhooks-business.html">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">API и интеграции</a><p class="article-kicker"><span>4 мин чтения</span></p><h1>Webhooks: почему системе выгоднее сообщить об изменении, чем ждать очередного вопроса</h1><p class="article-summary">Если одной системе важно узнать, что произошло в другой, можно спрашивать об этом каждую минуту. А можно получить уведомление сразу после события. Webhooks строятся вокруг второго подхода.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#api">API и интеграции</a><p class="article-kicker"><span>4 мин чтения</span></p><h1>Webhooks: почему системе выгоднее сообщить об изменении, чем ждать очередного вопроса</h1><p class="article-summary">Если одной системе важно узнать, что произошло в другой, можно спрашивать об этом каждую минуту. А можно получить уведомление сразу после события. Webhooks строятся вокруг второго подхода.</p></div></header>
       <article class="article-content">
         <p>Представим интернет-магазин, которому нужно узнать статус оплаты. Самый прямой путь — регулярно спрашивать платёжную систему: «оплачено?», «а теперь?», «а сейчас?».</p>
         <p>Так работает polling. Он прост, но создаёт постоянный трафик и всё равно оставляет задержку между событием и реакцией.</p>
@@ -66,6 +73,6 @@
         <p><strong>Для бизнеса ценность в том, что процессы реагируют быстрее и тратят меньше ресурсов на бессмысленные проверки.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

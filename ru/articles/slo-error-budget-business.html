@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="SLO и Error Budget: сколько надёжности действительно нужно бизнесу">
     <meta property="og:description" content="Надёжность — не абсолют. SLO помогает договориться, какой уровень сервиса нужен бизнесу, а Error Budget — сколько риска изменений компания может себе позволить.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/slo-error-budget-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/slo-error-budget-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>SLO и Error Budget: сколько надёжности действительно нужно бизнесу - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/slo-error-budget-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/slo-error-budget-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/slo-error-budget-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SLO и Error Budget: сколько надёжности действительно нужно бизнесу","description":"Что дают SLO и Error Budget бизнесу: как договориться о нужном уровне надёжности, связать сбои с темпом изменений и не переплачивать за недостижимые 100%.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/slo-error-budget-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/slo-error-budget-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/slo-error-budget-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/slo-error-budget-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SLO и Error Budget: сколько надёжности действительно нужно бизнесу","description":"Что дают SLO и Error Budget бизнесу: как договориться о нужном уровне надёжности, связать сбои с темпом изменений и не переплачивать за недостижимые 100%.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/slo-error-budget-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="slo-error-budget-business.html" aria-current="page">RU</a><a href="../../en/articles/slo-error-budget-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Масштабирование и надёжность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>SLO и Error Budget: сколько надёжности действительно нужно бизнесу</h1><p class="article-summary">Требование «система должна работать всегда» звучит правильно, пока не приходится платить за каждый следующий девяток после запятой. SLO превращает разговор о надёжности в конкретную договорённость, а Error Budget связывает эту договорённость со скоростью изменений.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#scale">Масштабирование и надёжность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>SLO и Error Budget: сколько надёжности действительно нужно бизнесу</h1><p class="article-summary">Требование «система должна работать всегда» звучит правильно, пока не приходится платить за каждый следующий девяток после запятой. SLO превращает разговор о надёжности в конкретную договорённость, а Error Budget связывает эту договорённость со скоростью изменений.</p></div></header>
       <article class="article-content">
         <p>У бизнеса и инженерной команды часто разные представления о надёжности. Для бизнеса простой означает потерянные продажи, сорванные операции и недовольных клиентов. Для команды — инциденты, дежурства и риск новых релизов.</p>
         <p>Проблема начинается, когда единственным требованием становится «никаких сбоев». Абсолютной надёжности практически не бывает, а попытка приблизиться к ней стоит всё дороже и может замедлить продукт сильнее, чем редкие допустимые сбои.</p>
@@ -63,6 +70,6 @@
         <p><strong>Для бизнеса это способ перестать покупать надёжность вслепую и связать допустимый риск со скоростью развития продукта.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

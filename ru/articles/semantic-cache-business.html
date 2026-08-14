@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос">
     <meta property="og:description" content="Пользователи часто задают AI почти одинаковые вопросы разными словами. Semantic Cache может вернуть уже рассчитанный ответ без нового обращения к модели — быстрее и дешевле, но только если система умеет понимать, когда ответы действительно взаимозаменяемы.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/semantic-cache-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/semantic-cache-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/semantic-cache-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/semantic-cache-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/semantic-cache-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос","description":"Как Semantic Cache снижает стоимость и задержку AI-запросов, почему похожий вопрос не всегда означает одинаковый ответ и где кэширование создаёт риск устаревшего результата.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/semantic-cache-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/semantic-cache-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/semantic-cache-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/semantic-cache-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос","description":"Как Semantic Cache снижает стоимость и задержку AI-запросов, почему похожий вопрос не всегда означает одинаковый ответ и где кэширование создаёт риск устаревшего результата.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/semantic-cache-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="semantic-cache-business.html" aria-current="page">RU</a><a href="../../en/articles/semantic-cache-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос</h1><p class="article-summary">Пользователи часто задают AI почти одинаковые вопросы разными словами. Semantic Cache может вернуть уже рассчитанный ответ без нового обращения к модели — быстрее и дешевле, но только если система умеет понимать, когда ответы действительно взаимозаменяемы.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Semantic Cache: когда AI не должен заново отвечать на почти тот же вопрос</h1><p class="article-summary">Пользователи часто задают AI почти одинаковые вопросы разными словами. Semantic Cache может вернуть уже рассчитанный ответ без нового обращения к модели — быстрее и дешевле, но только если система умеет понимать, когда ответы действительно взаимозаменяемы.</p></div></header>
       <article class="article-content">
         <p>Обычный cache хорошо работает, когда два запроса идентичны. В AI-продуктах пользователи редко формулируют одинаково: «как отменить заказ?» и «можно ли отказаться от покупки?» могут означать одно и то же.</p>
         <p>Если каждый похожий вопрос снова отправлять в LLM, компания платит повторно за вычисление почти одинакового результата и снова принимает latency модели.</p>
@@ -60,6 +67,6 @@
         <p><strong>Для бизнеса он полезен там, где повторяемость высока, цена модели заметна, а риск устаревшего ответа можно контролировать.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

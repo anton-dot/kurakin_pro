@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Индексы базы данных: почему ускорение чтения делает запись дороже">
     <meta property="og:description" content="Индекс может превратить медленный поиск в быстрый. Но каждый новый индекс нужно хранить и обновлять при изменении данных. Ускоряя чтение, мы неизбежно делаем запись дороже.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/database-indexing-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/database-indexing-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Индексы базы данных: почему ускорение чтения делает запись дороже - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/database-indexing-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/database-indexing-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/database-indexing-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Индексы базы данных: почему ускорение чтения делает запись дороже","description":"Как индексы ускоряют поиск в базе, почему каждый индекс увеличивает цену записи и хранения и когда оптимизация запросов становится архитектурным решением.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/database-indexing-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/database-indexing-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/database-indexing-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/database-indexing-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Индексы базы данных: почему ускорение чтения делает запись дороже","description":"Как индексы ускоряют поиск в базе, почему каждый индекс увеличивает цену записи и хранения и когда оптимизация запросов становится архитектурным решением.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/database-indexing-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="database-indexing-business.html" aria-current="page">RU</a><a href="../../en/articles/database-indexing-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Индексы базы данных: почему ускорение чтения делает запись дороже</h1><p class="article-summary">Индекс может превратить медленный поиск в быстрый. Но каждый новый индекс нужно хранить и обновлять при изменении данных. Ускоряя чтение, мы неизбежно делаем запись дороже.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#data">Данные и базы</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Индексы базы данных: почему ускорение чтения делает запись дороже</h1><p class="article-summary">Индекс может превратить медленный поиск в быстрый. Но каждый новый индекс нужно хранить и обновлять при изменении данных. Ускоряя чтение, мы неизбежно делаем запись дороже.</p></div></header>
       <article class="article-content">
         <p>Когда база небольшая, запрос почти всегда кажется быстрым. Проблема появляется позже: таблица растёт, фильтров становится больше, отчёты тяжелее, а привычный запрос внезапно начинает занимать секунды.</p>
         <p>Первый ответ команды часто прост: добавить индекс. Это действительно может решить проблему — но индекс не бесплатный ускоритель.</p>
@@ -60,6 +67,6 @@
         <p><strong>Для бизнеса хороший индекс — это не техническая оптимизация ради миллисекунд, а осознанная инвестиция в важный сценарий чтения.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

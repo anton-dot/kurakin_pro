@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="gRPC: когда внутренним сервисам нужен более строгий контракт, чем обычный REST">
     <meta property="og:description" content="Что даёт gRPC при взаимодействии сервисов, как строгий контракт влияет на скорость изменений и когда дополнительная сложность не окупается.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/grpc-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/grpc-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>gRPC: когда внутренним сервисам нужен более строгий контракт, чем обычный REST - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/grpc-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/grpc-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/grpc-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"gRPC: когда внутренним сервисам нужен более строгий контракт, чем обычный REST","description":"Что даёт gRPC при взаимодействии сервисов, как строгий контракт влияет на скорость изменений и когда дополнительная сложность не окупается.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/grpc-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/grpc-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/grpc-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/grpc-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"gRPC: когда внутренним сервисам нужен более строгий контракт, чем обычный REST","description":"Что даёт gRPC при взаимодействии сервисов, как строгий контракт влияет на скорость изменений и когда дополнительная сложность не окупается.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/grpc-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="grpc-business.html" aria-current="page">RU</a><a href="../../en/articles/grpc-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">API и интеграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>gRPC: когда внутренним сервисам нужен более строгий контракт, чем обычный REST</h1><p class="article-summary">gRPC помогает сделать взаимодействие между сервисами быстрым и формализованным. Но бизнес-ценность появляется не из-за протокола, а когда строгие контракты снижают стоимость интеграционных ошибок между большим количеством команд.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#api">API и интеграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>gRPC: когда внутренним сервисам нужен более строгий контракт, чем обычный REST</h1><p class="article-summary">gRPC помогает сделать взаимодействие между сервисами быстрым и формализованным. Но бизнес-ценность появляется не из-за протокола, а когда строгие контракты снижают стоимость интеграционных ошибок между большим количеством команд.</p></div></header>
       <article class="article-content">
         <p>Когда внутри компании десятки сервисов постоянно вызывают друг друга, «просто HTTP API» постепенно перестаёт быть просто. Команды по-разному описывают форматы, версии и ошибки, а несовместимое изменение одного сервиса может неожиданно сломать другой.</p>
 <p>gRPC предлагает более строгий контракт: интерфейс описывается заранее, а клиентский и серверный код может генерироваться из одной схемы.</p>
@@ -56,6 +63,6 @@
 <p><strong>gRPC полезен не потому, что он «современнее REST», а когда стоимость неявных внутренних контрактов уже стала заметной для бизнеса.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

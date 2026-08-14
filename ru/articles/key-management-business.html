@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Key Management: почему шифрование бесполезно без управления ключами">
     <meta property="og:description" content="Зашифрованные данные защищены только до тех пор, пока ключи защищены лучше самих данных. Key Management превращает шифрование из галочки в управляемый процесс с доступом, ротацией и отзывом.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/key-management-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/key-management-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Key Management: почему шифрование бесполезно без управления ключами - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/key-management-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/key-management-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/key-management-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Key Management: почему шифрование бесполезно без управления ключами","description":"Почему ценность шифрования зависит от управления ключами: где хранить ключи, как ограничивать доступ, ротировать и отзывать их без остановки бизнеса.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/key-management-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/key-management-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/key-management-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/key-management-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Key Management: почему шифрование бесполезно без управления ключами","description":"Почему ценность шифрования зависит от управления ключами: где хранить ключи, как ограничивать доступ, ротировать и отзывать их без остановки бизнеса.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/key-management-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="key-management-business.html" aria-current="page">RU</a><a href="../../en/articles/key-management-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Безопасность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Key Management: почему шифрование бесполезно без управления ключами</h1><p class="article-summary">Зашифрованные данные защищены только до тех пор, пока ключи защищены лучше самих данных. Key Management превращает шифрование из галочки в управляемый процесс с доступом, ротацией и отзывом.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#security">Безопасность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Key Management: почему шифрование бесполезно без управления ключами</h1><p class="article-summary">Зашифрованные данные защищены только до тех пор, пока ключи защищены лучше самих данных. Key Management превращает шифрование из галочки в управляемый процесс с доступом, ротацией и отзывом.</p></div></header>
       <article class="article-content">
         <p>Фраза «данные зашифрованы» звучит как завершённая мера безопасности. Но у любого шифрования есть ключ. Если ключ лежит рядом с данными, записан в конфигурации или доступен слишком многим системам, защита становится формальной.</p>
         <p>Поэтому архитектурный вопрос начинается не с алгоритма, а с жизненного цикла ключа.</p>
@@ -60,6 +67,6 @@
         <p><strong>Для бизнеса Key Management — это способ сделать доступ к зашифрованным данным контролируемым, отзывным и проверяемым, а не вечным.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

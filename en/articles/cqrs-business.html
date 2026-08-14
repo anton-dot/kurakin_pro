@@ -9,23 +9,30 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="CQRS: Why a System May Need to Read Data Very Differently From How It Writes It">
     <meta property="og:description" content="CQRS in business terms: when separating reads and writes improves product speed, and what extra models and consistency costs come with it.">
-    <meta property="og:url" content="https://kurakin-anton.ru/en/articles/cqrs-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/cqrs-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>CQRS: Why a System May Need to Read Data Very Differently From How It Writes It - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/en/articles/cqrs-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/cqrs-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/cqrs-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"CQRS: Why a System May Need to Read Data Very Differently From How It Writes It","description":"What CQRS is, why a system may benefit from reading data differently from how it writes it, and what trade-offs come with that separation.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/cqrs-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/cqrs-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/cqrs-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/cqrs-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"CQRS: Why a System May Need to Read Data Very Differently From How It Writes It","description":"What CQRS is, why a system may benefit from reading data differently from how it writes it, and what trade-offs come with that separation.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/cqrs-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/cqrs-business.html">RU</a><a href="cqrs-business.html" aria-current="page">EN</a></div></header>
+    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/cqrs-business.html">RU</a><a href="cqrs-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>CQRS: Why a System May Need to Read Data Very Differently From How It Writes It</h1><p class="article-summary">Writing data requires rules and consistency. Reading often needs something else entirely: fast lists, search, dashboards, and reports. CQRS separates those responsibilities.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>CQRS: Why a System May Need to Read Data Very Differently From How It Writes It</h1><p class="article-summary">Writing data requires rules and consistency. Reading often needs something else entirely: fast lists, search, dashboards, and reports. CQRS separates those responsibilities.</p></div></header>
       <article class="article-content">
         <p>Many systems start with one model for everything: creating an order, changing its status, listing orders, searching, and reporting.</p>
         <p>That is convenient while the product is small. Over time, read and write requirements often move in different directions.</p>
@@ -55,6 +62,6 @@
         <p><strong>Its business value appears when that separation removes a real product constraint, not when it simply makes the architecture more sophisticated.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
 </html>

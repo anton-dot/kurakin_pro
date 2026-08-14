@@ -9,23 +9,30 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Least Privilege: Why a System Should Not Get More Access Than It Actually Needs">
   <meta property="og:description" content="How to reduce breach impact with minimum permissions without turning access control into a permanent blocker for teams.">
-  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/least-privilege-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/en/articles/least-privilege-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Least Privilege: Why a System Should Not Get More Access Than It Actually Needs - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/least-privilege-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/least-privilege-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/least-privilege-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Least Privilege: Why a System Should Not Get More Access Than It Actually Needs","description":"Why least privilege reduces incident blast radius, how to limit access to real needs, and what the business pays for stricter boundaries.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/least-privilege-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/en/articles/least-privilege-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/least-privilege-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/least-privilege-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Least Privilege: Why a System Should Not Get More Access Than It Actually Needs","description":"Why least privilege reduces incident blast radius, how to limit access to real needs, and what the business pays for stricter boundaries.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/least-privilege-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/least-privilege-business.html">RU</a><a href="least-privilege-business.html" aria-current="page">EN</a></div></header>
+<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="/en/">Home</a>
+  <a href="/en/projects.html">Projects</a>
+  <a href="/en/experience.html">About</a>
+  <a href="/en/articles/">Writing</a>
+  <a href="/en/architecture/" aria-current="page">Architecture</a>
+  <a href="/en/#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/least-privilege-business.html">RU</a><a href="least-privilege-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>Least Privilege: Why a System Should Not Get More Access Than It Actually Needs</h1><p class="article-summary">Broad permissions are convenient: fewer errors, less configuration, faster integration. But if an account or service with those permissions is compromised, the attacker gets the same broad access. Least Privilege limits the damage in advance.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>Least Privilege: Why a System Should Not Get More Access Than It Actually Needs</h1><p class="article-summary">Broad permissions are convenient: fewer errors, less configuration, faster integration. But if an account or service with those permissions is compromised, the attacker gets the same broad access. Least Privilege limits the damage in advance.</p></div></header>
 <article class="article-content">
 <h2>What problem are we solving?</h2><p>Many systems grant access “with room to spare”: a service can perform more operations than it uses, people keep old roles, and technical accounts get access to entire environments because it is easier.</p><p>That is almost invisible during normal operation. During a leak, mistake, or compromise, excessive permissions define the maximum blast radius.</p>
 <h2>How Least Privilege works</h2><p>Every user, service, or process gets only the actions and data required for its current function. Everything else is denied by default.</p><p>Permissions can be limited by resource, operation, environment, time, or context. The important part is not only granting minimum access but reviewing it as roles and systems change.</p>
@@ -37,5 +44,5 @@
 <h2>Questions to ask before deciding</h2><ul><li>Which permissions does this service actually use?</li><li>What could an attacker do with its credentials?</li><li>Have temporary permissions become permanent?</li><li>Can excess access be revoked automatically?</li><li>Does the policy create more operational pain than risk reduction?</li></ul>
 <h2>In the end</h2><p>Least Privilege does not prevent every incident. It does something important: it limits in advance how far one mistake or compromise can spread.</p><p><strong>For the business, minimum permissions are a way to reduce the price of inevitable mistakes instead of assuming mistakes will never happen.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
 </body></html>

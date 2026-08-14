@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Bulkhead: почему одна перегруженная функция не должна съедать ресурсы всего продукта">
     <meta property="og:description" content="Как изоляция ресурсов ограничивает радиус аварии и помогает сохранить критические бизнес-процессы при перегрузке одной части системы.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/bulkhead-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/bulkhead-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Bulkhead: почему одна перегруженная функция не должна съедать ресурсы всего продукта - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/bulkhead-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/bulkhead-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/bulkhead-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bulkhead: почему одна перегруженная функция не должна съедать ресурсы всего продукта","description":"Что такое Bulkhead Pattern, как изоляция ресурсов ограничивает последствия перегрузки и почему бизнесу важно заранее решить, какие функции должны выживать независимо друг от друга.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/bulkhead-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/bulkhead-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bulkhead-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bulkhead-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bulkhead: почему одна перегруженная функция не должна съедать ресурсы всего продукта","description":"Что такое Bulkhead Pattern, как изоляция ресурсов ограничивает последствия перегрузки и почему бизнесу важно заранее решить, какие функции должны выживать независимо друг от друга.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/bulkhead-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="bulkhead-business.html" aria-current="page">RU</a><a href="../../en/articles/bulkhead-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Масштабирование и надёжность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Bulkhead: почему одна перегруженная функция не должна съедать ресурсы всего продукта</h1><p class="article-summary">Если одна тяжёлая функция может занять все соединения, потоки или воркеры, локальная проблема быстро становится общей. Bulkhead разделяет ресурсы так, чтобы перегрузка одной части не оставляла без воздуха весь продукт.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#scale">Масштабирование и надёжность</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Bulkhead: почему одна перегруженная функция не должна съедать ресурсы всего продукта</h1><p class="article-summary">Если одна тяжёлая функция может занять все соединения, потоки или воркеры, локальная проблема быстро становится общей. Bulkhead разделяет ресурсы так, чтобы перегрузка одной части не оставляла без воздуха весь продукт.</p></div></header>
       <article class="article-content">
         <p>В распределённой системе сбой редко остаётся аккуратно внутри одного компонента. Если все функции используют общий пул ресурсов, одна медленная зависимость или всплеск запросов может занять все соединения, потоки или воркеры.</p>
         <p>После этого тормозит уже не только проблемный сценарий. Обычные запросы ждут свободный ресурс, очереди растут, таймауты создают повторы — и локальная перегрузка превращается в общую деградацию.</p>
@@ -62,6 +69,6 @@
         <p><strong>Для бизнеса ценность появляется тогда, когда одна перегруженная функция перестаёт иметь право отнять ресурсы у всего продукта.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

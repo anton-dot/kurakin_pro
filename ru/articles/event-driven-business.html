@@ -9,27 +9,34 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Event-Driven Architecture: зачем бизнесу системы, которые реагируют на события">
     <meta property="og:description" content="Event-driven architecture на языке бизнеса: независимость систем, скорость интеграций и цена асинхронной сложности.">
-    <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/event-driven-business.html">
-    <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+    <meta property="og:url" content="https://kurakin.pro/ru/articles/event-driven-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-08-12">
     <title>Event-Driven Architecture: зачем бизнесу системы, которые реагируют на события - Антон Куракин</title>
-    <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/event-driven-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/event-driven-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/event-driven-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Event-Driven Architecture: зачем бизнесу системы, которые реагируют на события","description":"Зачем бизнесу event-driven architecture, как события уменьшают связанность систем, ускоряют изменения и какую сложность добавляют.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/event-driven-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+    <link rel="canonical" href="https://kurakin.pro/ru/articles/event-driven-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/event-driven-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/event-driven-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Event-Driven Architecture: зачем бизнесу системы, которые реагируют на события","description":"Зачем бизнесу event-driven architecture, как события уменьшают связанность систем, ускоряют изменения и какую сложность добавляют.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/event-driven-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="ru">
     <a class="skip-link" href="#main">Перейти к содержанию</a>
     <header class="site-header">
-      <a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
-      <nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../../index.html#contact">Контакты</a></nav>
+      <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+      <nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav>
       <div class="lang-switcher" aria-label="Выбор языка"><a href="event-driven-business.html" aria-current="page">RU</a><a href="../../en/articles/event-driven-business.html">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Event-Driven Architecture: зачем бизнесу системы, которые реагируют на события</h1><p class="article-summary">Событийная архитектура позволяет системам меньше знать друг о друге и легче подключать новые реакции на бизнес-события. Цена — более сложное понимание процессов и отказ от идеи, что всё происходит мгновенно.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#events">События и очереди</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Event-Driven Architecture: зачем бизнесу системы, которые реагируют на события</h1><p class="article-summary">Событийная архитектура позволяет системам меньше знать друг о друге и легче подключать новые реакции на бизнес-события. Цена — более сложное понимание процессов и отказ от идеи, что всё происходит мгновенно.</p></div></header>
       <article class="article-content">
         <p>Во многих системах один процесс выглядит как цепочка прямых вызовов: заказ создан — вызвать оплату, затем склад, затем уведомления, затем аналитику.</p>
         <p>Пока участников мало, это понятно. Но каждый новый потребитель добавляет зависимость: система заказов должна знать, кого ещё вызвать и что делать, если кто-то не ответил.</p>
@@ -81,6 +88,6 @@
         <p><strong>Это хороший способ купить гибкость интеграций и устойчивость — если компания готова заплатить за асинхронность, наблюдаемость и более сложную модель данных во времени.</strong></p>
       </article>
     </main>
-    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+    <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
   </body>
 </html>

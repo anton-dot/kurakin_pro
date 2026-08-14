@@ -9,22 +9,29 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Context Mapping: почему границы доменов недостаточно просто нарисовать">
   <meta property="og:description" content="Разделить систему на bounded contexts — только половина работы. Домены всё равно обмениваются данными и зависят друг от друга. Context Mapping нужен, чтобы эти отношения были осознанными, а не случайными.">
-  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/context-mapping-business.html">
-  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="og:url" content="https://kurakin.pro/ru/articles/context-mapping-business.html">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
   <meta property="article:modified_time" content="2026-08-12">
   <title>Context Mapping: почему границы доменов недостаточно просто нарисовать - Антон Куракин</title>
-  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/context-mapping-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/context-mapping-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/context-mapping-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Context Mapping: почему границы доменов недостаточно просто нарисовать","description":"Как Context Mapping делает зависимости между бизнес-доменами и командами явными, помогает выбирать способ интеграции и снижает цену скрытой связанности.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/context-mapping-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="canonical" href="https://kurakin.pro/ru/articles/context-mapping-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/context-mapping-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/context-mapping-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Context Mapping: почему границы доменов недостаточно просто нарисовать","description":"Как Context Mapping делает зависимости между бизнес-доменами и командами явными, помогает выбирать способ интеграции и снижает цену скрытой связанности.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/context-mapping-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="ru">
 <a class="skip-link" href="#main">Перейти к содержанию</a>
-<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="context-mapping-business.html" aria-current="page">RU</a><a href="../../en/articles/context-mapping-business.html">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#domain">Домены и команды</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Context Mapping: почему границы доменов недостаточно просто нарисовать</h1><p class="article-summary">Разделить систему на bounded contexts — только половина работы. Домены всё равно обмениваются данными и зависят друг от друга. Context Mapping нужен, чтобы эти отношения были осознанными, а не случайными.</p></div></header>
+<header class="site-header"><a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация">
+  <a href="/">Главная</a>
+  <a href="/projects.html">Проекты</a>
+  <a href="/experience.html">О себе</a>
+  <a href="/ru/articles/">Статьи</a>
+  <a href="/ru/architecture/" aria-current="page">Архитектура</a>
+  <a href="/#contact">Контакты</a>
+</nav><div class="lang-switcher" aria-label="Выбор языка"><a href="context-mapping-business.html" aria-current="page">RU</a><a href="../../en/articles/context-mapping-business.html">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/ru/architecture/#domain">Домены и команды</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Context Mapping: почему границы доменов недостаточно просто нарисовать</h1><p class="article-summary">Разделить систему на bounded contexts — только половина работы. Домены всё равно обмениваются данными и зависят друг от друга. Context Mapping нужен, чтобы эти отношения были осознанными, а не случайными.</p></div></header>
 <article class="article-content">
 <h2>Какую проблему мы решаем</h2>
 <p>Bounded Context помогает определить, где заканчивается одна модель бизнеса и начинается другая. Но после этого возникает следующий вопрос: как эти контексты взаимодействуют между собой?</p>
@@ -53,5 +60,5 @@
 <p>Границы сами по себе не делают архитектуру независимой. Важно ещё понимать отношения между границами.</p>
 <p><strong>Для бизнеса Context Mapping — это способ увидеть не только устройство системы, но и реальную цену координации между частями компании.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="/ru/architecture/">ИТ-архитектура для всех</a></footer>
 </body></html>
