@@ -1,0 +1,53 @@
+name: Final architecture series
+on:
+  push:
+    paths:
+      - '.architecture-final-trigger'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate final architecture articles and update catalog
+        run: python scripts/final_architecture_batch_b.py
+      - name: Validate final architecture batch
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          slugs = [
+            'domain-events-business','exactly-once-business','event-partitioning-business',
+            'timeouts-deadlines-business','distributed-tracing-business','health-checks-business',
+            'locking-strategies-business','isolation-levels-business','oltp-vs-olap-business',
+            'lakehouse-business','semantic-layer-business','data-quality-business',
+            'workload-identity-business','supply-chain-security-business',
+            'managed-vs-self-hosted-business','multi-cloud-business','ai-memory-business',
+            'structured-output-business','ai-tool-permissions-business','ai-data-privacy-business'
+          ]
+          for slug in slugs:
+            for lang in ('ru','en'):
+              p=Path(lang)/'articles'/(slug+'.html')
+              assert p.exists(), p
+              text=p.read_text(encoding='utf-8')
+              assert text.count('<h1>') == 1, p
+              assert '<article class="article-content">' in text, p
+              assert '<img' not in text.split('<article class="article-content">',1)[1], p
+              assert f'https://kurakin-anton.ru/{lang}/articles/{slug}.html' in text, p
+          for lang in ('ru','en'):
+            idx=(Path(lang)/'architecture'/'index.html').read_text(encoding='utf-8')
+            for slug in slugs: assert slug+'.html' in idx, (lang,slug)
+          sm=Path('sitemap-architecture.xml').read_text(encoding='utf-8')
+          for slug in slugs:
+            for lang in ('ru','en'):
+              assert f'https://kurakin.pro/{lang}/articles/{slug}.html' in sm, (lang,slug)
+          print('validated', len(slugs), 'article pairs')
+          PY
+      - name: Commit changes and clean helper files
+        run: |
+          git config user.name "anton-dot"
+          git config user.email "66353024+anton-dot@users.noreply.github.com"
+          rm -f scripts/final_architecture_batch_a.py scripts/final_architecture_batch_b.py .architecture-final-trigger .github/workflows/final-architecture-series.yml
+          git add -A
+          git commit -m "Finish IT Architecture for Everyone series"
+          git push
