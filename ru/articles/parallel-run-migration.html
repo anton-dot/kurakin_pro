@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как Parallel Run снижает риск миграции legacy через сравнение старой и новой системы на реальных сценариях и чем приходится платить за период двойной эксплуатации.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Parallel Run: зачем некоторое время запускать старую и новую систему одновременно">
+  <meta property="og:description" content="Самый опасный момент большой миграции — когда новую систему считают готовой только потому, что тесты прошли. Parallel Run позволяет некоторое время сравнивать её с реальной старой системой до окончательного переключения.">
+  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/parallel-run-migration.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>Parallel Run: зачем некоторое время запускать старую и новую систему одновременно - Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/parallel-run-migration.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/parallel-run-migration.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/parallel-run-migration.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Parallel Run: зачем некоторое время запускать старую и новую систему одновременно","description":"Как Parallel Run снижает риск миграции legacy через сравнение старой и новой системы на реальных сценариях и чем приходится платить за период двойной эксплуатации.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/parallel-run-migration.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="ru">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="parallel-run-migration.html" aria-current="page">RU</a><a href="../../en/articles/parallel-run-migration.html">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy и миграции</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Parallel Run: зачем некоторое время запускать старую и новую систему одновременно</h1><p class="article-summary">Самый опасный момент большой миграции — когда новую систему считают готовой только потому, что тесты прошли. Parallel Run позволяет некоторое время сравнивать её с реальной старой системой до окончательного переключения.</p></div></header>
+<article class="article-content">
+<h2>Какую проблему мы решаем</h2>
+<p>Legacy-система часто содержит годы накопленных правил, исключений и поведения, которое нигде полностью не описано. Новая реализация может пройти тесты и всё равно отличаться на редких реальных сценариях.</p>
+<p>Если заметить это только после полного переключения, ошибка уже становится бизнес-инцидентом.</p>
+<h2>Как работает Parallel Run</h2>
+<p>Старая и новая система некоторое время получают одинаковые или сопоставимые входные данные. Результаты новой реализации сравниваются с текущей системой, но не обязательно сразу влияют на клиента.</p>
+<p>Расхождения фиксируются, классифицируются и разбираются. Команда постепенно понимает, где новая система ошибается, а где старая сама содержит историческое поведение, которое больше не нужно переносить.</p>
+<p>Это отличается от Blue-Green Deployment: blue-green помогает переключать версии приложения, а Parallel Run прежде всего проверяет эквивалентность поведения во время миграции.</p>
+<h2>Что получает бизнес</h2>
+<p>Бизнес снижает риск большого cutover. Решение о переключении принимается не только по тестовой среде, а по данным о том, как новая система ведёт себя на реальных сценариях.</p>
+<p>Это особенно важно там, где ошибка миграции может искажать деньги, статусы, отчётность или ключевые операции.</p>
+<p>Компания также получает возможность увидеть скрытые legacy-правила до того, как старую систему выключат окончательно.</p>
+<h2>Что получает команда</h2>
+<p>Команда получает реальную обратную связь о совместимости: какие сценарии совпадают, где есть расхождения и насколько они критичны.</p>
+<p>Можно постепенно улучшать новую систему без постоянного страха, что единственный момент проверки наступит в день переключения.</p>
+<h2>Что получает клиент</h2>
+<p>Клиент получает меньше риска внезапной деградации после миграции. Большая часть ошибок обнаруживается до того, как новая система становится единственным источником результата.</p>
+<h2>Чем мы за это платим</h2>
+<p>Некоторое время компания оплачивает две системы одновременно. Нужно дублировать обработку, сравнивать результаты, хранить диагностику и следить, чтобы параллельный путь не создавал побочных эффектов.</p>
+<p>Особенно сложно с операциями, которые изменяют внешний мир. Нельзя просто дважды отправить платёж, письмо или команду партнёру ради сравнения.</p>
+<h2>Когда не нужно усложнять</h2>
+<p>Для маленькой низкорисковой замены Parallel Run может быть избыточным. Иногда достаточны тесты, canary или постепенное включение функции.</p>
+<p>Он полезнее всего там, где legacy сложен, правила плохо документированы, а цена неправильного cutover высока.</p>
+<h2>Что стоит спросить перед решением</h2>
+<ul><li>Какие результаты старой и новой системы можно сравнивать автоматически?</li><li>Как долго нужно наблюдать редкие сценарии?</li><li>Какие операции нельзя безопасно выполнять дважды?</li><li>Как отличить ошибку новой системы от исторической ошибки legacy?</li><li>По каким критериям мы разрешим окончательное переключение?</li></ul>
+<h2>В итоге</h2>
+<p>Parallel Run покупает уверенность не обещаниями новой системы, а сравнением её поведения с реальностью.</p>
+<p><strong>Для бизнеса это способ заплатить за короткий период двойной эксплуатации, чтобы не платить намного больше за ошибочный день окончательного переключения.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+</body></html>

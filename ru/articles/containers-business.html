@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Что контейнеры дают бизнесу и командам: воспроизводимые среды, более предсказуемые релизы и переносимость — и почему за это приходится платить новым инфраструктурным слоем.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Containers: почему одинаковая упаковка приложения снижает цену изменений">
+  <meta property="og:description" content="Контейнеры не делают систему масштабируемой или надёжной автоматически. Их базовая ценность проще: приложение и его зависимости приезжают в окружение в одной воспроизводимой упаковке.">
+  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/containers-business.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>Containers: почему одинаковая упаковка приложения снижает цену изменений - Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/containers-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/containers-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/containers-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Containers: почему одинаковая упаковка приложения снижает цену изменений","description":"Что контейнеры дают бизнесу и командам: воспроизводимые среды, более предсказуемые релизы и переносимость — и почему за это приходится платить новым инфраструктурным слоем.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/containers-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="ru">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="containers-business.html" aria-current="page">RU</a><a href="../../en/articles/containers-business.html">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#cloud">Cloud и инфраструктура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>Containers: почему одинаковая упаковка приложения снижает цену изменений</h1><p class="article-summary">Контейнеры не делают систему масштабируемой или надёжной автоматически. Их базовая ценность проще: приложение и его зависимости приезжают в окружение в одной воспроизводимой упаковке.</p></div></header>
+<article class="article-content">
+<h2>Какую проблему мы решаем</h2>
+<p>Приложение редко состоит только из собственного кода. Ему нужны библиотеки, runtime, системные зависимости и конкретные настройки. Если каждая среда собирается отдельно, появляются знакомые проблемы: на ноутбуке работает, на тесте иначе, в production третья версия зависимости.</p>
+<p>Чем больше команд и сред, тем дороже становится эта непредсказуемость.</p>
+<h2>Как работают контейнеры</h2>
+<p>Контейнер упаковывает приложение вместе с большей частью его runtime-зависимостей в образ. Один и тот же образ можно продвигать через тестовые и production-среды, меняя конфигурацию снаружи.</p>
+<p>Контейнеры не равны Kubernetes. Контейнер — способ упаковки и запуска. Kubernetes и другие оркестраторы решают уже следующую задачу: как управлять большим количеством контейнеров.</p>
+<h2>Что получает бизнес</h2>
+<p>Бизнес получает более предсказуемый путь от изменения к production. Меньше времени уходит на разницу между окружениями и ручную подготовку серверов.</p>
+<p>Новые среды и сервисы проще воспроизводить, поэтому запуск продукта, региона или временного стенда меньше зависит от уникальной ручной настройки.</p>
+<p>Контейнеры также уменьшают часть инфраструктурной привязки, но не дают автоматической независимости от cloud-провайдера: базы, сети и управляемые сервисы всё равно могут оставаться специфичными.</p>
+<h2>Что получает команда</h2>
+<p>Команда получает единый артефакт релиза, локально воспроизводимую среду и более понятную границу между приложением и инфраструктурой.</p>
+<p>Зависимости описываются явнее, а обновление runtime можно тестировать как изменение образа, а не как ручную операцию на серверах.</p>
+<h2>Что получает клиент</h2>
+<p>Клиент получает косвенный эффект: меньше ошибок из-за различий окружений и более стабильные релизы. Исправления проще доставлять одинаковым способом во все экземпляры приложения.</p>
+<h2>Чем мы за это платим</h2>
+<p>Появляется новый слой: сборка образов, registry, сканирование уязвимостей, управление версиями и runtime контейнеров.</p>
+<p>Плохой Dockerfile или небезопасный базовый образ просто стандартизирует проблему. А если поверх контейнеров слишком рано добавить сложную оркестрацию, инфраструктурная цена может превысить пользу.</p>
+<h2>Когда не нужно усложнять</h2>
+<p>Для одного простого приложения на стабильной платформе контейнеризация может не окупить переход. Особенно если существующий deployment уже воспроизводим и редко меняется.</p>
+<p>Ценность растёт вместе с количеством сервисов, сред, команд и частотой релизов.</p>
+<h2>Что стоит спросить перед решением</h2>
+<ul><li>Какие проблемы окружений мы реально пытаемся убрать?</li><li>Нужен ли нам только контейнерный формат или уже оркестратор?</li><li>Кто отвечает за базовые образы и их обновление?</li><li>Как будем сканировать и подписывать образы?</li><li>Какая часть portability действительно важна бизнесу?</li></ul>
+<h2>В итоге</h2>
+<p>Контейнеры полезны не потому, что они современнее виртуальных машин. Они уменьшают число уникальных способов собрать и запустить одно и то же приложение.</p>
+<p><strong>Для бизнеса контейнер — это прежде всего более дешёвая воспроизводимость изменений, а уже потом основа для масштабной cloud-платформы.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+</body></html>

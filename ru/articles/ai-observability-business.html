@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Как наблюдать AI-продукт в production через качество, стоимость, latency, retrieval, tool calls и guardrails, а не только через HTTP-ошибки и uptime.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Observability: почему для AI недостаточно знать, что запрос завершился успешно">
+  <meta property="og:description" content="Обычный сервис может вернуть 200 OK и действительно выполнить задачу. AI тоже может вернуть 200 OK — и при этом дать бесполезный, дорогой или рискованный ответ. Поэтому production-наблюдаемость для AI должна видеть больше, чем технический успех запроса.">
+  <meta property="og:url" content="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>AI Observability: почему для AI недостаточно знать, что запрос завершился успешно - Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Observability: почему для AI недостаточно знать, что запрос завершился успешно","description":"Как наблюдать AI-продукт в production через качество, стоимость, latency, retrieval, tool calls и guardrails, а не только через HTTP-ошибки и uptime.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/ru/articles/ai-observability-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="ru">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header"><a class="brand" href="../../index.html" aria-label="Антон Куракин"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a><nav class="site-nav" aria-label="Основная навигация"><a href="../../index.html">Главная</a><a href="../../projects.html">Проекты</a><a href="../../experience.html">О себе</a><a href="index.html">Статьи</a><a href="../architecture/index.html">Архитектура</a><a href="../../index.html#contact">Контакты</a></nav><div class="lang-switcher" aria-label="Выбор языка"><a href="ai-observability-business.html" aria-current="page">RU</a><a href="../../en/articles/ai-observability-business.html">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI-архитектура</a><p class="article-kicker"><span>5 мин чтения</span></p><h1>AI Observability: почему для AI недостаточно знать, что запрос завершился успешно</h1><p class="article-summary">Обычный сервис может вернуть 200 OK и действительно выполнить задачу. AI тоже может вернуть 200 OK — и при этом дать бесполезный, дорогой или рискованный ответ. Поэтому production-наблюдаемость для AI должна видеть больше, чем технический успех запроса.</p></div></header>
+<article class="article-content">
+<h2>Какую проблему мы решаем</h2>
+<p>В обычной системе технические метрики часто хорошо показывают проблему: ошибки выросли, latency ухудшилась, база недоступна. В AI-продукте запрос может технически завершиться успешно, но ответ стать хуже после смены модели, prompt, retrieval или данных.</p>
+<p>Если измерять только uptime, такая деградация останется невидимой до жалоб клиентов.</p>
+<h2>Как работает AI Observability</h2>
+<p>AI Observability связывает технический запрос с контекстом его выполнения: какая модель и версия использовались, какой prompt был собран, какие документы вернул retrieval, какие инструменты вызвал агент, сколько токенов и времени потрачено, сработали ли guardrails и какой feedback пришёл после ответа.</p>
+<p>Важно не превращать telemetry в утечку данных. Чувствительные prompts, документы и персональные данные требуют фильтрации, маскирования и ограниченного доступа.</p>
+<p>AI Observability отличается от AI Evaluation: evals проверяют качество на подготовленных наборах и экспериментах, observability показывает, что реально происходит с production-трафиком.</p>
+<h2>Что получает бизнес</h2>
+<p>Бизнес получает видимость качества вместе со стоимостью. Можно увидеть, что новая модель стала немного лучше, но вдвое дороже для конкретного сценария — или что расходы выросли из-за неожиданно длинного контекста.</p>
+<p>Быстрее обнаруживаются продуктовые регрессии, которые не выглядят как инфраструктурная авария: рост отказов guardrail, ухудшение retrieval, увеличение fallback или падение пользовательской оценки.</p>
+<p>Это позволяет управлять AI как операционным продуктом, а не как чёрным ящиком поставщика.</p>
+<h2>Что получает команда</h2>
+<p>Команда получает возможность разбирать конкретный путь ответа: prompt, retrieval, model routing, tool calls, retries и итоговый результат.</p>
+<p>Это уменьшает количество споров в стиле «модель иногда странно отвечает» и превращает проблему в набор наблюдаемых сигналов, которые можно сравнивать между версиями.</p>
+<h2>Что получает клиент</h2>
+<p>Клиент получает более стабильное качество. Команда быстрее замечает тихие регрессии и может откатить prompt, модель или retrieval-настройку до того, как проблема станет массовой.</p>
+<h2>Чем мы за это платим</h2>
+<p>Telemetry для AI быстро становится объёмной и дорогой. Трейсы могут содержать prompts, документы, tool calls и ответы моделей, поэтому хранение и доступ требуют отдельной политики безопасности.</p>
+<p>Есть риск собирать всё подряд и утонуть в данных. Наблюдаемость полезна только когда сигналы связаны с конкретными решениями и бизнес-метриками.</p>
+<h2>Когда не нужно усложнять</h2>
+<p>Для небольшого внутреннего эксперимента достаточно базовых логов, стоимости и ручного feedback. Полноценная AI-observability платформа может быть преждевременной.</p>
+<p>Она становится важной, когда AI участвует в клиентском процессе, использует несколько моделей или инструментов и его качество влияет на деньги, риск или доверие.</p>
+<h2>Что стоит спросить перед решением</h2>
+<ul><li>Какие признаки означают, что AI-сценарий реально стал хуже?</li><li>Нужно ли хранить полный prompt или достаточно безопасных атрибутов?</li><li>Как связать стоимость запроса с бизнес-результатом?</li><li>Какие изменения модели, prompt и retrieval нужно уметь сравнивать?</li><li>Как быстро мы заметим рост fallback, guardrail или плохого feedback?</li></ul>
+<h2>В итоге</h2>
+<p>Для AI технически успешный запрос — только начало ответа на вопрос о качестве системы.</p>
+<p><strong>Для бизнеса AI Observability означает видеть не только доступность модели, но и то, какую ценность, стоимость и риск она реально создаёт в production.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../architecture/index.html">ИТ-архитектура для всех</a></footer>
+</body></html>

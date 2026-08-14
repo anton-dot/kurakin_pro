@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How to observe an AI product in production through quality, cost, latency, retrieval, tool calls, and guardrails instead of only HTTP errors and uptime.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Observability: Why a Successful Request Is Not Enough for AI">
+  <meta property="og:description" content="A conventional service can return 200 OK and genuinely complete the task. AI can return 200 OK and still produce a useless, expensive, or risky answer. Production observability for AI must see more than technical request success.">
+  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>AI Observability: Why a Successful Request Is Not Enough for AI - Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/ai-observability-business.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/ai-observability-business.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Observability: Why a Successful Request Is Not Enough for AI","description":"How to observe an AI product in production through quality, cost, latency, retrieval, tool calls, and guardrails instead of only HTTP errors and uptime.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/ai-observability-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/ai-observability-business.html">RU</a><a href="ai-observability-business.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>AI Observability: Why a Successful Request Is Not Enough for AI</h1><p class="article-summary">A conventional service can return 200 OK and genuinely complete the task. AI can return 200 OK and still produce a useless, expensive, or risky answer. Production observability for AI must see more than technical request success.</p></div></header>
+<article class="article-content">
+<h2>What problem are we solving?</h2>
+<p>In conventional systems, technical metrics often reveal the problem clearly: errors rise, latency worsens, or a database is unavailable. In an AI product, a request can complete successfully while answer quality degrades after a model, prompt, retrieval, or data change.</p>
+<p>If we observe only uptime, that degradation stays invisible until customers complain.</p>
+<h2>How AI Observability works</h2>
+<p>AI Observability connects a technical request with execution context: which model and version ran, which prompt was assembled, what retrieval returned, which tools an agent called, how many tokens and how much time were spent, whether guardrails triggered, and what feedback arrived after the answer.</p>
+<p>Telemetry must not become a data leak. Sensitive prompts, documents, and personal data need filtering, masking, retention rules, and restricted access.</p>
+<p>AI Observability is different from AI Evaluation: evals test quality on prepared datasets and experiments, while observability shows what is happening on real production traffic.</p>
+<h2>What the business gets</h2>
+<p>The business sees quality together with cost. It becomes possible to notice that a new model is slightly better but far more expensive for a specific scenario, or that spend increased because context became unexpectedly long.</p>
+<p>Product regressions that do not look like infrastructure outages become visible sooner: more guardrail blocks, worse retrieval, rising fallback, or falling user feedback.</p>
+<p>That makes AI an operational product that can be managed rather than a black box provided by a vendor.</p>
+<h2>What the team gets</h2>
+<p>The team can inspect the actual path of an answer: prompt, retrieval, model routing, tool calls, retries, and final result.</p>
+<p>That replaces vague debates like 'the model sometimes answers strangely' with observable signals that can be compared across versions.</p>
+<h2>What the customer gets</h2>
+<p>Customers get more stable quality. The team can detect quiet regressions and roll back a prompt, model, or retrieval change before the problem becomes widespread.</p>
+<h2>What do we pay for it?</h2>
+<p>AI telemetry can become large and expensive quickly. Traces may contain prompts, documents, tool calls, and model outputs, so storage and access need dedicated security policies.</p>
+<p>There is also a risk of collecting everything and learning nothing. Observability is useful only when signals connect to concrete decisions and business outcomes.</p>
+<h2>When not to add the complexity</h2>
+<p>For a small internal experiment, basic logs, cost tracking, and manual feedback may be enough. A full AI observability platform can be premature.</p>
+<p>It becomes important when AI participates in a customer process, uses multiple models or tools, and its quality affects money, risk, or trust.</p>
+<h2>What should we ask before deciding?</h2>
+<ul><li>Which signals mean the AI scenario actually became worse?</li><li>Do we need full prompts or only safe attributes?</li><li>How will we connect request cost with business outcome?</li><li>Which model, prompt, and retrieval changes must be comparable?</li><li>How quickly will we notice rising fallback, guardrail blocks, or poor feedback?</li></ul>
+<h2>In the end</h2>
+<p>For AI, a technically successful request is only the beginning of understanding system quality.</p>
+<p><strong>For the business, AI Observability means seeing not only model availability, but the value, cost, and risk it actually creates in production.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body></html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Parallel Run reduces legacy migration risk by comparing old and new systems on real scenarios and what the period of double operation costs.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Parallel Run: Why Run the Old and New Systems at the Same Time for a While">
+  <meta property="og:description" content="The riskiest moment in a large migration is when the new system is considered ready because tests passed. Parallel Run keeps old and new running together long enough to compare them before final cutover.">
+  <meta property="og:url" content="https://kurakin-anton.ru/en/articles/parallel-run-migration.html">
+  <meta property="og:image" content="https://kurakin-anton.ru/assets/img/article-notes.png">
+  <meta property="article:published_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-08-12">
+  <title>Parallel Run: Why Run the Old and New Systems at the Same Time for a While - Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin-anton.ru/en/articles/parallel-run-migration.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin-anton.ru/ru/articles/parallel-run-migration.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin-anton.ru/en/articles/parallel-run-migration.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Parallel Run: Why Run the Old and New Systems at the Same Time for a While","description":"How Parallel Run reduces legacy migration risk by comparing old and new systems on real scenarios and what the period of double operation costs.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin-anton.ru/en/articles/parallel-run-migration.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin-anton.ru/"},"image":"https://kurakin-anton.ru/assets/img/article-notes.png"}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../../en/index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../../en/index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html">Architecture</a><a href="../../en/index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/parallel-run-migration.html">RU</a><a href="parallel-run-migration.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy & migration</a><p class="article-kicker"><span>5 min read</span></p><h1>Parallel Run: Why Run the Old and New Systems at the Same Time for a While</h1><p class="article-summary">The riskiest moment in a large migration is when the new system is considered ready because tests passed. Parallel Run keeps old and new running together long enough to compare them before final cutover.</p></div></header>
+<article class="article-content">
+<h2>What problem are we solving?</h2>
+<p>Legacy systems often contain years of accumulated rules, exceptions, and behavior that is not fully documented anywhere. A new implementation can pass tests and still differ on rare real-world scenarios.</p>
+<p>If those differences appear only after full cutover, the migration defect has already become a business incident.</p>
+<h2>How Parallel Run works</h2>
+<p>The old and new systems receive the same or comparable inputs for a period of time. The new implementation's outputs are compared with the current system, without necessarily affecting the customer yet.</p>
+<p>Differences are recorded, classified, and investigated. The team learns where the new system is wrong and where the old system contains historical behavior that should not be copied forward.</p>
+<p>This is different from Blue-Green Deployment: blue-green helps switch application versions, while Parallel Run primarily validates behavioral equivalence during migration.</p>
+<h2>What the business gets</h2>
+<p>The business reduces big-cutover risk. The decision to switch is based not only on a test environment but on evidence from real scenarios.</p>
+<p>That matters especially where migration errors can affect money, status, reporting, or critical operations.</p>
+<p>The company also discovers hidden legacy rules before the old system is permanently removed.</p>
+<h2>What the team gets</h2>
+<p>The team gets real compatibility feedback: which scenarios match, where results differ, and how serious those differences are.</p>
+<p>The new system can improve gradually instead of putting all confidence into one cutover day.</p>
+<h2>What the customer gets</h2>
+<p>Customers face less risk of sudden degradation after migration because many discrepancies are found before the new system becomes the only source of truth.</p>
+<h2>What do we pay for it?</h2>
+<p>For a while, the company pays for two systems. Processing is duplicated, results must be compared, diagnostics stored, and the parallel path must not create side effects.</p>
+<p>Operations that change the outside world are especially difficult. You cannot send a payment, email, or partner command twice just for comparison.</p>
+<h2>When not to add the complexity</h2>
+<p>For a small low-risk replacement, Parallel Run can be excessive. Tests, canary release, or gradual feature enablement may be enough.</p>
+<p>It is most useful when legacy is complex, rules are poorly documented, and a bad cutover is expensive.</p>
+<h2>What should we ask before deciding?</h2>
+<ul><li>Which outputs can be compared automatically?</li><li>How long do we need to observe rare scenarios?</li><li>Which operations cannot safely run twice?</li><li>How will we distinguish a defect in the new system from a historical defect in legacy?</li><li>What evidence will allow final cutover?</li></ul>
+<h2>In the end</h2>
+<p>Parallel Run buys confidence by comparing new-system behavior with reality rather than trusting readiness claims.</p>
+<p><strong>For the business, it is a way to pay for a short period of double operation instead of paying much more for a failed final cutover.</strong></p>
+</article></main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body></html>
