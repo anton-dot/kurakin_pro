@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Technical Debt Calculator</title>
+  <desc id="desc">Abstract calculator and debt gauge icon</desc>
+  <rect width="128" height="128" rx="24" fill="#071426"/>
+  <rect x="28" y="24" width="72" height="80" rx="10" fill="none" stroke="#8fe6e2" stroke-width="6"/>
+  <path d="M42 42h44M42 58h20" stroke="#8fe6e2" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="48" cy="78" r="6" fill="#c98128"/>
+  <circle cx="66" cy="78" r="6" fill="#c98128"/>
+  <circle cx="84" cy="78" r="6" fill="#c98128"/>
+  <path d="M42 94h44" stroke="#9b4d36" stroke-width="6" stroke-linecap="round"/>
+</svg>
