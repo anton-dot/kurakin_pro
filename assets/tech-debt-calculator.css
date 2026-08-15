@@ -108,6 +108,56 @@
   margin: 24px 0 0;
 }
 
+.debt-share {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  margin-top: 28px;
+  padding: 20px;
+}
+
+.debt-share-title {
+  color: #8fe6e2;
+  font-size: 0.78rem;
+  font-weight: 850;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.debt-share-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.96rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.debt-share-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.button.debt-share-copy {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #071426;
+  cursor: pointer;
+  min-height: 42px;
+  padding: 9px 14px;
+}
+
+.button.debt-share-copy:hover {
+  background: #e8f7f5;
+  border-color: #e8f7f5;
+}
+
+.debt-copy-status {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.82rem;
+}
+
 .debt-calculator-note {
   border-left: 3px solid var(--amber);
   margin: 0;
