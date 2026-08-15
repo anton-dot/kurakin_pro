@@ -18,7 +18,7 @@
   <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/tech-debt-calculator.html">
   <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/styles.css?v=20260815-1">
-  <link rel="stylesheet" href="../assets/tech-debt-calculator.css?v=20260815-1">
+  <link rel="stylesheet" href="../assets/tech-debt-calculator.css?v=20260815-2">
 </head>
 <body data-page="project-detail" data-lang="ru">
   <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -63,6 +63,14 @@
             <div class="debt-result-row"><span>Задержки разработки</span><strong data-debt-delivery>$0</strong></div>
             <div class="debt-result-row"><span>В среднем за месяц</span><strong data-debt-monthly>$0</strong></div>
           </div>
+          <div class="debt-share">
+            <p class="debt-share-title">Готовый текст для отправки</p>
+            <p class="debt-share-text" data-debt-share-summary></p>
+            <div class="debt-share-actions">
+              <button class="button debt-share-copy" type="button" data-debt-copy>Скопировать текст</button>
+              <span class="debt-copy-status" data-debt-copy-status aria-live="polite"></span>
+            </div>
+          </div>
           <p class="debt-result-method">Модель: годовая стоимость команды × оценка потери продуктивности плюс явно указанные часы на инциденты и задержки. Для стоимости часа используется 2 080 рабочих часов в год.</p>
         </aside>
       </div>
@@ -76,6 +84,6 @@
     </section>
   </main>
   <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
-  <script src="../assets/tech-debt-calculator.js"></script>
+  <script src="../assets/tech-debt-calculator.js?v=20260815-2"></script>
 </body>
 </html>
