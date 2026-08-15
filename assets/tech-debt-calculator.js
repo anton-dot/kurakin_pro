@@ -41,7 +41,7 @@
     const deliveryHoursPerMonth = readNumber(fields.deliveryHoursPerMonth);
 
     const annualTeamCost = engineers * monthlyCost * 12;
-    const hourlyLoadedCost = engineers > 0 ? (monthlyCost * 12) / 2080 : 0;
+    const hourlyLoadedCost = (monthlyCost * 12) / 2080;
 
     const productivityCost = annualTeamCost * (debtPercent / 100);
     const incidentCost = incidentsPerMonth * hoursPerIncident * 12 * hourlyLoadedCost;
