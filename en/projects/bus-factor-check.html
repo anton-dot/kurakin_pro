@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free Bus Factor Check: map critical knowledge, identify single-owner risks, calculate a bus factor proxy and redundancy score, and copy a management summary.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/bus-factor-check.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/bus-factor-check.html">
+  <meta property="og:title" content="Bus Factor Check">
+  <meta property="og:description" content="Find critical knowledge that depends on one person and prioritize where a second independent owner is needed.">
+  <title>Bus Factor Check — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/bus-factor-check.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/bus-factor-check.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/bus-factor-check.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/bus-factor-check.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bus Factor Check","url":"https://kurakin.pro/en/projects/bus-factor-check.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based key-person dependency check using critical knowledge areas, a bus factor proxy, and a redundancy score.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/bus-factor-check.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/bus-factor-check.html">RU</a><a href="bus-factor-check.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/bus-factor-check.svg" alt="" width="112" height="112"><h1>Bus Factor Check</h1></div>
+        <p class="project-detail-lead">A quick map of key-person risk: which critical knowledge really lives in one person, and where the team would stop first.</p>
+      </div>
+    </section>
+
+    <section class="bf-section" aria-labelledby="bf-title">
+      <div class="bf-shell">
+        <div class="bf-panel" data-bf-tool>
+          <div class="bf-intro">
+            <p class="eyebrow">Free key-person dependency check</p>
+            <h2 id="bf-title">What breaks if one person is unavailable tomorrow?</h2>
+            <p>Add critical knowledge areas and enter how many people can independently change, recover, or support each one. The tool uses the minimum coverage as a simple bus factor proxy.</p>
+          </div>
+
+          <div class="bf-context">
+            <label for="bf-team-name">Team, system, or product</label>
+            <input id="bf-team-name" type="text" placeholder="For example: Core Platform" autocomplete="off" data-bf-team-name>
+            <small>Optional. The name is used only in the ready-to-share summary.</small>
+          </div>
+
+          <div class="bf-area-head"><span>Critical knowledge area</span><span>Independent owners</span><span></span></div>
+          <div class="bf-area-list" data-bf-areas></div>
+          <button class="button bf-add" type="button" data-bf-add>Add area</button>
+        </div>
+
+        <aside class="bf-result" aria-live="polite">
+          <p class="bf-kicker">Bus factor proxy</p>
+          <p class="bf-score" data-bf-score>—</p>
+          <p class="bf-status" data-bf-status></p>
+
+          <div class="bf-metrics" data-bf-metrics></div>
+
+          <div class="bf-risk">
+            <p class="bf-risk-title">Priority risks</p>
+            <ul class="bf-risk-list" data-bf-risks></ul>
+          </div>
+
+          <div class="bf-summary">
+            <p class="bf-summary-title">Ready-to-share summary</p>
+            <p class="bf-summary-text" data-bf-summary></p>
+            <div class="bf-summary-actions"><button class="button bf-copy" type="button" data-bf-copy>Copy summary</button><span class="bf-copy-status" data-bf-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="bf-method">The bus factor here is intentionally a simple proxy: the minimum number of people able to cover any listed critical area independently. Real organizational risk also depends on knowledge overlap, documentation quality, and how quickly context can be transferred.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">How to use it</p><h2>Do not count people. Find fragile knowledge.</h2></div>
+        <div class="project-intro-copy"><p>Bus factor is useful less as a team KPI and more as a way to find areas where one vacation, resignation, or overloaded person becomes an operational risk.</p><p>The first practical move is usually simple: give a second person enough ownership to complete the full loop independently — change, release, diagnose, and recover the critical component.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/bus-factor-check.js?v=20260817-1"></script>
+</body>
+</html>
