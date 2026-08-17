@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A free AI ROI calculator for estimating the real economic return of workplace AI, including adoption, license cost, value realization, and rework.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/ai-roi-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/ai-roi-calculator.html">
+  <meta property="og:title" content="AI ROI Calculator">
+  <meta property="og:description" content="Estimate ROI, net benefit, and payback for workplace AI with realistic adjustments for adoption and output quality.">
+  <title>AI ROI Calculator — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/ai-roi-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/ai-roi-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/ai-roi-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/ai-roi-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"AI ROI Calculator","url":"https://kurakin.pro/en/projects/ai-roi-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based calculator for estimating workplace AI ROI using adoption, realized value, license cost, implementation cost, and ongoing operations.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/ai-roi-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/ai-roi-calculator.html">RU</a><a href="ai-roi-calculator.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/ai-roi-calculator.svg" alt="" width="112" height="112"><h1>AI ROI Calculator</h1></div>
+        <p class="project-detail-lead">Estimate the economic value of workplace AI without assuming that every “saved” minute automatically becomes money.</p>
+      </div>
+    </section>
+
+    <section class="ai-roi-section" aria-labelledby="calculator-title">
+      <div class="ai-roi-shell">
+        <form class="ai-roi-form" data-ai-roi-calculator>
+          <div><p class="eyebrow">Free calculator</p><h2 id="calculator-title">Calculate AI ROI</h2><p>The model separates potential time savings from value that is actually realized. This helps avoid overstating the impact of low adoption or AI output that needs heavy review and rework.</p></div>
+
+          <div class="ai-roi-field"><label for="currency">Currency</label><select id="currency" aria-describedby="currency-hint"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select><span class="ai-roi-hint" id="currency-hint">Currency for employee cost, licenses, and implementation. Exchange rates are not converted automatically.</span></div>
+
+          <div class="ai-roi-field"><label for="ai-users">Employees with paid AI access</label><input id="ai-users" type="number" min="0" step="1" value="200" inputmode="numeric" aria-describedby="ai-users-hint"><span class="ai-roi-hint" id="ai-users-hint">The number of paid users or seats the company plans to maintain.</span></div>
+
+          <div class="ai-roi-field"><label for="monthly-employee-cost">Average loaded employee cost / month</label><input id="monthly-employee-cost" type="number" min="0" step="100" value="7000" inputmode="decimal" aria-describedby="monthly-employee-cost-hint"><span class="ai-roi-hint" id="monthly-employee-cost-hint">Salary plus payroll taxes, benefits, equipment, and other direct employment costs. Use an average for the population being evaluated.</span></div>
+
+          <div class="ai-roi-field"><label for="adoption-rate">Real adoption (%)</label><input id="adoption-rate" type="number" min="0" max="100" step="1" value="60" inputmode="decimal" aria-describedby="adoption-rate-hint"><span class="ai-roi-hint" id="adoption-rate-hint">The share of licensed users who actually use AI regularly in their work, rather than merely having access.</span></div>
+
+          <div class="ai-roi-field"><label for="hours-saved-week">Time saved per active user / week, hours</label><input id="hours-saved-week" type="number" min="0" step="0.1" value="1.5" inputmode="decimal" aria-describedby="hours-saved-week-hint"><span class="ai-roi-hint" id="hours-saved-week-hint">Estimate net time saved after prompting, reading the output, and normal review. A conservative estimate is usually more useful.</span></div>
+
+          <div class="ai-roi-field"><label for="realization-rate">Value realization from saved time (%)</label><input id="realization-rate" type="number" min="0" max="100" step="1" value="70" inputmode="decimal" aria-describedby="realization-rate-hint"><span class="ai-roi-hint" id="realization-rate-hint">The share of freed time that becomes useful work: more output, faster delivery, or reduced resource need. 100% is usually too optimistic.</span></div>
+
+          <div class="ai-roi-field"><label for="rework-rate">Loss to AI review and rework (%)</label><input id="rework-rate" type="number" min="0" max="100" step="1" value="15" inputmode="decimal" aria-describedby="rework-rate-hint"><span class="ai-roi-hint" id="rework-rate-hint">The share of potential value lost to errors, hallucinations, extra validation, repeated work, or fixing low-quality output.</span></div>
+
+          <div class="ai-roi-field"><label for="license-cost">AI license cost / user / month</label><input id="license-cost" type="number" min="0" step="1" value="30" inputmode="decimal" aria-describedby="license-cost-hint"><span class="ai-roi-hint" id="license-cost-hint">The full recurring cost of one paid seat. If several AI tools are used, enter their combined per-user cost.</span></div>
+
+          <div class="ai-roi-field"><label for="implementation-cost">Implementation and training, one-time</label><input id="implementation-cost" type="number" min="0" step="1000" value="20000" inputmode="decimal" aria-describedby="implementation-cost-hint"><span class="ai-roi-hint" id="implementation-cost-hint">Setup, training, policy work, integrations, pilots, and other one-time launch costs.</span></div>
+
+          <div class="ai-roi-field"><label for="ongoing-cost">Operations, governance, and support / month</label><input id="ongoing-cost" type="number" min="0" step="500" value="3000" inputmode="decimal" aria-describedby="ongoing-cost-hint"><span class="ai-roi-hint" id="ongoing-cost-hint">Ongoing internal effort for administration, security/compliance, onboarding, support, quality monitoring, and AI governance.</span></div>
+
+          <p class="ai-roi-note">This estimates the value of freed time, not guaranteed payroll savings. If people simply perform the same amount of work faster, financial value is realized only when that time is converted into additional useful output.</p>
+        </form>
+
+        <aside class="ai-roi-result" aria-live="polite">
+          <p class="ai-roi-result-kicker">First-year ROI</p>
+          <p class="ai-roi-result-total" data-ai-roi>—</p>
+          <p class="ai-roi-result-caption">After licenses, implementation, ongoing operations, and adjustments for actual usage.</p>
+
+          <div class="ai-roi-metrics">
+            <div class="ai-roi-row"><span>First-year net benefit</span><strong data-ai-net-benefit>—</strong></div>
+            <div class="ai-roi-row"><span>Realized annual value</span><strong data-ai-realized-value>—</strong></div>
+            <div class="ai-roi-row"><span>Total first-year cost</span><strong data-ai-first-year-cost>—</strong></div>
+            <div class="ai-roi-row"><span>Recurring annual cost</span><strong data-ai-recurring-cost>—</strong></div>
+            <div class="ai-roi-row"><span>Payback period</span><strong data-ai-payback>—</strong></div>
+            <div class="ai-roi-row"><span>Time-saving break-even</span><strong data-ai-break-even>—</strong></div>
+            <div class="ai-roi-row"><span>Active users</span><strong data-ai-active-users>—</strong></div>
+          </div>
+
+          <div class="ai-roi-summary">
+            <p class="ai-roi-summary-title">Ready-to-send summary</p>
+            <p class="ai-roi-summary-text" data-ai-roi-summary></p>
+            <div class="ai-roi-summary-actions"><button class="button ai-roi-copy" type="button" data-ai-roi-copy>Copy summary</button><span class="ai-roi-copy-status" data-ai-roi-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="ai-roi-method">Model: active users = paid seats × adoption. Potential time value is reduced by the value-realization rate and losses from review/rework. First-year ROI compares net benefit with all first-year costs. Hourly loaded cost uses 2,080 working hours per year.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Why this exists</p><h2>AI can save time and still have weak ROI</h2></div>
+        <div class="project-intro-copy"><p>A license does not create value by itself. People need to use the tool, AI needs to save more time than it consumes, and the freed capacity needs to become useful output.</p><p>That is why the calculator shows not only ROI but also the break-even point in minutes per active user per week. That number is often easier to validate in a pilot than an abstract claim about “productivity improvement.”</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/ai-roi-calculator.js?v=20260817-1"></script>
+</body>
+</html>
