@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Incident Cost Calculator</title>
+  <desc id="desc">Warning pulse and cost indicator</desc>
+  <rect width="128" height="128" rx="24" fill="#071426"/>
+  <path d="M24 75h18l9-26 15 49 12-35 8 12h18" fill="none" stroke="#8fe6e2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="95" cy="37" r="16" fill="#c98128"/>
+  <path d="M95 28v10M95 44h.01" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+</svg>

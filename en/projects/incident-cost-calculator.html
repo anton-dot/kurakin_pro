@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A free production incident cost calculator covering lost revenue, engineering and support time, customer compensation, recovery costs, and annual impact.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/incident-cost-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/incident-cost-calculator.html">
+  <meta property="og:title" content="Incident Cost Calculator">
+  <meta property="og:description" content="Estimate the real business cost of one production incident and the annual impact of recurring failures.">
+  <title>Incident Cost Calculator — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/incident-cost-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/incident-cost-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/incident-cost-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/incident-cost-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Incident Cost Calculator","url":"https://kurakin.pro/en/projects/incident-cost-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based calculator for the full business cost of a production incident including lost revenue, team time, compensation, and recovery costs.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/incident-cost-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/incident-cost-calculator.html">RU</a><a href="incident-cost-calculator.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/incident-cost-calculator.svg" alt="" width="112" height="112"><h1>Incident Cost Calculator</h1></div>
+        <p class="project-detail-lead">Estimate what a production incident really costs — not only engineering time, but lost revenue, customer support, compensation, and direct recovery spend.</p>
+      </div>
+    </section>
+
+    <section class="incident-section" aria-labelledby="calculator-title">
+      <div class="incident-shell">
+        <form class="incident-form" data-incident-calculator>
+          <div><p class="eyebrow">Free calculator</p><h2 id="calculator-title">Cost of one incident</h2><p>Enter what you can estimate. Unknown or irrelevant cost components can stay at zero.</p></div>
+
+          <div class="incident-grid">
+            <div class="incident-field incident-field--full"><label for="incident-name">Incident or scenario name</label><input id="incident-name" type="text" placeholder="For example: checkout unavailable" aria-describedby="incident-name-hint"><span class="incident-hint" id="incident-name-hint">Optional. The name will be included in the ready-to-share summary.</span></div>
+            <div class="incident-field"><label for="currency">Currency</label><select id="currency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select></div>
+            <div class="incident-field"><label for="incidents-year">Similar incidents / year</label><input id="incidents-year" type="number" min="0" step="1" value="6" aria-describedby="incidents-year-hint"><span class="incident-hint" id="incidents-year-hint">Used only to calculate expected annual impact.</span></div>
+          </div>
+
+          <fieldset class="incident-group">
+            <legend>Revenue and customer impact</legend>
+            <div class="incident-grid">
+              <div class="incident-field"><label for="duration-hours">Incident duration, hours</label><input id="duration-hours" type="number" min="0" step="0.1" value="2" aria-describedby="duration-hint"><span class="incident-hint" id="duration-hint">The period of actual business degradation or unavailability.</span></div>
+              <div class="incident-field"><label for="revenue-per-hour">Normal revenue / hour</label><input id="revenue-per-hour" type="number" min="0" step="100" value="25000" aria-describedby="revenue-hint"><span class="incident-hint" id="revenue-hint">Average hourly revenue for the relevant period. Enter 0 if the incident does not directly affect revenue.</span></div>
+              <div class="incident-field"><label for="revenue-impact-percent">Revenue lost during incident, %</label><input id="revenue-impact-percent" type="number" min="0" max="100" step="1" value="70" aria-describedby="impact-hint"><span class="incident-hint" id="impact-hint">Use 100% for a complete stop in sales, less for partial degradation or fallback paths.</span></div>
+              <div class="incident-field"><label for="compensation-cost">SLA credits and customer compensation</label><input id="compensation-cost" type="number" min="0" step="100" value="15000" aria-describedby="compensation-hint"><span class="incident-hint" id="compensation-hint">Refunds, service credits, discounts, and other direct customer compensation caused by the incident.</span></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="incident-group">
+            <legend>People cost</legend>
+            <div class="incident-grid">
+              <div class="incident-field"><label for="responding-engineers">Engineers in the response</label><input id="responding-engineers" type="number" min="0" step="1" value="8" aria-describedby="engineers-hint"><span class="incident-hint" id="engineers-hint">People actively involved in diagnosis, mitigation, and recovery.</span></div>
+              <div class="incident-field"><label for="response-hours">Response hours per engineer</label><input id="response-hours" type="number" min="0" step="0.5" value="3" aria-describedby="response-hint"><span class="incident-hint" id="response-hint">This can be longer than incident duration if people join early or keep working after service recovery.</span></div>
+              <div class="incident-field"><label for="engineer-monthly-cost">Average loaded engineer cost / month</label><input id="engineer-monthly-cost" type="number" min="0" step="100" value="9000" aria-describedby="engineer-cost-hint"><span class="incident-hint" id="engineer-cost-hint">Salary plus payroll taxes, benefits, equipment, and other direct employment cost.</span></div>
+              <div class="incident-field"><label for="followup-hours">Engineering follow-up hours</label><input id="followup-hours" type="number" min="0" step="1" value="40" aria-describedby="followup-hint"><span class="incident-hint" id="followup-hint">Postmortem, fixes, tests, cleanup, verification, and preventive actions.</span></div>
+              <div class="incident-field"><label for="support-hours">Support / operations hours</label><input id="support-hours" type="number" min="0" step="1" value="20" aria-describedby="support-hours-hint"><span class="incident-hint" id="support-hours-hint">Total time from support, operations, customer success, and other teams dealing with the consequences.</span></div>
+              <div class="incident-field"><label for="support-monthly-cost">Average loaded support / ops cost / month</label><input id="support-monthly-cost" type="number" min="0" step="100" value="6000" aria-describedby="support-cost-hint"><span class="incident-hint" id="support-cost-hint">Used to translate support and operations hours into money.</span></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="incident-group">
+            <legend>Direct recovery spend</legend>
+            <div class="incident-grid">
+              <div class="incident-field"><label for="external-cost">External vendors and emergency services</label><input id="external-cost" type="number" min="0" step="100" value="5000" aria-describedby="external-hint"><span class="incident-hint" id="external-hint">Consultants, vendor support, emergency capacity, and other external recovery spend.</span></div>
+              <div class="incident-field"><label for="other-cost">Other direct cost</label><input id="other-cost" type="number" min="0" step="100" value="0" aria-describedby="other-hint"><span class="incident-hint" id="other-hint">Optional: communications, legal expense, extra services, or other measurable incident cost.</span></div>
+            </div>
+          </fieldset>
+
+          <p class="incident-note">Reputation damage, churn, and long-term trust loss are difficult to estimate reliably, so the calculator does not add them automatically. If you have a defensible monetary estimate, include it under “Other direct cost”.</p>
+        </form>
+
+        <aside class="incident-result" aria-live="polite">
+          <p class="incident-kicker">Cost of one incident</p>
+          <p class="incident-total" data-incident-total>—</p>
+          <p class="incident-caption">A directional business estimate, not an accounting statement.</p>
+
+          <div class="incident-breakdown">
+            <div class="incident-row"><span>Lost revenue</span><strong data-incident-revenue>—</strong></div>
+            <div class="incident-row"><span>People cost</span><strong data-incident-people>—</strong></div>
+            <div class="incident-row"><span>Compensation and direct recovery</span><strong data-incident-direct>—</strong></div>
+          </div>
+
+          <div class="incident-highlight-grid">
+            <div class="incident-highlight"><span>Cost per incident hour</span><strong data-incident-per-hour>—</strong></div>
+            <div class="incident-highlight"><span>Expected annual impact</span><strong data-incident-annual>—</strong></div>
+          </div>
+
+          <div class="incident-summary">
+            <p class="incident-summary-title">Ready-to-share summary</p>
+            <p class="incident-summary-text" data-incident-summary></p>
+            <div class="incident-summary-actions"><button class="button incident-copy" type="button" data-incident-copy>Copy summary</button><span class="incident-copy-status" data-incident-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="incident-method">Model: lost revenue + response/follow-up/support labor + customer compensation and direct recovery spend. Loaded monthly employee cost is converted to hourly cost using 2,080 working hours per year.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Why this exists</p><h2>The cost of an incident is rarely the cost of engineers on the call</h2></div>
+        <div class="project-intro-copy"><p>A large part of incident impact often sits outside engineering: lost revenue, customer support, SLA credits, emergency vendor spend, and follow-up work after service recovery.</p><p>This calculator turns reliability from an abstract “we should make the system more resilient” discussion into a financial conversation about the cost of repeating a specific class of failure.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/incident-cost-calculator.js?v=20260817-1"></script>
+</body>
+</html>
