@@ -1,0 +1,185 @@
+.saas-waste-section {
+  padding: clamp(52px, 8vw, 96px) clamp(20px, 7vw, 96px);
+}
+
+.saas-waste-shell {
+  display: grid;
+  gap: clamp(28px, 5vw, 56px);
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  max-width: 1180px;
+}
+
+.saas-waste-form,
+.saas-waste-result {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.saas-waste-form {
+  display: grid;
+  gap: 22px;
+}
+
+.saas-waste-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.saas-waste-field {
+  display: grid;
+  gap: 7px;
+}
+
+.saas-waste-field label {
+  font-weight: 720;
+}
+
+.saas-waste-field input,
+.saas-waste-field select {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font: inherit;
+  min-height: 46px;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.saas-waste-hint,
+.saas-waste-note,
+.saas-waste-method {
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.saas-waste-note {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin: 0;
+  padding: 14px 16px;
+}
+
+.saas-waste-result {
+  align-self: start;
+  background: #071426;
+  color: #fff;
+  position: sticky;
+  top: calc(var(--header-height) + 20px);
+}
+
+.saas-waste-result-kicker,
+.saas-waste-summary-title {
+  color: #8fe6e2;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.saas-waste-total {
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  font-weight: 850;
+  line-height: 1;
+  margin: 8px 0 10px;
+}
+
+.saas-waste-caption {
+  color: rgba(255,255,255,.72);
+  margin-bottom: 26px;
+}
+
+.saas-waste-breakdown {
+  border-top: 1px solid rgba(255,255,255,.16);
+  display: grid;
+  gap: 0;
+  margin-top: 22px;
+}
+
+.saas-waste-row {
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 13px 0;
+}
+
+.saas-waste-row span {
+  color: rgba(255,255,255,.72);
+}
+
+.saas-waste-row strong {
+  text-align: right;
+}
+
+.saas-waste-summary {
+  border-top: 1px solid rgba(255,255,255,.16);
+  margin-top: 26px;
+  padding-top: 22px;
+}
+
+.saas-waste-summary-text {
+  color: rgba(255,255,255,.88);
+  line-height: 1.55;
+}
+
+.saas-waste-summary-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.button.saas-waste-copy {
+  background: #fff;
+  color: #071426;
+  min-height: 42px;
+  padding: 9px 14px;
+}
+
+.saas-waste-copy-status {
+  color: #8fe6e2;
+  font-size: 0.84rem;
+  font-weight: 760;
+}
+
+.saas-waste-method {
+  color: rgba(255,255,255,.64);
+  margin: 22px 0 0;
+}
+
+.project-card--featured .project-brand-media--saas-waste {
+  background: #071426;
+}
+
+@media (max-width: 900px) {
+  .saas-waste-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .saas-waste-result {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .saas-waste-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .saas-waste-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .saas-waste-row strong {
+    text-align: left;
+  }
+}
