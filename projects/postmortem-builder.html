@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Бесплатный Postmortem Builder: структурируйте impact, timeline, root cause, contributing factors и action items после production-инцидента.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/postmortem-builder.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/postmortem-builder.html">
+  <meta property="og:title" content="Postmortem Builder">
+  <meta property="og:description" content="Соберите blameless postmortem после инцидента и получите готовый текст с timeline, причинами и action items.">
+  <title>Postmortem Builder — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/postmortem-builder.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/postmortem-builder.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/postmortem-builder.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/postmortem-builder.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Postmortem Builder","url":"https://kurakin.pro/projects/postmortem-builder.html","applicationCategory":"DeveloperApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"ru","description":"Браузерный конструктор blameless postmortem с impact, timeline, root cause, выводами и action items.","author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../assets/postmortem-builder.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="postmortem-builder.html" aria-current="page">RU</a><a href="../en/projects/postmortem-builder.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/postmortem-builder.svg" alt="" width="112" height="112"><h1>Postmortem Builder</h1></div>
+        <p class="project-detail-lead">Инцидент закончился не тогда, когда сервис поднялся. Он закончился, когда команда поняла, почему это произошло и что конкретно изменит, чтобы риск не повторился.</p>
+      </div>
+    </section>
+
+    <section class="pm-section" aria-labelledby="pm-title">
+      <div class="pm-shell">
+        <div class="pm-panel" data-pm-tool>
+          <div class="pm-intro">
+            <p class="eyebrow">Бесплатный Postmortem Builder</p>
+            <h2 id="pm-title">Соберите факты, причины и действия в один документ</h2>
+            <p>Заполняйте только то, что известно. Отделяйте факты от предположений, а каждое действие доводите до владельца и срока. Всё работает локально в браузере.</p>
+          </div>
+
+          <section class="pm-group" aria-labelledby="pm-context-title">
+            <h3 id="pm-context-title">1. Контекст инцидента</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-incident-title">Название инцидента</label><input id="pm-incident-title" data-pm-field="title" type="text" placeholder="Например: Checkout API недоступен при оформлении заказа"></div>
+              <div class="pm-field"><label for="pm-date">Дата</label><input id="pm-date" data-pm-field="date" type="date"></div>
+              <div class="pm-field"><label for="pm-severity">Severity</label><select id="pm-severity" data-pm-field="severity"><option value="">Выберите</option><option>SEV-1</option><option>SEV-2</option><option>SEV-3</option><option>SEV-4</option></select></div>
+              <div class="pm-field"><label for="pm-duration">Продолжительность</label><input id="pm-duration" data-pm-field="duration" type="text" placeholder="Например: 37 минут"><small>Можно указать длительность пользовательского impact, даже если технические работы шли дольше.</small></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-impact-title">
+            <h3 id="pm-impact-title">2. Что произошло</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-summary">Краткое резюме</label><textarea id="pm-summary" data-pm-field="summary" placeholder="Что произошло, в каком компоненте и как инцидент завершился."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-impact">Влияние на клиентов и бизнес</label><textarea id="pm-impact" data-pm-field="impact" placeholder="Какие сценарии были недоступны или деградировали. Не придумывайте цифры, если их нет."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-detection">Как обнаружили</label><textarea id="pm-detection" data-pm-field="detection" placeholder="Алерт, обращение клиента, support, ручная проверка или другой сигнал."></textarea></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-timeline-title">
+            <div class="pm-repeat-head"><h3 id="pm-timeline-title">3. Timeline</h3><p>Фиксируйте наблюдаемые события: обнаружение, решения, изменения состояния, восстановление.</p></div>
+            <div class="pm-repeat-list" data-pm-timeline></div>
+            <button class="button pm-add" type="button" data-pm-add-timeline>Добавить событие</button>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-analysis-title">
+            <h3 id="pm-analysis-title">4. Почему это произошло</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-root-cause">Root cause</label><textarea id="pm-root-cause" data-pm-field="rootCause" placeholder="Техническая или процессная причина, без поиска виноватого человека."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-contributing">Сопутствующие факторы</label><textarea id="pm-contributing" data-pm-field="contributing" placeholder="Один фактор на строку: слабый alerting, ручной процесс, отсутствие лимита, недостаточная изоляция..."></textarea><small>Root cause редко объясняет весь масштаб инцидента. Здесь фиксируйте условия, которые позволили проблеме возникнуть или усилиться.</small></div>
+              <div class="pm-field pm-field--wide"><label for="pm-resolution">Как восстановили сервис</label><textarea id="pm-resolution" data-pm-field="resolution" placeholder="Что остановило impact и что было сделано для стабилизации."></textarea></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-learning-title">
+            <h3 id="pm-learning-title">5. Что узнали</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-well">Что сработало хорошо</label><textarea id="pm-well" data-pm-field="wentWell" placeholder="Один пункт на строку."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-poorly">Что сработало плохо</label><textarea id="pm-poorly" data-pm-field="wentPoorly" placeholder="Один пункт на строку. Описывайте систему и процесс, не персональные обвинения."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-lessons">Выводы</label><textarea id="pm-lessons" data-pm-field="lessons" placeholder="Что команда теперь понимает иначе и какие принципы стоит изменить."></textarea></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-actions-title">
+            <div class="pm-repeat-head"><h3 id="pm-actions-title">6. Action items</h3><p>Действие без владельца и срока — не action item.</p></div>
+            <div class="pm-repeat-list" data-pm-actions></div>
+            <button class="button pm-add" type="button" data-pm-add-action>Добавить действие</button>
+          </section>
+        </div>
+
+        <aside class="pm-result" aria-live="polite">
+          <p class="pm-kicker">Готовый документ</p>
+          <div class="pm-result-head"><h2>Postmortem</h2><div class="pm-completeness"><span>Completeness</span><strong data-pm-completeness>0%</strong></div></div>
+          <pre class="pm-preview" data-pm-preview></pre>
+          <div class="pm-actions"><button class="button pm-copy" type="button" data-pm-copy>Скопировать postmortem</button><span class="pm-copy-status" data-pm-copy-status aria-live="polite"></span></div>
+          <p class="pm-method">Инструмент ничего не отправляет на сервер. Формат intentionally blameless: цель — понять условия системы и процесса и снизить вероятность повторения, а не назначить виноватого.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="pm-guide">
+        <div><p class="eyebrow">Принцип</p><h2>Хороший postmortem меняет систему</h2></div>
+        <div><p>Самая слабая версия postmortem — длинное описание того, что уже произошло. Полезная версия заканчивается несколькими проверяемыми изменениями: новый guardrail, автоматизация, alert, ограничение blast radius, тест восстановления или изменение процесса.</p><p>Если после документа ничего не меняется, следующий похожий инцидент будет просто лучше задокументирован.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/postmortem-builder.js?v=20260817-1"></script>
+</body>
+</html>
