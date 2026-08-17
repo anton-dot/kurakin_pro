@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Бесплатный SafePrompt: локальная проверка текста перед отправкой в AI на потенциальные secrets, credentials, персональные данные и инфраструктурные идентификаторы.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/safeprompt.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/safeprompt.html">
+  <meta property="og:title" content="SafePrompt">
+  <meta property="og:description" content="Проверьте текст на потенциально чувствительные данные и получите redacted-копию перед отправкой в AI.">
+  <title>SafePrompt — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/safeprompt.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/safeprompt.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/safeprompt.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/safeprompt.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SafePrompt","url":"https://kurakin.pro/projects/safeprompt.html","applicationCategory":"SecurityApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"ru","description":"Локальная браузерная проверка текста на потенциальные secrets, credentials, персональные данные и инфраструктурные идентификаторы перед отправкой в AI.","author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../assets/safeprompt.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="safeprompt.html" aria-current="page">RU</a><a href="../en/projects/safeprompt.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/safeprompt.svg" alt="" width="112" height="112"><h1>SafePrompt</h1></div>
+        <p class="project-detail-lead">Самый безопасный secret — тот, который вообще не попал в промпт. SafePrompt помогает заметить потенциально чувствительные данные до отправки текста в AI.</p>
+      </div>
+    </section>
+
+    <section class="sp-section" aria-labelledby="sp-title">
+      <div class="sp-shell" data-sp-tool>
+        <div class="sp-panel">
+          <div class="sp-intro">
+            <p class="eyebrow">Бесплатный локальный инструмент</p>
+            <h2 id="sp-title">Проверьте текст перед отправкой в AI</h2>
+            <p>Вставьте промпт, лог, конфигурацию или другой контекст. Проверка выполняется только в браузере: текст не отправляется на сервер и не сохраняется.</p>
+          </div>
+          <div class="sp-field">
+            <label for="sp-input">Текст для проверки</label>
+            <textarea id="sp-input" data-sp-input placeholder="Вставьте сюда промпт или контекст. SafePrompt будет искать потенциальные API keys, tokens, credentials, email, телефоны, IP-адреса, платёжные карты и другие чувствительные шаблоны."></textarea>
+            <p class="sp-hint">Не вставляйте реальные secrets только ради проверки инструмента. Если значение уже известно как секретное — просто удалите его.</p>
+          </div>
+          <div class="sp-toolbar">
+            <button class="button sp-button-secondary" type="button" data-sp-clear>Очистить</button>
+          </div>
+        </div>
+
+        <aside class="sp-result" aria-live="polite">
+          <p class="sp-kicker">Potential exposure</p>
+          <div class="sp-status"><div><span>Уровень риска</span><div class="sp-risk" data-sp-risk>Сигналов не найдено</div></div><div class="sp-count" data-sp-count>0 совпадений</div></div>
+          <div class="sp-findings" data-sp-findings></div>
+          <label class="sp-output-label" for="sp-output">Redacted-копия</label>
+          <textarea class="sp-output" id="sp-output" data-sp-output readonly></textarea>
+          <div class="sp-copy-row"><button class="button" type="button" data-sp-copy>Скопировать безопасную версию</button><span class="sp-copy-status" data-sp-copy-status></span></div>
+          <p class="sp-method">SafePrompt использует набор эвристических шаблонов. Он может не найти нестандартный secret или, наоборот, отметить обычные данные. Результат — дополнительная проверка, а не гарантия безопасности.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="sp-guide">
+        <div><p class="eyebrow">Что проверяется</p><h2>Уберите лишний риск до отправки</h2></div>
+        <div><p>SafePrompt ищет наиболее типичные признаки чувствительных данных и заменяет найденные фрагменты понятными placeholders.</p><ul><li>API keys, access tokens, bearer/JWT и private keys;</li><li>password/secret/token в конфигурации и connection strings;</li><li>email, телефоны и номера платёжных карт;</li><li>IP-адреса и часть инфраструктурного контекста.</li></ul><p>Инструмент не пытается решить всю задачу DLP. Его цель проще: сделать быструю локальную проверку привычкой перед тем, как отправить рабочий контекст внешней AI-системе.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/safeprompt.js?v=20260817-1"></script>
+</body>
+</html>
