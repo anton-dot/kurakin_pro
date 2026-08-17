@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Bus Factor Check</title>
+  <desc id="desc">Three connected people with one highlighted dependency</desc>
+  <rect width="128" height="128" rx="24" fill="#071426"/>
+  <circle cx="35" cy="42" r="12" fill="none" stroke="#8fe6e2" stroke-width="6"/>
+  <circle cx="93" cy="42" r="12" fill="none" stroke="#8fe6e2" stroke-width="6"/>
+  <circle cx="64" cy="88" r="12" fill="none" stroke="#fff" stroke-width="6"/>
+  <path d="M46 47l10 25M82 47L72 72M47 42h34" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="35" cy="42" r="5" fill="#c98128"/>
+</svg>
