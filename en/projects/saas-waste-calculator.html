@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A free SaaS waste calculator for unused and underused licenses, oversized plans, overlapping tools, and potential annual savings.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/saas-waste-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/saas-waste-calculator.html">
+  <meta property="og:title" content="SaaS Waste Calculator">
+  <meta property="og:description" content="Estimate how much SaaS budget is tied up in unused licenses, oversized plans, and overlapping tools.">
+  <title>SaaS Waste Calculator — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/saas-waste-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/saas-waste-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/saas-waste-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/saas-waste-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SaaS Waste Calculator","url":"https://kurakin.pro/en/projects/saas-waste-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based calculator for potential savings from unused SaaS licenses, oversized plans, and overlapping software tools.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/saas-waste-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/saas-waste-calculator.html">RU</a><a href="saas-waste-calculator.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/saas-waste-calculator.svg" alt="" width="112" height="112"><h1>SaaS Waste Calculator</h1></div>
+        <p class="project-detail-lead">Estimate how much SaaS budget may be recoverable through unused seats, underused licenses, right-sized plans, and removal of overlapping tools.</p>
+      </div>
+    </section>
+
+    <section class="saas-waste-section" aria-labelledby="calculator-title">
+      <div class="saas-waste-shell">
+        <form class="saas-waste-form" data-saas-waste-calculator>
+          <div><p class="eyebrow">Free calculator</p><h2 id="calculator-title">How much money is being wasted on SaaS?</h2><p>Use license and usage data from a representative month. Keep the user categories below mutually exclusive where possible, otherwise the potential savings may be counted twice.</p></div>
+
+          <div class="saas-waste-grid">
+            <div class="saas-waste-field"><label for="currency">Currency</label><select id="currency" aria-describedby="currency-hint"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select><span class="saas-waste-hint" id="currency-hint">Used for all monetary fields. The calculator does not convert exchange rates.</span></div>
+            <div class="saas-waste-field"><label for="paid-seats">Paid licenses</label><input id="paid-seats" type="number" min="0" step="1" value="250" aria-describedby="paid-seats-hint"><span class="saas-waste-hint" id="paid-seats-hint">All paid seats for the selected SaaS product or a group of similar tools.</span></div>
+            <div class="saas-waste-field"><label for="seat-cost">Cost per license / month</label><input id="seat-cost" type="number" min="0" step="1" value="35" aria-describedby="seat-cost-hint"><span class="saas-waste-hint" id="seat-cost-hint">Use the effective average price after discounts and annual commitments where possible.</span></div>
+            <div class="saas-waste-field"><label for="unused-seats">Fully unused licenses</label><input id="unused-seats" type="number" min="0" step="1" value="30" aria-describedby="unused-seats-hint"><span class="saas-waste-hint" id="unused-seats-hint">No login or meaningful usage during the chosen period. Do not include underused users here.</span></div>
+            <div class="saas-waste-field"><label for="underused-seats">Underused licenses</label><input id="underused-seats" type="number" min="0" step="1" value="50" aria-describedby="underused-seats-hint"><span class="saas-waste-hint" id="underused-seats-hint">Users who log in rarely or use the product so lightly that some seats may be removable.</span></div>
+            <div class="saas-waste-field"><label for="underused-recoverable">Share of underused seats removable, %</label><input id="underused-recoverable" type="number" min="0" max="100" step="5" value="40" aria-describedby="recoverable-hint"><span class="saas-waste-hint" id="recoverable-hint">Use a conservative estimate. If 20 of 50 underused seats can realistically be removed, enter 40%.</span></div>
+            <div class="saas-waste-field"><label for="over-tier-seats">Licenses on an oversized plan</label><input id="over-tier-seats" type="number" min="0" step="1" value="40" aria-describedby="over-tier-hint"><span class="saas-waste-hint" id="over-tier-hint">Active users who need the product but not the current expensive tier. Exclude unused and underused seats.</span></div>
+            <div class="saas-waste-field"><label for="downgrade-saving">Downgrade saving / license / month</label><input id="downgrade-saving" type="number" min="0" step="1" value="12" aria-describedby="downgrade-hint"><span class="saas-waste-hint" id="downgrade-hint">Difference between the current tier and the lower tier that still meets the user's needs.</span></div>
+            <div class="saas-waste-field"><label for="overlap-monthly">Overlapping SaaS tools / month</label><input id="overlap-monthly" type="number" min="0" step="100" value="1800" aria-describedby="overlap-hint"><span class="saas-waste-hint" id="overlap-hint">Spend on separate products whose function is already covered elsewhere and may be removable.</span></div>
+          </div>
+
+          <p class="saas-waste-note">This is an optimization estimate, not an automatic cancellation plan. Rare usage may still be business-critical, contracts can limit removals, and some overlap can be intentional for security, geography, or different workflows.</p>
+        </form>
+
+        <aside class="saas-waste-result" aria-live="polite">
+          <p class="saas-waste-result-kicker">Potential savings / year</p>
+          <p class="saas-waste-total" data-saas-savings>—</p>
+          <p class="saas-waste-caption">Estimated spend worth validating for optimization.</p>
+
+          <div class="saas-waste-breakdown">
+            <div class="saas-waste-row"><span>Current SaaS spend / year</span><strong data-saas-annual-spend>—</strong></div>
+            <div class="saas-waste-row"><span>Unused licenses</span><strong data-saas-unused>—</strong></div>
+            <div class="saas-waste-row"><span>Recoverable underused</span><strong data-saas-underused>—</strong></div>
+            <div class="saas-waste-row"><span>Oversized plans</span><strong data-saas-tier>—</strong></div>
+            <div class="saas-waste-row"><span>Overlapping tools</span><strong data-saas-overlap>—</strong></div>
+            <div class="saas-waste-row"><span>Potential / month</span><strong data-saas-monthly>—</strong></div>
+            <div class="saas-waste-row"><span>Potential savings rate</span><strong data-saas-rate>—</strong></div>
+          </div>
+
+          <div class="saas-waste-summary">
+            <p class="saas-waste-summary-title">Ready-to-share summary</p>
+            <p class="saas-waste-summary-text" data-saas-summary></p>
+            <div class="saas-waste-summary-actions"><button class="button saas-waste-copy" type="button" data-saas-copy>Copy summary</button><span class="saas-waste-copy-status" data-saas-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="saas-waste-method">Model: annual spend = paid seats × monthly seat cost × 12 + overlapping SaaS spend. Potential savings = unused seats + removable share of underused seats + downgrade savings for active over-tier seats + overlapping tools. Seat categories are capped so they cannot exceed the total paid licenses.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Why it matters</p><h2>SaaS waste rarely looks like one large expense</h2></div>
+        <div class="project-intro-copy"><p>It is usually dozens of small leaks: former employee accounts, licenses kept just in case, premium tiers for one feature, and several tools solving nearly the same problem.</p><p>The calculator is not a replacement for SaaS management or procurement review. It turns scattered usage issues into a financial number that can be discussed with product owners, IT, Finance, and Procurement.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/saas-waste-calculator.js?v=20260817-1"></script>
+</body>
+</html>
