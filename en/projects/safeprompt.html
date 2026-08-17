@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free SafePrompt tool: locally check text before sending it to AI for potential secrets, credentials, personal data, and infrastructure identifiers.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/safeprompt.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/safeprompt.html">
+  <meta property="og:title" content="SafePrompt">
+  <meta property="og:description" content="Check text for potentially sensitive data and create a redacted copy before sending it to AI.">
+  <title>SafePrompt — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/safeprompt.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/safeprompt.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/safeprompt.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/safeprompt.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SafePrompt","url":"https://kurakin.pro/en/projects/safeprompt.html","applicationCategory":"SecurityApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A local browser check for potential secrets, credentials, personal data, and infrastructure identifiers before text is sent to AI.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/safeprompt.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/safeprompt.html">RU</a><a href="safeprompt.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/safeprompt.svg" alt="" width="112" height="112"><h1>SafePrompt</h1></div>
+        <p class="project-detail-lead">The safest secret is the one that never enters a prompt. SafePrompt helps spot potentially sensitive data before text is sent to an AI system.</p>
+      </div>
+    </section>
+
+    <section class="sp-section" aria-labelledby="sp-title">
+      <div class="sp-shell" data-sp-tool>
+        <div class="sp-panel">
+          <div class="sp-intro">
+            <p class="eyebrow">Free local tool</p>
+            <h2 id="sp-title">Check text before sending it to AI</h2>
+            <p>Paste a prompt, log, configuration, or other context. The check runs entirely in the browser: the text is not sent to a server or stored.</p>
+          </div>
+          <div class="sp-field">
+            <label for="sp-input">Text to check</label>
+            <textarea id="sp-input" data-sp-input placeholder="Paste a prompt or context here. SafePrompt will look for potential API keys, tokens, credentials, emails, phone numbers, IP addresses, payment cards, and other sensitive patterns."></textarea>
+            <p class="sp-hint">Do not paste real secrets just to test the tool. If a value is already known to be secret, remove it instead.</p>
+          </div>
+          <div class="sp-toolbar">
+            <button class="button sp-button-secondary" type="button" data-sp-clear>Clear</button>
+          </div>
+        </div>
+
+        <aside class="sp-result" aria-live="polite">
+          <p class="sp-kicker">Potential exposure</p>
+          <div class="sp-status"><div><span>Risk level</span><div class="sp-risk" data-sp-risk>No signals found</div></div><div class="sp-count" data-sp-count>0 matches</div></div>
+          <div class="sp-findings" data-sp-findings></div>
+          <label class="sp-output-label" for="sp-output">Redacted copy</label>
+          <textarea class="sp-output" id="sp-output" data-sp-output readonly></textarea>
+          <div class="sp-copy-row"><button class="button" type="button" data-sp-copy>Copy safer version</button><span class="sp-copy-status" data-sp-copy-status></span></div>
+          <p class="sp-method">SafePrompt uses heuristic patterns. It can miss an unusual secret or flag ordinary data. Treat the result as an extra check, not a security guarantee.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="sp-guide">
+        <div><p class="eyebrow">What it checks</p><h2>Remove avoidable risk before sending</h2></div>
+        <div><p>SafePrompt looks for common signs of sensitive data and replaces matched fragments with readable placeholders.</p><ul><li>API keys, access tokens, bearer/JWT values, and private keys;</li><li>password/secret/token values in configuration and connection strings;</li><li>emails, phone numbers, and payment card numbers;</li><li>IP addresses and part of the infrastructure context.</li></ul><p>The tool is not a complete DLP system. Its narrower goal is to make a fast local check a normal step before working context is shared with an external AI system.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/safeprompt.js?v=20260817-1"></script>
+</body>
+</html>
