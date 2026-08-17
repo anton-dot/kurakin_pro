@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Бесплатный Build vs Buy калькулятор для сравнения полной стоимости собственной разработки и покупки готового SaaS или программного продукта.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/build-vs-buy-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/build-vs-buy-calculator.html">
+  <meta property="og:title" content="Build vs Buy Calculator">
+  <meta property="og:description" content="Сравните TCO собственной разработки и покупки готового решения на выбранном горизонте планирования.">
+  <title>Build vs Buy Calculator — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/build-vs-buy-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/build-vs-buy-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/build-vs-buy-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/build-vs-buy-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Build vs Buy Calculator","url":"https://kurakin.pro/projects/build-vs-buy-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"ru","description":"Браузерный калькулятор для сравнения полной стоимости собственной разработки и покупки готового программного решения.","author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../assets/build-vs-buy-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="build-vs-buy-calculator.html" aria-current="page">RU</a><a href="../en/projects/build-vs-buy-calculator.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/build-vs-buy-calculator.svg" alt="" width="112" height="112"><h1>Build vs Buy Calculator</h1></div>
+        <p class="project-detail-lead">Сравните полную стоимость собственной разработки и покупки готового решения — с учётом не только старта, но и дальнейшего владения.</p>
+      </div>
+    </section>
+
+    <section class="build-buy-section" aria-labelledby="calculator-title">
+      <div class="build-buy-shell">
+        <form class="build-buy-form" data-build-buy-calculator>
+          <div><p class="eyebrow">Бесплатный калькулятор</p><h2 id="calculator-title">Build или Buy?</h2><p>Это TCO-модель для первого управленческого сравнения. Заполните обе стороны одинаково честно: Build часто недооценивают по поддержке, Buy — по внедрению и внутреннему сопровождению.</p></div>
+
+          <div class="build-buy-global">
+            <div class="build-buy-field"><label for="currency">Валюта</label><select id="currency" aria-describedby="currency-hint"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select><span class="build-buy-hint" id="currency-hint">Валюта для всех денежных полей. Курсы не пересчитываются.</span></div>
+            <div class="build-buy-field"><label for="horizon-years">Горизонт сравнения, лет</label><input id="horizon-years" type="number" min="1" max="10" step="1" value="3" aria-describedby="horizon-hint"><span class="build-buy-hint" id="horizon-hint">Обычно полезно смотреть 3–5 лет, а не только первый бюджетный год.</span></div>
+          </div>
+
+          <fieldset class="build-buy-fieldset">
+            <legend>Build — разработать самим</legend>
+            <div class="build-buy-field"><label for="build-engineers">Инженеров на разработку</label><input id="build-engineers" type="number" min="0" step="0.5" value="4" aria-describedby="build-engineers-hint"><span class="build-buy-hint" id="build-engineers-hint">Среднее количество инженеров, занятых созданием решения в период разработки.</span></div>
+            <div class="build-buy-field"><label for="monthly-cost">Полная стоимость инженера / месяц</label><input id="monthly-cost" type="number" min="0" step="100" value="9000" aria-describedby="monthly-cost-hint"><span class="build-buy-hint" id="monthly-cost-hint">Зарплата плюс налоги, льготы, оборудование и другие прямые затраты компании.</span></div>
+            <div class="build-buy-field"><label for="build-months">Срок разработки, месяцев</label><input id="build-months" type="number" min="0" step="1" value="6" aria-describedby="build-months-hint"><span class="build-buy-hint" id="build-months-hint">До первой рабочей версии, которую можно использовать вместо покупного решения.</span></div>
+            <div class="build-buy-field"><label for="maintenance-fte">Поддержка после запуска, FTE</label><input id="maintenance-fte" type="number" min="0" step="0.1" value="0.5" aria-describedby="maintenance-hint"><span class="build-buy-hint" id="maintenance-hint">Средняя постоянная инженерная загрузка после запуска. Например, 0.5 FTE = половина времени одного инженера.</span></div>
+            <div class="build-buy-field"><label for="build-infra-monthly">Инфраструктура и инструменты / месяц</label><input id="build-infra-monthly" type="number" min="0" step="100" value="1500" aria-describedby="infra-hint"><span class="build-buy-hint" id="infra-hint">Hosting, базы данных, мониторинг, лицензии и другие регулярные технические расходы своего решения.</span></div>
+            <div class="build-buy-field"><label for="opportunity-monthly">Стоимость отложенной продуктовой работы / месяц</label><input id="opportunity-monthly" type="number" min="0" step="1000" value="0" aria-describedby="opportunity-hint"><span class="build-buy-hint" id="opportunity-hint">Опционально. Оценка ценности работы, которую команда не делает, пока создаёт внутреннее решение. Если не готовы оценивать — оставьте 0.</span></div>
+          </fieldset>
+
+          <fieldset class="build-buy-fieldset">
+            <legend>Buy — купить готовое решение</legend>
+            <div class="build-buy-field"><label for="buy-subscription-monthly">Подписка / месяц</label><input id="buy-subscription-monthly" type="number" min="0" step="100" value="8000" aria-describedby="subscription-hint"><span class="build-buy-hint" id="subscription-hint">Полная стоимость лицензий или подписки для необходимого количества пользователей.</span></div>
+            <div class="build-buy-field"><label for="buy-implementation">Внедрение, разово</label><input id="buy-implementation" type="number" min="0" step="1000" value="20000" aria-describedby="implementation-hint"><span class="build-buy-hint" id="implementation-hint">Настройка, миграция, обучение и услуги поставщика на старте.</span></div>
+            <div class="build-buy-field"><label for="buy-integration">Интеграции, разово</label><input id="buy-integration" type="number" min="0" step="1000" value="10000" aria-describedby="integration-hint"><span class="build-buy-hint" id="integration-hint">Внутренняя или внешняя разработка интеграций, необходимых для запуска.</span></div>
+            <div class="build-buy-field"><label for="buy-support-hours-monthly">Внутреннее сопровождение, инженерных часов / месяц</label><input id="buy-support-hours-monthly" type="number" min="0" step="1" value="20" aria-describedby="support-hint"><span class="build-buy-hint" id="support-hint">Время команды на администрирование, интеграции, изменения конфигурации и работу с поставщиком.</span></div>
+          </fieldset>
+
+          <p class="build-buy-note">Калькулятор сравнивает стоимость, но не принимает решение за вас. Security, compliance, time-to-market, контроль над roadmap, vendor lock-in и стратегическая ценность собственной технологии могут быть важнее разницы в TCO.</p>
+        </form>
+
+        <aside class="build-buy-result" aria-live="polite">
+          <p class="build-buy-result-kicker">Дешевле по модели</p>
+          <p class="build-buy-winner" data-winner>—</p>
+          <p class="build-buy-result-caption">Сравнение по полной стоимости на выбранном горизонте.</p>
+
+          <div class="build-buy-tco-grid">
+            <div class="build-buy-tco-card"><span class="build-buy-tco-label">Build TCO</span><strong data-build-tco>—</strong></div>
+            <div class="build-buy-tco-card"><span class="build-buy-tco-label">Buy TCO</span><strong data-buy-tco>—</strong></div>
+          </div>
+
+          <div class="build-buy-breakdown">
+            <div class="build-buy-row"><span>Разница в TCO</span><strong data-difference>—</strong></div>
+            <div class="build-buy-row"><span>Build после запуска / год</span><strong data-build-run>—</strong></div>
+            <div class="build-buy-row"><span>Buy recurring / год</span><strong data-buy-run>—</strong></div>
+            <div class="build-buy-row"><span>Простой break-even Build</span><strong data-break-even>—</strong></div>
+            <div class="build-buy-row"><span>Opportunity cost Build</span><strong data-opportunity>—</strong></div>
+          </div>
+
+          <div class="build-buy-summary">
+            <p class="build-buy-summary-title">Готовый текст для отправки</p>
+            <p class="build-buy-summary-text" data-build-buy-summary></p>
+            <div class="build-buy-summary-actions"><button class="button build-buy-copy" type="button" data-build-buy-copy>Скопировать текст</button><span class="build-buy-copy-status" data-build-buy-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="build-buy-method">Модель: Build = стоимость разработки + opportunity cost + поддержка и инфраструктура после запуска. Buy = разовые внедрение и интеграция + подписка и внутреннее сопровождение. Break-even — упрощённая оценка по разнице начальных и ежегодных затрат.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Зачем это нужно</p><h2>Build vs Buy — это не спор разработчиков и закупок</h2></div>
+        <div class="project-intro-copy"><p>Собственная разработка часто выглядит дешевле, пока в расчёте нет поддержки, инфраструктуры и альтернативной стоимости команды. Покупка готового решения выглядит дешевле, пока в ней не появились внедрение, интеграции и постоянная внутренняя работа.</p><p>Этот калькулятор нужен не для автоматического ответа. Он помогает сделать финансовую часть решения прозрачной, а затем отдельно обсуждать скорость, контроль, риски и стратегическую ценность.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/build-vs-buy-calculator.js?v=20260817-1"></script>
+</body>
+</html>
