@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">SaaS Waste Calculator</title>
+  <desc id="desc">Stacked software seats with a savings indicator</desc>
+  <rect width="128" height="128" rx="24" fill="#071426"/>
+  <rect x="24" y="28" width="80" height="20" rx="6" fill="none" stroke="#8fe6e2" stroke-width="6"/>
+  <rect x="24" y="54" width="80" height="20" rx="6" fill="none" stroke="#fff" stroke-width="6"/>
+  <rect x="24" y="80" width="50" height="20" rx="6" fill="none" stroke="#c98128" stroke-width="6"/>
+  <path d="M88 82v22M78 94l10 10 16-18" fill="none" stroke="#8fe6e2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
