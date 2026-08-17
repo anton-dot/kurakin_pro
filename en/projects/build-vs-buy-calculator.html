@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A free Build vs Buy calculator for comparing the total cost of building software internally versus buying an existing SaaS or software product.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/build-vs-buy-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/build-vs-buy-calculator.html">
+  <meta property="og:title" content="Build vs Buy Calculator">
+  <meta property="og:description" content="Compare the TCO of building internally versus buying an existing solution over a selected planning horizon.">
+  <title>Build vs Buy Calculator — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/build-vs-buy-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/build-vs-buy-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/build-vs-buy-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/build-vs-buy-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Build vs Buy Calculator","url":"https://kurakin.pro/en/projects/build-vs-buy-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based calculator for comparing the total cost of building software internally versus buying an existing solution.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/build-vs-buy-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/build-vs-buy-calculator.html">RU</a><a href="build-vs-buy-calculator.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/build-vs-buy-calculator.svg" alt="" width="112" height="112"><h1>Build vs Buy Calculator</h1></div>
+        <p class="project-detail-lead">Compare the full cost of building internally versus buying an existing solution — including ongoing ownership, not just the initial budget.</p>
+      </div>
+    </section>
+
+    <section class="build-buy-section" aria-labelledby="calculator-title">
+      <div class="build-buy-shell">
+        <form class="build-buy-form" data-build-buy-calculator>
+          <div><p class="eyebrow">Free calculator</p><h2 id="calculator-title">Build or Buy?</h2><p>This is a TCO model for an initial management comparison. Be equally honest on both sides: Build is often underestimated on maintenance, while Buy is underestimated on implementation and internal support.</p></div>
+
+          <div class="build-buy-global">
+            <div class="build-buy-field"><label for="currency">Currency</label><select id="currency" aria-describedby="currency-hint"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select><span class="build-buy-hint" id="currency-hint">Currency for every monetary field. Exchange rates are not converted.</span></div>
+            <div class="build-buy-field"><label for="horizon-years">Comparison horizon, years</label><input id="horizon-years" type="number" min="1" max="10" step="1" value="3" aria-describedby="horizon-hint"><span class="build-buy-hint" id="horizon-hint">A 3–5 year view is usually more useful than comparing only the first budget year.</span></div>
+          </div>
+
+          <fieldset class="build-buy-fieldset">
+            <legend>Build — develop internally</legend>
+            <div class="build-buy-field"><label for="build-engineers">Engineers during build</label><input id="build-engineers" type="number" min="0" step="0.5" value="4" aria-describedby="build-engineers-hint"><span class="build-buy-hint" id="build-engineers-hint">Average number of engineers assigned to creating the solution during the build period.</span></div>
+            <div class="build-buy-field"><label for="monthly-cost">Loaded engineer cost / month</label><input id="monthly-cost" type="number" min="0" step="100" value="9000" aria-describedby="monthly-cost-hint"><span class="build-buy-hint" id="monthly-cost-hint">Salary plus payroll taxes, benefits, equipment, and other direct employment costs.</span></div>
+            <div class="build-buy-field"><label for="build-months">Build duration, months</label><input id="build-months" type="number" min="0" step="1" value="6" aria-describedby="build-months-hint"><span class="build-buy-hint" id="build-months-hint">Time until the first usable version can replace the purchased alternative.</span></div>
+            <div class="build-buy-field"><label for="maintenance-fte">Post-launch maintenance, FTE</label><input id="maintenance-fte" type="number" min="0" step="0.1" value="0.5" aria-describedby="maintenance-hint"><span class="build-buy-hint" id="maintenance-hint">Average ongoing engineering load after launch. For example, 0.5 FTE means half of one engineer's time.</span></div>
+            <div class="build-buy-field"><label for="build-infra-monthly">Infrastructure and tools / month</label><input id="build-infra-monthly" type="number" min="0" step="100" value="1500" aria-describedby="infra-hint"><span class="build-buy-hint" id="infra-hint">Hosting, databases, monitoring, licenses, and other recurring technical costs of the internal solution.</span></div>
+            <div class="build-buy-field"><label for="opportunity-monthly">Deferred product work value / month</label><input id="opportunity-monthly" type="number" min="0" step="1000" value="0" aria-describedby="opportunity-hint"><span class="build-buy-hint" id="opportunity-hint">Optional. Estimate the value of work the team is not doing while it builds the internal solution. Leave 0 if you do not want to model it.</span></div>
+          </fieldset>
+
+          <fieldset class="build-buy-fieldset">
+            <legend>Buy — purchase an existing solution</legend>
+            <div class="build-buy-field"><label for="buy-subscription-monthly">Subscription / month</label><input id="buy-subscription-monthly" type="number" min="0" step="100" value="8000" aria-describedby="subscription-hint"><span class="build-buy-hint" id="subscription-hint">Total license or subscription cost for the required number of users.</span></div>
+            <div class="build-buy-field"><label for="buy-implementation">Implementation, one-time</label><input id="buy-implementation" type="number" min="0" step="1000" value="20000" aria-describedby="implementation-hint"><span class="build-buy-hint" id="implementation-hint">Configuration, migration, training, and vendor services required at the start.</span></div>
+            <div class="build-buy-field"><label for="buy-integration">Integrations, one-time</label><input id="buy-integration" type="number" min="0" step="1000" value="10000" aria-describedby="integration-hint"><span class="build-buy-hint" id="integration-hint">Internal or external engineering work needed to integrate the purchased product.</span></div>
+            <div class="build-buy-field"><label for="buy-support-hours-monthly">Internal support, engineering hours / month</label><input id="buy-support-hours-monthly" type="number" min="0" step="1" value="20" aria-describedby="support-hint"><span class="build-buy-hint" id="support-hint">Team time spent on administration, integrations, configuration changes, and vendor coordination.</span></div>
+          </fieldset>
+
+          <p class="build-buy-note">The calculator compares cost, not strategy. Security, compliance, time to market, roadmap control, vendor lock-in, and the strategic value of proprietary technology can matter more than the TCO difference.</p>
+        </form>
+
+        <aside class="build-buy-result" aria-live="polite">
+          <p class="build-buy-result-kicker">Cheaper in this model</p>
+          <p class="build-buy-winner" data-winner>—</p>
+          <p class="build-buy-result-caption">Full-cost comparison over the selected horizon.</p>
+
+          <div class="build-buy-tco-grid">
+            <div class="build-buy-tco-card"><span class="build-buy-tco-label">Build TCO</span><strong data-build-tco>—</strong></div>
+            <div class="build-buy-tco-card"><span class="build-buy-tco-label">Buy TCO</span><strong data-buy-tco>—</strong></div>
+          </div>
+
+          <div class="build-buy-breakdown">
+            <div class="build-buy-row"><span>TCO difference</span><strong data-difference>—</strong></div>
+            <div class="build-buy-row"><span>Build run cost / year</span><strong data-build-run>—</strong></div>
+            <div class="build-buy-row"><span>Buy recurring / year</span><strong data-buy-run>—</strong></div>
+            <div class="build-buy-row"><span>Simple Build break-even</span><strong data-break-even>—</strong></div>
+            <div class="build-buy-row"><span>Build opportunity cost</span><strong data-opportunity>—</strong></div>
+          </div>
+
+          <div class="build-buy-summary">
+            <p class="build-buy-summary-title">Ready-to-send summary</p>
+            <p class="build-buy-summary-text" data-build-buy-summary></p>
+            <div class="build-buy-summary-actions"><button class="button build-buy-copy" type="button" data-build-buy-copy>Copy summary</button><span class="build-buy-copy-status" data-build-buy-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="build-buy-method">Model: Build = engineering during development + opportunity cost + maintenance and infrastructure after launch. Buy = one-time implementation and integration + subscription and internal support. Break-even is a simplified comparison of initial and annual costs.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Why this exists</p><h2>Build vs Buy is not an argument between engineering and procurement</h2></div>
+        <div class="project-intro-copy"><p>Internal development often looks cheaper until maintenance, infrastructure, and the opportunity cost of the team are included. Buying looks cheaper until implementation, integrations, and ongoing internal work appear in the model.</p><p>This calculator is not designed to make the decision automatically. It makes the financial part visible so the real discussion can move to speed, control, risk, and strategic value.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/build-vs-buy-calculator.js?v=20260817-1"></script>
+</body>
+</html>
