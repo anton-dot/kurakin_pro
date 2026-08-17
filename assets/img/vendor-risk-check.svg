@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Vendor Risk Check</title>
+  <desc id="desc">Shield and linked vendor nodes</desc>
+  <rect width="128" height="128" rx="24" fill="#071426"/>
+  <path d="M64 20l34 12v27c0 23-13 39-34 49-21-10-34-26-34-49V32l34-12z" fill="none" stroke="#8fe6e2" stroke-width="6" stroke-linejoin="round"/>
+  <circle cx="52" cy="58" r="7" fill="#fff"/>
+  <circle cx="78" cy="49" r="7" fill="#c98128"/>
+  <circle cx="75" cy="78" r="7" fill="#fff"/>
+  <path d="M58 56l13-5M57 63l12 10" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+</svg>

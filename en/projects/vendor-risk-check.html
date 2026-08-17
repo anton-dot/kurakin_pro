@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A free lightweight IT vendor risk assessment with 24 questions across security, data, reliability, lock-in, support, and commercial governance.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/vendor-risk-check.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/vendor-risk-check.html">
+  <meta property="og:title" content="Vendor Risk Check">
+  <meta property="og:description" content="24 questions, a risk score from 0 to 100, dependency level, and critical red flags for a fast vendor review.">
+  <title>Vendor Risk Check — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/vendor-risk-check.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/vendor-risk-check.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/vendor-risk-check.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/vendor-risk-check.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Vendor Risk Check","url":"https://kurakin.pro/en/projects/vendor-risk-check.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based lightweight IT vendor risk assessment with 24 questions, an overall risk score, dependency level, and critical red flags.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/vendor-risk-check.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/vendor-risk-check.html">RU</a><a href="vendor-risk-check.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/vendor-risk-check.svg" alt="" width="112" height="112"><h1>Vendor Risk Check</h1></div>
+        <p class="project-detail-lead">A fast IT vendor review before purchase, renewal, or a deeper assessment: risk, dependency, and critical red flags.</p>
+      </div>
+    </section>
+
+    <section class="vendor-risk-section" aria-labelledby="assessment-title">
+      <div class="vendor-risk-shell">
+        <div class="vendor-risk-assessment" data-vendor-risk-assessment>
+          <div class="vendor-risk-intro">
+            <p class="eyebrow">Free lightweight assessment</p>
+            <h2 id="assessment-title">How safe is it to become dependent on this vendor?</h2>
+            <p>For each statement choose Yes, Partly, or No / unknown. Fewer confirmed controls mean a higher risk score. Answers stay in your browser.</p>
+          </div>
+
+          <div class="vendor-risk-context">
+            <div class="vendor-risk-field">
+              <label for="vendor-name">Vendor or service</label>
+              <input id="vendor-name" type="text" placeholder="For example: CRM Vendor" aria-describedby="vendor-name-hint">
+              <span class="vendor-risk-field-hint" id="vendor-name-hint">Optional. The name is used in the generated summary and does not affect the score.</span>
+            </div>
+          </div>
+
+          <div data-vendor-risk-questions></div>
+        </div>
+
+        <aside class="vendor-risk-result" aria-live="polite">
+          <p class="vendor-risk-kicker">Vendor risk</p>
+          <p class="vendor-risk-score" data-vendor-risk-score>—</p>
+          <p class="vendor-risk-status" data-vendor-risk-status>No answers</p>
+          <p class="vendor-risk-progress" data-vendor-risk-progress></p>
+
+          <div class="vendor-risk-metrics">
+            <div class="vendor-risk-row"><span>Vendor dependency</span><strong data-vendor-dependency>—</strong></div>
+            <div class="vendor-risk-row"><span>Critical red flags</span><strong data-vendor-red-flag-count>0</strong></div>
+          </div>
+
+          <div class="vendor-risk-category-scores" data-vendor-risk-categories></div>
+
+          <div class="vendor-risk-red-flags">
+            <p class="vendor-risk-panel-title">Critical red flags</p>
+            <ul class="vendor-risk-flag-list" data-vendor-risk-flags></ul>
+          </div>
+
+          <div class="vendor-risk-summary">
+            <p class="vendor-risk-summary-title">Ready-to-share summary</p>
+            <p class="vendor-risk-summary-text" data-vendor-risk-summary></p>
+            <div class="vendor-risk-summary-actions"><button class="button vendor-risk-copy" type="button" data-vendor-risk-copy>Copy summary</button><span class="vendor-risk-copy-status" data-vendor-risk-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="vendor-risk-method">The risk score uses answered questions only and remains preliminary until all 24 are complete. “No / unknown” counts as risk: if a control exists but you cannot verify it, it still needs validation before a decision. This does not replace a security, legal, or procurement review.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Why it matters</p><h2>A vendor problem becomes your problem</h2></div>
+        <div class="project-intro-copy"><p>Vendor risk is more than a security questionnaire. A technically mature provider can still create heavy lock-in, unpredictable cost, or a critical operational dependency.</p><p>The tool separates control quality from dependency. That helps identify the next action: request evidence, change contract terms, build a fallback, reduce integration coupling, or choose another vendor.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/vendor-risk-check.js?v=20260817-1"></script>
+</body>
+</html>
