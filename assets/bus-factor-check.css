@@ -1,0 +1,225 @@
+.bf-section {
+  padding: clamp(52px, 8vw, 96px) clamp(20px, 7vw, 96px);
+}
+
+.bf-shell {
+  display: grid;
+  gap: clamp(28px, 5vw, 56px);
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  max-width: 1180px;
+}
+
+.bf-panel,
+.bf-result {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.bf-intro > p:last-child,
+.bf-context small,
+.bf-method {
+  color: var(--ink-soft);
+}
+
+.bf-context {
+  display: grid;
+  gap: 8px;
+  margin: 28px 0;
+}
+
+.bf-context label,
+.bf-area-head {
+  font-weight: 780;
+}
+
+.bf-context input,
+.bf-area input {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  min-height: 46px;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.bf-area-list {
+  display: grid;
+  gap: 12px;
+}
+
+.bf-area-head,
+.bf-area {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) 150px 42px;
+}
+
+.bf-area-head {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  padding: 0 4px;
+}
+
+.bf-area {
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.bf-remove {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.1rem;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.bf-remove:hover,
+.bf-remove:focus-visible {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+
+.bf-add {
+  margin-top: 16px;
+}
+
+.bf-result {
+  align-self: start;
+  background: #071426;
+  color: #fff;
+  position: sticky;
+  top: calc(var(--header-height) + 20px);
+}
+
+.bf-kicker,
+.bf-summary-title,
+.bf-risk-title {
+  color: #8fe6e2;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.bf-score {
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  font-weight: 850;
+  line-height: 0.98;
+  margin: 8px 0 12px;
+}
+
+.bf-status {
+  font-size: 1.12rem;
+  font-weight: 780;
+  margin-bottom: 8px;
+}
+
+.bf-metrics {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+  padding-top: 22px;
+}
+
+.bf-metric {
+  align-items: baseline;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+}
+
+.bf-metric span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+}
+
+.bf-metric strong {
+  font-size: 1.06rem;
+}
+
+.bf-risk,
+.bf-summary {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  margin-top: 26px;
+  padding-top: 22px;
+}
+
+.bf-risk-list {
+  color: rgba(255, 255, 255, 0.86);
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+.bf-risk-list li::marker {
+  color: #d89b82;
+}
+
+.bf-summary-text {
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.65;
+}
+
+.bf-summary-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.button.bf-copy {
+  background: #fff;
+  color: #071426;
+  min-height: 42px;
+  padding: 9px 14px;
+}
+
+.bf-copy-status {
+  color: #8fe6e2;
+  font-size: 0.84rem;
+  font-weight: 760;
+}
+
+.bf-method {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.86rem;
+  margin: 24px 0 0;
+}
+
+.project-card--featured .project-brand-media--bus-factor {
+  background: #071426;
+}
+
+@media (max-width: 900px) {
+  .bf-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .bf-result {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .bf-area-head {
+    display: none;
+  }
+
+  .bf-area {
+    grid-template-columns: 1fr 88px 42px;
+  }
+}

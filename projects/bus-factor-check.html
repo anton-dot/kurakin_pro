@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Бесплатный Bus Factor Check: карта критичных знаний, bus factor proxy, single-owner риски, redundancy score и готовое summary для команды.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/bus-factor-check.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/bus-factor-check.html">
+  <meta property="og:title" content="Bus Factor Check">
+  <meta property="og:description" content="Найдите критичные знания, которые зависят от одного человека, и приоритеты для снижения key-person risk.">
+  <title>Bus Factor Check — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/bus-factor-check.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/bus-factor-check.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/bus-factor-check.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/bus-factor-check.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bus Factor Check","url":"https://kurakin.pro/projects/bus-factor-check.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"ru","description":"Браузерная оценка зависимости критичных знаний от отдельных людей с bus factor proxy и redundancy score.","author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../assets/bus-factor-check.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="bus-factor-check.html" aria-current="page">RU</a><a href="../en/projects/bus-factor-check.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/bus-factor-check.svg" alt="" width="112" height="112"><h1>Bus Factor Check</h1></div>
+        <p class="project-detail-lead">Быстрая карта key-person risk: какие критичные знания реально живут в одном человеке и где команда остановится первой.</p>
+      </div>
+    </section>
+
+    <section class="bf-section" aria-labelledby="bf-title">
+      <div class="bf-shell">
+        <div class="bf-panel" data-bf-tool>
+          <div class="bf-intro">
+            <p class="eyebrow">Бесплатная оценка зависимости от людей</p>
+            <h2 id="bf-title">Что сломается, если завтра недоступен один человек?</h2>
+            <p>Добавьте критичные области знаний и укажите, сколько людей могут самостоятельно изменить, восстановить или поддерживать каждую из них. Инструмент использует минимальное покрытие как простой proxy bus factor.</p>
+          </div>
+
+          <div class="bf-context">
+            <label for="bf-team-name">Команда, система или продукт</label>
+            <input id="bf-team-name" type="text" placeholder="Например: Core Platform" autocomplete="off" data-bf-team-name>
+            <small>Необязательно. Название используется только в готовом summary.</small>
+          </div>
+
+          <div class="bf-area-head"><span>Критичная область знаний</span><span>Самостоятельных владельцев</span><span></span></div>
+          <div class="bf-area-list" data-bf-areas></div>
+          <button class="button bf-add" type="button" data-bf-add>Добавить область</button>
+        </div>
+
+        <aside class="bf-result" aria-live="polite">
+          <p class="bf-kicker">Bus factor proxy</p>
+          <p class="bf-score" data-bf-score>—</p>
+          <p class="bf-status" data-bf-status></p>
+
+          <div class="bf-metrics" data-bf-metrics></div>
+
+          <div class="bf-risk">
+            <p class="bf-risk-title">Приоритетные риски</p>
+            <ul class="bf-risk-list" data-bf-risks></ul>
+          </div>
+
+          <div class="bf-summary">
+            <p class="bf-summary-title">Готовое summary</p>
+            <p class="bf-summary-text" data-bf-summary></p>
+            <div class="bf-summary-actions"><button class="button bf-copy" type="button" data-bf-copy>Скопировать текст</button><span class="bf-copy-status" data-bf-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="bf-method">Bus factor здесь — намеренно простой proxy: минимальное число людей, способных самостоятельно покрыть любую из перечисленных критичных областей. Реальный организационный риск зависит ещё и от пересечения знаний между людьми, качества документации и скорости передачи контекста.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Как использовать</p><h2>Не считать людей. Искать хрупкие знания</h2></div>
+        <div class="project-intro-copy"><p>Bus factor полезен не как KPI команды, а как повод найти области, где один отпуск, увольнение или перегрузка превращаются в операционный риск.</p><p>Первый практический шаг обычно простой: дать второму человеку возможность самостоятельно пройти полный цикл — изменить, выпустить, диагностировать и восстановить критичный компонент.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/bus-factor-check.js?v=20260817-1"></script>
+</body>
+</html>
