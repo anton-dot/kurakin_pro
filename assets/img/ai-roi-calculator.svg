@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">AI ROI Calculator</title>
+  <desc id="desc">Abstract AI spark with an upward return arrow</desc>
+  <rect width="128" height="128" rx="24" fill="#071426"/>
+  <path d="M38 70c13-3 21-11 24-24 3 13 11 21 24 24-13 3-21 11-24 24-3-13-11-21-24-24Z" fill="#8fe6e2"/>
+  <circle cx="90" cy="37" r="8" fill="#c98128"/>
+  <path d="M31 97h22l14-12 14 6 18-23" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M88 67h13v13" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

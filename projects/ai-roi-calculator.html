@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Бесплатный AI ROI калькулятор для оценки реальной экономической отдачи от AI-инструментов с учётом adoption, стоимости лицензий, реализации пользы и переделок.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/ai-roi-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/ai-roi-calculator.html">
+  <meta property="og:title" content="AI ROI Calculator">
+  <meta property="og:description" content="Оцените ROI, чистый эффект и срок окупаемости корпоративного AI с поправкой на реальное использование и качество результата.">
+  <title>AI ROI Calculator — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/ai-roi-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/ai-roi-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/ai-roi-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/ai-roi-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"AI ROI Calculator","url":"https://kurakin.pro/projects/ai-roi-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"ru","description":"Браузерный калькулятор для оценки ROI корпоративного внедрения AI с учётом adoption, реализованной пользы, лицензий и операционных затрат.","author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../assets/ai-roi-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="ai-roi-calculator.html" aria-current="page">RU</a><a href="../en/projects/ai-roi-calculator.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/ai-roi-calculator.svg" alt="" width="112" height="112"><h1>AI ROI Calculator</h1></div>
+        <p class="project-detail-lead">Оцените экономический эффект корпоративного AI без предположения, что каждая «сэкономленная» минута автоматически превращается в деньги.</p>
+      </div>
+    </section>
+
+    <section class="ai-roi-section" aria-labelledby="calculator-title">
+      <div class="ai-roi-shell">
+        <form class="ai-roi-form" data-ai-roi-calculator>
+          <div><p class="eyebrow">Бесплатный калькулятор</p><h2 id="calculator-title">Посчитать ROI от AI</h2><p>Модель отделяет потенциальную экономию времени от реально реализованной пользы. Это помогает не переоценивать эффект низкого adoption или AI-результата, который приходится долго проверять и переделывать.</p></div>
+
+          <div class="ai-roi-field"><label for="currency">Валюта</label><select id="currency" aria-describedby="currency-hint"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select><span class="ai-roi-hint" id="currency-hint">Валюта для стоимости сотрудников, лицензий и внедрения. Курсы автоматически не пересчитываются.</span></div>
+
+          <div class="ai-roi-field"><label for="ai-users">Сотрудников с платным доступом к AI</label><input id="ai-users" type="number" min="0" step="1" value="200" inputmode="numeric" aria-describedby="ai-users-hint"><span class="ai-roi-hint" id="ai-users-hint">Количество оплачиваемых пользователей или лицензий, которые компания планирует поддерживать.</span></div>
+
+          <div class="ai-roi-field"><label for="monthly-employee-cost">Средняя полная стоимость сотрудника / месяц</label><input id="monthly-employee-cost" type="number" min="0" step="100" value="7000" inputmode="decimal" aria-describedby="monthly-employee-cost-hint"><span class="ai-roi-hint" id="monthly-employee-cost-hint">Зарплата плюс налоги, льготы, оборудование и другие прямые затраты компании. Используйте среднее по той группе, для которой оценивается AI.</span></div>
+
+          <div class="ai-roi-field"><label for="adoption-rate">Реальный adoption (%)</label><input id="adoption-rate" type="number" min="0" max="100" step="1" value="60" inputmode="decimal" aria-describedby="adoption-rate-hint"><span class="ai-roi-hint" id="adoption-rate-hint">Доля пользователей с лицензией, которые действительно регулярно используют AI в рабочих задачах, а не просто имеют доступ.</span></div>
+
+          <div class="ai-roi-field"><label for="hours-saved-week">Экономия времени на активного пользователя / неделю, часов</label><input id="hours-saved-week" type="number" min="0" step="0.1" value="1.5" inputmode="decimal" aria-describedby="hours-saved-week-hint"><span class="ai-roi-hint" id="hours-saved-week-hint">Оценивайте чистую экономию после написания промптов, чтения результата и обычной проверки. Лучше использовать консервативную оценку.</span></div>
+
+          <div class="ai-roi-field"><label for="realization-rate">Реализация пользы от сэкономленного времени (%)</label><input id="realization-rate" type="number" min="0" max="100" step="1" value="70" inputmode="decimal" aria-describedby="realization-rate-hint"><span class="ai-roi-hint" id="realization-rate-hint">Какая доля освобождённого времени действительно превращается в полезную работу: дополнительные задачи, более быстрый delivery или снижение потребности в ресурсе. 100% обычно слишком оптимистично.</span></div>
+
+          <div class="ai-roi-field"><label for="rework-rate">Потери на проверку и переделку AI-результата (%)</label><input id="rework-rate" type="number" min="0" max="100" step="1" value="15" inputmode="decimal" aria-describedby="rework-rate-hint"><span class="ai-roi-hint" id="rework-rate-hint">Часть потенциальной пользы, которая теряется из-за ошибок, hallucinations, дополнительной валидации, повторной работы или исправления низкокачественного результата.</span></div>
+
+          <div class="ai-roi-field"><label for="license-cost">Стоимость AI-лицензии / пользователь / месяц</label><input id="license-cost" type="number" min="0" step="1" value="30" inputmode="decimal" aria-describedby="license-cost-hint"><span class="ai-roi-hint" id="license-cost-hint">Полная регулярная стоимость одного оплачиваемого seat. Если есть несколько AI-сервисов, можно использовать их суммарную стоимость.</span></div>
+
+          <div class="ai-roi-field"><label for="implementation-cost">Внедрение и обучение, разово</label><input id="implementation-cost" type="number" min="0" step="1000" value="20000" inputmode="decimal" aria-describedby="implementation-cost-hint"><span class="ai-roi-hint" id="implementation-cost-hint">Настройка, обучение, создание политик, интеграции, пилотирование и другие одноразовые затраты запуска.</span></div>
+
+          <div class="ai-roi-field"><label for="ongoing-cost">Управление, governance и поддержка / месяц</label><input id="ongoing-cost" type="number" min="0" step="500" value="3000" inputmode="decimal" aria-describedby="ongoing-cost-hint"><span class="ai-roi-hint" id="ongoing-cost-hint">Постоянная внутренняя работа: администрирование, security/compliance, обучение новых пользователей, поддержка, мониторинг качества и AI governance.</span></div>
+
+          <p class="ai-roi-note">Это оценка стоимости высвобождённого времени, а не обещание прямого сокращения payroll. Если сотрудники просто делают тот же объём работы быстрее, финансовый эффект реализуется только тогда, когда это время используется для дополнительной ценности.</p>
+        </form>
+
+        <aside class="ai-roi-result" aria-live="polite">
+          <p class="ai-roi-result-kicker">ROI первого года</p>
+          <p class="ai-roi-result-total" data-ai-roi>—</p>
+          <p class="ai-roi-result-caption">После лицензий, внедрения, сопровождения и поправки на реальное использование.</p>
+
+          <div class="ai-roi-metrics">
+            <div class="ai-roi-row"><span>Чистый эффект первого года</span><strong data-ai-net-benefit>—</strong></div>
+            <div class="ai-roi-row"><span>Реализованная ценность / год</span><strong data-ai-realized-value>—</strong></div>
+            <div class="ai-roi-row"><span>Все затраты первого года</span><strong data-ai-first-year-cost>—</strong></div>
+            <div class="ai-roi-row"><span>Повторяющиеся затраты / год</span><strong data-ai-recurring-cost>—</strong></div>
+            <div class="ai-roi-row"><span>Срок окупаемости</span><strong data-ai-payback>—</strong></div>
+            <div class="ai-roi-row"><span>Безубыточность по времени</span><strong data-ai-break-even>—</strong></div>
+            <div class="ai-roi-row"><span>Активных пользователей</span><strong data-ai-active-users>—</strong></div>
+          </div>
+
+          <div class="ai-roi-summary">
+            <p class="ai-roi-summary-title">Готовый текст для отправки</p>
+            <p class="ai-roi-summary-text" data-ai-roi-summary></p>
+            <div class="ai-roi-summary-actions"><button class="button ai-roi-copy" type="button" data-ai-roi-copy>Скопировать текст</button><span class="ai-roi-copy-status" data-ai-roi-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="ai-roi-method">Модель: активные пользователи = оплачиваемые seats × adoption. Потенциальная стоимость сэкономленного времени уменьшается на коэффициент реализации пользы и потери на проверку/переделку. ROI первого года сравнивает чистый эффект со всеми затратами первого года. Для стоимости часа используется 2 080 рабочих часов в год.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Зачем это нужно</p><h2>AI может экономить время и всё равно иметь слабый ROI</h2></div>
+        <div class="project-intro-copy"><p>Лицензия сама по себе не создаёт ценность. Пользователь должен реально применять инструмент, AI должен экономить больше времени, чем уходит на работу с ним, а освобождённые часы должны превращаться в дополнительный полезный результат.</p><p>Поэтому калькулятор специально показывает не только ROI, но и точку безубыточности в минутах на пользователя в неделю. Эту цифру проще проверить на пилоте, чем спорить о процентах «роста продуктивности» в абстракции.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/ai-roi-calculator.js?v=20260817-1"></script>
+</body>
+</html>
