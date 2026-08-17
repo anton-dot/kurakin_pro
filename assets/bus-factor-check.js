@@ -4,6 +4,12 @@
 
   const isRu = document.documentElement.lang === 'ru';
   const t = (ru, en) => isRu ? ru : en;
+  const escapeHtml = (value) => value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
   const list = root.querySelector('[data-bf-areas]');
   const addButton = root.querySelector('[data-bf-add]');
   const teamName = root.querySelector('[data-bf-team-name]');
@@ -15,29 +21,20 @@
   const copyButton = document.querySelector('[data-bf-copy]');
   const copyStatus = document.querySelector('[data-bf-copy-status]');
 
-  const defaults = isRu
-    ? [
-        ['Core application', 2],
-        ['Production / on-call', 1],
-        ['Database and data', 2],
-        ['Cloud / infrastructure', 3],
-        ['CI/CD and releases', 2],
-        ['Critical integrations', 1]
-      ]
-    : [
-        ['Core application', 2],
-        ['Production / on-call', 1],
-        ['Database and data', 2],
-        ['Cloud / infrastructure', 3],
-        ['CI/CD and releases', 2],
-        ['Critical integrations', 1]
-      ];
+  const defaults = [
+    ['Core application', 2],
+    ['Production / on-call', 1],
+    ['Database and data', 2],
+    ['Cloud / infrastructure', 3],
+    ['CI/CD and releases', 2],
+    ['Critical integrations', 1]
+  ];
 
   const addRow = (name = '', owners = 2) => {
     const row = document.createElement('div');
     row.className = 'bf-area';
     row.innerHTML = `
-      <input type="text" value="${name.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" aria-label="${t('Критичная область знаний', 'Critical knowledge area')}" data-bf-area-name>
+      <input type="text" value="${escapeHtml(name)}" aria-label="${t('Критичная область знаний', 'Critical knowledge area')}" data-bf-area-name>
       <input type="number" min="0" max="20" step="1" value="${owners}" aria-label="${t('Людей, способных самостоятельно поддерживать область', 'People able to own this area independently')}" data-bf-owners>
       <button class="bf-remove" type="button" aria-label="${t('Удалить область', 'Remove area')}" data-bf-remove>×</button>
     `;
@@ -79,15 +76,15 @@
     scoreEl.textContent = String(busFactor);
     statusEl.textContent = statusFor(busFactor, singleOwner.length);
     metricsEl.innerHTML = `
-      <div class="bf-metric"><span>${t('Knowledge redundancy score', 'Knowledge redundancy score')}</span><strong>${redundancyScore}/100</strong></div>
+      <div class="bf-metric"><span>Knowledge redundancy score</span><strong>${redundancyScore}/100</strong></div>
       <div class="bf-metric"><span>${t('Критичных областей', 'Critical areas')}</span><strong>${rows.length}</strong></div>
-      <div class="bf-metric"><span>${t('Single-owner / no-owner', 'Single-owner / no-owner')}</span><strong>${atRisk.length}</strong></div>
+      <div class="bf-metric"><span>Single-owner / no-owner</span><strong>${atRisk.length}</strong></div>
       <div class="bf-metric"><span>${t('Только два владельца', 'Only two owners')}</span><strong>${twoOwners.length}</strong></div>
       <div class="bf-metric"><span>${t('Три и более владельца', 'Three or more owners')}</span><strong>${resilient.length}</strong></div>
     `;
 
     if (atRisk.length) {
-      risksEl.innerHTML = atRisk.map((row) => `<li>${row.name}: ${row.owners === 0 ? t('нет самостоятельного владельца', 'no independent owner') : t('зависит от одного человека', 'depends on one person')}</li>`).join('');
+      risksEl.innerHTML = atRisk.map((row) => `<li>${escapeHtml(row.name)}: ${row.owners === 0 ? t('нет самостоятельного владельца', 'no independent owner') : t('зависит от одного человека', 'depends on one person')}</li>`).join('');
     } else {
       risksEl.innerHTML = `<li>${t('Критичных single-owner областей не отмечено.', 'No critical single-owner areas are currently marked.')}</li>`;
     }
