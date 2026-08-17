@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What to examine in technology due diligence before acquiring a company: architecture, people, data, dependencies, security, and the real technology obligations behind the business.">
+    <meta name="description" content="A practical technology due diligence checklist for acquisitions: architecture, delivery, people, data, security, vendors, technical debt, and remediation priorities.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Technology Due Diligence: What to Check Before Acquiring a Company">
-    <meta property="og:description" content="What to examine in technology due diligence before acquiring a company: architecture, people, data, dependencies, security, and the real technology obligations behind the business.">
+    <meta property="og:description" content="A practical technology due diligence checklist for acquisitions: architecture, delivery, people, data, security, vendors, technical debt, and remediation priorities.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/technology-due-diligence.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <title>Technology Due Diligence: What to Check Before Acquiring a Company - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/technology-due-diligence.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/technology-due-diligence.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/technology-due-diligence.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Technology Due Diligence: What to Check Before Acquiring a Company","description":"What to examine in technology due diligence before acquiring a company: architecture, people, data, dependencies, security, and the real technology obligations behind the business.","inLanguage":"en","datePublished":"2026-03-04","dateModified":"2026-03-04","mainEntityOfPage":"https://kurakin.pro/en/articles/technology-due-diligence.html","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Technology Due Diligence: What to Check Before Acquiring a Company","description":"A practical technology due diligence checklist for acquisitions: architecture, delivery, people, data, security, vendors, technical debt, and remediation priorities.","inLanguage":"en","datePublished":"2026-03-04","dateModified":"2026-08-17","mainEntityOfPage":"https://kurakin.pro/en/articles/technology-due-diligence.html","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -30,45 +30,104 @@
   <a href="/en/#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language switcher"><a href="../../ru/articles/technology-due-diligence.html">RU</a><a href="technology-due-diligence.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/articles/">All articles</a><p class="article-kicker"><time datetime="2026-03-04">March 4, 2026</time><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Technology Due Diligence: What to Check Before Acquiring a Company</h1><p class="article-summary">When acquiring a technology company, the buyer does not only acquire a product and revenue. It also acquires architecture, people, dependencies, and accumulated decisions whose cost may appear after the deal.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/articles/">All articles</a><p class="article-kicker"><time datetime="2026-03-04">March 4, 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-08-17">August 17, 2026</time></span><span aria-hidden="true">·</span><span>8 min read</span></p><h1>Technology Due Diligence: What to Check Before Acquiring a Company</h1><p class="article-summary">When acquiring a technology company, the buyer does not only acquire a product and revenue. It also acquires architecture, people, dependencies, data, and accumulated decisions whose cost may appear after the deal.</p></div></header>
       <article class="article-content">
-        <p>Technology due diligence is sometimes treated as a code quality review. But clean code alone does not make a company a good acquisition, and an old stack does not automatically make it a bad one.</p>
-        <p>The more useful question is: which technology obligations, constraints, and risks transfer to the buyer with the business?</p>
+        <p>Technology due diligence is sometimes treated as a code quality review. That is too narrow.</p>
+        <p>A buyer is not only acquiring a product, a repository, and a team. The buyer is also inheriting architecture, operating habits, dependencies, security exposure, data obligations, and decisions that may become expensive only after the deal closes.</p>
+        <p>The useful question is not “is this technology good?” It is “what technology reality are we buying, what could constrain the business, and what will it cost to change?”</p>
 
-        <h2>Start with the connection between technology and the business</h2>
-        <p>Understand which parts of the technology are actually critical to revenue, customers, and future growth.</p>
-        <p>What cannot be replaced quickly? Which capabilities differentiate the product? Where does the company rely on manual work? What happens if load, customer count, or geography changes significantly?</p>
-        <p>Without this context, architecture review easily turns into a debate about preferences.</p>
+        <h2>What Technology Due Diligence Should Answer</h2>
+        <p>A good review should make the technology side of the deal easier to understand in business terms.</p>
+        <p>What must keep working on day one? Which systems are critical to revenue or customer commitments? Where is the company dependent on a person, vendor, or fragile process? Which risks can be accepted, which need remediation, and which could materially change the deal?</p>
+        <p>That is very different from producing a long list of code smells.</p>
+        <p>The outcome should help the buyer separate three things: problems that are mostly cosmetic, problems that become important only at a certain scale or strategic direction, and problems that can affect continuity, cost, or the ability to execute the acquisition thesis.</p>
 
-        <h2>Review architectural constraints, not architectural beauty</h2>
-        <p>Every working system contains tradeoffs. What matters is where those tradeoffs are already costing the business speed, money, or options.</p>
-        <p>Which components are difficult to change? Where are dependencies too tight? What fails repeatedly? Which changes does the team avoid? Are there parts of the product that cannot evolve without a major project?</p>
-        <p>Those are the real technology obligations the future owner is acquiring.</p>
+        <h2>Start with the Acquisition Thesis</h2>
+        <p>Technology only makes sense in context.</p>
+        <p>If the buyer intends to keep the company independent, the important questions are different from a plan to integrate products, consolidate platforms, move data, combine teams, or expand into new markets.</p>
+        <p>Before reviewing architecture, understand what the business expects to happen after the acquisition.</p>
+        <p>Which capabilities are part of the value of the deal? Which systems will need to integrate? What growth is expected? What cannot be interrupted? Which technology assumptions are already built into the financial or product plan?</p>
+        <p>Without that context, reviewers can spend days criticizing choices that do not matter and miss constraints that do.</p>
 
-        <h2>Understand who the system depends on</h2>
-        <p>One of the most expensive risks may sit in people rather than code.</p>
-        <p>Is there one engineer who understands a critical system? Who knows how to release? Who understands the infrastructure? Who makes architecture decisions? What happens if two key people leave after the acquisition?</p>
-        <p>Documentation helps, but it does not always compensate for concentrated knowledge.</p>
+        <h2>Map the Systems That Actually Matter</h2>
+        <p>Not every repository deserves equal attention.</p>
+        <p>Start with the systems that support critical customer journeys, revenue, data, operations, and integrations. Understand how they connect and what happens when one fails.</p>
+        <p>You do not need a perfect architecture diagram. You need a map good enough to see where the business is concentrated.</p>
+        <p>Which components are hard to replace? Which have no clear owner? Where does one failure propagate into several products? Which parts depend on manual intervention? Where are releases or recoveries unusually risky?</p>
+        <p>The point is not architectural beauty. It is operational and strategic consequence.</p>
 
-        <h2>Understand the data</h2>
-        <p>You need to know what data the company stores, where it comes from, who owns it, and how easily it can be restored or moved.</p>
-        <p>Risk becomes especially serious when the product depends heavily on data but there is little clarity about quality, provenance, access, or recovery.</p>
-        <p>A data problem after the deal can be far more expensive than an unfashionable framework.</p>
+        <h2>Review Architectural Constraints, Not Fashion</h2>
+        <p>Every working system contains trade-offs. Old technology can be perfectly adequate. Modern technology can be badly designed.</p>
+        <p>I would look for constraints rather than age.</p>
+        <p>Which components are difficult to change? Where are dependencies too tight? Which changes does the team routinely avoid? What fails repeatedly? Where does scaling require disproportionate effort? Are there product areas that cannot evolve without a major technical project?</p>
+        <p>Then connect each constraint to a business consequence.</p>
+        <p>If a monolith is stable and the company can ship quickly, the label “monolith” is not a finding. If a small change requires coordinated releases across several teams and repeatedly delays product work, that is a finding.</p>
 
-        <h2>Review external dependencies</h2>
-        <p>A product may look proprietary while much of its capability depends on vendors, licenses, cloud services, closed APIs, or a single contractor.</p>
-        <p>What happens if a vendor raises prices? Can the company switch? Which contract terms matter? Is there technology the company effectively does not control?</p>
-        <p>Vendor lock-in is not automatically a problem. It simply needs to be a conscious part of the deal economics.</p>
+        <h2>Understand Delivery, Not Just the Codebase</h2>
+        <p>A healthy repository does not guarantee a healthy engineering system.</p>
+        <p>Look at how changes move from an idea to production. How frequently can the team release? What requires manual work? How are incidents handled? Can the company restore service and data? How much knowledge is required to deploy safely?</p>
+        <p>The goal is not to demand a specific development process. It is to understand whether the company can change its product predictably.</p>
+        <p>If every important release depends on two people being online at the same time, that is a technology risk even if the code itself is clean.</p>
 
-        <h2>Review security through consequences</h2>
-        <p>Asking only whether a security policy exists tells you little. It is more useful to understand which scenarios can actually damage the business.</p>
-        <p>Who has production and data access? How are secrets managed? What happens if an account is compromised? Can systems be restored? Are critical changes made manually without controls?</p>
-        <p>The goal is not to find a company with no risk. No such company exists. The goal is to understand the size and manageability of the risk.</p>
+        <h2>Find Key-Person Dependencies</h2>
+        <p>Some of the most expensive risks sit in people rather than systems.</p>
+        <p>Who understands the critical architecture? Who knows how production actually works? Who can restore data? Who owns the most important vendor relationships? Who makes the decisions when something breaks?</p>
+        <p>Then ask what happens if those people leave after the transaction.</p>
+        <p>Documentation helps, but it is not the same as distributed capability. A company can have excellent documentation and still rely heavily on one person for judgment and context.</p>
+        <p>The important output is not “documentation is weak.” It is knowing where continuity depends on specific people and how difficult that dependency will be to reduce.</p>
 
-        <h2>Estimate the cost of fixing issues, not just the number of issues</h2>
-        <p>A long list of findings is nearly useless without priority. Ten minor architecture problems may cost less than one serious people dependency.</p>
-        <p>For each material constraint, ask whether it needs fixing at all, when it becomes critical, what organizational change it requires, and what happens if nothing is done.</p>
-        <p><strong>Good technology due diligence does not answer “how good is the code?” It helps the buyer understand the technology reality they are actually acquiring and how much freedom it leaves the business after the deal.</strong></p>
+        <h2>Understand the Data</h2>
+        <p>Data deserves its own review because it is often both an asset and a constraint.</p>
+        <p>What data does the company store? Where does it come from? Which systems are authoritative? Who can access it? How is it backed up and restored? Can it be exported, migrated, or reconciled?</p>
+        <p>Look for gaps between what the company believes about its data and what the systems can actually prove.</p>
+        <p>If the acquisition thesis includes combining products or moving customers, data structure and data quality can become a major integration problem. The fashionable framework used by the application may matter much less.</p>
+
+        <h2>Review Security Through Consequences</h2>
+        <p>Security review can easily become a checklist exercise. I prefer to start with plausible consequences.</p>
+        <p>Who has access to production and sensitive data? How are secrets managed? What happens when an employee leaves? Can critical actions be traced? What happens if an account or vendor integration is compromised? Can systems and data be restored?</p>
+        <p>Then look at the controls around the most serious scenarios.</p>
+        <p>The goal is not to find a company with zero risk. No such company exists. The goal is to understand which risks are material, how likely they are to surface during integration or growth, and whether the current organization can manage them.</p>
+
+        <h2>Review Vendors and External Dependencies</h2>
+        <p>A product can look proprietary while depending heavily on cloud services, third-party APIs, licenses, contractors, or a vendor that is difficult to replace.</p>
+        <p>Map the dependencies that would hurt if they changed.</p>
+        <p>What happens if pricing changes? Can the company switch providers? Does a critical integration depend on an undocumented behavior? Is important operational knowledge held by a contractor? Does the business rely on technology it does not really control?</p>
+        <p>Vendor lock-in is not automatically bad. Sometimes it is the economically correct choice. It becomes a problem when the deal assumes flexibility that the technology does not actually have.</p>
+
+        <h2>Separate Technical Debt from Remediation Cost</h2>
+        <p>“Technical debt” is too broad to be useful on its own.</p>
+        <p>The buyer needs to know which debt affects the deal and what happens if it is left alone.</p>
+        <p>For each material issue, I would ask: what business capability does it constrain, when does it become critical, what has to change to fix it, who needs to be involved, and what happens if nothing is done?</p>
+        <p>This turns a technical finding into a decision.</p>
+        <p>A rough estimate can also be useful as a conversation starter. The <a href="../projects/tech-debt-calculator.html">Technical Debt Calculator</a> can help structure that first estimate, but it should not replace engineering judgment. The cost is not only developer time; some issues require product trade-offs, migration work, organizational changes, or temporary slowdown.</p>
+
+        <h2>A Practical Technology Due Diligence Checklist</h2>
+        <p>The exact depth depends on the deal, but I would want clear answers in these areas:</p>
+        <ul>
+          <li>business-critical systems and customer dependencies;</li>
+          <li>architecture constraints and scaling limits;</li>
+          <li>engineering delivery and release process;</li>
+          <li>reliability, backup, recovery, and incident handling;</li>
+          <li>key-person and knowledge concentration;</li>
+          <li>data ownership, quality, movement, and recovery;</li>
+          <li>security access and material risk scenarios;</li>
+          <li>cloud, vendor, license, API, and contractor dependencies;</li>
+          <li>technical debt that can affect the acquisition plan;</li>
+          <li>realistic remediation priorities after closing.</li>
+        </ul>
+        <p>The checklist is not the report. It is a way to make sure important areas are not invisible.</p>
+
+        <h2>What the Final Report Should Do</h2>
+        <p>The worst due diligence report is a long document where every issue looks equally important.</p>
+        <p>I would group findings by consequence and decision.</p>
+        <p>What can break continuity? What can slow integration? What can create an unexpected cost? What can limit growth? What depends on retaining specific people? What should be fixed before closing, shortly after closing, later, or perhaps never?</p>
+        <p>For each major finding, explain the evidence, the business consequence, the likely remediation path, and the uncertainty.</p>
+        <p>The report should not pretend to know more than the review can prove. A short diligence process will always leave unknowns. Those unknowns should be visible too.</p>
+
+        <h2>Technology Due Diligence Is About Optionality</h2>
+        <p>A buyer does not need perfect technology. It needs to understand what it is committing to.</p>
+        <p>A system can be old and still leave the business plenty of options. A modern architecture can still trap the company behind fragile dependencies, missing knowledge, or expensive operating assumptions.</p>
+        <p><strong>Good technology due diligence does not answer “how good is the code?” It shows what technology obligations come with the company, which of them matter to the acquisition thesis, and how much freedom the buyer will have after the deal.</strong></p>
       </article>
     </main>
     <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/">Home</a></footer>
