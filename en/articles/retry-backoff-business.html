@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Retry with Backoff in business language: when retrying helps survive a short failure, and when it turns a small problem into a flood of load and errors.">
+    <meta name="description" content="How retry with exponential backoff and jitter works, which failures should be retried, why idempotency matters, and how retries can amplify an outage.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Retry with Backoff: Why Retrying Immediately Can Be the Worst Decision">
-    <meta property="og:description" content="How to retry temporary failures without amplifying an incident with extra load.">
+    <meta property="og:title" content="Retry with Backoff: Exponential Backoff, Jitter, and When Not to Retry">
+    <meta property="og:description" content="How to retry temporary failures without creating retry storms, duplicate operations, or a slower customer-facing failure.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/retry-backoff-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>Retry with Backoff: Why Retrying Immediately Can Be the Worst Decision - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-08-17">
+    <title>Retry with Backoff: Exponential Backoff, Jitter, and When Not to Retry - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/retry-backoff-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/retry-backoff-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/retry-backoff-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Retry with Backoff: Why Retrying Immediately Can Be the Worst Decision","description":"Retry with Backoff in business language: when retrying helps survive a short failure, and when it turns a small problem into a flood of load and errors.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/retry-backoff-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Retry with Backoff: Exponential Backoff, Jitter, and When Not to Retry","description":"How retry with exponential backoff and jitter works, which failures should be retried, why idempotency matters, and how retries can amplify an outage.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-17","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/retry-backoff-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -32,46 +32,71 @@
   <a href="/en/#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/retry-backoff-business.html">RU</a><a href="retry-backoff-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><span>5 min read</span></p><h1>Retry with Backoff: Why Retrying Immediately Can Be the Worst Decision</h1><p class="article-summary">A short network failure does not always need to become a customer-facing error. But if thousands of systems immediately retry failed requests at once, a small issue can turn into a major outage.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><span>7 min read</span></p><h1>Retry with Backoff: Exponential Backoff, Jitter, and When Not to Retry</h1><p class="article-summary">Retries can hide a short dependency failure from the customer. They can also multiply traffic against an already unhealthy service. The difference is in which errors are retried, how attempts are spaced, and whether repeating the operation is safe.</p></div></header>
       <article class="article-content">
-        <p>In distributed systems, an error does not always mean an operation is impossible. A service may simply be busy for a few seconds, a packet may be lost, or a dependency may be restarting.</p>
-        <p>Retrying can be sensible. Retrying immediately and repeatedly is not.</p>
-
-        <h2>What problem are we solving?</h2>
-        <p>Retry automatically repeats a temporarily failed operation. Backoff adds a delay between attempts, often increasing it after each failure.</p>
-        <p>The goal is to survive a short outage while giving the troubled system time to recover.</p>
-        <p>Without delay, thousands of clients can synchronize and attack an already overloaded service with even more traffic.</p>
-
-        <h2>What does the business get?</h2>
-        <p>The business gets fewer customer-visible failures caused by short technical problems.</p>
-        <p>An operation that would otherwise fail may succeed on the second attempt without involving the user or support team.</p>
-        <p>More importantly, controlled retries reduce the risk that local overload becomes a larger incident. The company protects critical flows instead of amplifying its own failure.</p>
-        <p>This matters especially for payments, orders, integrations, and background processes where short dependency outages are normal reality.</p>
-
-        <h2>What does the team get?</h2>
-        <p>The team gets a standard way to handle temporary failures and can distinguish retryable errors from final ones.</p>
-        <p>Backoff, jitter, and attempt limits help avoid synchronized waves of repeated traffic.</p>
-        <p>But retries require idempotency. If repeating an operation can create a second payment or order, automatic retry becomes dangerous.</p>
-
-        <h2>What does the customer get?</h2>
-        <p>The customer sees fewer errors caused by a one-second problem that the system can fix on its own.</p>
-        <p>But endless retries hurt too: instead of a fast, clear error, the interface may hang for a minute. Retries need limits.</p>
-
+        <p>In a distributed system, a failed request does not always mean the operation is impossible. A dependency may be restarting, a connection may have timed out, or a service may be overloaded for a few seconds.</p>
+        <p>That makes retrying useful. It also makes retrying one of the easiest resilience mechanisms to misuse.</p>
+        <h2>What is retry with backoff?</h2>
+        <p>A retry repeats an operation after a failure. Backoff adds a delay between attempts instead of sending them immediately one after another.</p>
+        <p>The purpose is simple: give the dependency time to recover and avoid turning one failed request into many failed requests in the same second.</p>
+        <h2>What is exponential backoff?</h2>
+        <p>With exponential backoff, the delay grows after each unsuccessful attempt. The first retry may happen quickly, while later attempts wait progressively longer.</p>
+        <p>The exact numbers are less important than the behavior: repeated failure should reduce retry pressure rather than maintain a constant flood.</p>
+        <p>A maximum delay and a maximum number of attempts are usually needed as well. Otherwise a request can keep retrying long after it has stopped being useful to the business.</p>
+        <h2>Why add jitter?</h2>
+        <p>If thousands of clients fail at the same moment and all use the same backoff schedule, they may retry at the same moments too.</p>
+        <p>Jitter adds randomness to the delay so clients spread their retries over time. The goal is not randomness for its own sake. It is to prevent synchronized retry waves.</p>
+        <h2>Which errors should be retried?</h2>
+        <p>I would retry only when there is a reasonable expectation that time can change the outcome.</p>
+        <p>Temporary network failures, short overload, or an unavailable dependency can fit that model. Invalid input, missing permission, or a business rule failure usually will not become successful simply because the same request is sent five more times.</p>
+        <p>Retrying a permanent error adds load, increases latency, and hides the real problem.</p>
+        <h2>Idempotency decides whether retry is safe</h2>
+        <p>Before automatically retrying an operation, ask what happens if the first attempt actually succeeded but the response was lost.</p>
+        <p>A repeated “read this data” is usually harmless. A repeated “charge this customer” can be very different.</p>
+        <p>Important write operations often need an idempotency mechanism or another business rule that ensures the same logical request cannot create duplicate side effects.</p>
+        <p>This is also why retry strategy belongs to the business flow, not only to a generic HTTP client configuration.</p>
+        <h2>What is a retry storm?</h2>
+        <p>A service becomes overloaded and starts failing. Clients retry. The retries add more traffic. The service has even less capacity to recover, so more requests fail and more clients retry.</p>
+        <p>At that point the resilience mechanism has become part of the incident.</p>
+        <p>Backoff and jitter reduce this risk, but architecture should also limit how much retry traffic one original request can create.</p>
+        <h2>Retries need a time budget</h2>
+        <p>A user waiting for a page has a different time budget from a background reconciliation job.</p>
+        <p>If the customer-facing request has a five-second usefulness window, six retries over a minute do not improve reliability. They turn a clear failure into a slow failure.</p>
+        <p>Retries, timeouts, and the overall business deadline should be designed together.</p>
+        <h2>Retries across several layers can multiply</h2>
+        <p>A browser may retry an API call. The API gateway may retry the service. The service may retry a database or another API. A queue consumer may retry the whole operation again.</p>
+        <p>Each layer can look reasonable in isolation while the combined behavior creates a large amplification factor during an incident.</p>
+        <p>Teams should know where retries are allowed and avoid invisible retry chains.</p>
+        <h2>What does the business gain?</h2>
+        <p>Good retry behavior converts short technical failures into successful business operations without involving the customer or support team.</p>
+        <p>It also helps systems recover more gracefully because temporary trouble does not immediately become a permanent customer error.</p>
+        <p>The business value is resilience to transient failure, not simply “more attempts.”</p>
         <h2>What do we pay for it?</h2>
-        <p>The price is extra load and more complex behavior during incidents.</p>
-        <p>The team must know which failures are temporary, how many attempts are allowed, and how long the user can wait.</p>
-        <p>A badly configured retry policy can multiply traffic exactly when the system is least able to handle it.</p>
-
-        <h2>When is retry unnecessary?</h2>
-        <p>Do not retry errors that clearly will not disappear with time: invalid input, missing permissions, or a failed business rule.</p>
-        <p>Retrying without understanding the cause is not resilience. It is extra noise.</p>
-
-        <h2>What should we ask before deciding?</h2>
-        <ul><li>Which errors are actually temporary?</li><li>Is the operation safe to repeat?</li><li>How many attempts are acceptable?</li><li>How quickly should the dependency recover?</li><li>What happens if thousands of clients retry at the same time?</li></ul>
-
+        <p>Retries consume capacity, increase latency, complicate observability, and can duplicate side effects.</p>
+        <p>Every retry policy needs ownership: which errors qualify, how long the business can wait, how many attempts are allowed, and how the system behaves after the final failure.</p>
+        <h2>When should you not retry?</h2>
+        <ul>
+          <li>the error is clearly permanent;</li>
+          <li>the operation is unsafe to repeat and has no idempotency protection;</li>
+          <li>the business deadline has already passed;</li>
+          <li>the dependency explicitly tells the client not to retry yet or to slow down;</li>
+          <li>another layer already owns the retry policy;</li>
+          <li>retrying creates more risk than returning a clear failure.</li>
+        </ul>
+        <h2>Questions to ask before implementing retry</h2>
+        <ul>
+          <li>Which exact failures are transient?</li>
+          <li>Is the operation safe to repeat if the first attempt actually succeeded?</li>
+          <li>What is the total time budget?</li>
+          <li>How many attempts are allowed?</li>
+          <li>Do we use backoff and jitter?</li>
+          <li>Are other layers retrying the same operation too?</li>
+          <li>How do we observe retry volume during an incident?</li>
+          <li>What happens after the final attempt fails?</li>
+        </ul>
         <h2>In the end</h2>
-        <p>Retry is useful not because “we should try again,” but because distributed systems regularly experience short failures.</p>
-        <p><strong>For the business, a good retry hides a short problem. A bad retry helps a small problem become a big one.</strong></p>
+        <p>Retry is useful because short failures are normal in distributed systems. It is dangerous because repeated traffic is not free.</p>
+        <p><strong>A good retry policy gives a dependency time to recover and protects the business from a transient failure. A bad one makes the failing dependency work harder exactly when it needs less load.</strong></p>
       </article>
     </main>
     <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>

@@ -3,19 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="When vendor lock-in becomes a business risk: how to evaluate supplier dependence, switching cost, and the real price of convenience.">
+    <meta name="description" content="Vendor and supplier lock-in explained through switching cost, data portability, contracts, architecture, operational dependency, and how to plan an exit without avoiding useful vendors.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Vendor Lock-In: When Supplier Dependence Becomes a Business Risk">
-    <meta property="og:description" content="When vendor lock-in becomes a business risk: how to evaluate supplier dependence, switching cost, and the real price of convenience.">
+    <meta property="og:title" content="Vendor Lock-In and Supplier Lock-In: How to Measure the Real Exit Cost">
+    <meta property="og:description" content="How vendor dependence becomes a business risk, what creates switching cost, and how to preserve options without rebuilding every external service in-house.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/vendor-lock-in-risk.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
-    <title>Vendor Lock-In: When Supplier Dependence Becomes a Business Risk - Anton Kurakin</title>
+    <meta property="article:published_time" content="2026-04-13">
+    <meta property="article:modified_time" content="2026-08-17">
+    <title>Vendor Lock-In and Supplier Lock-In: How to Measure the Real Exit Cost - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/vendor-lock-in-risk.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/vendor-lock-in-risk.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/vendor-lock-in-risk.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Vendor Lock-In: When Supplier Dependence Becomes a Business Risk","description":"When vendor lock-in becomes a business risk: how to evaluate supplier dependence, switching cost, and the real price of convenience.","inLanguage":"en","datePublished":"2026-04-13","dateModified":"2026-04-13","mainEntityOfPage":"https://kurakin.pro/en/articles/vendor-lock-in-risk.html","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Vendor Lock-In and Supplier Lock-In: How to Measure the Real Exit Cost","description":"Vendor and supplier lock-in explained through switching cost, data portability, contracts, architecture, operational dependency, and how to plan an exit without avoiding useful vendors.","inLanguage":"en","datePublished":"2026-04-13","dateModified":"2026-08-17","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/vendor-lock-in-risk.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -30,26 +32,76 @@
   <a href="/en/#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language switcher"><a href="../../ru/articles/vendor-lock-in-risk.html">RU</a><a href="vendor-lock-in-risk.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/articles/">All articles</a><p class="article-kicker"><time datetime="2026-04-13">April 13, 2026</time><span aria-hidden="true">·</span><span>4 min read</span></p><h1>Vendor Lock-In: When Supplier Dependence Becomes a Business Risk</h1><p class="article-summary">Dependence on a vendor is not automatically bad. It becomes a problem when the company can no longer change direction without a disproportionate cost, risk, or interruption to the business.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/articles/">All articles</a><p class="article-kicker"><time datetime="2026-04-13">April 13, 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-08-17">August 17, 2026</time></span><span aria-hidden="true">·</span><span>7 min read</span></p><h1>Vendor Lock-In and Supplier Lock-In: How to Measure the Real Exit Cost</h1><p class="article-summary">Dependence on a vendor is not automatically a problem. Lock-in becomes a business risk when changing supplier, technology, or direction is so expensive that the company effectively loses the option to leave.</p></div></header>
       <article class="article-content">
-        <p>Businesses often fear vendor lock-in in abstract terms: “we do not want to depend on one supplier.” But almost every effective solution creates some dependency — on a cloud provider, ERP, payment platform, software vendor, or strategic partner.</p>
-        <p>The useful question is not whether dependency exists. It is how expensive it would be to change the decision if circumstances changed.</p>
-        <h2>Today's convenience can become tomorrow's exit cost</h2>
-        <p>A vendor may provide excellent speed, integration, and support. That is real value.</p>
-        <p>But the deeper the product becomes embedded in processes, data, and architecture, the more expensive a migration becomes.</p>
-        <h2>The biggest risk is losing negotiating power</h2>
-        <p>If a supplier cannot be replaced within a reasonable period, the company has fewer options when prices rise, quality drops, or contract terms change.</p>
-        <p>Even a strong partner becomes a risk when the business has no realistic response to a serious disagreement.</p>
-        <h2>Data matters more than the license</h2>
-        <p>A subscription can be cancelled. It is much harder to understand how quickly the company can retrieve its data, in what format, and what surrounding processes must be rebuilt.</p>
-        <p>Sometimes the company technically owns the data but practically cannot move it without a major project.</p>
-        <h2>Do not eliminate every dependency</h2>
-        <p>Building an internal alternative to every external service is usually economically irrational. Avoiding lock-in at any cost creates its own cost and complexity.</p>
-        <p>A better approach is to choose consciously where dependency is acceptable and where it touches a critical process or strategic advantage.</p>
-        <h2>Know the exit cost before you need to leave</h2>
-        <p>Before committing to an important vendor, ask what happens if the price doubles, how long a migration would take, which data can be exported, and which processes would stop during a switch.</p>
-        <p>If those answers are missing, the company has evaluated the cost of entry but not the full cost of the decision.</p>
-        <p><strong>Vendor lock-in becomes a business risk not when the company depends on a supplier, but when it no longer understands what it would cost to stop depending on that supplier.</strong></p>
+        <p>Almost every useful external product creates dependency. A cloud platform, ERP, payment provider, database, CRM, logistics partner, or AI service saves the company from building something itself.</p>
+        <p>The mistake is treating all dependency as bad. The better question is much more practical: if circumstances changed, how expensive would it be to change this decision?</p>
+        <h2>What is vendor lock-in?</h2>
+        <p>Vendor lock-in is a situation where switching away from a supplier, product, or platform becomes difficult because the company has accumulated technical, operational, contractual, data, or organizational switching costs.</p>
+        <p>Supplier lock-in is the same business problem viewed more broadly. The dependency may not be software at all. A critical process can become tied to one external company, one contract, one data format, or one specialized capability.</p>
+        <p>The key word is not dependency. It is <strong>optionality</strong>: does the company still have realistic alternatives?</p>
+        <h2>What actually creates lock-in?</h2>
+        <p><strong>Data.</strong> The company may technically own its data while still being unable to export it in a usable format or migrate it within a reasonable time.</p>
+        <p><strong>Architecture.</strong> Product logic can become deeply coupled to proprietary APIs, workflows, database behavior, or managed services.</p>
+        <p><strong>Operations.</strong> Teams may build monitoring, support procedures, incident response, and business processes around one supplier.</p>
+        <p><strong>Skills.</strong> Employees become productive in a specific ecosystem. Moving away can require retraining, hiring, and temporary loss of speed.</p>
+        <p><strong>Contracts.</strong> Minimum commitments, termination terms, data-export conditions, and pricing structures can make an exit expensive even when the technology is portable.</p>
+        <p><strong>Integrations.</strong> A platform with dozens of downstream integrations can be much harder to replace than its license price suggests.</p>
+        <h2>Lock-in is not always bad</h2>
+        <p>A company may rationally accept strong dependence in exchange for speed, quality, reliability, or access to capabilities it would be expensive to build internally.</p>
+        <p>Avoiding every proprietary feature can also become a form of waste. Teams build abstraction layers they never use, run several platforms “just in case,” or choose the lowest common denominator instead of the capability that creates business value.</p>
+        <p>The goal is not zero lock-in. It is <strong>known lock-in with an acceptable exit cost</strong>.</p>
+        <h2>How to measure vendor lock-in</h2>
+        <p>I would evaluate the exit as a real project rather than a theoretical possibility.</p>
+        <ul>
+          <li>How much data must be moved, and in what format can it be exported?</li>
+          <li>Which application features depend on proprietary behavior?</li>
+          <li>How many integrations must be rebuilt?</li>
+          <li>Which business processes stop during migration?</li>
+          <li>How much parallel running is needed?</li>
+          <li>What new skills or people are required?</li>
+          <li>What contract costs are triggered by leaving?</li>
+          <li>How long would the migration take if the company had to start this quarter?</li>
+        </ul>
+        <p>The result does not need to be a perfect estimate. Even a rough exit model is far more useful than saying “we can always migrate later.”</p>
+        <h2>Loss of negotiating power is often the hidden cost</h2>
+        <p>The company does not need to leave a vendor for lock-in to become expensive.</p>
+        <p>If the supplier knows replacement would take two years, the customer has fewer options when prices rise, service quality falls, product direction changes, or contract terms become less attractive.</p>
+        <p>Exit capability therefore has value even when it is never used. It changes the negotiation.</p>
+        <h2>Data portability deserves its own review</h2>
+        <p>“The data belongs to us” is not enough.</p>
+        <p>Useful questions include whether all relevant data can be exported, whether metadata and relationships survive, how long export takes, whether historical records are included, and what must happen to backups or retained copies after termination.</p>
+        <p>A platform can be easy to cancel and still be extremely hard to leave because the business cannot reconstruct a usable state elsewhere.</p>
+        <h2>Architecture portability is not binary</h2>
+        <p>Teams sometimes ask whether a solution is “cloud agnostic” or “vendor independent” as if portability were yes or no.</p>
+        <p>In practice there are layers. Standard technologies may be portable while operations depend on proprietary managed services. Application code may move while identity, monitoring, networking, and data pipelines do not.</p>
+        <p>The useful question is which parts genuinely need portability and which are allowed to remain supplier-specific because the value is worth it.</p>
+        <h2>When should we build an abstraction layer?</h2>
+        <p>An abstraction is valuable when there is a credible reason to support multiple implementations or when a dependency sits behind a stable business capability.</p>
+        <p>It is less useful when engineers build a generic wrapper around every vendor feature before the company has any realistic plan to switch.</p>
+        <p>A bad abstraction gives the business the cost of portability without actual portability.</p>
+        <h2>Exit plans do not need to be migration projects</h2>
+        <p>Preserving an option to leave does not mean continuously running a second provider.</p>
+        <p>It can mean keeping data exports tested, documenting proprietary dependencies, avoiding unnecessary coupling, negotiating useful contract terms, and knowing which parts of the system would have to change.</p>
+        <p>The objective is to prevent the exit path from becoming completely unknown.</p>
+        <h2>Vendor lock-in in technology due diligence</h2>
+        <p>Supplier dependence matters especially when buying a company. The buyer inherits not only contracts and architecture but also the cost of changing them.</p>
+        <p>A critical platform with no realistic alternative can affect operating cost, negotiating position, integration plans, and the acquisition roadmap. That is why vendor dependence belongs in <a href="technology-due-diligence.html">technology due diligence</a>, not only in procurement.</p>
+        <h2>Questions to ask before committing to a critical vendor</h2>
+        <ul>
+          <li>What business capability are we gaining by accepting this dependency?</li>
+          <li>What happens if the price increases materially?</li>
+          <li>Can we export all important data in a usable form?</li>
+          <li>Which proprietary features are we choosing deliberately?</li>
+          <li>How many systems and processes will depend on this vendor?</li>
+          <li>What would a realistic migration require?</li>
+          <li>How long can the business tolerate the transition?</li>
+          <li>Which contract terms affect exit?</li>
+          <li>What is the smallest amount of exit preparation worth maintaining today?</li>
+        </ul>
+        <h2>In the end</h2>
+        <p>Vendor lock-in is not the presence of a supplier. Modern companies depend on suppliers because buying capabilities is often more rational than building them.</p>
+        <p><strong>The risk appears when the company stops knowing the price of changing its mind. A good vendor decision includes both the value of entering and a realistic understanding of the cost of leaving.</strong></p>
       </article>
     </main>
     <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/">Home</a></footer>
