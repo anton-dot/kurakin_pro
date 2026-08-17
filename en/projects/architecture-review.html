@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A free Architecture Review with 24 questions across system boundaries, reliability, data, security, operations, and cost of change.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/architecture-review.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/architecture-review.html">
+  <meta property="og:title" content="Architecture Review">
+  <meta property="og:description" content="A fast architecture health check with a 0–100 score, weak areas, critical gaps, and a ready-to-share review summary.">
+  <title>Architecture Review — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/architecture-review.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/architecture-review.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/architecture-review.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/architecture-review.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Architecture Review","url":"https://kurakin.pro/en/projects/architecture-review.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based architecture assessment with 24 questions, an overall score, category scores, and critical gaps.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/architecture-review.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/architecture-review.html">RU</a><a href="architecture-review.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/architecture-review.svg" alt="" width="112" height="112"><h1>Architecture Review</h1></div>
+        <p class="project-detail-lead">24 questions to quickly see whether architecture supports product change — or has started telling the business what it can and cannot do.</p>
+      </div>
+    </section>
+
+    <section class="ar-section" aria-labelledby="review-title">
+      <div class="ar-shell">
+        <div class="ar-assessment" data-ar-assessment>
+          <div class="ar-intro">
+            <p class="eyebrow">Free architecture health check</p>
+            <h2 id="review-title">Does the architecture support the product or constrain it?</h2>
+            <p>Choose Yes, Partly, or No / unknown. All 24 questions have equal weight. The goal is not to grade architectural elegance, but to find where the cost of change, failure, and scaling is increasing.</p>
+          </div>
+
+          <div class="ar-context">
+            <label for="ar-system-name">System or product</label>
+            <input id="ar-system-name" type="text" placeholder="For example: Core Platform" autocomplete="off" data-ar-system-name>
+            <small>Optional. The name is used only in the generated summary and is never sent anywhere.</small>
+          </div>
+
+          <div data-ar-questions></div>
+        </div>
+
+        <aside class="ar-result" aria-live="polite">
+          <p class="ar-result-kicker">Architecture score</p>
+          <p class="ar-score" data-ar-score>—</p>
+          <p class="ar-status" data-ar-status>No answers</p>
+          <p class="ar-progress" data-ar-progress></p>
+
+          <div class="ar-category-scores" data-ar-category-scores></div>
+
+          <div class="ar-critical-panel">
+            <p class="ar-panel-title">Critical gaps</p>
+            <ul class="ar-critical-list" data-ar-critical></ul>
+          </div>
+
+          <div class="ar-summary">
+            <p class="ar-summary-title">Ready-to-share review summary</p>
+            <p class="ar-summary-text" data-ar-summary></p>
+            <div class="ar-summary-actions"><button class="button ar-copy" type="button" data-ar-copy>Copy summary</button><span class="ar-copy-status" data-ar-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="ar-method">This is a lightweight review, not a full audit. The score is most useful as a prompt to test concrete scenarios: a new requirement, load growth, dependency failure, data migration, or component replacement.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">What it evaluates</p><h2>Not the stack. The system's ability to change</h2></div>
+        <div class="project-intro-copy"><p>The same stack can support both excellent and very expensive architecture. This review focuses on boundaries, failure isolation, data contracts, trust boundaries, operability, and the effort required for typical product changes.</p><p>If a weak area does not affect real business scenarios, there is no reason to improve it for the score. If it does, you now have a concrete architecture decision to discuss.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/architecture-review.js?v=20260817-1"></script>
+</body>
+</html>
