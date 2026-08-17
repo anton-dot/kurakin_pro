@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free Postmortem Builder for structuring impact, timeline, root cause, contributing factors, lessons learned, and action items after a production incident.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/postmortem-builder.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/postmortem-builder.html">
+  <meta property="og:title" content="Postmortem Builder">
+  <meta property="og:description" content="Build a blameless incident postmortem with timeline, causes, lessons, and accountable action items.">
+  <title>Postmortem Builder — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/postmortem-builder.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/postmortem-builder.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/postmortem-builder.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/postmortem-builder.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Postmortem Builder","url":"https://kurakin.pro/en/projects/postmortem-builder.html","applicationCategory":"DeveloperApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based blameless incident postmortem builder with impact, timeline, root cause, lessons, and action items.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/postmortem-builder.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/postmortem-builder.html">RU</a><a href="postmortem-builder.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/postmortem-builder.svg" alt="" width="112" height="112"><h1>Postmortem Builder</h1></div>
+        <p class="project-detail-lead">An incident is not finished when the service is back. It is finished when the team understands why it happened and what will actually change to reduce the chance of recurrence.</p>
+      </div>
+    </section>
+
+    <section class="pm-section" aria-labelledby="pm-title">
+      <div class="pm-shell">
+        <div class="pm-panel" data-pm-tool>
+          <div class="pm-intro">
+            <p class="eyebrow">Free Postmortem Builder</p>
+            <h2 id="pm-title">Turn facts, causes, and actions into one useful document</h2>
+            <p>Fill in only what is known. Keep facts separate from assumptions, and make every action item accountable with an owner and due date. Everything runs locally in the browser.</p>
+          </div>
+
+          <section class="pm-group" aria-labelledby="pm-context-title">
+            <h3 id="pm-context-title">1. Incident context</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-incident-title">Incident title</label><input id="pm-incident-title" data-pm-field="title" type="text" placeholder="For example: Checkout API unavailable during order placement"></div>
+              <div class="pm-field"><label for="pm-date">Date</label><input id="pm-date" data-pm-field="date" type="date"></div>
+              <div class="pm-field"><label for="pm-severity">Severity</label><select id="pm-severity" data-pm-field="severity"><option value="">Choose</option><option>SEV-1</option><option>SEV-2</option><option>SEV-3</option><option>SEV-4</option></select></div>
+              <div class="pm-field"><label for="pm-duration">Duration</label><input id="pm-duration" data-pm-field="duration" type="text" placeholder="For example: 37 minutes"><small>Use customer-impact duration even if technical follow-up work continued longer.</small></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-impact-title">
+            <h3 id="pm-impact-title">2. What happened</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-summary">Executive summary</label><textarea id="pm-summary" data-pm-field="summary" placeholder="What happened, which component was involved, and how the incident ended."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-impact">Customer and business impact</label><textarea id="pm-impact" data-pm-field="impact" placeholder="Which user journeys were unavailable or degraded. Do not invent numbers you do not have."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-detection">Detection</label><textarea id="pm-detection" data-pm-field="detection" placeholder="Alert, customer report, support ticket, manual check, or another signal."></textarea></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-timeline-title">
+            <div class="pm-repeat-head"><h3 id="pm-timeline-title">3. Timeline</h3><p>Record observable events: detection, decisions, state changes, mitigation, and recovery.</p></div>
+            <div class="pm-repeat-list" data-pm-timeline></div>
+            <button class="button pm-add" type="button" data-pm-add-timeline>Add event</button>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-analysis-title">
+            <h3 id="pm-analysis-title">4. Why it happened</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-root-cause">Root cause</label><textarea id="pm-root-cause" data-pm-field="rootCause" placeholder="The technical or process cause, without assigning individual blame."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-contributing">Contributing factors</label><textarea id="pm-contributing" data-pm-field="contributing" placeholder="One factor per line: weak alerting, manual process, missing limit, poor isolation..."></textarea><small>A root cause rarely explains the full blast radius. Capture the conditions that allowed the issue to happen or become worse.</small></div>
+              <div class="pm-field pm-field--wide"><label for="pm-resolution">Resolution and recovery</label><textarea id="pm-resolution" data-pm-field="resolution" placeholder="What stopped the impact and what stabilized the system afterward."></textarea></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-learning-title">
+            <h3 id="pm-learning-title">5. What we learned</h3>
+            <div class="pm-grid">
+              <div class="pm-field pm-field--wide"><label for="pm-well">What went well</label><textarea id="pm-well" data-pm-field="wentWell" placeholder="One item per line."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-poorly">What went poorly</label><textarea id="pm-poorly" data-pm-field="wentPoorly" placeholder="One item per line. Describe system and process conditions, not personal blame."></textarea></div>
+              <div class="pm-field pm-field--wide"><label for="pm-lessons">Lessons learned</label><textarea id="pm-lessons" data-pm-field="lessons" placeholder="What the team understands differently now and which assumptions should change."></textarea></div>
+            </div>
+          </section>
+
+          <section class="pm-group" aria-labelledby="pm-actions-title">
+            <div class="pm-repeat-head"><h3 id="pm-actions-title">6. Action items</h3><p>An action without an owner and due date is not an action item.</p></div>
+            <div class="pm-repeat-list" data-pm-actions></div>
+            <button class="button pm-add" type="button" data-pm-add-action>Add action</button>
+          </section>
+        </div>
+
+        <aside class="pm-result" aria-live="polite">
+          <p class="pm-kicker">Ready document</p>
+          <div class="pm-result-head"><h2>Postmortem</h2><div class="pm-completeness"><span>Completeness</span><strong data-pm-completeness>0%</strong></div></div>
+          <pre class="pm-preview" data-pm-preview></pre>
+          <div class="pm-actions"><button class="button pm-copy" type="button" data-pm-copy>Copy postmortem</button><span class="pm-copy-status" data-pm-copy-status aria-live="polite"></span></div>
+          <p class="pm-method">Nothing is sent to a server. The format is intentionally blameless: the goal is to understand system and process conditions and reduce recurrence, not to identify a person to blame.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="pm-guide">
+        <div><p class="eyebrow">Principle</p><h2>A useful postmortem changes the system</h2></div>
+        <div><p>The weakest postmortem is a long description of something that already happened. A useful one ends with a few testable changes: a guardrail, automation, alert, smaller blast radius, restore test, or process change.</p><p>If nothing changes after the document, the next similar incident will simply be documented better.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/postmortem-builder.js?v=20260817-1"></script>
+</body>
+</html>
