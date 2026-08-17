@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Бесплатный SLO Calculator: посчитайте error budget в минутах и событиях, расход бюджета, остаток и burn rate на текущем окне.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/slo-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/slo-calculator.html">
+  <meta property="og:title" content="SLO Calculator">
+  <meta property="og:description" content="Переведите SLO в понятный error budget и проверьте, с какой скоростью он расходуется.">
+  <title>SLO Calculator — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/slo-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/slo-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/slo-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/slo-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SLO Calculator","url":"https://kurakin.pro/projects/slo-calculator.html","applicationCategory":"DeveloperApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"ru","description":"Браузерный калькулятор SLO, error budget и burn rate для сервисов и API.","author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../assets/slo-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="slo-calculator.html" aria-current="page">RU</a><a href="../en/projects/slo-calculator.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/slo-calculator.svg" alt="" width="112" height="112"><h1>SLO Calculator</h1></div>
+        <p class="project-detail-lead">SLO становится полезным, когда из процента доступности превращается в конкретный бюджет ошибок — и видно, с какой скоростью команда его сжигает.</p>
+      </div>
+    </section>
+
+    <section class="slo-section" aria-labelledby="slo-title">
+      <div class="slo-shell">
+        <div class="slo-panel" data-slo-tool>
+          <div class="slo-intro">
+            <p class="eyebrow">Бесплатный SLO / Error Budget Calculator</p>
+            <h2 id="slo-title">Сколько ошибок вы реально можете себе позволить?</h2>
+            <p>Задайте SLO и окно измерения. Калькулятор покажет допустимое время недоступности, error budget в событиях, уже потраченный бюджет и текущий burn rate.</p>
+          </div>
+
+          <div class="slo-form">
+            <div class="slo-field slo-field--wide">
+              <label for="slo-service-name">Сервис или API</label>
+              <input id="slo-service-name" type="text" placeholder="Например: Checkout API" autocomplete="off">
+              <small>Необязательно. Название используется только в готовом summary.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-availability">Целевой SLO, %</label>
+              <input id="slo-availability" type="number" min="0" max="100" step="0.001" value="99.9">
+              <small>Например: 99.9, 99.95 или 99.99. Чем выше SLO, тем меньше error budget.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-window">Окно измерения, дней</label>
+              <input id="slo-window" type="number" min="1" max="365" step="1" value="30">
+              <small>Период, по которому вы оцениваете SLO. Часто используют 28 или 30 дней.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-requests">Ожидаемые запросы за всё окно</label>
+              <input id="slo-requests" type="number" min="0" step="1" value="10000000">
+              <small>Общий объём событий, к которым применяется SLI: запросы, транзакции, задачи или другой измеряемый поток.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-bad-events">Плохие события с начала окна</label>
+              <input id="slo-bad-events" type="number" min="0" step="1" value="3000">
+              <small>Ошибки или события, которые не выполнили условие SLI. Используйте ту же единицу, что и для общего объёма.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-elapsed">Прошло дней с начала окна</label>
+              <input id="slo-elapsed" type="number" min="0.01" max="365" step="0.1" value="10">
+              <small>Нужно для burn rate: сравниваем долю уже потраченного бюджета с долей прошедшего окна.</small>
+            </div>
+          </div>
+        </div>
+
+        <aside class="slo-result" aria-live="polite">
+          <p class="slo-kicker">Текущий SLO</p>
+          <div class="slo-primary">
+            <div class="slo-primary-card"><span>SLO target</span><strong data-slo-availability-result>—</strong></div>
+            <div class="slo-primary-card"><span>Downtime budget</span><strong data-slo-budget-time>—</strong></div>
+          </div>
+          <p class="slo-status" data-slo-status></p>
+
+          <div class="slo-metrics">
+            <div class="slo-metric"><span>Error budget, событий</span><strong data-slo-budget-events>—</strong></div>
+            <div class="slo-metric"><span>Бюджет использован</span><strong data-slo-consumed>—</strong></div>
+            <div class="slo-metric"><span>Остаток бюджета</span><strong data-slo-remaining>—</strong></div>
+            <div class="slo-metric"><span>Burn rate</span><strong data-slo-burn-rate>—</strong></div>
+          </div>
+
+          <div class="slo-summary">
+            <p class="slo-summary-title">Готовое summary</p>
+            <p class="slo-summary-text" data-slo-summary></p>
+            <div class="slo-summary-actions"><button class="button slo-copy" type="button" data-slo-copy>Скопировать текст</button><span class="slo-copy-status" data-slo-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="slo-method">Калькулятор использует простую event-based модель: доля допустимых плохих событий равна 100% − SLO. Downtime budget показан как эквивалент той же доли времени. Для реального SLO важно отдельно определить корректный SLI и измерять именно пользовательский результат.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">Как читать результат</p><h2>Burn rate важнее красивых девяток</h2></div>
+        <div class="project-intro-copy"><p>Сам по себе SLO не говорит, нужно ли команде срочно переключаться на надёжность. Это становится видно, когда error budget расходуется быстрее времени.</p><p>Burn rate 1× означает, что бюджет расходуется примерно в темпе окна. Значение выше 1× — ранний сигнал, что при сохранении текущего качества бюджет закончится раньше срока.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/slo-calculator.js?v=20260817-1"></script>
+</body>
+</html>

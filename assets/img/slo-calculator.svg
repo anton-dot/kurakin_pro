@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">SLO Calculator</title>
+  <desc id="desc">A gauge and error budget indicator.</desc>
+  <rect width="128" height="128" rx="24" fill="#13202e"/>
+  <path d="M28 76a36 36 0 0 1 72 0" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" opacity=".92"/>
+  <path d="M64 76 88 52" fill="none" stroke="#7be0d7" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="64" cy="76" r="7" fill="#7be0d7"/>
+  <rect x="30" y="91" width="68" height="10" rx="5" fill="#ffffff" opacity=".2"/>
+  <rect x="30" y="91" width="46" height="10" rx="5" fill="#7be0d7"/>
+</svg>
