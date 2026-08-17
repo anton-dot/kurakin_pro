@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free SLO Calculator: turn an availability target into an error budget in time and events, track budget consumption, remaining budget, and burn rate.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/slo-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/slo-calculator.html">
+  <meta property="og:title" content="SLO Calculator">
+  <meta property="og:description" content="Translate an SLO into a practical error budget and see how quickly the service is consuming it.">
+  <title>SLO Calculator — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/slo-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/slo-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/slo-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/slo-calculator.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SLO Calculator","url":"https://kurakin.pro/en/projects/slo-calculator.html","applicationCategory":"DeveloperApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"en","description":"A browser-based SLO, error budget, and burn-rate calculator for services and APIs.","author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"}}</script>
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260807-5">
+  <link rel="stylesheet" href="../../assets/slo-calculator.css?v=20260817-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/slo-calculator.html">RU</a><a href="slo-calculator.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/slo-calculator.svg" alt="" width="112" height="112"><h1>SLO Calculator</h1></div>
+        <p class="project-detail-lead">An SLO becomes useful when an availability percentage turns into a concrete error budget — and you can see how quickly the team is burning through it.</p>
+      </div>
+    </section>
+
+    <section class="slo-section" aria-labelledby="slo-title">
+      <div class="slo-shell">
+        <div class="slo-panel" data-slo-tool>
+          <div class="slo-intro">
+            <p class="eyebrow">Free SLO / Error Budget Calculator</p>
+            <h2 id="slo-title">How many failures can you actually afford?</h2>
+            <p>Set the SLO and measurement window. The calculator shows allowed unavailability, the event error budget, budget already consumed, remaining budget, and current burn rate.</p>
+          </div>
+
+          <div class="slo-form">
+            <div class="slo-field slo-field--wide">
+              <label for="slo-service-name">Service or API</label>
+              <input id="slo-service-name" type="text" placeholder="For example: Checkout API" autocomplete="off">
+              <small>Optional. The name is used only in the ready-to-share summary.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-availability">Target SLO, %</label>
+              <input id="slo-availability" type="number" min="0" max="100" step="0.001" value="99.9">
+              <small>For example: 99.9, 99.95, or 99.99. A higher target leaves a smaller error budget.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-window">Measurement window, days</label>
+              <input id="slo-window" type="number" min="1" max="365" step="1" value="30">
+              <small>The period over which the SLO is evaluated. 28- and 30-day windows are common choices.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-requests">Expected events across the full window</label>
+              <input id="slo-requests" type="number" min="0" step="1" value="10000000">
+              <small>Total events covered by the SLI: requests, transactions, jobs, or another measurable flow.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-bad-events">Bad events since the window started</label>
+              <input id="slo-bad-events" type="number" min="0" step="1" value="3000">
+              <small>Failures or events that did not meet the SLI condition. Use the same unit as the total event volume.</small>
+            </div>
+
+            <div class="slo-field">
+              <label for="slo-elapsed">Days elapsed in the window</label>
+              <input id="slo-elapsed" type="number" min="0.01" max="365" step="0.1" value="10">
+              <small>Used for burn rate: consumed budget is compared with the share of the window that has elapsed.</small>
+            </div>
+          </div>
+        </div>
+
+        <aside class="slo-result" aria-live="polite">
+          <p class="slo-kicker">Current SLO</p>
+          <div class="slo-primary">
+            <div class="slo-primary-card"><span>SLO target</span><strong data-slo-availability-result>—</strong></div>
+            <div class="slo-primary-card"><span>Downtime budget</span><strong data-slo-budget-time>—</strong></div>
+          </div>
+          <p class="slo-status" data-slo-status></p>
+
+          <div class="slo-metrics">
+            <div class="slo-metric"><span>Error budget, events</span><strong data-slo-budget-events>—</strong></div>
+            <div class="slo-metric"><span>Budget consumed</span><strong data-slo-consumed>—</strong></div>
+            <div class="slo-metric"><span>Budget remaining</span><strong data-slo-remaining>—</strong></div>
+            <div class="slo-metric"><span>Burn rate</span><strong data-slo-burn-rate>—</strong></div>
+          </div>
+
+          <div class="slo-summary">
+            <p class="slo-summary-title">Ready-to-share summary</p>
+            <p class="slo-summary-text" data-slo-summary></p>
+            <div class="slo-summary-actions"><button class="button slo-copy" type="button" data-slo-copy>Copy summary</button><span class="slo-copy-status" data-slo-copy-status aria-live="polite"></span></div>
+          </div>
+
+          <p class="slo-method">This calculator uses a simple event-based model: the allowed bad-event share equals 100% − SLO. The downtime budget is the equivalent share of time. A real SLO still depends on choosing the right SLI and measuring the user outcome that actually matters.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="project-detail-section muted">
+      <div class="project-detail-inner project-intro">
+        <div><p class="eyebrow">How to read it</p><h2>Burn rate matters more than pretty nines</h2></div>
+        <div class="project-intro-copy"><p>An SLO alone does not tell the team whether reliability work is urgent. That becomes visible when the error budget is being consumed faster than time is passing.</p><p>A 1× burn rate means the budget is being spent roughly in line with the window. Above 1× is an early signal that, if quality stays the same, the budget will run out before the window ends.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/slo-calculator.js?v=20260817-1"></script>
+</body>
+</html>
