@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Build versus Buy calculator</title>
+  <desc id="desc">Two balanced blocks representing build and buy options.</desc>
+  <rect width="128" height="128" rx="24" fill="#071426"/>
+  <path d="M64 26v76M35 42h58" stroke="#8fe6e2" stroke-width="7" stroke-linecap="round"/>
+  <path d="M35 42 20 72h30L35 42Zm58 0L78 72h30L93 42Z" fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M17 75c2 11 9 17 18 17s16-6 18-17M75 75c2 11 9 17 18 17s16-6 18-17" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="64" cy="42" r="7" fill="#c98128"/>
+</svg>
