@@ -1,8 +1,107 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="How to build data quality around ownership, checks, and consumer expectations so errors are caught before reports and decisions."><meta name="author" content="Anton Kurakin"><meta name="color-scheme" content="light"><meta property="og:type" content="article"><meta property="og:title" content="Data Quality: Why Bad Data Is an Architecture Problem, Not Only an Analyst Problem"><meta property="og:description" content="A pipeline can finish successfully and still deliver incorrect data. Quality must be built into the path from source to consumer, not checked only inside BI."><meta property="og:url" content="https://kurakin.pro/en/articles/data-quality-business.html"><meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-08-12"><title>Data Quality: Why Bad Data Is an Architecture Problem, Not Only an Analyst Problem - Anton Kurakin</title><link rel="canonical" href="https://kurakin.pro/en/articles/data-quality-business.html"><link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/data-quality-business.html"><link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/data-quality-business.html"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Quality: Why Bad Data Is an Architecture Problem, Not Only an Analyst Problem","description":"How to build data quality around ownership, checks, and consumer expectations so errors are caught before reports and decisions.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/data-quality-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script><link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"></head><body data-page="article" data-lang="en"><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
-</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/data-quality-business.html">RU</a><a href="data-quality-business.html" aria-current="page">EN</a></div></header><main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#analytics">Data and analytics</a><p class="article-kicker"><span>4 min read</span></p><h1>Data Quality: Why Bad Data Is an Architecture Problem, Not Only an Analyst Problem</h1><p class="article-summary">A pipeline can finish successfully and still deliver incorrect data. Quality must be built into the path from source to consumer, not checked only inside BI.</p></div></header><article class="article-content"><h2>What Problem Are We Solving?</h2><p>Rows loaded and the job is green, but records are missing, values became null, or the business meaning of a field changed. These failures are dangerous because they look plausible and reach reports and decisions before anyone notices. Fixing one dashboard does not solve the systemic cause.</p><h2>How It Works</h2><p>Data Quality starts with explicit expectations such as completeness, freshness, uniqueness, valid ranges, referential integrity, and domain rules. The closer an issue is caught to its source, the fewer consumers receive the wrong result. A critical data product needs an owner who understands meaning, not only pipeline infrastructure.</p><h2>What the Business Gets</h2><p>The business gets fewer decisions based on bad data and shorter investigations when a number is questioned. Control can be prioritized by cost of error: critical financial and operational datasets deserve stronger guarantees than experimental data.</p><h2>What the Team Gets</h2><p>Teams get automatic checks and clear expectations instead of discovering problems after complaints. Data quality incidents become observable with a known source and affected consumers.</p><h2>What the Customer Gets</h2><p>Internal users get more stable reports and fewer surprises where important numbers are revised after a decision.</p><h2>What We Pay For It</h2><p>Checks require maintenance and create noise when expectations are poorly chosen. Overly strict rules can block pipelines for harmless deviations. Technical constraints cannot capture every business-semantic error.</p><h2>When Not to Add It</h2><p>Do not build a large quality platform for every temporary dataset. Strengthen controls where data drives money, operations, external reporting, or automation.</p><h2>What to Ask Before the Decision</h2><ul><li>Which data error creates real business damage?</li><li>Who owns the meaning of the dataset?</li><li>Which checks can run close to the source?</li><li>How quickly will consumers learn about a quality breach?</li><li>Do the checks create more signal than noise?</li></ul><h2>In the End</h2><p><strong>Data Quality does not end with a green pipeline. For the business, good data architecture catches an error before it becomes a confident number inside an important decision.</strong></p></article></main><footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Why data quality is an architecture problem: ownership, freshness, completeness, contracts, lineage, validation, and how to catch bad data before decisions use it.">
+    <meta name="author" content="Anton Kurakin">
+    <meta name="color-scheme" content="light">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Data Quality: Why Bad Data Is an Architecture Problem">
+    <meta property="og:description" content="A green pipeline can still deliver a wrong number. Build data quality around ownership, contracts, validation, lineage, and the cost of error.">
+    <meta property="og:url" content="https://kurakin.pro/en/articles/data-quality-business.html">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+    <meta property="article:published_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-18">
+    <title>Data Quality: Why Bad Data Is an Architecture Problem - Anton Kurakin</title>
+    <link rel="canonical" href="https://kurakin.pro/en/articles/data-quality-business.html">
+    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/data-quality-business.html">
+    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/data-quality-business.html">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Quality: Why Bad Data Is an Architecture Problem","description":"Why data quality is an architecture problem: ownership, freshness, completeness, contracts, lineage, validation, and how to catch bad data before decisions use it.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-18","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/data-quality-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/styles.css">
+  </head>
+  <body data-page="article" data-lang="en">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/" aria-current="page">Architecture</a><a href="/en/#contact">Contact</a></nav>
+      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/data-quality-business.html">RU</a><a href="data-quality-business.html" aria-current="page">EN</a></div>
+    </header>
+    <main class="article-page" id="main">
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#analytics">Data and analytics</a><p class="article-kicker"><time datetime="2026-08-18">Updated 18 Aug 2026</time><span aria-hidden="true">·</span><span>7 min read</span></p><h1>Data Quality: Why Bad Data Is an Architecture Problem</h1><p class="article-summary">A pipeline can finish successfully and still deliver the wrong business answer. Data quality is not a final BI check; it is a set of ownership, validation, contracts, and observability decisions across the path from source to consumer.</p></div></header>
+      <article class="article-content">
+        <p>A job is green. Rows were loaded. The dashboard refreshed. Yet records are missing, a field changed meaning, yesterday's data was loaded twice, or an upstream system stopped sending one category of events.</p>
+        <p>The dangerous data failures are often not the ones that crash the pipeline. They are the ones that produce a plausible number.</p>
+        <p>That is why data quality is an architecture problem, not only an analyst problem.</p>
+
+        <h2>What does “good data” actually mean?</h2>
+        <p>Quality is not one metric. Different datasets need different guarantees. Common dimensions include:</p>
+        <ul>
+          <li><strong>Completeness:</strong> did all expected records and fields arrive?</li>
+          <li><strong>Freshness:</strong> is the data recent enough for the decision?</li>
+          <li><strong>Validity:</strong> are values inside allowed ranges and formats?</li>
+          <li><strong>Uniqueness:</strong> did retries or joins create duplicates?</li>
+          <li><strong>Consistency:</strong> do related systems disagree about the same business fact?</li>
+          <li><strong>Referential integrity:</strong> do relationships still point to valid entities?</li>
+        </ul>
+        <p>The right target depends on the use case. A recommendation model may tolerate a small delay. A financial close, access-control decision, or automated payment process may not.</p>
+
+        <h2>A green pipeline is not a quality guarantee</h2>
+        <p>Infrastructure checks answer questions such as “Did the job run?” and “Did the file arrive?” They do not automatically answer “Is this the right data?”</p>
+        <p>A source can rename a business status while keeping the same technical type. A currency can change interpretation without breaking a schema. An upstream team can legitimately stop sending records that downstream reporting still expects.</p>
+        <p>This is where technical validation and business semantics meet. Someone must own not only the pipeline but also the meaning of the dataset.</p>
+
+        <h2>Catch errors as close to the source as possible</h2>
+        <p>The farther bad data travels, the more consumers it reaches and the harder the investigation becomes.</p>
+        <p>Basic checks can run at ingestion: expected volume, required fields, duplicate identifiers, freshness, allowed ranges, and schema compatibility. Domain-specific checks belong closer to the team that understands the business meaning.</p>
+        <p>If several teams depend on the data, explicit <a href="data-contracts-business.html">Data Contracts</a> help make ownership, fields, semantics, freshness, and change expectations visible instead of relying on tribal knowledge.</p>
+
+        <h2>Know where a number came from</h2>
+        <p>When a dashboard is wrong, the first expensive question is often: where did this field come from?</p>
+        <p>If a metric passed through five transformations, two joins, and a shared spreadsheet before reaching a report, debugging without lineage becomes archaeology.</p>
+        <p><a href="data-lineage-business.html">Data Lineage</a> makes the path visible: source, transformations, downstream datasets, and consumers. It does not prevent bad data by itself, but it dramatically reduces the search space when something changes.</p>
+
+        <h2>Ownership matters more than the number of checks</h2>
+        <p>A platform can run hundreds of tests and still fail if nobody owns the alert. Every important dataset needs a clear answer to two questions: who owns its technical delivery, and who owns its business meaning?</p>
+        <p>Sometimes this is the same team. Often it is not.</p>
+        <p>The architecture should also define what happens after a failed check. Do we block the pipeline, quarantine records, continue with a warning, or mark data as stale? There is no universal answer because the cost of false positives and the cost of bad data differ by domain.</p>
+
+        <h2>Prioritize by cost of error</h2>
+        <p>Trying to make every temporary dataset perfect is expensive and usually unnecessary.</p>
+        <p>A useful approach is to start with data that drives money, external reporting, operational decisions, customer-facing behavior, or automation. Ask what happens if the number is wrong for one hour, one day, or one week.</p>
+        <p>That makes quality an economic decision. Stronger guarantees go where an error has a real consequence.</p>
+
+        <h2>What the business gets</h2>
+        <p>The business gets fewer decisions based on silently incorrect data and shorter investigations when a number is questioned.</p>
+        <p>It also gets clearer accountability. Instead of “the dashboard is broken,” teams can identify which contract failed, which source changed, which consumers are affected, and who owns recovery.</p>
+        <p>This becomes even more important when data feeds automation or AI. A human may notice an absurd dashboard. A downstream automated process can act on bad data immediately and at scale.</p>
+
+        <h2>What the team gets</h2>
+        <p>Teams get explicit expectations and automated feedback instead of discovering problems through complaints.</p>
+        <p>They also get a safer way to change upstream systems. When contracts, checks, and lineage are visible, the blast radius of a schema or semantic change is easier to understand before release.</p>
+
+        <h2>What we pay for it</h2>
+        <p>Checks require maintenance. Thresholds can become noisy. Strict rules can block a pipeline because of a harmless deviation. Business rules evolve, so quality logic must evolve with them.</p>
+        <p>There is also a temptation to build a large central platform before teams agree on ownership. Tooling cannot solve unclear responsibility.</p>
+        <p>The goal is not maximum validation. It is enough validation and visibility to keep the cost of bad data below the cost of controlling it.</p>
+
+        <h2>Questions to ask before the decision</h2>
+        <ul>
+          <li>Which data errors create real business damage?</li>
+          <li>Who owns the technical delivery and the business meaning?</li>
+          <li>Which checks can run close to the source?</li>
+          <li>What happens after a quality check fails?</li>
+          <li>Can we identify every downstream consumer of a critical field?</li>
+          <li>How quickly will consumers know that data is stale or unreliable?</li>
+          <li>Are the checks producing more signal than noise?</li>
+        </ul>
+
+        <h2>In the end</h2>
+        <p>Data quality does not end with a green pipeline or a clean dashboard.</p>
+        <p><strong>For the business, good data architecture means detecting an error while it is still a data problem — before it becomes a confident number inside an important decision.</strong></p>
+      </article>
+    </main>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+  </body>
+</html>
