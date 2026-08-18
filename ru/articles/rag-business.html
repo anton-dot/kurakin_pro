@@ -12,12 +12,12 @@
     <meta property="og:url" content="https://kurakin.pro/ru/articles/rag-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-08-18">
     <title>RAG: как дать AI знания компании без переобучения модели - Антон Куракин</title>
     <link rel="canonical" href="https://kurakin.pro/ru/articles/rag-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/rag-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/rag-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RAG: как дать AI знания компании без переобучения модели","description":"Что такое RAG, как дать AI доступ к знаниям компании без переобучения модели и какие бизнес-компромиссы появляются вокруг качества, актуальности и доступа к данным.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/rag-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RAG: как дать AI знания компании без переобучения модели","description":"Что такое RAG, как дать AI доступ к знаниям компании без переобучения модели и какие бизнес-компромиссы появляются вокруг качества, актуальности и доступа к данным.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-08-18","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/rag-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -45,7 +45,7 @@
         <h2>Какую проблему мы решаем</h2>
         <p>Перед тем как модель отвечает пользователю, система ищет подходящие фрагменты во внутренних источниках: документах, базе знаний, каталоге продуктов или других данных.</p>
         <p>Найденный контекст передаётся модели вместе с вопросом. Модель не обязана хранить знания компании внутри себя — она получает их по запросу.</p>
-        <p>Это отделяет общую способность модели работать с языком от конкретной информации бизнеса.</p>
+        <p>Это отделяет общую способность модели работать с языком от конкретной информации бизнеса. В типичной реализации за поиск по смыслу отвечает <a href="vector-search-business.html">Vector Search</a>, но сама vector database не гарантирует хороший retrieval.</p>
 
         <h2>Что получает бизнес</h2>
         <p>Главная выгода — корпоративные знания можно обновлять без нового обучения модели.</p>
@@ -56,7 +56,7 @@
         <h2>Что получает команда</h2>
         <p>Команда может развивать поиск, модель и источники данных независимо. Можно менять LLM, не перестраивая всю базу знаний, или улучшать индекс без переобучения модели.</p>
         <p>Но появляется новая цепочка: подготовка документов, разбиение на фрагменты, индексация, retrieval, сбор контекста и генерация.</p>
-        <p>Ошибка теперь может быть не только в модели. Система могла не найти нужный документ, выбрать старую версию или передать слишком мало контекста.</p>
+        <p>Ошибка теперь может быть не только в модели. Система могла не найти нужный документ, выбрать старую версию или передать слишком мало контекста. Поэтому RAG тесно связан с тем, как команда управляет <a href="context-window-business.html">контекстом модели</a>.</p>
 
         <h2>Что получает пользователь</h2>
         <p>Пользователь получает ответы, которые опираются на знания конкретной компании, а не только на общие сведения модели.</p>
@@ -66,7 +66,7 @@
         <h2>Чем мы за это платим</h2>
         <p>Цена — качество данных, поиска и контроля доступа.</p>
         <p>Если в базе знаний лежат противоречивые или устаревшие документы, AI будет уверенно использовать именно их. Если права не учитываются при поиске, пользователь может получить контекст, который не должен был видеть.</p>
-        <p>Нужны метрики качества retrieval, процессы обновления источников и тесты реальных пользовательских вопросов.</p>
+        <p>Нужны метрики качества retrieval, процессы обновления источников и тесты реальных пользовательских вопросов. Отдельно нужно решить, <a href="ai-data-privacy-business.html">какие корпоративные данные вообще можно передавать AI-модели</a> и где они будут обрабатываться.</p>
 
         <h2>Когда RAG не нужен</h2>
         <p>Если задача не требует корпоративных или быстро меняющихся знаний, дополнительный retrieval-слой может только увеличить задержку и сложность.</p>
