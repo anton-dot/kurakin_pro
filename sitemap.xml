@@ -88,18 +88,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" />
   </url>
   <url>
-    <loc>https://kurakin.pro/projects/tech-debt-calculator.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/tech-debt-calculator.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/tech-debt-calculator.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/tech-debt-calculator.html" />
-  </url>
-  <url>
-    <loc>https://kurakin.pro/en/projects/tech-debt-calculator.html</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/tech-debt-calculator.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/tech-debt-calculator.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/tech-debt-calculator.html" />
-  </url>
-  <url>
     <loc>https://kurakin.pro/ru/articles/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />
