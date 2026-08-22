@@ -3,3 +3,4 @@ Allow: /
 
 Sitemap: https://kurakin.pro/sitemap.xml
 Sitemap: https://kurakin.pro/sitemap-architecture.xml
+Sitemap: https://kurakin.pro/sitemap-bmaker.xml
