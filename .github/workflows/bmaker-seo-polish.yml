@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/bmaker_seo_polish.py'
+      - '.github/workflows/bmaker-seo-polish.yml'
 
 permissions:
   contents: write
