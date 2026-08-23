@@ -1,0 +1,31 @@
+name: B-Maker SEO polish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/bmaker_seo_polish.py'
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply SEO polish
+        run: python3 tools/bmaker_seo_polish.py
+      - name: Commit generated pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects/b-maker/compare en/projects/b-maker/compare
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "Polish B-Maker SEO guide pages"
+          git push
