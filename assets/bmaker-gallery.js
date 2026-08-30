@@ -134,7 +134,7 @@
           cards: [
             ['Fast start', 'Start writing first', 'Why the first job of writing software is to let you write — and let structure arrive later.', 'start-writing-first'],
             ['Idea Map', 'From idea to chapter', 'How a loose note gradually becomes part of the real manuscript without copying between tools.', 'from-idea-to-chapter'],
-            ['Versions', 'No more final-final.docx', 'How named versions, comparison and locking change the way revision works.', 'no-more-final-final.docx']
+            ['Versions', 'No more final-final.docx', 'How named versions, comparison and locking change the way revision works.', 'no-more-final-final-docx']
           ]
         };
 
