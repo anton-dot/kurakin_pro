@@ -134,7 +134,7 @@
           cards: [
             ['Fast start', 'Start writing first', 'Why the first job of writing software is to let you write — and let structure arrive later.', 'start-writing-first'],
             ['Idea Map', 'From idea to chapter', 'How a loose note gradually becomes part of the real manuscript without copying between tools.', 'from-idea-to-chapter'],
-            ['Versions', 'No more final-final.docx', 'How named versions, comparison and locking change the way revision works.', 'no-more-final-final-docx']
+            ['Versions', 'No more final-final.docx', 'How named versions, comparison and locking change the way revision works.', 'no-more-final-final.docx']
           ]
         };
 
@@ -260,6 +260,26 @@
 })();
 
 (() => {
+  const measurementId = 'G-8F31VPYZVV';
+
+  function analytics() {
+    if (typeof window.gtag === 'function') return window.gtag;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId);
+
+    if (!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${measurementId}"]`)) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+      document.head.append(script);
+    }
+
+    return window.gtag;
+  }
+
   document.addEventListener('click', (event) => {
     const link = event.target.closest?.('a[href]');
     if (!link) return;
@@ -270,13 +290,11 @@
     else if (/^https:\/\/b-maker\.kurakin\.pro\/?(?:[?#].*)?$/.test(href)) eventName = 'bmaker_open_web';
     if (!eventName) return;
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: eventName,
-      bmaker_link_url: href,
-      bmaker_link_text: (link.textContent || '').trim(),
-      bmaker_page_path: window.location.pathname,
-      bmaker_page_language: document.documentElement.lang || document.body?.dataset?.lang || ''
+    analytics()('event', eventName, {
+      link_url: href,
+      link_text: (link.textContent || '').trim(),
+      page_path: window.location.pathname,
+      page_language: document.documentElement.lang || document.body?.dataset?.lang || ''
     });
   });
 })();
