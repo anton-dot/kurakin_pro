@@ -258,3 +258,25 @@
     } catch (_) {}
   }
 })();
+
+(() => {
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest?.('a[href]');
+    if (!link) return;
+    const href = link.href || '';
+    let eventName = null;
+    if (href.includes('/downloads/bmaker/B-Maker-Setup-macos.zip')) eventName = 'bmaker_download_macos';
+    else if (href.includes('/downloads/bmaker/B-Maker-Setup-win.zip')) eventName = 'bmaker_download_windows';
+    else if (/^https:\/\/b-maker\.kurakin\.pro\/?(?:[?#].*)?$/.test(href)) eventName = 'bmaker_open_web';
+    if (!eventName) return;
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      bmaker_link_url: href,
+      bmaker_link_text: (link.textContent || '').trim(),
+      bmaker_page_path: window.location.pathname,
+      bmaker_page_language: document.documentElement.lang || document.body?.dataset?.lang || ''
+    });
+  });
+})();
