@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Бесплатный калькулятор стоимости регулярных встреч: стоимость одного созвона, годовой meeting tax, человеко-часы и эквивалент рабочих дней.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/meeting-tax-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/meeting-tax-calculator.html">
+  <meta property="og:title" content="Meeting Tax Calculator">
+  <meta property="og:description" content="Сколько на самом деле стоит ваша еженедельная встреча — в деньгах, человеко-часах и рабочих днях.">
+  <title>Meeting Tax Calculator — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/meeting-tax-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/meeting-tax-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/meeting-tax-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/en/projects/meeting-tax-calculator.html">
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260815-1">
+  <link rel="stylesheet" href="../assets/meeting-tax-calculator.css?v=20260903-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="meeting-tax-calculator.html" aria-current="page">RU</a><a href="../en/projects/meeting-tax-calculator.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero meeting-tax-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/meeting-tax-calculator.svg" alt="" width="112" height="112"><h1>Meeting Tax Calculator</h1></div>
+        <p class="project-detail-lead">Встречи бесплатны только в календаре. Посчитайте, сколько одна регулярная встреча стоит компании за год — в деньгах и времени команды.</p>
+        <p class="meeting-tax-note">Не калькулятор «встречи — зло». Если встреча создаёт больше ценности, чем стоит, всё отлично. Проблема начинается, когда её стоимость никто никогда не считал.</p>
+      </div>
+    </section>
+
+    <section class="meeting-tax-section" aria-labelledby="calculator-title">
+      <div class="meeting-tax-shell">
+        <form class="meeting-tax-form" data-meeting-tax-form>
+          <div><p class="eyebrow">Бесплатный калькулятор</p><h2 id="calculator-title">Сколько стоит эта встреча?</h2><p>Используйте среднюю полную стоимость сотрудника для компании. Расчёт выполняется локально в браузере.</p></div>
+          <div class="meeting-tax-grid">
+            <div class="meeting-tax-field"><label for="currency">Валюта</label><select id="currency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select></div>
+            <div class="meeting-tax-field"><label for="people">Участников</label><input id="people" type="number" min="1" step="1" value="8" inputmode="numeric"><small>Все люди, которые обычно присутствуют.</small></div>
+          </div>
+          <div class="meeting-tax-field"><label for="annual-cost">Средняя полная стоимость одного участника / год</label><input id="annual-cost" type="number" min="0" step="1000" value="120000" inputmode="decimal"><small>Зарплата плюс налоги, льготы, оборудование и другие прямые затраты компании.</small></div>
+          <div class="meeting-tax-grid">
+            <div class="meeting-tax-field"><label for="duration">Длительность встречи, минут</label><input id="duration" type="number" min="0" step="5" value="60" inputmode="numeric"></div>
+            <div class="meeting-tax-field"><label for="prep">Подготовка + follow-up на человека, минут</label><input id="prep" type="number" min="0" step="5" value="10" inputmode="numeric"><small>Если подготовки нет — поставьте 0.</small></div>
+          </div>
+          <div class="meeting-tax-grid">
+            <div class="meeting-tax-field"><label for="meetings-week">Встреч в неделю</label><input id="meetings-week" type="number" min="0" step="0.5" value="1" inputmode="decimal"></div>
+            <div class="meeting-tax-field"><label for="weeks-year">Рабочих недель в году</label><input id="weeks-year" type="number" min="1" max="52" step="1" value="48" inputmode="numeric"><small>48 оставляет место для отпусков и праздников.</small></div>
+          </div>
+        </form>
+
+        <aside class="meeting-tax-result" data-meeting-tax-result aria-live="polite">
+          <p class="meeting-tax-kicker">Meeting Tax / год</p>
+          <p class="meeting-tax-total" data-meeting-tax-total>$0</p>
+          <p class="meeting-tax-caption">Примерная стоимость одной регулярной встречи за год.</p>
+          <div class="meeting-tax-metrics">
+            <div class="meeting-tax-metric"><span>Один созвон</span><strong data-meeting-tax-each>$0</strong></div>
+            <div class="meeting-tax-metric"><span>В среднем за месяц</span><strong data-meeting-tax-month>$0</strong></div>
+            <div class="meeting-tax-metric"><span>Человеко-часов в год</span><strong data-meeting-tax-hours>0 h</strong></div>
+            <div class="meeting-tax-metric"><span>Эквивалент рабочих дней</span><strong data-meeting-tax-days>0</strong></div>
+            <div class="meeting-tax-metric"><span>Эквивалент стоимости одного сотрудника</span><strong data-meeting-tax-weeks>0</strong></div>
+          </div>
+          <div class="meeting-tax-verdict"><strong data-meeting-tax-verdict-title></strong><p data-meeting-tax-verdict-copy></p></div>
+          <div class="meeting-tax-share"><p class="meeting-tax-share-label">Готовый текст для отправки</p><p class="meeting-tax-share-text" data-meeting-tax-share></p><div class="meeting-tax-actions"><button class="button" type="button" data-meeting-tax-copy>Скопировать</button><button class="button button-secondary" type="button" data-meeting-tax-native-share>Поделиться</button><span class="meeting-tax-status" data-meeting-tax-status aria-live="polite"></span></div></div>
+          <p class="meeting-tax-method">Модель использует 2 080 рабочих часов в году для расчёта стоимости часа. Подготовка и follow-up считаются для каждого участника. Это ориентир для обсуждения, а не бухгалтерский расчёт.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="meeting-tax-explainer muted">
+      <div class="meeting-tax-explainer-inner"><div><p class="eyebrow">Главный вопрос</p><h2>Не «сколько стоит встреча?», а «что мы покупаем за эти деньги?»</h2></div><div><p>Встреча может быть очень дорогой и всё равно окупаться: ускорить решение, снять риск, синхронизировать критическую работу или предотвратить дорогостоящую ошибку.</p><p>Но регулярная встреча без владельца, решения или измеримого результата превращается в скрытый организационный налог. Самый простой способ увидеть его — перевести календарь в человеко-часы и деньги.</p></div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/meeting-tax-calculator.js?v=20260903-1"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free meeting cost calculator: estimate the cost of one meeting, annual meeting tax, person-hours, and equivalent workdays.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/meeting-tax-calculator.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/meeting-tax-calculator.html">
+  <meta property="og:title" content="Meeting Tax Calculator">
+  <meta property="og:description" content="See what your recurring meeting really costs in money, person-hours, and workdays.">
+  <title>Meeting Tax Calculator — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/meeting-tax-calculator.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/meeting-tax-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/meeting-tax-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/en/projects/meeting-tax-calculator.html">
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260815-1">
+  <link rel="stylesheet" href="../../assets/meeting-tax-calculator.css?v=20260903-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/meeting-tax-calculator.html">RU</a><a href="meeting-tax-calculator.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero meeting-tax-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/meeting-tax-calculator.svg" alt="" width="112" height="112"><h1>Meeting Tax Calculator</h1></div>
+        <p class="project-detail-lead">Meetings are only free on the calendar. Calculate what one recurring meeting costs the company over a year — in money and team time.</p>
+        <p class="meeting-tax-note">This is not a “meetings are bad” calculator. If a meeting creates more value than it costs, great. The problem starts when nobody has ever looked at the cost.</p>
+      </div>
+    </section>
+
+    <section class="meeting-tax-section" aria-labelledby="calculator-title">
+      <div class="meeting-tax-shell">
+        <form class="meeting-tax-form" data-meeting-tax-form>
+          <div><p class="eyebrow">Free calculator</p><h2 id="calculator-title">What does this meeting cost?</h2><p>Use the average fully loaded employee cost. Everything is calculated locally in your browser.</p></div>
+          <div class="meeting-tax-grid">
+            <div class="meeting-tax-field"><label for="currency">Currency</label><select id="currency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select></div>
+            <div class="meeting-tax-field"><label for="people">Participants</label><input id="people" type="number" min="1" step="1" value="8" inputmode="numeric"><small>Everyone who normally attends.</small></div>
+          </div>
+          <div class="meeting-tax-field"><label for="annual-cost">Average fully loaded cost per participant / year</label><input id="annual-cost" type="number" min="0" step="1000" value="120000" inputmode="decimal"><small>Salary plus taxes, benefits, equipment, and other direct employer costs.</small></div>
+          <div class="meeting-tax-grid">
+            <div class="meeting-tax-field"><label for="duration">Meeting duration, minutes</label><input id="duration" type="number" min="0" step="5" value="60" inputmode="numeric"></div>
+            <div class="meeting-tax-field"><label for="prep">Prep + follow-up per person, minutes</label><input id="prep" type="number" min="0" step="5" value="10" inputmode="numeric"><small>Use 0 if there is none.</small></div>
+          </div>
+          <div class="meeting-tax-grid">
+            <div class="meeting-tax-field"><label for="meetings-week">Meetings per week</label><input id="meetings-week" type="number" min="0" step="0.5" value="1" inputmode="decimal"></div>
+            <div class="meeting-tax-field"><label for="weeks-year">Working weeks per year</label><input id="weeks-year" type="number" min="1" max="52" step="1" value="48" inputmode="numeric"><small>48 leaves room for holidays and time off.</small></div>
+          </div>
+        </form>
+
+        <aside class="meeting-tax-result" data-meeting-tax-result aria-live="polite">
+          <p class="meeting-tax-kicker">Meeting Tax / year</p>
+          <p class="meeting-tax-total" data-meeting-tax-total>$0</p>
+          <p class="meeting-tax-caption">Estimated annual cost of one recurring meeting.</p>
+          <div class="meeting-tax-metrics">
+            <div class="meeting-tax-metric"><span>One meeting</span><strong data-meeting-tax-each>$0</strong></div>
+            <div class="meeting-tax-metric"><span>Average per month</span><strong data-meeting-tax-month>$0</strong></div>
+            <div class="meeting-tax-metric"><span>Person-hours per year</span><strong data-meeting-tax-hours>0 h</strong></div>
+            <div class="meeting-tax-metric"><span>Equivalent workdays</span><strong data-meeting-tax-days>0</strong></div>
+            <div class="meeting-tax-metric"><span>Equivalent cost of one employee</span><strong data-meeting-tax-weeks>0</strong></div>
+          </div>
+          <div class="meeting-tax-verdict"><strong data-meeting-tax-verdict-title></strong><p data-meeting-tax-verdict-copy></p></div>
+          <div class="meeting-tax-share"><p class="meeting-tax-share-label">Ready-to-share result</p><p class="meeting-tax-share-text" data-meeting-tax-share></p><div class="meeting-tax-actions"><button class="button" type="button" data-meeting-tax-copy>Copy</button><button class="button button-secondary" type="button" data-meeting-tax-native-share>Share</button><span class="meeting-tax-status" data-meeting-tax-status aria-live="polite"></span></div></div>
+          <p class="meeting-tax-method">The model uses 2,080 working hours per year to estimate hourly cost. Prep and follow-up are counted for every participant. This is a decision aid, not an accounting figure.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="meeting-tax-explainer muted">
+      <div class="meeting-tax-explainer-inner"><div><p class="eyebrow">The real question</p><h2>Not “what does the meeting cost?” but “what are we buying with that money?”</h2></div><div><p>A meeting can be expensive and still be worth it: it can accelerate a decision, reduce risk, coordinate critical work, or prevent an expensive mistake.</p><p>But a recurring meeting without an owner, a decision, or measurable output becomes a hidden organizational tax. The simplest way to see it is to translate the calendar into person-hours and money.</p></div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/meeting-tax-calculator.js?v=20260903-1"></script>
+</body>
+</html>
