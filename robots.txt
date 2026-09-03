@@ -6,3 +6,4 @@ Sitemap: https://kurakin.pro/sitemap-architecture.xml
 Sitemap: https://kurakin.pro/sitemap-bmaker.xml
 Sitemap: https://kurakin.pro/sitemap-bmaker-stories.xml
 Sitemap: https://kurakin.pro/sitemap-bmaker-explained.xml
+Sitemap: https://kurakin.pro/sitemap-bmaker-explained-wave2.xml
