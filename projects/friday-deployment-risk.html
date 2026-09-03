@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Полушутливый Friday Deployment Risk Index: 12 вопросов про rollback, observability, blast radius, ручные шаги, on-call и готовность к пятничному релизу.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/friday-deployment-risk.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/friday-deployment-risk.html">
+  <meta property="og:title" content="Friday Deployment Risk Index">
+  <meta property="og:description" content="Насколько смелым будет ваш пятничный релиз? 12 вопросов про реальные механизмы безопасного deployment.">
+  <title>Friday Deployment Risk Index — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/friday-deployment-risk.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/friday-deployment-risk.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/friday-deployment-risk.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/en/projects/friday-deployment-risk.html">
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260815-1">
+  <link rel="stylesheet" href="../assets/friday-deployment-risk.css?v=20260903-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="friday-deployment-risk.html" aria-current="page">RU</a><a href="../en/projects/friday-deployment-risk.html">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero fd-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/friday-deployment-risk.svg" alt="" width="112" height="112"><h1>Friday Deployment Risk Index</h1></div>
+        <p class="project-detail-lead">Пятница не ломает production. Его ломают большие изменения без rollback, ручные шаги, слабая наблюдаемость и релиз, после которого все уже мысленно уехали за город.</p>
+        <p class="fd-disclaimer">Полушутливый release-readiness check. Не заменяет инженерную оценку риска и не запрещает деплоить по пятницам.</p>
+      </div>
+    </section>
+
+    <section class="fd-section" aria-labelledby="quiz-title">
+      <div class="fd-shell">
+        <div class="fd-intro">
+          <div><p class="eyebrow">12 вопросов · ~2 минуты</p><h2 id="quiz-title">How brave is your Friday release?</h2></div>
+          <p>Отвечайте про конкретный релиз, который собираетесь выкатывать. Чем выше итоговый score, тем больше надежды участвует в release process вместе с вами.</p>
+        </div>
+
+        <form class="fd-quiz" data-fd-quiz>
+          <fieldset class="fd-question" data-category="process"><legend><span>01</span> Когда именно вы собираетесь нажать Deploy?</legend><div class="fd-options"><label><input type="radio" name="q1" value="0"><span>Утром, впереди полный рабочий день</span></label><label><input type="radio" name="q1" value="1"><span>До обеда</span></label><label><input type="radio" name="q1" value="2"><span>После обеда</span></label><label><input type="radio" name="q1" value="3"><span>Под конец рабочего дня</span></label><label><input type="radio" name="q1" value="4"><span>После 18:00. Что может пойти не так?</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="rollback"><legend><span>02</span> Если релиз нужно откатить, насколько понятен и проверен rollback?</legend><div class="fd-options"><label><input type="radio" name="q2" value="0"><span>Автоматизирован и регулярно проверяется</span></label><label><input type="radio" name="q2" value="1"><span>Понятен и уже использовался</span></label><label><input type="radio" name="q2" value="2"><span>Есть инструкция, давно не проверяли</span></label><label><input type="radio" name="q2" value="3"><span>Теоретически можно откатить</span></label><label><input type="radio" name="q2" value="4"><span>Rollback — это новый релиз</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="rollback"><legend><span>03</span> Есть ли в релизе миграции данных или необратимые изменения?</legend><div class="fd-options"><label><input type="radio" name="q3" value="0"><span>Нет или полностью backward-compatible</span></label><label><input type="radio" name="q3" value="1"><span>Есть безопасная staged migration</span></label><label><input type="radio" name="q3" value="2"><span>Есть миграция с понятным планом возврата</span></label><label><input type="radio" name="q3" value="3"><span>Вернуться будет сложно</span></label><label><input type="radio" name="q3" value="4"><span>После миграции назад дороги нет</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="observability"><legend><span>04</span> Как быстро вы поймёте, что релиз что-то сломал?</legend><div class="fd-options"><label><input type="radio" name="q4" value="0"><span>Минуты: метрики, алерты и понятные SLI</span></label><label><input type="radio" name="q4" value="1"><span>Довольно быстро по dashboards</span></label><label><input type="radio" name="q4" value="2"><span>Нужно смотреть несколько мест</span></label><label><input type="radio" name="q4" value="3"><span>Скорее всего по обращениям</span></label><label><input type="radio" name="q4" value="4"><span>Пользователи сообщат</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="observability"><legend><span>05</span> Заранее определено, какие сигналы означают «останавливаем rollout»?</legend><div class="fd-options"><label><input type="radio" name="q5" value="0"><span>Да, есть явные критерии</span></label><label><input type="radio" name="q5" value="1"><span>В основном понятно</span></label><label><input type="radio" name="q5" value="2"><span>Будем смотреть по ситуации</span></label><label><input type="radio" name="q5" value="3"><span>Решим, если станет плохо</span></label><label><input type="radio" name="q5" value="4"><span>Главный сигнал — паника в чате</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="blast"><legend><span>06</span> Какую часть пользователей может затронуть ошибка?</legend><div class="fd-options"><label><input type="radio" name="q6" value="0"><span>Небольшой canary / внутренние пользователи</span></label><label><input type="radio" name="q6" value="1"><span>Ограниченный сегмент</span></label><label><input type="radio" name="q6" value="2"><span>Заметная часть трафика</span></label><label><input type="radio" name="q6" value="3"><span>Большинство пользователей</span></label><label><input type="radio" name="q6" value="4"><span>Все сразу</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="blast"><legend><span>07</span> Можно ли выключить новую функциональность без нового deployment?</legend><div class="fd-options"><label><input type="radio" name="q7" value="0"><span>Да, feature flag / config</span></label><label><input type="radio" name="q7" value="1"><span>Большую часть — да</span></label><label><input type="radio" name="q7" value="2"><span>Частично</span></label><label><input type="radio" name="q7" value="3"><span>Почти нет</span></label><label><input type="radio" name="q7" value="4"><span>Нет. Только новый релиз</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="process"><legend><span>08</span> Сколько ручных шагов и «не забудь сделать вот это» в релизе?</legend><div class="fd-options"><label><input type="radio" name="q8" value="0"><span>Практически всё автоматизировано</span></label><label><input type="radio" name="q8" value="1"><span>1–2 простых шага</span></label><label><input type="radio" name="q8" value="2"><span>Несколько проверок руками</span></label><label><input type="radio" name="q8" value="3"><span>Есть последовательность, которую знают не все</span></label><label><input type="radio" name="q8" value="4"><span>Release ritual передаётся устно</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="process"><legend><span>09</span> Насколько большой этот change set?</legend><div class="fd-options"><label><input type="radio" name="q9" value="0"><span>Маленькое изолированное изменение</span></label><label><input type="radio" name="q9" value="1"><span>Небольшой релиз</span></label><label><input type="radio" name="q9" value="2"><span>Несколько связанных изменений</span></label><label><input type="radio" name="q9" value="3"><span>Крупный пакет</span></label><label><input type="radio" name="q9" value="4"><span>Мы не релизили три недели</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="people"><legend><span>10</span> Кто сможет разобраться, если после релиза что-то пойдёт не так?</legend><div class="fd-options"><label><input type="radio" name="q10" value="0"><span>Несколько людей + нормальный runbook</span></label><label><input type="radio" name="q10" value="1"><span>Команда хорошо знает систему</span></label><label><input type="radio" name="q10" value="2"><span>Есть 2 ключевых человека</span></label><label><input type="radio" name="q10" value="3"><span>В основном один эксперт</span></label><label><input type="radio" name="q10" value="4"><span>Надеемся, он будет онлайн</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="people"><legend><span>11</span> После релиза кто-то реально остаётся наблюдать за системой?</legend><div class="fd-options"><label><input type="radio" name="q11" value="0"><span>Да, это часть release process</span></label><label><input type="radio" name="q11" value="1"><span>Да, некоторое время</span></label><label><input type="radio" name="q11" value="2"><span>Кто-нибудь поглядывает</span></label><label><input type="radio" name="q11" value="3"><span>Если что — напишут</span></label><label><input type="radio" name="q11" value="4"><span>Deploy → laptop closed</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="people"><legend><span>12</span> Насколько болезненным будет инцидент именно сегодня вечером или на выходных?</legend><div class="fd-options"><label><input type="radio" name="q12" value="0"><span>Низкий трафик, команда доступна</span></label><label><input type="radio" name="q12" value="1"><span>Нормальный рабочий режим</span></label><label><input type="radio" name="q12" value="2"><span>Есть неудобства, но справимся</span></label><label><input type="radio" name="q12" value="3"><span>Высокий трафик или мало людей</span></label><label><input type="radio" name="q12" value="4"><span>Peak business + ключевые люди недоступны</span></label></div></fieldset>
+
+          <div class="fd-submit-row"><button class="button fd-submit" type="submit">Оценить пятничную смелость</button><p data-fd-progress></p></div>
+        </form>
+
+        <section class="fd-result" data-fd-result hidden aria-live="polite">
+          <p class="fd-result-kicker">Friday Deployment Risk</p>
+          <div class="fd-score-row"><strong data-fd-score>0</strong><span>/100</span></div>
+          <h2 data-fd-title></h2>
+          <p class="fd-result-copy" data-fd-copy></p>
+          <div class="fd-meter" aria-hidden="true"><span data-fd-meter></span></div>
+          <div class="fd-breakdown" data-fd-breakdown></div>
+          <div class="fd-grid">
+            <div class="fd-callout"><p class="eyebrow">Самый большой риск</p><strong data-fd-worst></strong><p data-fd-worst-copy></p></div>
+            <div class="fd-callout"><p class="eyebrow">Самая спокойная зона</p><strong data-fd-best></strong><p>Не трогайте то, что уже работает. Используйте эту практику как образец для более рискованных частей релиза.</p></div>
+          </div>
+          <div class="fd-share-card">
+            <p class="fd-share-label">Готовый результат</p>
+            <p class="fd-share-text" data-fd-share-text></p>
+            <div class="fd-share-actions"><button class="button" type="button" data-fd-copy-button>Скопировать</button><button class="button button-secondary" type="button" data-fd-native-share>Поделиться</button><button class="button button-secondary" type="button" data-fd-restart>Пройти ещё раз</button><span data-fd-copy-status aria-live="polite"></span></div>
+          </div>
+          <p class="fd-footnote">Это эвристика, а не формальная risk model. Score помогает заметить сочетание факторов риска и начать разговор о механизмах безопасного релиза.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/friday-deployment-risk.js?v=20260903-1"></script>
+</body>
+</html>

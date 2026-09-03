@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A semi-serious Friday Deployment Risk Index: 12 questions about rollback, observability, blast radius, manual steps, on-call coverage and release readiness.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/friday-deployment-risk.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/friday-deployment-risk.html">
+  <meta property="og:title" content="Friday Deployment Risk Index">
+  <meta property="og:description" content="How brave is your Friday release? 12 questions about the mechanisms that make deployment safe or hopeful.">
+  <title>Friday Deployment Risk Index — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/friday-deployment-risk.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/friday-deployment-risk.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/friday-deployment-risk.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/en/projects/friday-deployment-risk.html">
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260815-1">
+  <link rel="stylesheet" href="../../assets/friday-deployment-risk.css?v=20260903-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/friday-deployment-risk.html">RU</a><a href="friday-deployment-risk.html" aria-current="page">EN</a></div>
+  </header>
+
+  <main id="main">
+    <section class="project-detail-hero fd-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/friday-deployment-risk.svg" alt="" width="112" height="112"><h1>Friday Deployment Risk Index</h1></div>
+        <p class="project-detail-lead">Friday does not break production. Large changes without rollback, manual rituals, weak observability, and releases performed after everyone has mentally left for the weekend do.</p>
+        <p class="fd-disclaimer">A semi-serious release-readiness check. It does not replace engineering risk assessment and it does not ban Friday deployments.</p>
+      </div>
+    </section>
+
+    <section class="fd-section" aria-labelledby="quiz-title">
+      <div class="fd-shell">
+        <div class="fd-intro">
+          <div><p class="eyebrow">12 questions · ~2 minutes</p><h2 id="quiz-title">How brave is your Friday release?</h2></div>
+          <p>Answer for the specific release you are about to ship. The higher the score, the more hope is participating in your release process alongside the engineering team.</p>
+        </div>
+
+        <form class="fd-quiz" data-fd-quiz>
+          <fieldset class="fd-question" data-category="process"><legend><span>01</span> When are you planning to press Deploy?</legend><div class="fd-options"><label><input type="radio" name="q1" value="0"><span>Morning, with a full workday ahead</span></label><label><input type="radio" name="q1" value="1"><span>Before lunch</span></label><label><input type="radio" name="q1" value="2"><span>After lunch</span></label><label><input type="radio" name="q1" value="3"><span>Near the end of the workday</span></label><label><input type="radio" name="q1" value="4"><span>After 6 PM. What could go wrong?</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="rollback"><legend><span>02</span> If you need to roll back, how clear and tested is the path?</legend><div class="fd-options"><label><input type="radio" name="q2" value="0"><span>Automated and regularly tested</span></label><label><input type="radio" name="q2" value="1"><span>Clear and used before</span></label><label><input type="radio" name="q2" value="2"><span>Documented, not tested recently</span></label><label><input type="radio" name="q2" value="3"><span>Rollback is theoretically possible</span></label><label><input type="radio" name="q2" value="4"><span>Rollback means another release</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="rollback"><legend><span>03</span> Does this release include data migrations or irreversible changes?</legend><div class="fd-options"><label><input type="radio" name="q3" value="0"><span>No, or fully backward-compatible</span></label><label><input type="radio" name="q3" value="1"><span>Safe staged migration</span></label><label><input type="radio" name="q3" value="2"><span>Migration with a known return path</span></label><label><input type="radio" name="q3" value="3"><span>Going back would be difficult</span></label><label><input type="radio" name="q3" value="4"><span>After migration, there is no way back</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="observability"><legend><span>04</span> How quickly will you know the release broke something?</legend><div class="fd-options"><label><input type="radio" name="q4" value="0"><span>Minutes: metrics, alerts and clear SLIs</span></label><label><input type="radio" name="q4" value="1"><span>Pretty quickly from dashboards</span></label><label><input type="radio" name="q4" value="2"><span>We need to check several places</span></label><label><input type="radio" name="q4" value="3"><span>Probably through support reports</span></label><label><input type="radio" name="q4" value="4"><span>Users will tell us</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="observability"><legend><span>05</span> Are the signals for “stop the rollout” defined in advance?</legend><div class="fd-options"><label><input type="radio" name="q5" value="0"><span>Yes, explicit criteria exist</span></label><label><input type="radio" name="q5" value="1"><span>Mostly clear</span></label><label><input type="radio" name="q5" value="2"><span>We will judge in the moment</span></label><label><input type="radio" name="q5" value="3"><span>We will decide if it gets bad</span></label><label><input type="radio" name="q5" value="4"><span>The main signal is panic in chat</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="blast"><legend><span>06</span> How much of your user base can a bad change affect?</legend><div class="fd-options"><label><input type="radio" name="q6" value="0"><span>Small canary / internal users</span></label><label><input type="radio" name="q6" value="1"><span>Limited segment</span></label><label><input type="radio" name="q6" value="2"><span>A noticeable share of traffic</span></label><label><input type="radio" name="q6" value="3"><span>Most users</span></label><label><input type="radio" name="q6" value="4"><span>Everyone at once</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="blast"><legend><span>07</span> Can you disable the new functionality without another deployment?</legend><div class="fd-options"><label><input type="radio" name="q7" value="0"><span>Yes, feature flag / config</span></label><label><input type="radio" name="q7" value="1"><span>Most of it, yes</span></label><label><input type="radio" name="q7" value="2"><span>Partially</span></label><label><input type="radio" name="q7" value="3"><span>Barely</span></label><label><input type="radio" name="q7" value="4"><span>No. Only another release</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="process"><legend><span>08</span> How many manual “do not forget this” steps are in the release?</legend><div class="fd-options"><label><input type="radio" name="q8" value="0"><span>Almost everything is automated</span></label><label><input type="radio" name="q8" value="1"><span>1–2 simple steps</span></label><label><input type="radio" name="q8" value="2"><span>Several manual checks</span></label><label><input type="radio" name="q8" value="3"><span>A sequence not everyone knows</span></label><label><input type="radio" name="q8" value="4"><span>The release ritual is oral tradition</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="process"><legend><span>09</span> How large is the change set?</legend><div class="fd-options"><label><input type="radio" name="q9" value="0"><span>Small isolated change</span></label><label><input type="radio" name="q9" value="1"><span>Small release</span></label><label><input type="radio" name="q9" value="2"><span>Several related changes</span></label><label><input type="radio" name="q9" value="3"><span>Large batch</span></label><label><input type="radio" name="q9" value="4"><span>We have not released in three weeks</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="people"><legend><span>10</span> Who can diagnose trouble after the release?</legend><div class="fd-options"><label><input type="radio" name="q10" value="0"><span>Several people + a useful runbook</span></label><label><input type="radio" name="q10" value="1"><span>The team knows the system well</span></label><label><input type="radio" name="q10" value="2"><span>Two key people</span></label><label><input type="radio" name="q10" value="3"><span>Mainly one expert</span></label><label><input type="radio" name="q10" value="4"><span>Hopefully that person is online</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="people"><legend><span>11</span> Does someone actually stay to observe the system after deployment?</legend><div class="fd-options"><label><input type="radio" name="q11" value="0"><span>Yes, it is part of the release process</span></label><label><input type="radio" name="q11" value="1"><span>Yes, for a while</span></label><label><input type="radio" name="q11" value="2"><span>Someone keeps an eye on it</span></label><label><input type="radio" name="q11" value="3"><span>If something happens, someone will message</span></label><label><input type="radio" name="q11" value="4"><span>Deploy → laptop closed</span></label></div></fieldset>
+          <fieldset class="fd-question" data-category="people"><legend><span>12</span> How painful would an incident be specifically tonight or over the weekend?</legend><div class="fd-options"><label><input type="radio" name="q12" value="0"><span>Low traffic, team available</span></label><label><input type="radio" name="q12" value="1"><span>Normal operating conditions</span></label><label><input type="radio" name="q12" value="2"><span>Inconvenient, but manageable</span></label><label><input type="radio" name="q12" value="3"><span>High traffic or low staffing</span></label><label><input type="radio" name="q12" value="4"><span>Peak business + key people unavailable</span></label></div></fieldset>
+
+          <div class="fd-submit-row"><button class="button fd-submit" type="submit">Assess Friday bravery</button><p data-fd-progress></p></div>
+        </form>
+
+        <section class="fd-result" data-fd-result hidden aria-live="polite">
+          <p class="fd-result-kicker">Friday Deployment Risk</p>
+          <div class="fd-score-row"><strong data-fd-score>0</strong><span>/100</span></div>
+          <h2 data-fd-title></h2>
+          <p class="fd-result-copy" data-fd-copy></p>
+          <div class="fd-meter" aria-hidden="true"><span data-fd-meter></span></div>
+          <div class="fd-breakdown" data-fd-breakdown></div>
+          <div class="fd-grid">
+            <div class="fd-callout"><p class="eyebrow">Biggest risk</p><strong data-fd-worst></strong><p data-fd-worst-copy></p></div>
+            <div class="fd-callout"><p class="eyebrow">Calmest area</p><strong data-fd-best></strong><p>Do not disturb what already works. Use this practice as a pattern for the riskier parts of the release.</p></div>
+          </div>
+          <div class="fd-share-card">
+            <p class="fd-share-label">Shareable result</p>
+            <p class="fd-share-text" data-fd-share-text></p>
+            <div class="fd-share-actions"><button class="button" type="button" data-fd-copy-button>Copy</button><button class="button button-secondary" type="button" data-fd-native-share>Share</button><button class="button button-secondary" type="button" data-fd-restart>Try again</button><span data-fd-copy-status aria-live="polite"></span></div>
+          </div>
+          <p class="fd-footnote">This is a heuristic, not a formal risk model. The score is meant to reveal stacked release risks and start a conversation about safer deployment mechanisms.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/friday-deployment-risk.js?v=20260903-1"></script>
+</body>
+</html>
