@@ -90,7 +90,7 @@
 
   [
     ['bmaker-articles.webp', 'from-articles-to-book'],
-    ['bmaker-manuscript.webp', 'write-in-sections-read-as-one-manuscript'],
+    ['bmaker-manuscript.webp', 'read-whole-manuscript'],
     ['bmaker-collections.webp', 'one-manuscript-several-views'],
     ['bmaker-idea-map.webp', 'from-idea-to-chapter'],
     ['bmaker-story.webp', 'characters-and-plot-without-spreadsheet'],
@@ -175,18 +175,14 @@
 
   const labels = isRu
     ? {
-        mac: 'Скачать для macOS',
-        win: 'Скачать для Windows',
-        web: 'Открыть в браузере',
+        mac: 'Скачать для macOS', win: 'Скачать для Windows', web: 'Открыть в браузере',
         intro: 'Используйте нативное приложение на macOS или Windows. На других устройствах B-Maker доступен в современном браузере.',
         macDesc: 'Нативное desktop-приложение для Mac с локальными файлами проектов.',
         winDesc: 'Нативное desktop-приложение для Windows с локальными файлами проектов.',
         webDesc: 'Работайте в браузере на Linux, Chromebook, планшете или другом устройстве.'
       }
     : {
-        mac: 'Download for macOS',
-        win: 'Download for Windows',
-        web: 'Open in browser',
+        mac: 'Download for macOS', win: 'Download for Windows', web: 'Open in browser',
         intro: 'Use the native app on macOS or Windows. On other devices, B-Maker runs in a modern browser.',
         macDesc: 'Native desktop app for Mac with local project files.',
         winDesc: 'Native desktop app for Windows with local project files.',
@@ -199,12 +195,8 @@
     a.className = `button ${primary ? 'primary' : 'secondary'}`;
     a.href = data[0];
     a.textContent = data[1];
-    if (kind === 'web') {
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-    } else {
-      a.setAttribute('download', '');
-    }
+    if (kind === 'web') { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    else a.setAttribute('download', '');
     return a;
   }
 
@@ -224,18 +216,11 @@
     const grid = platforms.querySelector('.bmaker-platform-grid');
     if (grid) {
       grid.replaceChildren();
-      const cards = [
-        ['macOS', labels.macDesc, 'mac'],
-        ['Windows', labels.winDesc, 'win'],
-        ['Web', labels.webDesc, 'web']
-      ];
-      cards.forEach(([title, description, kind]) => {
+      [['macOS', labels.macDesc, 'mac'], ['Windows', labels.winDesc, 'win'], ['Web', labels.webDesc, 'web']].forEach(([title, description, kind]) => {
         const card = document.createElement('article');
         card.className = 'bmaker-platform-card';
-        const h = document.createElement('h3');
-        h.textContent = title;
-        const p = document.createElement('p');
-        p.textContent = description;
+        const h = document.createElement('h3'); h.textContent = title;
+        const p = document.createElement('p'); p.textContent = description;
         card.append(h, p, action(kind, kind === preferred));
         grid.append(card);
       });
@@ -246,9 +231,7 @@
   style.textContent = '.bmaker-platform-grid{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:980px){.bmaker-platform-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:680px){.bmaker-platform-grid{grid-template-columns:1fr}}';
   document.head.append(style);
 
-  document.title = isRu
-    ? 'B-Maker — приложение для книг и статей на macOS, Windows и Web'
-    : 'B-Maker — Book and Article Writing Software for macOS, Windows and Web';
+  document.title = isRu ? 'B-Maker — приложение для книг и статей на macOS, Windows и Web' : 'B-Maker — Book and Article Writing Software for macOS, Windows and Web';
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.content = isRu
     ? 'B-Maker — local-first приложение для книг и коллекций статей на macOS, Windows и Web: пишите, организуйте, связывайте идеи, редактируйте, анализируйте и готовьте тексты к публикации в одном переносимом проекте.'
@@ -266,26 +249,115 @@
 })();
 
 (() => {
-  const measurementId = 'G-8F31VPYZVV';
+  const path = window.location.pathname;
+  if (!/(^|\/)projects\/b-maker\/(stories|compare)\//.test(path)) return;
+  if (document.querySelector('.bmaker-explained-related')) return;
 
+  const isRu = document.documentElement.lang === 'ru' || document.body?.dataset?.lang === 'ru';
+  const parts = path.split('/').filter(Boolean);
+  const sectionIndex = parts.findIndex((part) => part === 'stories' || part === 'compare');
+  if (sectionIndex < 0) return;
+  const section = parts[sectionIndex];
+  const slug = (parts[sectionIndex + 1] || '').replace(/\.html$/, '');
+  if (!slug || slug === 'index') return;
+
+  const storyMap = {
+    'import-existing-manuscript': ['why-import-docx', 'why-several-safety-layers'],
+    'from-idea-to-chapter': ['why-idea-map', 'why-project-aware-idea-map', 'why-convert-idea-to-manuscript'],
+    'from-articles-to-book': ['collections-vs-saved-search', 'why-hide-or-exclude-sections', 'why-export-one-section'],
+    'read-whole-manuscript': ['why-full-manuscript-view', 'focus-mode-vs-split-view', 'rich-editor-vs-portable-markdown', 'why-current-version'],
+    'one-manuscript-several-views': ['manuscript-tree-vs-board', 'collections-vs-saved-search', 'why-project-aware-idea-map'],
+    'characters-and-plot-without-spreadsheet': ['why-characters-relationships-arc-points', 'why-plotlines', 'why-locations', 'why-story-grid'],
+    'writing-goals-and-sessions': ['why-goals-and-sessions', 'why-writing-metrics'],
+    'no-more-final-final-docx': ['why-text-versions', 'why-current-version', 'why-compare-versions', 'why-lock-a-version'],
+    'editorial-checks-before-publishing': ['why-editorial-checks', 'why-writing-metrics'],
+    'from-manuscript-to-publishing-package': ['preview-vs-export', 'why-publishing-package', 'why-ai-use-declaration', 'why-project-assets'],
+    'local-first-writing-workflow': ['why-local-first', 'version-vs-backup', 'why-integrity-check', 'why-several-safety-layers', 'why-project-assets']
+  };
+  const compareMap = {
+    'manuscript-version-management': ['why-text-versions', 'why-current-version', 'why-compare-versions', 'why-lock-a-version'],
+    'writing-software-with-idea-map': ['why-idea-map', 'why-project-aware-idea-map', 'why-multiple-idea-maps', 'why-convert-idea-to-manuscript'],
+    'local-first-writing-software': ['why-local-first', 'why-several-safety-layers', 'why-project-assets'],
+    'how-to-organize-a-novel': ['manuscript-tree-vs-board', 'why-characters-relationships-arc-points', 'why-plotlines', 'why-story-grid'],
+    'turn-articles-into-a-book': ['collections-vs-saved-search', 'why-hide-or-exclude-sections', 'why-export-one-section'],
+    'novel-writing-software': ['why-characters-relationships-arc-points', 'why-plotlines', 'why-story-grid', 'why-locations'],
+    'nonfiction-writing-software': ['collections-vs-saved-search', 'why-idea-map', 'rich-editor-vs-portable-markdown'],
+    'writing-software-for-articles-and-books': ['collections-vs-saved-search', 'why-hide-or-exclude-sections', 'why-export-one-section']
+  };
+  const slugs = (section === 'stories' ? storyMap : compareMap)[slug];
+  if (!slugs?.length) return;
+
+  const titleMap = {
+    'why-text-versions': ['Зачем версии текста?', 'Why text versions?'],
+    'why-current-version': ['Зачем Current Version?', 'Why a current version?'],
+    'why-compare-versions': ['Зачем сравнивать версии?', 'Why compare versions?'],
+    'why-lock-a-version': ['Зачем блокировать версию?', 'Why lock a version?'],
+    'why-import-docx': ['Зачем импортировать DOCX?', 'Why import a DOCX?'],
+    'why-several-safety-layers': ['Зачем несколько слоёв безопасности?', 'Why several safety layers?'],
+    'why-idea-map': ['Зачем Idea Map?', 'Why an Idea Map?'],
+    'why-project-aware-idea-map': ['Зачем project-aware Idea Map?', 'Why a project-aware Idea Map?'],
+    'why-convert-idea-to-manuscript': ['Зачем превращать идею в рукопись?', 'Why turn an idea into manuscript?'],
+    'why-multiple-idea-maps': ['Зачем несколько Idea Map?', 'Why several Idea Maps?'],
+    'collections-vs-saved-search': ['Collection или Saved Search?', 'Collection vs saved search'],
+    'why-hide-or-exclude-sections': ['Зачем скрывать или исключать разделы?', 'Why hide or exclude sections?'],
+    'why-export-one-section': ['Зачем экспортировать один раздел?', 'Why export one section?'],
+    'why-full-manuscript-view': ['Зачем читать всю рукопись?', 'Why read the whole manuscript?'],
+    'focus-mode-vs-split-view': ['Focus Mode vs Split View', 'Focus Mode vs Split View'],
+    'rich-editor-vs-portable-markdown': ['Rich Editor vs portable Markdown', 'Rich editor vs portable Markdown'],
+    'manuscript-tree-vs-board': ['Дерево или Manuscript Board?', 'Tree vs manuscript board'],
+    'why-characters-relationships-arc-points': ['Зачем Characters, Relationships и Arc Points?', 'Why characters, relationships and arc points?'],
+    'why-plotlines': ['Зачем Plotlines?', 'Why plotlines?'],
+    'why-locations': ['Зачем Locations?', 'Why locations?'],
+    'why-story-grid': ['Зачем Story Grid?', 'Why Story Grid?'],
+    'why-goals-and-sessions': ['Зачем Goals и Sessions?', 'Why goals and sessions?'],
+    'why-writing-metrics': ['Зачем метрики текста?', 'Why writing metrics?'],
+    'why-editorial-checks': ['Зачем Editorial Checks?', 'Why editorial checks?'],
+    'preview-vs-export': ['Preview или Export?', 'Preview vs export'],
+    'why-publishing-package': ['Зачем Publishing Package?', 'Why a publishing package?'],
+    'why-ai-use-declaration': ['Зачем AI-use declaration?', 'Why an AI-use declaration?'],
+    'why-project-assets': ['Зачем assets внутри проекта?', 'Why keep assets with the project?'],
+    'why-local-first': ['Зачем local-first?', 'Why local-first?'],
+    'version-vs-backup': ['Version или Backup?', 'Version vs backup'],
+    'why-integrity-check': ['Зачем Integrity Check?', 'Why an integrity check?']
+  };
+
+  const block = document.createElement('section');
+  block.className = 'bmaker-explained-related';
+  block.style.marginTop = '42px';
+  const h = document.createElement('h2');
+  h.textContent = isRu ? 'Разобраться, зачем это нужно' : 'Understand why these tools exist';
+  const p = document.createElement('p');
+  p.style.display = 'flex';
+  p.style.flexWrap = 'wrap';
+  p.style.gap = '8px 16px';
+  slugs.forEach((item) => {
+    const a = document.createElement('a');
+    a.href = `../explained/${item}.html`;
+    a.textContent = titleMap[item]?.[isRu ? 0 : 1] || item;
+    p.append(a);
+  });
+  block.append(h, p);
+  const body = document.querySelector('.bmaker-compare-body');
+  const verdict = body?.querySelector('.bmaker-compare-verdict');
+  if (body) verdict ? verdict.before(block) : body.append(block);
+})();
+
+(() => {
+  const measurementId = 'G-8F31VPYZVV';
   function analytics() {
     if (typeof window.gtag === 'function') return window.gtag;
-
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
     window.gtag('config', measurementId);
-
     if (!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${measurementId}"]`)) {
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
       document.head.append(script);
     }
-
     return window.gtag;
   }
-
   document.addEventListener('click', (event) => {
     const link = event.target.closest?.('a[href]');
     if (!link) return;
@@ -295,7 +367,6 @@
     else if (href.includes('/downloads/bmaker/B-Maker-Setup-win.zip')) eventName = 'bmaker_download_windows';
     else if (/^https:\/\/b-maker\.kurakin\.pro\/?(?:[?#].*)?$/.test(href)) eventName = 'bmaker_open_web';
     if (!eventName) return;
-
     analytics()('event', eventName, {
       link_url: href,
       link_text: (link.textContent || '').trim(),
