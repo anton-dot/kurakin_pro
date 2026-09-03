@@ -64,6 +64,7 @@
 
   const isRu = body.dataset.lang === 'ru' || document.documentElement.lang === 'ru';
   const storiesRoot = 'b-maker/stories/';
+  const explainedRoot = 'b-maker/explained/';
   const linkLabel = isRu ? 'Посмотреть сценарий →' : 'See how it works →';
 
   function storyLink(slug, light = false) {
@@ -120,6 +121,7 @@
           title: 'Посмотрите, как это работает в реальном проекте.',
           lead: 'Не ещё один список функций. Короткие сценарии показывают путь от конкретной авторской проблемы до рабочего процесса в B-Maker.',
           all: 'Все 12 сценариев →',
+          explained: 'А для чего вообще нужна эта функция? B-Maker Explained →',
           cards: [
             ['Быстрый старт', 'Сначала пишите', 'Почему первая задача программы для письма — дать вам начать текст, а структуру добавить позже.', 'start-writing-first'],
             ['Idea Map', 'От идеи до главы', 'Как сырая заметка постепенно становится частью настоящей рукописи без копирования между приложениями.', 'from-idea-to-chapter'],
@@ -131,6 +133,7 @@
           title: 'See how it works in a real project.',
           lead: 'Not another feature list. Short workflows start with a concrete writing problem and follow it through B-Maker.',
           all: 'See all 12 stories →',
+          explained: 'What is this feature actually for? B-Maker Explained →',
           cards: [
             ['Fast start', 'Start writing first', 'Why the first job of writing software is to let you write — and let structure arrive later.', 'start-writing-first'],
             ['Idea Map', 'From idea to chapter', 'How a loose note gradually becomes part of the real manuscript without copying between tools.', 'from-idea-to-chapter'],
@@ -155,7 +158,10 @@
     const all = document.createElement('p');
     all.style.marginTop = '26px';
     all.innerHTML = `<a class="text-link" href="${storiesRoot}">${strings.all}</a>`;
-    inner.append(grid, all);
+    const explained = document.createElement('p');
+    explained.style.marginTop = '10px';
+    explained.innerHTML = `<a class="text-link" href="${explainedRoot}">${strings.explained}</a>`;
+    inner.append(grid, all, explained);
     section.append(inner);
     document.querySelector('.bmaker-compare-block')?.before(section);
   }
