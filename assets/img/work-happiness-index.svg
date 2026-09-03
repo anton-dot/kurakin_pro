@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Work Happiness Index</title>
+  <desc id="desc">A simple smiling work gauge icon.</desc>
+  <rect width="256" height="256" rx="56" fill="#111"/>
+  <circle cx="128" cy="112" r="68" fill="#fff"/>
+  <circle cx="102" cy="98" r="7" fill="#111"/>
+  <circle cx="154" cy="98" r="7" fill="#111"/>
+  <path d="M92 126c10 22 26 33 36 33s26-11 36-33" fill="none" stroke="#111" stroke-width="10" stroke-linecap="round"/>
+  <rect x="54" y="194" width="148" height="18" rx="9" fill="#3c3c3c"/>
+  <rect x="54" y="194" width="108" height="18" rx="9" fill="#fff"/>
+</svg>
