@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Context Switching Tax показывает, сколько рабочего дня съедают встречи, реактивная коммуникация и возвращение в контекст — в часах, днях и деньгах.">
+  <meta name="author" content="Антон Куракин">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/context-switching-tax.svg">
+  <meta property="og:url" content="https://kurakin.pro/projects/context-switching-tax.html">
+  <meta property="og:title" content="Context Switching Tax">
+  <meta property="og:description" content="Сколько часов рабочего дня реально остаётся после встреч, чатов и переключений контекста?">
+  <title>Context Switching Tax — Антон Куракин</title>
+  <link rel="canonical" href="https://kurakin.pro/projects/context-switching-tax.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/context-switching-tax.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/context-switching-tax.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/en/projects/context-switching-tax.html">
+  <link rel="icon" href="../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260815-1">
+  <link rel="stylesheet" href="../assets/context-switching-tax.css?v=20260903-1">
+</head>
+<body data-page="project-detail" data-lang="ru">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Антон Куракин"><img class="brand-logo" src="../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Антон Куракин</span></a>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="/">Главная</a><a href="/projects.html" aria-current="page">Проекты</a><a href="/experience.html">О себе</a><a href="/ru/articles/">Статьи</a><a href="/ru/architecture/">Архитектура</a><a href="/#contact">Контакты</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="context-switching-tax.html" aria-current="page">RU</a><a href="../en/projects/context-switching-tax.html">EN</a></div>
+  </header>
+  <main id="main">
+    <section class="project-detail-hero cs-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">Все проекты</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../assets/img/context-switching-tax.svg" alt="" width="112" height="112"><h1>Context Switching Tax</h1></div>
+        <p class="project-detail-lead">Вы работаете восемь часов. Но сколько из них действительно остаётся на работу после встреч, чатов, «быстрых вопросов» и возвращения в контекст?</p>
+        <p class="cs-disclaimer">Это приблизительная модель, а не научное измерение продуктивности. Все значения задаёте вы; расчёт выполняется локально в браузере.</p>
+      </div>
+    </section>
+    <section class="cs-section" data-context-tax>
+      <div class="cs-shell">
+        <form class="cs-form">
+          <p class="eyebrow">Attention calculator</p>
+          <h2>Сколько дня у вас остаётся?</h2>
+          <p>Возьмите типичный рабочий день. Не худший понедельник и не идеальную пятницу.</p>
+          <div class="cs-grid">
+            <div class="cs-field"><label for="workday">Рабочий день, часов</label><input id="workday" name="workday" type="number" min="0.5" step="0.5" value="8"><small>Сколько часов вы формально работаете в день.</small></div>
+            <div class="cs-field"><label for="meetings">Встречи в день, часов</label><input id="meetings" name="meetings" type="number" min="0" step="0.25" value="2"><small>Среднее время именно в календарных встречах.</small></div>
+            <div class="cs-field"><label for="reactive">Чаты и реактивная коммуникация, минут/день</label><input id="reactive" name="reactive" type="number" min="0" step="5" value="60"><small>Slack, Teams, почта, быстрые ответы и «есть минутка?».</small></div>
+            <div class="cs-field"><label for="switches">Незапланированных переключений / день</label><input id="switches" name="switches" type="number" min="0" step="1" value="6"><small>Сколько раз приходится бросить текущую задачу и перейти к другой.</small></div>
+            <div class="cs-field"><label for="recovery">Возврат в контекст, минут / переключение</label><input id="recovery" name="recovery" type="number" min="0" step="1" value="8"><small>Ваша оценка, не «научная константа».</small></div>
+            <div class="cs-field"><label for="days">Рабочих дней / неделю</label><input id="days" name="days" type="number" min="1" max="7" step="1" value="5"></div>
+            <div class="cs-field"><label for="weeks">Рабочих недель / год</label><input id="weeks" name="weeks" type="number" min="1" max="52" step="1" value="48"></div>
+            <div class="cs-field"><label for="annualCost">Полная стоимость сотрудника / год</label><input id="annualCost" name="annualCost" type="number" min="0" step="1000" value="120000"><small>Зарплата + налоги + льготы + другие прямые затраты.</small></div>
+            <div class="cs-field"><label for="currency">Валюта</label><select id="currency" name="currency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select></div>
+          </div>
+          <p class="cs-note">Модель считает потерянным временем встречи, реактивную коммуникацию и только время восстановления после незапланированных переключений. Сама новая задача не считается «потерей».</p>
+        </form>
+        <aside class="cs-result" aria-live="polite">
+          <p class="cs-result-kicker">Теоретически остаётся на фокус</p>
+          <p class="cs-big"><strong data-cs-focus>0</strong><span>ч / день</span></p>
+          <h2 data-cs-title>—</h2>
+          <p class="cs-verdict" data-cs-verdict></p>
+          <div class="cs-meter"><i data-cs-meter></i></div><p class="cs-meter-label" data-cs-meter-label></p>
+          <div class="cs-stats">
+            <div class="cs-stat"><span>Context Switching Tax</span><strong data-cs-tax>0%</strong></div>
+            <div class="cs-stat"><span>Фокус / неделю</span><strong data-cs-weekly>0 h</strong></div>
+            <div class="cs-stat"><span>Возврат в контекст / день</span><strong data-cs-recovery>0 h</strong></div>
+            <div class="cs-stat"><span>Потеря рабочих дней / год</span><strong data-cs-days-lost>0</strong></div>
+            <div class="cs-stat"><span>Стоимость фрагментации / год</span><strong data-cs-cost>0</strong></div>
+          </div>
+          <div class="cs-share"><p class="cs-share-label">Готово для отправки</p><p class="cs-share-text" data-cs-share></p><div class="cs-actions"><button class="button" type="button" data-cs-copy>Скопировать</button><button class="button button-secondary" type="button" data-cs-native-share>Поделиться</button><span class="cs-status" data-cs-status aria-live="polite"></span></div></div>
+        </aside>
+      </div>
+    </section>
+    <section class="project-detail-section muted"><div class="project-detail-inner project-intro"><div><p class="eyebrow">Зачем</p><h2>Проблема может быть не в скорости людей, а в целостности их внимания</h2></div><div class="project-intro-copy"><p>Встречи видны в календаре. Переключения между задачами — хуже: они выглядят как мелочи, но дробят день на куски, в которых трудно делать сложную работу.</p><p>Этот калькулятор нужен не для борьбы со всеми встречами и сообщениями. Он показывает цену режима, в котором всё постоянно требует немедленной реакции.</p></div></div></section>
+  </main>
+  <footer class="site-footer"><p>© 2026 Антон Куракин.</p><a href="../projects.html">Все проекты</a></footer>
+  <script src="../assets/context-switching-tax.js?v=20260903-1"></script>
+</body>
+</html>
