@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Context Switching Tax estimates how much of the workday disappears into meetings, reactive communication and rebuilding context — in hours, days and money.">
+  <meta name="author" content="Anton Kurakin">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kurakin.pro/assets/img/context-switching-tax.svg">
+  <meta property="og:url" content="https://kurakin.pro/en/projects/context-switching-tax.html">
+  <meta property="og:title" content="Context Switching Tax">
+  <meta property="og:description" content="How many hours of your workday are actually left after meetings, chat and context switches?">
+  <title>Context Switching Tax — Anton Kurakin</title>
+  <link rel="canonical" href="https://kurakin.pro/en/projects/context-switching-tax.html">
+  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/context-switching-tax.html">
+  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/context-switching-tax.html">
+  <link rel="alternate" hreflang="x-default" href="https://kurakin.pro/en/projects/context-switching-tax.html">
+  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260815-1">
+  <link rel="stylesheet" href="../../assets/context-switching-tax.css?v=20260903-1">
+</head>
+<body data-page="project-detail" data-lang="en">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/projects.html" aria-current="page">Projects</a><a href="/en/experience.html">About</a><a href="/en/articles/">Writing</a><a href="/en/architecture/">Architecture</a><a href="/en/#contact">Contact</a></nav>
+    <div class="lang-switcher" aria-label="Language switcher"><a href="../../projects/context-switching-tax.html">RU</a><a href="context-switching-tax.html" aria-current="page">EN</a></div>
+  </header>
+  <main id="main">
+    <section class="project-detail-hero cs-hero">
+      <div class="project-detail-hero-inner">
+        <a class="project-back-link" href="../projects.html">All projects</a>
+        <div class="project-title-lockup"><img class="project-detail-logo" src="../../assets/img/context-switching-tax.svg" alt="" width="112" height="112"><h1>Context Switching Tax</h1></div>
+        <p class="project-detail-lead">You work eight hours. But how many of those hours are actually left for work after meetings, chat, “quick questions” and rebuilding context?</p>
+        <p class="cs-disclaimer">An approximate model, not a scientific productivity measure. You provide every assumption; all calculations run locally in your browser.</p>
+      </div>
+    </section>
+    <section class="cs-section" data-context-tax>
+      <div class="cs-shell">
+        <form class="cs-form">
+          <p class="eyebrow">Attention calculator</p>
+          <h2>How much of your day is left?</h2>
+          <p>Use a typical workday — not your worst Monday and not an unusually quiet Friday.</p>
+          <div class="cs-grid">
+            <div class="cs-field"><label for="workday">Workday, hours</label><input id="workday" name="workday" type="number" min="0.5" step="0.5" value="8"><small>How many hours you formally work each day.</small></div>
+            <div class="cs-field"><label for="meetings">Meetings per day, hours</label><input id="meetings" name="meetings" type="number" min="0" step="0.25" value="2"><small>Average time spent in scheduled meetings.</small></div>
+            <div class="cs-field"><label for="reactive">Chat and reactive communication, min/day</label><input id="reactive" name="reactive" type="number" min="0" step="5" value="60"><small>Slack, Teams, email, quick replies and “got a minute?”.</small></div>
+            <div class="cs-field"><label for="switches">Unplanned switches / day</label><input id="switches" name="switches" type="number" min="0" step="1" value="6"><small>How often you have to drop the current task and move to another.</small></div>
+            <div class="cs-field"><label for="recovery">Context recovery, min / switch</label><input id="recovery" name="recovery" type="number" min="0" step="1" value="8"><small>Your estimate, not a “scientific constant”.</small></div>
+            <div class="cs-field"><label for="days">Workdays / week</label><input id="days" name="days" type="number" min="1" max="7" step="1" value="5"></div>
+            <div class="cs-field"><label for="weeks">Working weeks / year</label><input id="weeks" name="weeks" type="number" min="1" max="52" step="1" value="48"></div>
+            <div class="cs-field"><label for="annualCost">Fully loaded employee cost / year</label><input id="annualCost" name="annualCost" type="number" min="0" step="1000" value="120000"><small>Salary + taxes + benefits + other direct employment costs.</small></div>
+            <div class="cs-field"><label for="currency">Currency</label><select id="currency" name="currency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option></select></div>
+          </div>
+          <p class="cs-note">The model counts meetings, reactive communication and only the recovery time after unplanned switches as fragmentation. The new task itself is not treated as “waste”.</p>
+        </form>
+        <aside class="cs-result" aria-live="polite">
+          <p class="cs-result-kicker">Theoretical focus time left</p>
+          <p class="cs-big"><strong data-cs-focus>0</strong><span>h / day</span></p>
+          <h2 data-cs-title>—</h2>
+          <p class="cs-verdict" data-cs-verdict></p>
+          <div class="cs-meter"><i data-cs-meter></i></div><p class="cs-meter-label" data-cs-meter-label></p>
+          <div class="cs-stats">
+            <div class="cs-stat"><span>Context Switching Tax</span><strong data-cs-tax>0%</strong></div>
+            <div class="cs-stat"><span>Focus / week</span><strong data-cs-weekly>0 h</strong></div>
+            <div class="cs-stat"><span>Context recovery / day</span><strong data-cs-recovery>0 h</strong></div>
+            <div class="cs-stat"><span>Workdays lost / year</span><strong data-cs-days-lost>0</strong></div>
+            <div class="cs-stat"><span>Fragmentation cost / year</span><strong data-cs-cost>0</strong></div>
+          </div>
+          <div class="cs-share"><p class="cs-share-label">Ready to share</p><p class="cs-share-text" data-cs-share></p><div class="cs-actions"><button class="button" type="button" data-cs-copy>Copy</button><button class="button button-secondary" type="button" data-cs-native-share>Share</button><span class="cs-status" data-cs-status aria-live="polite"></span></div></div>
+        </aside>
+      </div>
+    </section>
+    <section class="project-detail-section muted"><div class="project-detail-inner project-intro"><div><p class="eyebrow">Why</p><h2>The problem may not be how fast people work. It may be how fragmented their attention is.</h2></div><div class="project-intro-copy"><p>Meetings are visible on the calendar. Context switches are harder to see: each one looks small, but together they split the day into pieces where complex work becomes difficult.</p><p>This calculator is not an argument against every meeting or message. It makes the cost of a permanently reactive operating mode visible.</p></div></div></section>
+  </main>
+  <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../projects.html">All projects</a></footer>
+  <script src="../../assets/context-switching-tax.js?v=20260903-1"></script>
+</body>
+</html>
