@@ -344,6 +344,7 @@
 
 (() => {
   const measurementId = 'G-8F31VPYZVV';
+
   function analytics() {
     if (typeof window.gtag === 'function') return window.gtag;
     window.dataLayer = window.dataLayer || [];
@@ -358,20 +359,56 @@
     }
     return window.gtag;
   }
+
+  const gtag = analytics();
+
+  function placement(link) {
+    if (link.closest('.bmaker-hero')) return 'hero';
+    if (link.closest('.bmaker-platforms')) return 'platforms';
+    if (link.closest('.bmaker-cta')) return 'bottom_cta';
+    if (link.closest('.bmaker-compare-verdict')) return 'comparison_verdict';
+    if (link.closest('.project-card')) return 'projects';
+    return 'content';
+  }
+
   document.addEventListener('click', (event) => {
     const link = event.target.closest?.('a[href]');
     if (!link) return;
     const href = link.href || '';
-    let eventName = null;
-    if (href.includes('/downloads/bmaker/B-Maker-Setup-macos.zip')) eventName = 'bmaker_download_macos';
-    else if (href.includes('/downloads/bmaker/B-Maker-Setup-win.zip')) eventName = 'bmaker_download_windows';
-    else if (/^https:\/\/b-maker\.kurakin\.pro\/?(?:[?#].*)?$/.test(href)) eventName = 'bmaker_open_web';
-    if (!eventName) return;
-    analytics()('event', eventName, {
+
+    let destination = null;
+    let ctaAction = null;
+    let legacyEvent = null;
+
+    if (href.includes('/downloads/bmaker/B-Maker-Setup-macos.zip')) {
+      destination = 'macos';
+      ctaAction = 'download';
+      legacyEvent = 'bmaker_download_macos';
+    } else if (href.includes('/downloads/bmaker/B-Maker-Setup-win.zip')) {
+      destination = 'windows';
+      ctaAction = 'download';
+      legacyEvent = 'bmaker_download_windows';
+    } else if (/^https:\/\/b-maker\.kurakin\.pro\/?(?:[?#].*)?$/.test(href)) {
+      destination = 'web';
+      ctaAction = 'open';
+      legacyEvent = 'bmaker_open_web';
+    }
+
+    if (!destination) return;
+
+    const params = {
+      destination,
+      cta_action: ctaAction,
+      cta_placement: placement(link),
       link_url: href,
       link_text: (link.textContent || '').trim(),
       page_path: window.location.pathname,
-      page_language: document.documentElement.lang || document.body?.dataset?.lang || ''
-    });
-  });
+      page_language: document.documentElement.lang || document.body?.dataset?.lang || '',
+      send_to: measurementId,
+      transport_type: 'beacon'
+    };
+
+    gtag('event', 'bmaker_cta_click', params);
+    gtag('event', legacyEvent, params);
+  }, { capture: true });
 })();
