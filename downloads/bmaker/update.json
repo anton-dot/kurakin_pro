@@ -3,14 +3,14 @@
   "publishedAtUtc": "2026-09-12T18:01:03Z",
   "releases": {
     "web": {
-      "version": "0.13.0",
-      "build": 24,
+      "version": "0.14.0",
+      "build": 25,
       "available": true,
       "url": "https://b-maker.kurakin.pro/"
     },
     "windows": {
-      "version": "0.13.0",
-      "build": 24,
+      "version": "0.14.0",
+      "build": 25,
       "available": true,
       "url": "https://kurakin.pro/downloads/bmaker/B-Maker-Setup-win.zip"
     },
