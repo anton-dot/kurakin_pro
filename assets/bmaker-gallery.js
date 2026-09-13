@@ -1,120 +1,86 @@
 (() => {
-  const images = [...document.querySelectorAll('.bmaker-shot-image')];
-  if (!images.length || !('HTMLDialogElement' in window)) return;
-  const ru = document.documentElement.lang === 'ru';
-  const dialog = document.createElement('dialog');
-  dialog.className = 'bmaker-lightbox';
-  dialog.setAttribute('aria-label', ru ? 'Увеличенный скриншот B-Maker' : 'Enlarged B-Maker screenshot');
-  const shell = document.createElement('div'); shell.className = 'bmaker-lightbox-shell';
-  const close = document.createElement('button'); close.className = 'bmaker-lightbox-close'; close.type = 'button'; close.textContent = '×'; close.setAttribute('aria-label', ru ? 'Закрыть' : 'Close');
-  const full = document.createElement('img'); full.className = 'bmaker-lightbox-image'; full.alt = '';
-  const caption = document.createElement('p'); caption.className = 'bmaker-lightbox-caption';
-  shell.append(close, full, caption); dialog.append(shell); document.body.append(dialog);
-  let lastFocused = null;
-  const shut = () => dialog.open && dialog.close();
-  const open = (img) => { lastFocused = img; full.src = img.currentSrc || img.src; full.alt = img.alt || ''; caption.textContent = img.alt || 'B-Maker'; document.body.classList.add('bmaker-lightbox-open'); dialog.showModal(); close.focus(); };
-  images.forEach((img) => {
-    img.tabIndex = 0; img.setAttribute('role', 'button'); img.setAttribute('aria-label', `${img.alt || 'B-Maker'} — ${ru ? 'увеличить' : 'enlarge'}`);
-    img.addEventListener('click', () => open(img));
-    img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); } });
-  });
-  close.addEventListener('click', shut); shell.addEventListener('click', (e) => e.target === shell && shut());
-  dialog.addEventListener('cancel', (e) => { e.preventDefault(); shut(); });
-  dialog.addEventListener('close', () => { document.body.classList.remove('bmaker-lightbox-open'); full.removeAttribute('src'); lastFocused?.focus(); });
-})();
+  const rootPath = (raw) => {
+    const value = (raw || '').trim();
+    if (!value) return '';
+    if (/^https?:\/\//i.test(value) || value.startsWith('/')) return value;
+    return `/${value.replace(/^\.\//, '')}`;
+  };
 
-(() => {
-  const body = document.body;
-  if (!body || body.dataset.page !== 'project-detail' || !/(^|\/)projects\/b-maker\.html$/.test(location.pathname)) return;
-  const ru = body.dataset.lang === 'ru' || document.documentElement.lang === 'ru';
-  const storiesRoot = 'b-maker/stories/';
-  const explainedRoot = 'b-maker/explained/';
-  const compareRoot = 'b-maker/compare/';
-  const label = ru ? 'Посмотреть сценарий →' : 'See how it works →';
-
-  function storyLink(slug, light = false) {
-    const p = document.createElement('p'); p.className = 'bmaker-story-link'; p.style.marginTop = '18px';
-    const a = document.createElement('a'); a.href = `${storiesRoot}${slug}.html`; a.className = 'text-link'; a.textContent = label; a.style.fontWeight = '800'; if (light) a.style.color = 'var(--bm-mint)';
-    p.append(a); return p;
-  }
-  function connectShot(file, slug) {
-    const copy = document.querySelector(`img[src*="${file}"]`)?.closest('.bmaker-section')?.querySelector('.bmaker-section-copy');
-    if (copy && !copy.querySelector('.bmaker-story-link')) copy.append(storyLink(slug));
-  }
-  [
-    ['bmaker-articles.webp','from-articles-to-book'],['bmaker-manuscript.webp','read-whole-manuscript'],['bmaker-collections.webp','one-manuscript-several-views'],['bmaker-idea-map.webp','from-idea-to-chapter'],['bmaker-story.webp','characters-and-plot-without-spreadsheet'],['bmaker-versions.webp','no-more-final-final-docx'],['bmaker-analytics.webp','editorial-checks-before-publishing'],['bmaker-publishing.webp','from-manuscript-to-publishing-package']
-  ].forEach(([f,s]) => connectShot(f,s));
-
-  const featureStories = ru ? new Map([['Цели и сессии','writing-goals-and-sessions'],['Импорт','import-existing-manuscript']]) : new Map([['Goals and sessions','writing-goals-and-sessions'],['Import','import-existing-manuscript']]);
-  document.querySelectorAll('.bmaker-feature').forEach((feature) => {
-    const slug = featureStories.get(feature.querySelector('strong')?.textContent?.trim());
-    if (slug && !feature.querySelector('.bmaker-story-link')) feature.append(storyLink(slug));
-  });
-  const localCopy = document.querySelector('.bmaker-local-grid > div:first-child');
-  if (localCopy && !localCopy.querySelector('.bmaker-story-link')) localCopy.append(storyLink('local-first-writing-workflow', true));
-
-  if (!document.querySelector('.bmaker-wave5-block')) {
-    const t = ru ? {
-      eyebrow:'B-Maker 0.15 · Wave 5', title:'Теперь рукопись можно не только читать — её можно слушать, вести к публикации и анализировать по новым измерениям.', lead:'Новые функции не меняют принцип B-Maker: начинайте с текста, а более тяжёлые инструменты подключайте тогда, когда проект действительно до них дорос.',
-      audioTitle:'Редактура на слух и MP3', audioText:'Озвучивайте раздел, выделение, текст от курсора или ветку структуры. Используйте системные, браузерные и загруженные офлайн-голоса, следите за текущим фрагментом и создавайте MP3 для дополнительной вычитки.', audioShot:'Скриншот: Read Aloud + настройки голоса', audioSpec:'Показать player, Reading Scope и Speech Engine с System / Browser / Piper / Supertonic 3.',
-      planTitle:'Publication Plan и мастера статьи/книги', planText:'Разделите структуру текста и процесс выпуска: этапы, дедлайны, milestones, checklist, Article Wizard, Book Wizard и writing scaffold остаются рядом с рукописью, но не смешиваются с ней.', planShot:'Скриншот: Publication Plan + Article Wizard', planSpec:'Показать недельный план с этапами и brief статьи с thesis, audience, tone, channel и sections.',
-      pov:'POV как измерение рукописи', povText:'Назначайте рассказчика и perspective разделам, наследуйте POV и открывайте поток сцен одного персонажа через всю книгу.',
-      ai:'AI-анализ рукописи и аудитории', aiText:'Отдельные отчёты по структуре, темпу, аудитории, позиционированию и другим измерениям. Отчёты сохраняют scope и usage и не меняют текст автоматически.',
-      audioLink:'Сценарий редактуры на слух →', planLink:'Сценарий от черновика к публикации →', povLink:'Зачем отслеживать POV →', aiLink:'Зачем разделять AI-анализ и AI-редактуру →', compare:'Гайд: writing software с text-to-speech →'
-    } : {
-      eyebrow:'B-Maker 0.15 · Wave 5', title:'Now you can do more than read the manuscript: listen to it, plan its path to publication, and inspect it across new dimensions.', lead:'The principle stays the same: start with text, then add heavier tools only when the project actually needs them.',
-      audioTitle:'Auditory editing and MP3', audioText:'Read a section, selection, text from the cursor or a structure branch. Use system, browser and downloaded offline voices, follow the current fragment, and create MP3 files for another proofreading pass.', audioShot:'Screenshot: Read Aloud + voice settings', audioSpec:'Show player, Reading Scope and Speech Engine with System / Browser / Piper / Supertonic 3.',
-      planTitle:'Publication Plan and article/book wizards', planText:'Separate manuscript structure from delivery work: stages, deadlines, milestones, checklists, Article Wizard, Book Wizard and writing scaffolds stay near the manuscript without becoming part of it.', planShot:'Screenshot: Publication Plan + Article Wizard', planSpec:'Show weekly stages plus an article brief with thesis, audience, tone, channel and sections.',
-      pov:'POV as a manuscript dimension', povText:'Assign narrator and perspective to sections, inherit POV, and open the stream of one character across the whole book.',
-      ai:'AI manuscript and audience analysis', aiText:'Separate reports for structure, pacing, audience, positioning and other dimensions. Reports preserve scope and usage and do not edit the manuscript automatically.',
-      audioLink:'Auditory editing workflow →', planLink:'Draft-to-publication workflow →', povLink:'Why track POV →', aiLink:'Why separate AI analysis from rewriting →', compare:'Guide: writing software with text-to-speech →'
+  function wireHydratedImage(img) {
+    const dialog = document.querySelector('.bmaker-lightbox');
+    if (!dialog || img.dataset.bmakerHydratedLightbox === '1') return;
+    const full = dialog.querySelector('.bmaker-lightbox-image');
+    const caption = dialog.querySelector('.bmaker-lightbox-caption');
+    if (!full || !caption) return;
+    const ru = document.documentElement.lang === 'ru';
+    const open = () => {
+      full.src = img.currentSrc || img.src;
+      full.alt = img.alt || '';
+      caption.textContent = img.alt || 'B-Maker';
+      document.body.classList.add('bmaker-lightbox-open');
+      if (!dialog.open) dialog.showModal();
     };
-    const section = document.createElement('section'); section.className = 'bmaker-section bmaker-wave5-block';
-    const inner = document.createElement('div'); inner.className = 'bmaker-section-inner';
-    inner.innerHTML = `<p class="bmaker-eyebrow">${t.eyebrow}</p><h2>${t.title}</h2><p style="color:var(--ink-soft);max-width:880px">${t.lead}</p>
-      <div class="bmaker-section-grid" style="margin-top:34px"><div class="bmaker-section-copy"><h2>${t.audioTitle}</h2><p>${t.audioText}</p><p><a class="text-link" href="${storiesRoot}listen-before-you-publish.html">${t.audioLink}</a></p><p><a class="text-link" href="${compareRoot}writing-software-with-text-to-speech.html">${t.compare}</a></p></div><div class="bmaker-shot"><div class="bmaker-shot-bar"><i></i><i></i><i></i></div><div class="bmaker-shot-placeholder"><strong>${t.audioShot}</strong><span>${t.audioSpec}</span><code>assets/img/bmaker/bmaker-wave5-audio.webp</code></div></div></div>
-      <div class="bmaker-section-grid reverse" style="margin-top:54px"><div class="bmaker-section-copy"><h2>${t.planTitle}</h2><p>${t.planText}</p><p><a class="text-link" href="${storiesRoot}plan-from-draft-to-publication.html">${t.planLink}</a></p></div><div class="bmaker-shot"><div class="bmaker-shot-bar"><i></i><i></i><i></i></div><div class="bmaker-shot-placeholder"><strong>${t.planShot}</strong><span>${t.planSpec}</span><code>assets/img/bmaker/bmaker-wave5-plan.webp</code></div></div></div>
-      <div class="bmaker-guide-grid" style="margin-top:54px"><a class="bmaker-guide-card" href="${explainedRoot}why-point-of-view-stream.html"><small>POV</small><h2>${t.pov}</h2><p>${t.povText}</p><span>${t.povLink}</span></a><a class="bmaker-guide-card" href="${explainedRoot}why-ai-manuscript-and-audience-analysis.html"><small>AI analysis</small><h2>${t.ai}</h2><p>${t.aiText}</p><span>${t.aiLink}</span></a></div>`;
-    section.append(inner);
-    const anchor = document.querySelector('.bmaker-stories-block') || document.querySelector('.bmaker-compare-block') || document.querySelector('.bmaker-platforms');
-    anchor ? anchor.before(section) : document.querySelector('main')?.append(section);
+    img.dataset.bmakerHydratedLightbox = '1';
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', `${img.alt || 'B-Maker'} — ${ru ? 'увеличить' : 'enlarge'}`);
+    img.addEventListener('click', open);
+    img.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        open();
+      }
+    });
   }
 
-  if (!document.querySelector('.bmaker-stories-block')) {
-    const t = ru ? {ey:'B-Maker Stories',title:'Посмотрите, как это работает в реальном проекте.',lead:'Короткие сценарии идут от конкретной авторской проблемы к рабочему процессу.',all:'Все 14 сценариев →',exp:'B-Maker Explained →',cards:[['Быстрый старт','Сначала пишите','Структуру можно добавить позже.','start-writing-first'],['Idea Map','От идеи до главы','Как заметка становится частью рукописи.','from-idea-to-chapter'],['Редактура на слух','Послушайте перед публикацией','Как слух помогает поймать то, что перестал видеть глаз.','listen-before-you-publish']]} : {ey:'B-Maker Stories',title:'See how it works in a real project.',lead:'Short workflows start with a concrete writing problem and follow it through B-Maker.',all:'See all 14 stories →',exp:'B-Maker Explained →',cards:[['Fast start','Start writing first','Let structure arrive later.','start-writing-first'],['Idea Map','From idea to chapter','Turn a loose note into manuscript.','from-idea-to-chapter'],['Auditory editing','Listen before you publish','Hear what visual familiarity hides.','listen-before-you-publish']]};
-    const section = document.createElement('section'); section.className = 'bmaker-section alt bmaker-stories-block';
-    const inner = document.createElement('div'); inner.className = 'bmaker-section-inner'; inner.innerHTML = `<p class="bmaker-eyebrow">${t.ey}</p><h2>${t.title}</h2><p style="color:var(--ink-soft);max-width:720px">${t.lead}</p>`;
-    const grid = document.createElement('div'); grid.className = 'bmaker-guide-grid';
-    t.cards.forEach(([k,h,p,s]) => { const a=document.createElement('a'); a.className='bmaker-guide-card'; a.href=`${storiesRoot}${s}.html`; a.innerHTML=`<small>${k}</small><h2>${h}</h2><p>${p}</p><span>${ru?'Читать историю →':'Read the story →'}</span>`; grid.append(a); });
-    inner.append(grid); const links=document.createElement('p'); links.style.marginTop='26px'; links.innerHTML=`<a class="text-link" href="${storiesRoot}">${t.all}</a> · <a class="text-link" href="${explainedRoot}">${t.exp}</a>`; inner.append(links); section.append(inner); document.querySelector('.bmaker-compare-block')?.before(section);
+  function hydratePlaceholder(placeholder) {
+    if (!(placeholder instanceof HTMLElement) || placeholder.dataset.bmakerHydrateChecked === '1') return Promise.resolve(false);
+    const code = placeholder.querySelector('code');
+    const src = rootPath(code?.textContent);
+    if (!src) return Promise.resolve(false);
+    placeholder.dataset.bmakerHydrateChecked = '1';
+    return new Promise((resolve) => {
+      const probe = new Image();
+      probe.onload = () => {
+        const img = document.createElement('img');
+        img.className = 'bmaker-shot-image';
+        img.src = src;
+        img.alt = (placeholder.querySelector('strong')?.textContent || 'B-Maker screenshot').replace(/^Screenshot:\s*/i, '').replace(/^Скриншот:\s*/i, '');
+        img.width = 1600;
+        img.height = 1000;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        placeholder.replaceWith(img);
+        wireHydratedImage(img);
+        resolve(true);
+      };
+      probe.onerror = () => resolve(false);
+      probe.src = src;
+    });
   }
 
-  const mac='https://kurakin.pro/downloads/bmaker/B-Maker-Setup-macos.zip', win='https://kurakin.pro/downloads/bmaker/B-Maker-Setup-win.zip', web='https://b-maker.kurakin.pro/';
-  const ua=navigator.userAgent||'', preferred=/Macintosh|Mac OS X/.test(ua)&&!/iPhone|iPad|iPod/.test(ua)?'mac':/Windows/.test(ua)?'win':'web';
-  const labels=ru?{mac:'Скачать для macOS',win:'Скачать для Windows',web:'Открыть в браузере',intro:'Используйте нативное приложение на macOS или Windows. На других устройствах B-Maker доступен в современном браузере.',macD:'Нативное desktop-приложение для Mac с локальными файлами проектов.',winD:'Нативное desktop-приложение для Windows с локальными файлами проектов.',webD:'Работайте в браузере на Linux, Chromebook, планшете или другом устройстве.'}:{mac:'Download for macOS',win:'Download for Windows',web:'Open in browser',intro:'Use the native app on macOS or Windows. On other devices, B-Maker runs in a modern browser.',macD:'Native desktop app for Mac with local project files.',winD:'Native desktop app for Windows with local project files.',webD:'Use B-Maker in a browser on Linux, Chromebook, tablets, and other devices.'};
-  const action=(kind,primary=false)=>{const a=document.createElement('a'); const d=kind==='mac'?[mac,labels.mac]:kind==='win'?[win,labels.win]:[web,labels.web]; a.className=`button ${primary?'primary':'secondary'}`; a.href=d[0]; a.textContent=d[1]; if(kind==='web'){a.target='_blank';a.rel='noopener noreferrer';}else a.setAttribute('download',''); return a;};
-  const order=preferred==='mac'?['mac','win','web']:preferred==='win'?['win','mac','web']:['web','mac','win'];
-  document.querySelectorAll('.bmaker-hero .bmaker-actions,.bmaker-cta .bmaker-actions').forEach(w=>w.replaceChildren(...order.map((k,i)=>action(k,i===0))));
-  const kicker=document.querySelector('.bmaker-kicker span:last-child'); if(kicker) kicker.textContent='macOS + Windows + Web';
-  const platforms=document.querySelector('.bmaker-platforms'); if(platforms){const intro=platforms.querySelector('.bmaker-section-inner > p:not(.bmaker-eyebrow)'); if(intro) intro.textContent=labels.intro; const grid=platforms.querySelector('.bmaker-platform-grid'); if(grid){grid.replaceChildren(); [['macOS',labels.macD,'mac'],['Windows',labels.winD,'win'],['Web',labels.webD,'web']].forEach(([h,p,k])=>{const c=document.createElement('article');c.className='bmaker-platform-card';c.innerHTML=`<h3>${h}</h3><p>${p}</p>`;c.append(action(k,k===preferred));grid.append(c);});}}
-  const style=document.createElement('style'); style.textContent='.bmaker-platform-grid{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:980px){.bmaker-platform-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:680px){.bmaker-platform-grid{grid-template-columns:1fr}}'; document.head.append(style);
-  document.title=ru?'B-Maker — приложение для книг и статей на macOS, Windows и Web':'B-Maker — Book and Article Writing Software for macOS, Windows and Web';
-  const meta=document.querySelector('meta[name="description"]'); if(meta) meta.content=ru?'B-Maker — local-first приложение для книг и коллекций статей на macOS, Windows и Web: пишите, организуйте, слушайте, связывайте идеи, редактируйте, анализируйте и готовьте тексты к публикации в одном переносимом проекте.':'B-Maker is local-first writing software for macOS, Windows and Web: write, organize, listen, map ideas, revise, analyze, and publish books and article collections in one portable project.';
-  const ld=document.querySelector('script[type="application/ld+json"]'); if(ld){try{const s=JSON.parse(ld.textContent);s.operatingSystem='macOS, Windows, Web';s.downloadUrl=[mac,win];s.featureList=[...(s.featureList||[]),'Read aloud and auditory editing','Offline voices and MP3 audio export','Point-of-view tracking and POV streams','Publication plans with article and book wizards','AI manuscript and audience analysis'];ld.textContent=JSON.stringify(s);}catch(_){}}
-})();
+  function hydrateAll(scope = document) {
+    const placeholders = [];
+    if (scope instanceof Element && scope.matches('.bmaker-shot-placeholder')) placeholders.push(scope);
+    if (scope.querySelectorAll) placeholders.push(...scope.querySelectorAll('.bmaker-shot-placeholder'));
+    return Promise.all(placeholders.map(hydratePlaceholder));
+  }
 
-(() => {
-  const path=location.pathname; if(!/(^|\/)projects\/b-maker\/(stories|compare)\//.test(path)||document.querySelector('.bmaker-explained-related')) return;
-  const ru=document.documentElement.lang==='ru'||document.body?.dataset?.lang==='ru'; const parts=path.split('/').filter(Boolean); const i=parts.findIndex(p=>p==='stories'||p==='compare'); if(i<0) return; const section=parts[i], slug=(parts[i+1]||'').replace(/\.html$/,''); if(!slug||slug==='index') return;
-  const storyMap={
-    'import-existing-manuscript':['why-import-docx','why-several-safety-layers'],'from-idea-to-chapter':['why-idea-map','why-project-aware-idea-map','why-convert-idea-to-manuscript'],'from-articles-to-book':['collections-vs-saved-search','why-hide-or-exclude-sections','why-export-one-section'],'read-whole-manuscript':['why-full-manuscript-view','focus-mode-vs-split-view','rich-editor-vs-portable-markdown','why-current-version'],'one-manuscript-several-views':['manuscript-tree-vs-board','collections-vs-saved-search','why-project-aware-idea-map'],'characters-and-plot-without-spreadsheet':['why-characters-relationships-arc-points','why-plotlines','why-locations','why-story-grid','why-point-of-view-stream'],'writing-goals-and-sessions':['why-goals-and-sessions','why-writing-metrics'],'no-more-final-final-docx':['why-text-versions','why-current-version','why-compare-versions','why-lock-a-version'],'editorial-checks-before-publishing':['why-editorial-checks','why-writing-metrics','why-read-aloud-and-audio-export'],'from-manuscript-to-publishing-package':['preview-vs-export','why-publishing-package','why-ai-use-declaration','why-project-assets','why-publication-plan-and-wizards'],'local-first-writing-workflow':['why-local-first','version-vs-backup','why-integrity-check','why-several-safety-layers'],'listen-before-you-publish':['why-read-aloud-and-audio-export','why-editorial-checks'],'plan-from-draft-to-publication':['why-publication-plan-and-wizards','why-publishing-package']};
-  const compareMap={'writing-software-with-text-to-speech':['why-read-aloud-and-audio-export'],'manuscript-version-management':['why-text-versions','why-current-version','why-compare-versions','why-lock-a-version'],'writing-software-with-idea-map':['why-idea-map','why-project-aware-idea-map','why-multiple-idea-maps','why-convert-idea-to-manuscript'],'local-first-writing-software':['why-local-first','why-several-safety-layers','why-project-assets'],'how-to-organize-a-novel':['manuscript-tree-vs-board','why-characters-relationships-arc-points','why-plotlines','why-story-grid','why-point-of-view-stream'],'turn-articles-into-a-book':['collections-vs-saved-search','why-hide-or-exclude-sections','why-export-one-section'],'novel-writing-software':['why-characters-relationships-arc-points','why-plotlines','why-story-grid','why-locations','why-point-of-view-stream'],'nonfiction-writing-software':['collections-vs-saved-search','why-idea-map','rich-editor-vs-portable-markdown','why-publication-plan-and-wizards'],'writing-software-for-articles-and-books':['collections-vs-saved-search','why-hide-or-exclude-sections','why-export-one-section','why-publication-plan-and-wizards']};
-  const slugs=(section==='stories'?storyMap:compareMap)[slug]; if(!slugs?.length) return;
-  const titles={'why-read-aloud-and-audio-export':['Зачем чтение вслух и MP3?','Why read aloud and audio export?'],'why-point-of-view-stream':['Зачем отслеживать POV?','Why track point of view?'],'why-publication-plan-and-wizards':['Зачем Publication Plan и мастера?','Why publication plans and wizards?'],'why-ai-manuscript-and-audience-analysis':['Зачем AI-анализ рукописи и аудитории?','Why AI manuscript and audience analysis?'],'why-editorial-checks':['Зачем Editorial Checks?','Why editorial checks?'],'why-publishing-package':['Зачем Publishing Package?','Why a publishing package?'],'why-text-versions':['Зачем версии текста?','Why text versions?'],'why-current-version':['Зачем Current Version?','Why a current version?'],'why-compare-versions':['Зачем сравнивать версии?','Why compare versions?'],'why-lock-a-version':['Зачем блокировать версию?','Why lock a version?'],'why-idea-map':['Зачем Idea Map?','Why an Idea Map?'],'why-project-aware-idea-map':['Зачем project-aware Idea Map?','Why a project-aware Idea Map?'],'why-multiple-idea-maps':['Зачем несколько Idea Map?','Why several Idea Maps?'],'why-convert-idea-to-manuscript':['Зачем превращать идею в рукопись?','Why turn an idea into manuscript?'],'why-local-first':['Зачем local-first?','Why local-first?'],'why-several-safety-layers':['Зачем несколько слоёв безопасности?','Why several safety layers?'],'why-project-assets':['Зачем assets внутри проекта?','Why keep assets with the project?'],'manuscript-tree-vs-board':['Дерево или Manuscript Board?','Tree vs manuscript board'],'why-characters-relationships-arc-points':['Зачем Characters и Arc Points?','Why characters and arc points?'],'why-plotlines':['Зачем Plotlines?','Why plotlines?'],'why-story-grid':['Зачем Story Grid?','Why Story Grid?'],'why-locations':['Зачем Locations?','Why locations?'],'collections-vs-saved-search':['Collection или Saved Search?','Collection vs saved search'],'why-hide-or-exclude-sections':['Зачем исключать разделы?','Why hide or exclude sections?'],'why-export-one-section':['Зачем экспортировать один раздел?','Why export one section?'],'rich-editor-vs-portable-markdown':['Rich Editor vs portable Markdown','Rich editor vs portable Markdown'],'why-integrity-check':['Зачем Integrity Check?','Why an integrity check?'],'version-vs-backup':['Version или Backup?','Version vs backup'],'why-import-docx':['Зачем импортировать DOCX?','Why import a DOCX?'],'why-goals-and-sessions':['Зачем Goals и Sessions?','Why goals and sessions?'],'why-writing-metrics':['Зачем метрики текста?','Why writing metrics?'],'why-ai-use-declaration':['Зачем AI-use declaration?','Why an AI-use declaration?'],'preview-vs-export':['Preview или Export?','Preview vs export'],'why-full-manuscript-view':['Зачем читать всю рукопись?','Why read the whole manuscript?'],'focus-mode-vs-split-view':['Focus Mode vs Split View','Focus Mode vs Split View']};
-  const block=document.createElement('section'); block.className='bmaker-explained-related'; block.style.marginTop='42px'; const h=document.createElement('h2'); h.textContent=ru?'Разобраться, зачем это нужно':'Understand why these tools exist'; const p=document.createElement('p'); p.style.display='flex';p.style.flexWrap='wrap';p.style.gap='8px 16px'; slugs.forEach(s=>{const a=document.createElement('a');a.href=`../explained/${s}.html`;a.textContent=titles[s]?.[ru?0:1]||s;p.append(a);});block.append(h,p);const b=document.querySelector('.bmaker-compare-body'),v=b?.querySelector('.bmaker-compare-verdict'); if(b) v?v.before(block):b.append(block);
-})();
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
+      if (node instanceof Element) hydrateAll(node);
+    }));
+  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 
-(() => {
-  const id='G-8F31VPYZVV'; window.dataLayer=window.dataLayer||[]; if(typeof window.gtag!=='function') window.gtag=function(){window.dataLayer.push(arguments);}; if(!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${id}"]`)){window.gtag('js',new Date());window.gtag('config',id);const s=document.createElement('script');s.async=true;s.src=`https://www.googletagmanager.com/gtag/js?id=${id}`;document.head.append(s);} const placement=(a)=>a.closest('.bmaker-hero')?'hero':a.closest('.bmaker-platforms')?'platforms':a.closest('.bmaker-cta')?'bottom_cta':a.closest('.bmaker-compare-verdict')?'comparison_verdict':a.closest('.project-card')?'projects':'content';
-  document.addEventListener('click',(e)=>{const a=e.target.closest?.('a[href]');if(!a)return;const href=a.href||'';let destination,action,legacy;if(href.includes('/downloads/bmaker/B-Maker-Setup-macos.zip')){destination='macos';action='download';legacy='bmaker_download_macos';}else if(href.includes('/downloads/bmaker/B-Maker-Setup-win.zip')){destination='windows';action='download';legacy='bmaker_download_windows';}else if(/^https:\/\/b-maker\.kurakin\.pro\/?(?:[?#].*)?$/.test(href)){destination='web';action='open';legacy='bmaker_open_web';}if(!destination)return;const p={destination,cta_action:action,cta_placement:placement(a),link_url:href,link_text:(a.textContent||'').trim(),page_path:location.pathname,page_language:document.documentElement.lang||document.body?.dataset?.lang||'',send_to:id,transport_type:'beacon'};window.gtag('event','bmaker_cta_click',p);window.gtag('event',legacy,p);},{capture:true});
+  hydrateAll(document).finally(() => {
+    const core = document.createElement('script');
+    core.src = '/assets/bmaker-gallery-core.js';
+    core.async = false;
+    core.onload = () => {
+      document.querySelectorAll('.bmaker-shot-image').forEach(wireHydratedImage);
+      hydrateAll(document);
+    };
+    document.head.append(core);
+  });
 })();
