@@ -30,6 +30,19 @@
     robots.content = 'noindex,follow,max-image-preview:large';
   }
 
+  const productPage = /\/projects\/b-maker\.html$/.test(path);
+  if (productPage) {
+    const microcopy = document.querySelector('.bmaker-hero .bmaker-microcopy');
+    if (microcopy && !microcopy.querySelector('[data-bmaker-guide-link]')) {
+      const guideLink = document.createElement('a');
+      guideLink.className = 'text-link';
+      guideLink.href = 'b-maker/guide.html';
+      guideLink.dataset.bmakerGuideLink = '1';
+      guideLink.textContent = document.documentElement.lang === 'ru' ? 'Руководство по B-Maker →' : 'B-Maker user guide →';
+      microcopy.append(document.createTextNode(' '), guideLink);
+    }
+  }
+
   const rootPath = (raw) => {
     const value = (raw || '').trim();
     if (!value) return '';
