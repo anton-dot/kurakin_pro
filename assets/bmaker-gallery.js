@@ -1,4 +1,35 @@
 (() => {
+  const INDEXABLE_COMPARE_PAGES = new Set([
+    'b-maker-vs-scrivener.html',
+    'b-maker-vs-plottr.html',
+    'b-maker-vs-scapple.html',
+    'book-writing-software-for-mac.html',
+    'book-writing-software-for-windows.html',
+    'book-writing-software-with-ai.html',
+    'cross-platform-writing-software.html',
+    'local-first-writing-software.html',
+    'novel-writing-software.html',
+    'nonfiction-writing-software.html',
+    'writing-software-for-articles-and-books.html'
+  ]);
+
+  const path = window.location.pathname.replace(/\/+$/, '');
+  const explainedMatch = path.match(/\/projects\/b-maker\/explained\/([^/]+\.html)$/);
+  const compareMatch = path.match(/\/projects\/b-maker\/compare\/([^/]+\.html)$/);
+  const shouldNoindex =
+    (explainedMatch && explainedMatch[1] !== 'index.html') ||
+    (compareMatch && compareMatch[1] !== 'index.html' && !INDEXABLE_COMPARE_PAGES.has(compareMatch[1]));
+
+  if (shouldNoindex) {
+    let robots = document.querySelector('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement('meta');
+      robots.name = 'robots';
+      document.head.appendChild(robots);
+    }
+    robots.content = 'noindex,follow,max-image-preview:large';
+  }
+
   const rootPath = (raw) => {
     const value = (raw || '').trim();
     if (!value) return '';
