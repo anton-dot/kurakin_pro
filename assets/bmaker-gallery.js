@@ -1,4 +1,5 @@
 (() => {
+  const path = window.location.pathname.replace(/\/+$/, '');
   const productPage = /\/projects\/b-maker\.html$/.test(path);
   if (productPage) {
     const microcopy = document.querySelector('.bmaker-hero .bmaker-microcopy');
