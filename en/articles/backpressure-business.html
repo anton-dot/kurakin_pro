@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What backpressure gives the business: how to stop incoming work from overwhelming the system, preserve critical operations, and decide where delay is acceptable.">
+    <meta name="description" content="Backpressure prevents queues and requests from growing beyond useful capacity. A practical look at admission limits, delayed work, retries, and business priorities.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Backpressure: Why a System Must Be Able to Slow the Flow, Not Just Process Faster">
-    <meta property="og:description" content="When incoming work grows faster than the system can process it, trying to accept everything often ends in a wider outage. Backpressure slows the flow, sets boundaries, and keeps the system manageable.">
+    <meta property="og:title" content="Backpressure: When Your System Must Say Not Yet">
+    <meta property="og:description" content="Backpressure prevents queues and requests from growing beyond useful capacity. A practical look at admission limits, delayed work, retries, and business priorities.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/backpressure-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>Backpressure: Why a System Must Be Able to Slow the Flow, Not Just Process Faster - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-10-13">
+    <title>Backpressure: When Your System Must Say Not Yet - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/backpressure-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/backpressure-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/backpressure-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Backpressure: Why a System Must Be Able to Slow the Flow, Not Just Process Faster","description":"What backpressure gives the business: how to stop incoming work from overwhelming the system, preserve critical operations, and decide where delay is acceptable.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/backpressure-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Backpressure: When Your System Must Say Not Yet","description":"Backpressure prevents queues and requests from growing beyond useful capacity. A practical look at admission limits, delayed work, retries, and business priorities.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/backpressure-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -36,35 +36,51 @@
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/backpressure-business.html">RU</a><a href="backpressure-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Backpressure: Why a System Must Be Able to Slow the Flow, Not Just Process Faster</h1><p class="article-summary">When incoming work grows faster than the system can process it, trying to accept everything often ends in a wider outage. Backpressure slows the flow, sets boundaries, and keeps the system manageable.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#events">Events and messaging</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-13">13 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Backpressure: When Your System Must Say Not Yet</h1><p class="article-summary">Accepting every request sounds customer-friendly until the queue becomes too large to finish. Backpressure makes overload a controlled decision instead of a surprise outage.</p></div></header>
       <article class="article-content">
-        <p>Incoming requests, events, or jobs can grow faster than a system can process them. This happens during campaigns, bulk notifications, downstream failures, or simply fast product growth.</p>
-        <p>The naive strategy is to keep accepting everything. Queues grow, memory fills, latency rises, and eventually one overloaded function turns into a wider outage.</p>
-        <h2>What problem are we solving?</h2>
-        <p>Backpressure is a way for a system to say to the source of load: “not this fast right now.” That can mean pausing, reducing throughput, rejecting some work, limiting queue size, or lowering priority.</p>
-        <p>The goal is not to make the product slower. The goal is to prevent unbounded demand from accumulating after physical processing capacity has already been reached.</p>
-        <p>A well-designed system knows in advance which operations can wait, which can fail fast, and which must continue even under pressure.</p>
-        <h2>What does the business get?</h2>
-        <p>The main benefit is predictable behavior during overload. Instead of an uncontrolled global outage, the business gets managed degradation.</p>
-        <p>This matters when operations have different value. A payment, order confirmation, or login may deserve capacity before recommendation refreshes or background analytics.</p>
-        <p>Backpressure also makes capacity problems visible. If queues are constantly full, the answer is not another retry. The company may need more capacity, different priorities, or a different process.</p>
-        <h2>What does the team get?</h2>
-        <p>The team gets explicit load boundaries and fewer cascading failures. Queues stop growing without limit, and one slow consumer is less likely to destabilize everything else.</p>
-        <p>But the source must understand the signal. If clients cannot slow down or retry later correctly, pressure is merely pushed somewhere else.</p>
-        <h2>What does the customer get?</h2>
-        <p>The customer may see a slower response or an occasional explicit failure instead of a completely unavailable product. That is worse than perfect operation, but usually far better than a total collapse.</p>
-        <p>Retry behavior must be clear so users do not create duplicate operations because the system left them uncertain.</p>
-        <h2>What do we pay for it?</h2>
-        <p>We have to design limits, queue sizes, priorities, and degradation rules, then measure lag and throughput.</p>
-        <p>Backpressure that is too aggressive rejects useful work too early. Backpressure that is too weak does not protect the system.</p>
-        <h2>When is backpressure unnecessary?</h2>
-        <p>If demand is naturally limited, workloads are small, and there is plenty of spare capacity, a sophisticated pressure-control mechanism can be overkill.</p>
-        <p>It becomes important with queues, streaming, unstable consumers, or sharp traffic spikes.</p>
-        <h2>What should we ask before deciding?</h2>
-        <ul><li>Which operation must survive overload?</li><li>Where is delay acceptable and where is fast rejection better?</li><li>What queue size still has business value?</li><li>Can the producer slow down or retry later?</li><li>What happens if overload lasts an hour instead of a minute?</li></ul>
-        <h2>In the end</h2>
-        <p>Backpressure is not about speed. It is about control.</p>
-        <p><strong>For the business, it turns overload from an unexpected general outage into a predefined operating mode with explicit priorities.</strong></p>
+        <p>A product gets a burst of traffic. Orders, notifications and background jobs enter the system faster than the workers can finish them. At first everything looks fine: requests are accepted, the queue keeps filling, and nobody sees a hard error.</p>
+        <p>Later, jobs that should have finished quickly are still waiting. Some may no longer be useful by the time they run. The service has not solved the overload. It has postponed the moment when customers discover it.</p>
+        <p>Backpressure is the mechanism for stopping that accumulation. When the consumer cannot keep up, the system needs a way to slow the producer, limit the backlog, or decline work it cannot reasonably complete.</p>
+
+        <h2>A queue is a buffer, not extra capacity</h2>
+        <p>Queues are excellent at absorbing temporary bursts. They allow producers and consumers to work at different speeds for a while. The trouble begins when incoming work stays faster than completed work.</p>
+        <p>As long as that difference continues, the backlog grows. More storage may postpone the limit, but it does not make the system process work faster.</p>
+        <p>The useful question is not only how many messages fit in the queue. It is how old the oldest item will be by the time a worker picks it up. A delayed invoice export may still be useful. A notification about an event that ended hours ago may not be.</p>
+        <p>That gives the business a role in capacity design. Not every operation has the same deadline, and not every delay is acceptable.</p>
+
+        <h2>Sometimes the right response is to accept less work</h2>
+        <p>Backpressure can appear in several forms, depending on how the producer and consumer communicate.</p>
+        <p>In a streaming pipeline, a consumer may signal that it is ready for fewer items. A background system may pause or slow producers when queue age crosses a limit. A synchronous API can enforce concurrency or request-rate limits and return a clear error rather than allowing a request to wait indefinitely.</p>
+        <p>If HTTP is involved, a rate-limit response such as <code>429</code>, sometimes with a <code>Retry-After</code> hint, can tell a cooperating caller to slow down. But that is only useful if callers are designed to respect it.</p>
+        <p>Blindly rejecting everything is not a good overload policy either. Some work must continue. Other work can wait. Some should be dropped or rejected before it enters the system. Someone has to decide which is which.</p>
+
+        <h2>Move the decision toward the entrance</h2>
+        <p>If an application accepts a job and only discovers overload after storing it deep inside several queues, it has already made a promise. The customer may have received a confirmation while the system has little idea when the work will finish.</p>
+        <p>Where possible, put admission limits near the point where work enters the system. Tell the caller early whether the request can be processed now, accepted for later processing, or not accepted at all.</p>
+        <p>Those states should mean different things in the product. A response that says “accepted for processing” must not be presented as “completed.” If a task expires before execution, the system also needs a rule for what happens next.</p>
+        <p>This may sound like interface detail. It becomes a support problem very quickly when a customer retries an uncertain operation and accidentally submits it twice. Clear statuses, bounded retries and idempotent handling matter as much as the queue implementation.</p>
+
+        <h2>Choose who gets to keep moving</h2>
+        <p>Consider a system that handles checkout, recommendations and background analytics through shared processing capacity. Under overload, serving all three in the same order can be a poor business decision.</p>
+        <p>Checkout may need priority because a long delay changes the customer journey. Analytics can often run later. Recommendations might use existing results for a while. The exact priorities depend on the product, but they should not be decided accidentally by whichever request arrived first.</p>
+        <p>Some workloads also need a fairness rule. Without one, a single noisy customer or integration can consume the entire queue and make everyone else wait.</p>
+        <p>This is where <a href="bulkhead-business.html">bulkheads</a> can complement backpressure. Separate resource budgets protect critical work from other workloads. Backpressure controls what happens when even a protected budget reaches its limit.</p>
+
+        <h2>More workers might make the incident worse</h2>
+        <p>A common reaction to a growing queue is to increase the number of consumers. Sometimes that is exactly right: there is spare capacity downstream, and workers are the bottleneck.</p>
+        <p>But imagine every worker is waiting on a database or an external API that is already saturated. Adding workers sends more concurrent requests into the same problem. Queue length may change while the failing dependency gets less room to recover.</p>
+        <p>In that case, a <a href="circuit-breaker-business.html">circuit breaker</a> may stop futile calls to an unhealthy service. A <a href="retry-backoff-business.html">bounded retry policy</a> can prevent clients from multiplying the overload. None of these removes the need to understand actual processing capacity.</p>
+        <p>It helps to measure arrival rate, completion rate, oldest-item age, rejected work, retries and the time customers spend waiting. Queue depth alone can be misleading: a short queue can still be unhealthy if nothing is finishing.</p>
+
+        <h2>Do not hide the cost of rejection</h2>
+        <p>Setting a firm limit often makes system metrics look less chaotic. Some requests will fail immediately instead of joining an unbounded backlog. That is usually better for the platform, but there is a trade-off.</p>
+        <p>Rejection must be handled by the product and its users. Can the caller try again safely? Will the user lose work? Is there a useful “try later” state, or are we making the customer repeat an entire process?</p>
+        <p>A well-designed overload policy also distinguishes short spikes from sustained excess demand. A small buffer can smooth a burst. It cannot compensate for a service that is chronically unable to keep up with ordinary traffic. At that point the business needs more capacity, less work, or a change in the process.</p>
+
+        <h2>When backpressure is not worth a separate mechanism</h2>
+        <p>A small application with naturally bounded workload may need no elaborate flow-control system. Basic request limits, timeouts and a modest queue can be sufficient.</p>
+        <p>But when work can accumulate faster than anyone can process it, accepting everything is not neutral. It is a choice to create future delay and uncertainty.</p>
+        <p>I would want one answer before choosing the mechanism: when capacity runs out, what promise are we still willing to make to the customer? Once that is clear, the technical limits can be designed around it.</p>
       </article>
     </main>
     <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
