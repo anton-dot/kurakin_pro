@@ -1,16 +1,16 @@
 {
     "schemaVersion":  1,
-    "publishedAtUtc":  "2026-10-15T20:53:32.0260680Z",
+    "publishedAtUtc":  "2026-10-16T13:45:59.9935013Z",
     "releases":  {
                      "web":  {
-                                 "version":  "0.15.5",
-                                 "build":  34,
+                                 "version":  "0.15.6",
+                                 "build":  35,
                                  "available":  true,
                                  "url":  "https://b-maker.kurakin.pro/"
                              },
                      "windows":  {
-                                     "version":  "0.15.5",
-                                     "build":  34,
+                                     "version":  "0.15.6",
+                                     "build":  35,
                                      "available":  true,
                                      "url":  "https://kurakin.pro/downloads/bmaker/B-Maker-Setup-win.zip"
                                  },
