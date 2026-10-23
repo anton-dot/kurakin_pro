@@ -10,14 +10,14 @@
     <meta property="og:title" content="Microservices: The Ongoing Cost of Team Independence">
     <meta property="og:description" content="When microservices really make teams independent, how they change data consistency and operations, and how to tell whether the added complexity pays for itself.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/microservices-business.html">
-    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/microservices-architecture.webp">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-10-23">
     <title>Microservices: The Ongoing Cost of Team Independence - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/microservices-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/microservices-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/microservices-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Microservices: The Ongoing Cost of Team Independence","description":"When microservices really make teams independent, how they change data consistency and operations, and how to tell whether the added complexity pays for itself.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-23","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/microservices-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Microservices: The Ongoing Cost of Team Independence","description":"When microservices really make teams independent, how they change data consistency and operations, and how to tell whether the added complexity pays for itself.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-23","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/microservices-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/microservices-architecture.webp"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -40,6 +40,8 @@
       <article class="article-content">
 <p>Microservices are often presented as a way to set teams free. Each team owns a part of the product and releases it without waiting for the others. It sounds attractive. But if every meaningful change still needs five approvals, splitting the software has not created independence. It has merely introduced more things to run.</p>
 <p>So I would not start by asking how many services the company needs. I would ask <strong>which dependency is slowing the business down, and whether a service boundary will actually remove it.</strong></p>
+<figure class="architecture-illustration"><img src="../../assets/img/microservices-architecture.webp" width="1080" height="720" alt="Comparison of one monolithic application with a campus of independently operated services connected by a network" loading="eager" decoding="async"><figcaption>One system with shared infrastructure on the left; separately operated components that must still communicate on the right. It illustrates the trade-off, not a particular system design.</figcaption></figure>
+
 <h2>Independence is not a service count</h2>
 <p>Think of an online store. Catalog changes frequently, payments need cautious releases, and notifications move at another pace. When they all share a deployment, one team may end up waiting for another.</p>
 <p>Separate services can give teams independent releases, infrastructure suited to their workload and the ability to scale one busy capability without scaling the whole product.</p>
