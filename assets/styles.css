@@ -1291,6 +1291,25 @@ h3 {
   color: var(--teal-dark);
 }
 
+.architecture-illustration {
+  margin: 32px 0 40px;
+}
+
+.architecture-illustration img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+}
+
+.architecture-illustration figcaption {
+  color: var(--ink-soft);
+  font-size: 0.87rem;
+  line-height: 1.55;
+  margin-top: 12px;
+}
+
 .article-source {
   border-left: 3px solid var(--teal);
   display: grid;
