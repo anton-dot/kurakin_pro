@@ -2,11 +2,13 @@
 <urlset xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kurakin.pro/ru/architecture/</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/architecture/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/architecture/" />
   </url>
   <url>
     <loc>https://kurakin.pro/en/architecture/</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/architecture/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/architecture/" />
   </url>
@@ -672,11 +674,13 @@
   </url>
   <url>
     <loc>https://kurakin.pro/ru/articles/ai-guardrails-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-guardrails-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-guardrails-business.html" />
   </url>
   <url>
     <loc>https://kurakin.pro/en/articles/ai-guardrails-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-guardrails-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-guardrails-business.html" />
   </url>
@@ -1252,31 +1256,37 @@
   </url>
   <url>
     <loc>https://kurakin.pro/ru/articles/ai-memory-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-memory-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-memory-business.html" />
   </url>
   <url>
     <loc>https://kurakin.pro/en/articles/ai-memory-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-memory-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-memory-business.html" />
   </url>
   <url>
     <loc>https://kurakin.pro/ru/articles/structured-output-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/structured-output-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/structured-output-business.html" />
   </url>
   <url>
     <loc>https://kurakin.pro/en/articles/structured-output-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/structured-output-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/structured-output-business.html" />
   </url>
   <url>
     <loc>https://kurakin.pro/ru/articles/ai-tool-permissions-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-tool-permissions-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-tool-permissions-business.html" />
   </url>
   <url>
     <loc>https://kurakin.pro/en/articles/ai-tool-permissions-business.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-tool-permissions-business.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-tool-permissions-business.html" />
   </url>
