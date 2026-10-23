@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Why a monolith can be a sensible business architecture: where it improves speed and cost, and when it starts limiting growth.">
+    <meta name="description" content="When a monolith makes business sense, where shared deployments create friction, and how to judge whether splitting into services is worth the cost.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Monolith: Why Simple Architecture Sometimes Wins">
-    <meta property="og:description" content="A monolith in business language: when simplicity helps the product move faster and when one system becomes a constraint.">
+    <meta property="og:title" content="Monolith vs Microservices: When One Application Wins">
+    <meta property="og:description" content="When a monolith makes business sense, where shared deployments create friction, and how to judge whether splitting into services is worth the cost.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/monolith-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>Monolith: Why Simple Architecture Sometimes Wins - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-10-23">
+    <title>Monolith vs Microservices: When One Application Wins - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/monolith-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/monolith-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/monolith-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Monolith: Why Simple Architecture Sometimes Wins","description":"Why a monolith can be a sensible business architecture: where it improves speed and cost, and when it starts limiting growth.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/monolith-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Monolith vs Microservices: When One Application Wins","description":"When a monolith makes business sense, where shared deployments create friction, and how to judge whether splitting into services is worth the cost.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-23","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/monolith-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -36,61 +36,37 @@
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/monolith-business.html">RU</a><a href="monolith-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#foundations">Architecture foundations</a><p class="article-kicker"><span>4 min read</span></p><h1>Monolith: Why Simple Architecture Sometimes Wins</h1><p class="article-summary">A monolith is often treated as a temporary stage before “real” architecture. For many products, however, one system remains the fastest and cheapest way to grow for a long time.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#foundations">Architecture foundations</a><p class="article-kicker"><span>4 min read</span></p><h1>Monolith vs Microservices: When One Application Wins</h1><p class="article-summary">A monolith is not automatically technical debt. Here is how to weigh speed, team coordination and operating cost before splitting an application.</p></div></header>
       <article class="article-content">
-        <p>In software, the word “monolith” often sounds like a criticism. One large system, one release, one codebase, many dependencies — and the assumed next step is microservices.</p>
-        <p>But a monolith is not automatically a problem. It becomes a problem when its structure starts slowing down the business.</p>
-
-        <h2>What is a monolith?</h2>
-        <p>In simple terms, it is an application whose main parts are developed and deployed together. Users, catalog, orders, payments, and other functions may live in one system and share infrastructure.</p>
-        <p>That limits independence between parts, but it also removes many problems that come with distributed systems.</p>
-
-        <h2>What problem are we solving?</h2>
-        <p>Early in a product’s life, the main challenge is usually not independent scaling for dozens of services. It is validating ideas quickly, shipping changes, and avoiding a large infrastructure burden.</p>
-        <p>A monolith gives a simpler operating model: fewer components, fewer network interactions, one delivery process, and fewer places where complexity itself can cause failure.</p>
-
-        <h2>What does the business get?</h2>
-        <p>The biggest benefit is speed at a relatively low architectural cost.</p>
-        <p>A small team can evolve the product without a dedicated platform function, complex observability, or a large set of infrastructure components. More time and money can go into the product rather than into operating distribution.</p>
-        <p>This matters especially when the product, market, or business model is still changing. In that environment, the ability to reshape the system quickly can be more valuable than independently deploying one service.</p>
-        <p>A monolith can also make costs easier to predict: less infrastructure, fewer operational dependencies, and usually fewer specialized capabilities that must be maintained continuously.</p>
-
-        <h2>What does the team get?</h2>
-        <p>Developers can usually run the system locally, follow a business flow end to end, and change several related parts in one codebase.</p>
-        <p>Transactions and data consistency are often simpler too. A normal business operation does not need to become a chain of network calls with recovery logic for the third step out of five.</p>
-        <p>But the simplicity disappears if the monolith has no internal boundaries. When every part can reach into every other part, one codebase becomes a source of risk instead of an advantage.</p>
-
-        <h2>What does the customer get?</h2>
-        <p>The customer does not care how many applications run inside the company.</p>
-        <p>If simpler architecture lets the team fix issues faster, release features sooner, and avoid failures across service boundaries, the customer benefits.</p>
-        <p>Complex architecture does not create customer value by itself.</p>
-
-        <h2>What do we pay for it?</h2>
-        <p>The price appears as the system grows.</p>
-        <p>Independent teams may start blocking each other. A shared release becomes heavier. One hot area cannot be scaled as independently. A failure in one process may affect the whole application.</p>
-        <p>The more dangerous cost is internal coupling. Without clear boundaries, every change can touch more and more of the system over time.</p>
-
-        <h2>When does a monolith stop paying off?</h2>
-        <ul>
-          <li>Several teams regularly block each other’s releases.</li>
-          <li>Different parts need fundamentally different scaling.</li>
-          <li>The shared release noticeably slows product delivery.</li>
-          <li>A failure in one area too often affects the whole product.</li>
-          <li>The cost of change grows because of coupling rather than because the feature itself is difficult.</li>
-        </ul>
-
-        <h2>Questions to ask before changing it</h2>
-        <ul>
-          <li>Which specific monolith problem is already costing the business money or speed?</li>
-          <li>Can better module boundaries solve it?</li>
-          <li>Do teams truly need independent releases?</li>
-          <li>Will the new architecture cost less than the problem we are trying to remove?</li>
-        </ul>
-
-        <h2>In the end</h2>
-        <p>A monolith is not a sign of technical immaturity. It is one architecture option with a valid range of use.</p>
-        <p><strong>If a simple system lets the business move quickly without creating real constraints, making it more complex just to look modern is a poor investment.</strong></p>
-      </article>
+<p>Microservices are often proposed before anyone has clearly described the problem they are supposed to solve. The application has grown, releases are getting harder, so it must be time to split it up. Sometimes that helps. Sometimes it turns one difficult problem into ten.</p>
+<p>First, find out what is really holding the business back: the application's structure, the way teams work, or the need to coordinate every change with everyone.</p>
+<figure class="architecture-illustration"><img src="../../assets/img/monolith-architecture.svg" width="960" height="600" alt="One building with connected rooms representing different functions of a monolithic application" loading="eager"><figcaption>Think of a monolith as a building with different departments sharing the same utilities. Working together can be easy; renovating one floor can affect another. It is an analogy, not a software architecture diagram.</figcaption></figure>
+<h2>One application does not have to mean one tangled mess</h2>
+<p>Imagine an online store. Catalog, cart, orders and payments can all live inside one application, built and deployed as a unit. That is a simplified picture of a monolith.</p>
+<p>Yet its code can still be organised into clean modules with explicit boundaries. A monolith describes primarily how the application is built and deployed, not whether its internals are well designed.</p>
+<p>The building analogy helps here. Rooms serve different purposes, but share infrastructure. Good boundaries still matter even when there is only one building.</p>
+<h2>Why simplicity can win early on</h2>
+<p>When a product is evolving, future business boundaries are rarely obvious. Today checkout works one way; next month the company tests a different model. A single team and deployment process can make those changes easier.</p>
+<p>You do not immediately need to solve all the problems of communication between independently deployed services: network failures, incompatible contracts, cross-service tracing and data coordination. A monolith still needs monitoring and operational discipline. It simply avoids introducing some distributed-system complexity before it is useful.</p>
+<p>For an executive, the economics are straightforward: how much engineering effort improves the product, and how much is spent operating the architecture itself? The second category rarely looks impressive on a slide.</p>
+<h2>Where the cost shows up</h2>
+<p>Suppose one team owns promotions, another payments and a third customer accounts. When everything ships together, testing and release coordination can become shared work. More teams can mean more waiting.</p>
+<p>But a common deployment does not automatically require downtime or endless manual approvals. Release automation, tests and modularity often matter as much as architecture style.</p>
+<p>There are technical constraints too. A resource-intensive operation in the same process can affect unrelated functions. Scaling one hot feature independently is less straightforward than scaling a dedicated service. That does not mean monoliths cannot scale: multiple instances of the whole application are often perfectly viable.</p>
+<p>Worse is a codebase where changing one area unexpectedly breaks several others. That is a coupling problem. Moving the same poor boundaries into services will not fix it; the dependencies will simply cross a network.</p>
+<h2>Microservices buy independence, but the bill keeps coming</h2>
+<p>Separate services can let teams deploy at different times and scale different workloads. In exchange, the company takes on contract compatibility, network failure handling, distributed observability, security between services and harder data consistency problems.</p>
+<p>Consider an order saved by one service while another has yet to confirm payment. What does the customer see in between? How do we recover from partial completion? In a monolith using one transactional database, some of these operations can be kept atomic more easily.</p>
+<p>So “Why haven't we adopted microservices?” is not a particularly useful management question. A better one is: what independence do we genuinely need enough to pay for it every day?</p>
+<h2>What I would check before splitting anything</h2>
+<p>I would start with actual delays. Are releases blocked by the build pipeline? Manual testing? Teams editing the same code? Or approvals unrelated to technology? These are different problems with different remedies.</p>
+<p>Then I would see whether internal module boundaries, data ownership, automated tests and a better delivery process could remove the bottleneck. A modular monolith can deliver much of the desired clarity without the full operational cost of distributed services.</p>
+<p>A separate service starts to make sense when a capability has a clear owner, a meaningful boundary, distinct scaling or release needs, and someone prepared to operate it. The benefit still needs to exceed the ongoing cost.</p>
+<h2>When is it time to change?</h2>
+<p>Persistent release conflicts, proven differences in scaling needs, unacceptable blast radius and changes slowed by shared technical dependencies are serious signals. They justify an architecture review, not an automatic order to break the application apart.</p>
+<p>Sometimes the answer is a modular monolith. Sometimes extracting one problematic component is enough. Sometimes a service architecture is justified.</p>
+<p><strong>There is no reason to defend a monolith on principle. Keep it while the cost of sharing one application is lower than the cost of independence.</strong> Architecture exists to make business change possible, not to prove how modern the engineering department is.</p>
+</article>
     </main>
     <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
   </body>
