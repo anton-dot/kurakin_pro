@@ -10,14 +10,14 @@
     <meta property="og:title" content="Микросервисы: независимость команд, за которую придётся платить">
     <meta property="og:description" content="Что микросервисы действительно меняют в работе команд, какие новые сбои и расходы создают и как определить, оправдана ли независимость сервисов.">
     <meta property="og:url" content="https://kurakin.pro/ru/articles/microservices-business.html">
-    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+    <meta property="og:image" content="https://kurakin.pro/assets/img/microservices-architecture.webp">
     <meta property="article:published_time" content="2026-08-12">
     <meta property="article:modified_time" content="2026-10-23">
     <title>Микросервисы: независимость команд, за которую придётся платить - Антон Куракин</title>
     <link rel="canonical" href="https://kurakin.pro/ru/articles/microservices-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/microservices-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/microservices-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Микросервисы: независимость команд, за которую придётся платить","description":"Что микросервисы действительно меняют в работе команд, какие новые сбои и расходы создают и как определить, оправдана ли независимость сервисов.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-10-23","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/microservices-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Микросервисы: независимость команд, за которую придётся платить","description":"Что микросервисы действительно меняют в работе команд, какие новые сбои и расходы создают и как определить, оправдана ли независимость сервисов.","inLanguage":"ru","datePublished":"2026-08-12","dateModified":"2026-10-23","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/ru/articles/microservices-business.html"},"author":{"@type":"Person","name":"Антон Куракин","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/microservices-architecture.webp"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -40,6 +40,8 @@
       <article class="article-content">
 <p>Микросервисы часто продают компании как способ дать командам свободу: каждая отвечает за свою часть продукта и выпускает её, не ожидая остальных. Звучит убедительно. Но если после разделения любое изменение по-прежнему требует пяти согласований, архитектура не дала независимости. Она лишь добавила больше процессов и серверов.</p>
 <p>Поэтому я бы начинал не с вопроса, сколько сервисов нужно, а с другого: <strong>какая зависимость сегодня мешает бизнесу работать и действительно ли сервисная граница её устранит?</strong></p>
+<figure class="architecture-illustration"><img src="../../assets/img/microservices-architecture.webp" width="1080" height="720" alt="Сравнение одной монолитной системы с несколькими отдельно работающими сервисами, связанными сетью" loading="eager" decoding="async"><figcaption>Слева — одна система с общими коммуникациями. Справа — отдельные части с собственным устройством, которым всё равно приходится договариваться друг с другом. Это сравнение принципов, а не схема конкретного продукта.</figcaption></figure>
+
 <h2>Независимость появляется не от количества приложений</h2>
 <p>Представим интернет-магазин. Каталог обновляется часто, платежи требуют осторожных изменений, а уведомления живут своим ритмом. Когда эти области связаны единым релизом, одна команда может ждать другую.</p>
 <p>Выделение самостоятельных сервисов может позволить командам выпускать изменения отдельно, выбирать подходящую инфраструктуру и масштабировать ту нагрузку, которая выросла. Не обязательно увеличивать весь продукт только потому, что резко подорожал расчёт рекомендаций.</p>
