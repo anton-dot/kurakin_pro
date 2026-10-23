@@ -3,73 +3,80 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What SLOs and error budgets give the business: how to agree on the right reliability level, connect incidents with delivery speed, and avoid overpaying for impossible perfection.">
+    <meta name="description" content="How to set service objectives around customer outcomes, understand error budgets and decide when reliability work should take priority over new releases.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="SLO and Error Budgets: How Much Reliability Does the Business Actually Need?">
-    <meta property="og:description" content="Reliability is not absolute. SLOs define the service level the business needs, while error budgets connect that target with the pace of change.">
+    <meta property="og:title" content="SLO and Error Budgets: When Should Releases Slow Down?">
+    <meta property="og:description" content="How to set service objectives around customer outcomes, understand error budgets and decide when reliability work should take priority over new releases.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/slo-error-budget-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>SLO and Error Budgets: How Much Reliability Does the Business Actually Need? - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-10-23">
+    <title>SLO and Error Budgets: When Should Releases Slow Down? - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/slo-error-budget-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/slo-error-budget-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/slo-error-budget-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SLO and Error Budgets: How Much Reliability Does the Business Actually Need?","description":"What SLOs and error budgets give the business: how to agree on the right reliability level, connect incidents with delivery speed, and avoid overpaying for impossible perfection.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/slo-error-budget-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SLO and Error Budgets: When Should Releases Slow Down?","description":"How to set service objectives around customer outcomes, understand error budgets and decide when reliability work should take priority over new releases.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-23","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/slo-error-budget-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/slo-error-budget-business.html">RU</a><a href="slo-error-budget-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><span>5 min read</span></p><h1>SLO and Error Budgets: How Much Reliability Does the Business Actually Need?</h1><p class="article-summary">“The system must always work” sounds right until the company has to pay for every additional nine of availability. SLOs turn reliability into an explicit agreement, while error budgets connect that agreement to the pace of change.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Scaling and reliability</a><p class="article-kicker"><span>5 min read</span><span>·</span><span>Updated <time datetime="2026-10-23">23 October 2026</time></span></p><h1>SLO and Error Budgets: When Should Releases Slow Down?</h1><p class="article-summary">An uptime chart can be green while customers cannot pay. SLOs connect real customer outcomes with the choice between releases and reliability.</p></div></header>
       <article class="article-content">
-        <p>Business and engineering teams often talk about reliability from different angles. For the business, downtime means lost sales, interrupted operations, and unhappy customers. For engineers, it means incidents, on-call load, and increased risk around every release.</p>
-        <p>The trouble starts when the only requirement is “no outages.” Perfect reliability is rarely realistic, and every step toward it costs more. At some point, protecting the system from every possible failure can slow the product more than an occasional acceptable incident would.</p>
-        <h2>What problem are we solving?</h2>
-        <p>An SLO, or Service Level Objective, defines the target quality of a service. Instead of saying “it should work well,” the company agrees on availability, latency, or successful operations over a specific period.</p>
-        <p>An error budget is the amount of deviation from that target the business is willing to accept. If the service does not need to be perfect every second, that remaining budget becomes room for releases, experiments, and architectural change.</p>
-        <p>The point is not the metric itself. The point is forcing a business decision: how reliable does this service actually need to be, and how much are we willing to spend to improve it further?</p>
-        <h2>What does the business get?</h2>
-        <p>The main benefit is the ability to compare the cost of risk with the cost of reliability.</p>
-        <p>If one minute of downtime in a payment flow directly stops revenue, a strict SLO may be justified. If a rarely used internal report is unavailable for a few minutes, paying the same engineering price probably makes no sense.</p>
-        <p>SLOs also reduce the endless conflict between “we need to ship faster” and “we need to stop breaking things.” While the error budget is healthy, the team can accept more change. If the budget is exhausted, reliability work becomes the rational priority.</p>
-        <p>That turns reliability into a product-management decision rather than an internal operations concern.</p>
-        <h2>What does the team get?</h2>
-        <p>The team gets a concrete target instead of the vague instruction to “make it reliable.” It becomes possible to identify which measures really represent customer experience and where acceptable risk ends.</p>
-        <p>This helps choose between new features, technical debt, and resilience work. Not every incident justifies an architectural rewrite, but repeatedly exceeding the agreed error budget is strong evidence that the system needs attention.</p>
-        <p>The SLO must represent something meaningful. Server uptime is a poor metric if the customer still cannot complete a purchase.</p>
-        <h2>What does the customer get?</h2>
-        <p>The customer gets a more predictable service because the company explicitly decides which user journeys must be highly reliable and which failures are unacceptable.</p>
-        <p>The customer also benefits from the product not being frozen in pursuit of impossible perfection. New functionality can keep moving while the actual level of risk stays within agreed limits.</p>
-        <h2>What do we pay for it?</h2>
-        <p>The company has to choose the right indicators, build measurement, and agree on targets. This is organizational work, not just monitoring configuration.</p>
-        <p>An SLO that is too loose can normalize a poor service. One that is too strict can make the business permanently pay for reliability customers do not actually need.</p>
-        <p>There is also a cultural cost. If the error budget becomes a punishment mechanism, teams may hide problems or optimize the metric rather than improve the service.</p>
-        <h2>When are SLOs and error budgets unnecessary?</h2>
-        <p>For a small internal tool where downtime has little consequence, a formal SLO process may be excessive. Basic monitoring and sensible operational practices can be enough.</p>
-        <p>The approach becomes useful when the service is critical, releases are frequent, multiple teams disagree about priorities, or the cost of additional reliability is already material to the business.</p>
-        <h2>What should we ask before deciding?</h2>
-        <ul><li>Which failures are actually visible to the customer or business process?</li><li>What is the cost of a minute or an hour of downtime for different functions?</li><li>Which metric reflects the real user outcome?</li><li>How much reliability are we willing to buy with money and delivery speed?</li><li>What should the team do when the error budget is exhausted?</li></ul>
-        <h2>In the end</h2>
-        <p>An SLO does not promise a perfect system. It helps the company agree on how good the system needs to be.</p>
-        <p><strong>For the business, it is a way to stop buying reliability blindly and connect acceptable risk with the speed of product development.</strong></p>
-      </article>
+<p>The business wants faster releases. Operations wants a break from releases because the last incident has left the service looking fragile. Without a shared definition of acceptable reliability, the argument goes nowhere. Everyone is defending a different kind of risk.</p>
+<p>SLOs and error budgets are not just more numbers to put on a dashboard. They create an agreement about the customer experience the product must deliver, and give that agreement a role in decisions about change.</p>
+<figure class="architecture-illustration"><img src="../../assets/img/slo-error-budget-architecture.webp" width="1280" height="750" alt="A customer-facing application beside a large reliability gauge, with a mostly green ring and a smaller amber section representing limited tolerance for failure." loading="eager" decoding="async"><figcaption>Reliability is not a simple on/off switch. There is an observable customer outcome, a service objective and a limited allowance for failure. This is a conceptual illustration, not real monitoring data.</figcaption></figure>
+
+<h2>A healthy server can still mean a broken checkout</h2>
+<p>Imagine an online store. Its servers are up and the pages load, but customers cannot complete payment. Infrastructure monitoring may be green. The business still has a broken journey at the point where it matters most.</p>
+<p>That is why I would begin with what the customer is trying to accomplish, not with server uptime. For checkout, successful completion and acceptable response time matter. For an internal report, the relevant question may be whether correct data is available when someone needs it to make a decision.</p>
+<p>From that outcome, choose an SLI — a measurable service level indicator. It could be the share of checkout attempts that complete successfully. An SLO then states the target for that indicator over an agreed measurement window. This is a testable expectation, not a promise that nothing will ever fail.</p>
+
+<h2>An error budget is not a licence to break things</h2>
+<p>If the target allows less than perfect operation, the difference represents some tolerated share of unsuccessful outcomes. That is the error budget.</p>
+<p>The point is not to decide how many customers we are allowed to disappoint. It is to make risk a conscious decision instead of a negotiation driven by the last outage. While the service is meeting its objective, changes can continue, with the team watching how quickly that allowance is being consumed.</p>
+<p>Different measures need different budgets. A request-based objective produces a budget of unsuccessful requests, not a number of downtime minutes. You must decide what counts as an attempt, what counts as failure, which time period applies, and which users are in scope.</p>
+<p>Metrics must describe the real customer experience. A checkout that hangs until the customer leaves is not successful merely because the application never recorded an error response.</p>
+
+<h2>When shipping less is the sensible business decision</h2>
+<p>Suppose the service has consumed most of its error budget. Another risky release could hurt customers more than its new feature would help them. Should it go out now? Perhaps not.</p>
+<p>But a blanket ban on change is rarely the answer. An urgent security fix or a change that restores reliability may be necessary even after the budget is exhausted. So the policy should be agreed before the argument begins: which launches slow down, which fixes go ahead, and who can authorise exceptions.</p>
+<p>A good policy is not a punishment for the team that had the incident. It gives that team permission to focus on reliability work without being asked to deliver the same feature roadmap at the same time.</p>
+<p>There is another subtlety: a healthy-looking budget for an entire period can hide a sharp increase in failures right now. Waiting for the budget to hit zero is not good incident management. The speed of consumption matters too.</p>
+
+<h2>Reliability can be expensive in both directions</h2>
+<p>Checkout and a rarely used internal report should not automatically have identical targets. A failed payment can mean a lost sale. A short delay in a report may have no practical effect at all.</p>
+<p>Higher reliability goals can require more redundancy, more engineering effort, more operational care and a slower appetite for change. This is not an argument for weak protection where failure is costly. It is an argument for matching the objective to the consequences.</p>
+<p>And a target set too low has its own cost: it can make a poor experience look acceptable on paper. If customers keep struggling while the SLO stays green, the indicator may be wrong.</p>
+
+<h2>How I would introduce it</h2>
+<p>Start with one critical customer journey rather than launching a company-wide measurement programme. Product, engineering and operations should agree on four things:</p>
+<ul>
+<li>What success looks like for the customer and where that outcome is measured.</li>
+<li>Which quality objective and measurement window the business actually needs.</li>
+<li>Who watches error-budget consumption and what triggers an early response.</li>
+<li>Which releases pause after an SLO miss, and which corrective changes remain permitted.</li>
+</ul>
+<p>If a third-party provider causes the failure, customers may still experience it as a failure of your product. Ownership of the customer outcome remains important, although the remedy may involve fallback design, escalation or a different provider arrangement.</p>
+<p><strong>An SLO will not make a service reliable by itself. It helps people make an adult decision about when to deliver more change and when to stop adding risk long enough to improve the service.</strong></p>
+<p>Google's <a href="https://sre.google/workbook/error-budget-policy/" target="_blank" rel="noopener noreferrer">example error-budget policy</a> shows how to turn this agreement into operational rules. The useful part is the decision process, not copying somebody else's thresholds.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
