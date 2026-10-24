@@ -3,46 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="How Transactional Inbox helps receive messages reliably, survive redelivery, and avoid executing one business operation twice.">
+  <meta name="description" content="How a transactional inbox deduplicates messages, which writes must share a transaction and what happens when consumers call external systems.">
   <meta name="author" content="Anton Kurakin">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Transactional Inbox: Why Reliable Delivery Is Not Enough">
-  <meta property="og:description" content="How to make message consumption resilient to redelivery without turning retries into duplicate business operations.">
+  <meta property="og:title" content="Transactional Inbox: Two Deliveries, One Business Effect">
+  <meta property="og:description" content="How a transactional inbox deduplicates messages, which writes must share a transaction and what happens when consumers call external systems.">
   <meta property="og:url" content="https://kurakin.pro/en/articles/transactional-inbox-business.html">
   <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
-  <meta property="article:modified_time" content="2026-08-12">
-  <title>Transactional Inbox: Why Reliable Delivery Is Not Enough - Anton Kurakin</title>
+  <meta property="article:modified_time" content="2026-10-24">
+  <title>Transactional Inbox: Two Deliveries, One Business Effect - Anton Kurakin</title>
   <link rel="canonical" href="https://kurakin.pro/en/articles/transactional-inbox-business.html">
   <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/transactional-inbox-business.html">
   <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/transactional-inbox-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Transactional Inbox: Why Reliable Delivery Is Not Enough","description":"How Transactional Inbox helps receive messages reliably, survive redelivery, and avoid executing one business operation twice.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/transactional-inbox-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Transactional Inbox: Two Deliveries, One Business Effect","description":"How a transactional inbox deduplicates messages, which writes must share a transaction and what happens when consumers call external systems.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/transactional-inbox-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/transactional-inbox-business.html">RU</a><a href="transactional-inbox-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#events">Events and messaging</a><p class="article-kicker"><span>5 min read</span></p><h1>Transactional Inbox: Why Reliable Delivery Is Not Enough</h1><p class="article-summary">Queues are often chosen for reliability, but reliable delivery frequently means the same message may arrive again. If the consumer cannot recognize duplicates, a retry can become a second payment, a second order, or another state change.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>2 min read</span> · <time datetime="2026-10-24">Updated 24 October 2026</time></p><h1>Transactional Inbox: Two Deliveries, One Business Effect</h1><p class="article-summary">The broker delivers the same event again. How do we avoid another charge, loyalty award or shipment?</p></div></header>
 <article class="article-content">
-<h2>What problem are we solving?</h2><p>In a distributed system, a sender does not always know whether a consumer processed a message. The connection may fail after processing, the acknowledgement may be lost, or the broker may deliver the event again.</p><p>That is why “at least once” delivery is useful for reliability but automatically creates a risk of duplicate business execution.</p>
-<h2>How Transactional Inbox works</h2><p>The consumer stores the incoming message identifier together with the processing result or inside the same transaction boundary. Before processing a redelivery, it checks whether the message has already been seen.</p><p>If it has, the consumer can acknowledge the message without applying the business change again.</p><p>The idea is similar to API idempotency, but applied to asynchronous messages and events.</p>
-<h2>What the business gets</h2><p>The main benefit is fewer financial and operational errors caused by redelivery. Transport reliability no longer conflicts with business correctness.</p><p>The company can let brokers and consumers retry aggressively after failures without turning recovery into a source of new incidents.</p>
-<h2>What the team gets</h2><p>The team gets an explicit deduplication mechanism and can separate delivery guarantees from business idempotency.</p><p>Retries, replay, and recovery become easier to design because duplicate messages are treated as a normal scenario rather than an exception.</p>
-<h2>What the customer gets</h2><p>Customers see fewer duplicates: repeated charges, orders, notifications, or state changes caused by technical retries.</p><p>The system can be persistent about delivery while remaining correct from the user’s point of view.</p>
-<h2>What do we pay for it?</h2><p>Message identifiers must be stored and eventually expired, and the identifier has to remain stable and unique for the business operation.</p><p>If the Inbox record is stored separately from the business change, another inconsistency window appears. The transaction boundary still matters.</p>
-<h2>When it is unnecessary</h2><p>If the operation is naturally idempotent and repeating it does not change the result, a dedicated Inbox may be unnecessary.</p><p>It is most valuable where duplicate execution has a real price: money, quotas, entity creation, external calls, or irreversible state changes.</p>
-<h2>Questions to ask before deciding</h2><ul><li>Can the broker deliver the same message again?</li><li>What happens if the operation runs twice?</li><li>Does the message have a stable unique identifier?</li><li>Can the processed marker and business change be stored atomically?</li><li>How long must processed identifiers be remembered?</li></ul>
-<h2>In the end</h2><p>Reliable delivery does not mean exactly one execution. In real distributed systems, redelivery is normal and should be designed for.</p><p><strong>For the business, Transactional Inbox is valuable because it lets the system recover persistently without executing the same business operation twice.</strong></p>
+<p>The warehouse has accepted a fulfilment command, but its acknowledgement never reaches the broker. The message arrives again. That is not necessarily a publishing bug: redelivery is a common way for reliable transports to avoid losing work.</p>
+<p>A Transactional Inbox gives the receiver a way to recognise work it has already performed. The tricky part is not remembering message IDs; it is keeping that memory consistent with the business change.</p>
+<h2>The record of processing must be atomic with the change</h2>
+<p>Suppose a consumer checks whether it has seen an event, changes an order, and only afterwards writes “processed”. If the process crashes after the order update but before the marker, a redelivery can repeat the business effect.</p>
+<p>For changes inside the consumer's own database, the processing record and the state update should share a local transaction. Either both commit or neither does. A unique message identifier constraint can also protect against concurrent duplicate deliveries.</p>
+<h2>Transport identity versus business identity</h2>
+<p>Now imagine the same business command is published again under a new message ID. An Inbox that only deduplicates transport identities will not recognise the underlying operation as the same one.</p>
+<p>Important effects may need a separate business key: a payment attempt ID, order ID or another stable identifier. Message deduplication and <a href="idempotency-business.html">business-level idempotency</a> solve related but different problems.</p>
+<h2>What if the consumer calls an external provider?</h2>
+<p>A local database transaction does not automatically include an external payment API or shipping service. Marking a message processed before the external call risks silently skipping an action. Calling the provider first risks repeating it after a database crash.</p>
+<p>That calls for other safeguards: a provider idempotency key, durable outgoing work, explicit intermediate states or a compensation flow. Transactional Inbox does not make independent systems one atomic transaction.</p>
+<h2>How long should the inbox remember?</h2>
+<p>Delete deduplication records too soon and an old message replay may look new again. Keep every record forever and the inbox may grow unnecessarily. Retention has to reflect possible replay windows and the cost of repeating the business effect.</p>
+<p>I would test not merely whether an inbox table exists, but whether the consumer behaves correctly after crashing between steps, receiving the same message concurrently and replaying older work.</p>
+<p><strong>A Transactional Inbox is memory of work already done. That memory must agree with the local state change, while external side effects need their own protection.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
 </body></html>
