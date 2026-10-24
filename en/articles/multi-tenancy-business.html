@@ -3,68 +3,55 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="How to choose a multi-tenancy architecture through customer isolation, infrastructure cost, incident risk, and product delivery speed.">
+<meta name="description" content="Choosing SaaS tenant isolation across data, compute and operations: shared databases, noisy neighbors, security and the cost of dedicated environments.">
 <meta name="author" content="Anton Kurakin">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Multi-Tenancy: How Strongly Should Customers Be Isolated From Each Other?">
-<meta property="og:description" content="One product can serve many customers in very different ways. Stronger isolation reduces some risks, but increases infrastructure and operating cost.">
+<meta property="og:title" content="Multi-Tenancy: Sharing Costs Without Sharing Every Failure">
+<meta property="og:description" content="Choosing SaaS tenant isolation across data, compute and operations: shared databases, noisy neighbors, security and the cost of dedicated environments.">
 <meta property="og:url" content="https://kurakin.pro/en/articles/multi-tenancy-business.html">
 <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
 <meta property="article:published_time" content="2026-08-12">
-<meta property="article:modified_time" content="2026-08-12">
-<title>Multi-Tenancy: How Strongly Should Customers Be Isolated From Each Other? - Anton Kurakin</title>
+<meta property="article:modified_time" content="2026-10-24">
+<title>Multi-Tenancy: Sharing Costs Without Sharing Every Failure - Anton Kurakin</title>
 <link rel="canonical" href="https://kurakin.pro/en/articles/multi-tenancy-business.html">
 <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/multi-tenancy-business.html">
 <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/multi-tenancy-business.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Multi-Tenancy: How Strongly Should Customers Be Isolated From Each Other?","description":"How to choose a multi-tenancy architecture through customer isolation, infrastructure cost, incident risk, and product delivery speed.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/multi-tenancy-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Multi-Tenancy: Sharing Costs Without Sharing Every Failure","description":"Choosing SaaS tenant isolation across data, compute and operations: shared databases, noisy neighbors, security and the cost of dedicated environments.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/multi-tenancy-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
 <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/multi-tenancy-business.html">RU</a><a href="multi-tenancy-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#foundations">Architecture foundations</a><p class="article-kicker"><span>5 min read</span></p><h1>Multi-Tenancy: How Strongly Should Customers Be Isolated From Each Other?</h1><p class="article-summary">A SaaS product can serve thousands of customers through one shared system, or through almost separate systems for each customer. Stronger isolation reduces some risks and supports special requirements, but it also raises infrastructure, operating, and change cost.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#foundations">Architecture foundations</a><p class="article-kicker"><span>2 min read</span> · <time datetime="2026-10-24">Updated 24 October 2026</time></p><h1>Multi-Tenancy: Sharing Costs Without Sharing Every Failure</h1><p class="article-summary">Two customers share one product. How do we capture the economies of scale without letting one customer's workload or mistake harm another?</p></div></header>
 <article class="article-content">
-<h2>What problem are we solving?</h2>
-<p>When different companies or customer groups use the same product, architecture has to answer an uncomfortable question: how strongly should they be separated from each other?</p>
-<p>If everyone shares compute and a database, the product is usually cheaper to scale and easier to update. But a data-filtering mistake, one large customer's load, or a bad release can potentially affect more users.</p>
-<p>If every customer gets dedicated infrastructure, the boundaries become stronger. At the same time, the company now owns more environments, configurations, upgrades, and operational work.</p>
-<h2>How does the approach work?</h2>
-<p>Multi-tenancy is not one architecture. Isolation can exist at several levels: a shared database with tenant identifiers, separate schemas or databases, dedicated compute, separate clusters, or fully dedicated environments.</p>
-<p>It is therefore more useful to define boundaries separately for data, compute, network access, keys, configuration, and releases than to simply say “we are multi-tenant.”</p>
-<p>A hybrid model is often practical: most customers use the shared platform, while stronger isolation is introduced where requirements justify its cost.</p>
-<h2>What does the business get?</h2>
-<p>The main advantage of sharing is economy of scale. One release model, one infrastructure model, and pooled resources allow the company to serve more customers without infrastructure cost growing linearly.</p>
-<p>Stronger isolation can be valuable for large customers, security requirements, regulation, or unusual workloads. It reduces the chance that one customer's problem becomes everyone's problem.</p>
-<p>Multi-tenancy therefore directly affects product unit economics, the cost of serving enterprise customers, and acceptable business risk.</p>
-<h2>What does the team get?</h2>
-<p>The team gets an explicit tenant model: how the customer is identified, where access is checked, how resource limits work, how migrations are run, and how an incident is investigated for one tenant.</p>
-<p>A good model reduces special cases. A bad one quickly becomes a collection of “this customer works differently” conditions that make every release harder.</p>
-<h2>What does the customer get?</h2>
-<p>Customers do not care about the architecture term. They care that their data cannot leak to another tenant, another customer's traffic does not make the product unusable, and a change for someone else does not unexpectedly break their work.</p>
-<p>For some customers, stronger isolation also makes internal security and audit requirements easier to satisfy.</p>
-<h2>What do we pay for it?</h2>
-<p>The stronger the isolation, the higher the infrastructure and operating cost. More environments must be upgraded, monitored, migrated, and kept consistent.</p>
-<p>Weaker isolation is cheaper, but it demands excellent discipline around authorization, data queries, and resource controls. A mistake can have a larger blast radius.</p>
-<h2>When is extra complexity unnecessary?</h2>
-<p>Not every product needs a database or environment per customer. If requirements are similar, risk is acceptable, and scale is still modest, premature isolation can create more work than value.</p>
-<p>The opposite mistake is trying to satisfy serious enterprise isolation requirements with a few conditional statements after the cost of mixing data or sharing failures has already become high.</p>
-<h2>What should we ask before deciding?</h2>
-<ul><li>What is the maximum acceptable impact if one tenant overloads the system?</li><li>How strongly must customer data be logically or physically separated?</li><li>Do some customers have special security or residency requirements?</li><li>Must different customers receive changes on different schedules?</li><li>How much additional infrastructure and operational work are we prepared to own?</li></ul>
-<h2>In the end</h2>
-<p>Multi-tenancy is a choice between economy of scale and isolation of risk. There is no universally correct depth of separation.</p>
-<p><strong>For the business, good multi-tenancy means not maximum isolation, but the minimum sufficient isolation that keeps risk acceptable without destroying the economics of the product.</strong></p>
+<p>Imagine a SaaS product serving two companies. One customer starts an intensive export, and the other suddenly sees much slower responses. Worse, a filtering bug exposes one company's data to the other. Both incidents involve tenant boundaries, but the failures and remedies are very different.</p>
+<p>Multi-tenancy is not one technology. It is a decision about which resources customers share and where isolation is enforced.</p>
+<h2>What is worth sharing, and what becomes risky?</h2>
+<p>Shared applications and infrastructure avoid running a separate server for every tenant. The company can ship updates centrally and use capacity more efficiently. Those economies often underpin SaaS pricing.</p>
+<p>Shared resources also create dependencies between neighbours. One customer can consume compute, queue capacity or database connections. A missing tenant check can turn an ordinary software defect into cross-customer data exposure.</p>
+<p>So examine isolation separately for data access, compute resources, network boundaries, operational recovery and deployment cadence. A separate database does not magically fix bad authorization; a shared process does not necessarily mean no isolation.</p>
+<h2>One product can support several isolation levels</h2>
+<p>At one end are shared tables with strong tenant scoping. Other designs use separate schemas or databases. Some customers may need dedicated environments or particular data-residency controls.</p>
+<p>Deeper separation generally increases the operational bill: migrations, backups, monitoring and upgrades multiply. Maximum isolation is not the default answer. It has to match the consequences of failure and what the customer contract actually requires.</p>
+<h2>A large tenant changes the workload for everyone</h2>
+<p>Security isolation and resource isolation are different problems. Even if data is protected, one customer may saturate a common queue or connection pool. Limits, quotas, separate worker pools or workload isolation may be necessary.</p>
+<p>Those limits must reflect product promises. Throttling legitimate usage without matching the customer's contracted service level is a different kind of product failure.</p>
+<h2>Test the decision with four scenarios</h2>
+<p>I would ask the team to walk through an accidental cross-tenant query, a large customer's traffic spike, restoring one tenant from backup and rolling out a change to only part of the customer base.</p>
+<p>The answers reveal which boundaries matter. Sometimes better authorization and quotas are enough. Sometimes a dedicated database or environment is a justified business requirement.</p>
+<p><strong>Good multi-tenancy does not isolate everything. It contains the real risks of sharing without destroying the economics of a common platform.</strong></p>
 </article>
 </main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
 </body>
 </html>
