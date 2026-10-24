@@ -3,73 +3,58 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Why AI products need systematic quality evaluation, how evals compare models and prompts, and where automated metrics cannot replace business criteria.">
+    <meta name="description" content="How to test AI systems with business cases, weighted failure severity, separate retrieval evaluations and regression checks beyond impressive demos.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="AI Evaluation: Why AI Quality Cannot Be Checked Only by Hand After Release">
-    <meta property="og:description" content="How evals compare models and prompts, catch regressions, and connect AI quality to real business criteria, cost, latency, and risk.">
+    <meta property="og:title" content="AI Evaluation: A Better-Sounding Answer May Be a Worse One">
+    <meta property="og:description" content="How to test AI systems with business cases, weighted failure severity, separate retrieval evaluations and regression checks beyond impressive demos.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/ai-evaluation-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>AI Evaluation: Why AI Quality Cannot Be Checked Only by Hand After Release - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-10-24">
+    <title>AI Evaluation: A Better-Sounding Answer May Be a Worse One - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/ai-evaluation-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-evaluation-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-evaluation-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Evaluation: Why AI Quality Cannot Be Checked Only by Hand After Release","description":"Why AI products need systematic quality evaluation, how evals compare models and prompts, and where automated metrics cannot replace business criteria.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/ai-evaluation-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Evaluation: A Better-Sounding Answer May Be a Worse One","description":"How to test AI systems with business cases, weighted failure severity, separate retrieval evaluations and regression checks beyond impressive demos.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/ai-evaluation-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/ai-evaluation-business.html">RU</a><a href="ai-evaluation-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>AI Evaluation: Why AI Quality Cannot Be Checked Only by Hand After Release</h1><p class="article-summary">A conventional function usually satisfies a condition or it does not. An AI answer can be technically successful yet useless, inaccurate, or unsafe. Quality therefore needs to move from team intuition into a repeatable evaluation process.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>2 min read</span> · <time datetime="2026-10-24">Updated 24 October 2026</time></p><h1>AI Evaluation: A Better-Sounding Answer May Be a Worse One</h1><p class="article-summary">The new model sounds more confident, but it now mishandles an important refund case. What should be tested before release?</p></div></header>
       <article class="article-content">
-        <p>AI systems are harder to test with conventional assertions. The same question can produce several different but acceptable answers, while a failure may appear as confident, plausible text rather than an exception.</p>
-        <p>If quality is checked only through a handful of manual examples before release, a team can improve one scenario and quietly damage another.</p>
-        <h2>What problem are we solving?</h2>
-        <p>It is especially risky to compare models or prompts by impression. A more polished answer is not necessarily more accurate, cheaper, or more useful to the business.</p>
-        <p>AI Evaluation, or evals, uses repeatable tests on predefined examples and criteria.</p>
-        <p>A dataset may contain real request types, reference facts, forbidden outputs, format requirements, and business rules. Results can be judged by automated metrics, another model, humans, or a combination.</p>
-        <h2>What the business gets</h2>
-        <p>The main benefit is the ability to make model and product decisions using more than a demo.</p>
-        <p>The company can compare a more expensive and a cheaper model on its own scenarios, verify whether a new prompt truly improves results, and detect regressions before a broad rollout.</p>
-        <p>Evals also connect AI quality to acceptable risk. Drafting marketing copy can tolerate a different failure rate from a financial or legal workflow.</p>
-        <p>Measurement only creates value when the business defines what good means for the product. Otherwise the team optimizes a convenient metric instead of the real outcome.</p>
-        <h2>What the team gets</h2>
-        <p>The team gets a regression suite for a probabilistic system. A change to the model, retrieval layer, system prompt, or tools can be run against the same scenarios.</p>
-        <p>That speeds experimentation and exposes hidden trade-offs: accuracy improved but cost doubled; responses became shorter but now omit a required fact.</p>
-        <p>The evaluation set must keep learning from production failures. A static benchmark eventually stops representing the product.</p>
-        <h2>What the customer gets</h2>
-        <p>Customers get more predictable quality and fewer regressions when models or prompts change.</p>
-        <p>Evals are particularly useful for protecting rare but critical scenarios that a normal manual review may never encounter.</p>
-        <h2>What we pay for it</h2>
-        <p>Examples need to be collected, labeled, reviewed, and maintained. Ambiguous cases require judgment.</p>
-        <p>Automated evaluation is imperfect too. A model judge has its own biases, while a simple metric may not understand the meaning of an answer.</p>
-        <p>Serious evals increase experimentation cost because every candidate must run through the test set and sometimes through human review.</p>
-        <h2>When a complex eval system is not needed</h2>
-        <p>For an early prototype, a small representative set and manual review can be enough. Building a full platform while product scenarios change every day is premature.</p>
-        <p>Once AI affects money, customers, or operational decisions, however, the absence of repeatable evaluation quickly becomes a risk.</p>
-        <h2>Questions to ask before the decision</h2>
-        <ul><li>How does the business define a good and a bad answer?</li><li>Which errors are tolerable and which are critical?</li><li>Does the test set include real production examples?</li><li>Do we compare quality together with cost and latency?</li><li>Who checks that the metric actually reflects customer value?</li></ul>
-        <h2>In the end</h2>
-        <p>AI Evaluation turns “this model feels better” into a testable engineering and product hypothesis.</p>
-        <p><strong>The business needs evals not for a pretty score, but to change AI faster without losing control of quality, cost, and risk.</strong></p>
-      </article>
+<p>The team demos a new model. It answers quickly, sounds confident and rarely fails in the meeting. A week later, an important but uncommon refund scenario starts producing the wrong advice. The answer still sounds perfectly polished.</p>
+<p>AI Evaluation should measure the system on the tasks it is responsible for, not on how convincing a handful of examples look.</p>
+<h2>Start with the cost of failure</h2>
+<p>An internal knowledge assistant must avoid inventing policy and ideally show sources. An intake classifier needs to route the right requests and escalate ambiguous ones. An agent with write access must not perform unauthorised actions.</p>
+<p>A single “90% quality” figure conceals those differences. A punctuation issue and a wrong bank account number should not carry equal weight. Group evaluations by real scenarios and severity of the consequences.</p>
+<h2>Build a test set that survives model changes</h2>
+<p>Collect repeatable examples covering routine questions, edge cases, ambiguity, stale documents, missing evidence and tool failures. Run them whenever prompts, models, retrieval or tools change, looking for regressions as well as improvements.</p>
+<p>Automated checks can verify formats and known facts. Another model may serve as a judge for suitable dimensions, but model grading needs calibration against human review. Its scores are evidence, not absolute truth.</p>
+<h2>With RAG, evaluate retrieval separately</h2>
+<p>A wrong answer may originate before generation. The system might retrieve the wrong policy, select an obsolete version or miss the relevant paragraph. For <a href="rag-business.html">RAG</a>, measure whether relevant sources were found, whether citations support the answer and whether the final answer is accurate.</p>
+<p>An elegant paraphrase is not proof. Important claims should be grounded in checkable information.</p>
+<h2>Evaluation continues after release</h2>
+<p>Real user requests change over time. Monitor failures, manual corrections, complaints and cost per useful completed task. Add important new failure cases to the regression set.</p>
+<p>I would approve a model change only after comparing quality, latency, cost and risk in the actual workflows. A cheaper model may be sufficient for some tasks; for others the extra errors can erase the saving.</p>
+<p><strong>AI Evaluation is not asking how intelligent the model sounds. It asks whether the company can trust the system with a specific job and a known cost of getting it wrong.</strong></p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
