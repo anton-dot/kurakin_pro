@@ -3,89 +3,72 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What RAG is, how to give AI access to company knowledge without retraining the model, and which trade-offs appear around quality, freshness, and data access.">
+    <meta name="description" content="A business-focused look at RAG: finding current company knowledge, enforcing access rights, measuring retrieval separately from answer quality, and knowing when not to use it.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="RAG: How to Give AI Company Knowledge Without Retraining the Model">
-    <meta property="og:description" content="RAG in business language: how to connect internal knowledge to AI, update information faster, and manage the price of retrieval quality and access control.">
+    <meta property="og:title" content="RAG: Why AI Can Confidently Quote an Outdated Document">
+    <meta property="og:description" content="A business-focused look at RAG: finding current company knowledge, enforcing access rights, measuring retrieval separately from answer quality, and knowing when not to use it.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/rag-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>RAG: How to Give AI Company Knowledge Without Retraining the Model - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-10-24">
+    <title>RAG: Why AI Can Confidently Quote an Outdated Document - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/rag-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/rag-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/rag-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RAG: How to Give AI Company Knowledge Without Retraining the Model","description":"What RAG is, how to give AI access to company knowledge without retraining the model, and which trade-offs appear around quality, freshness, and data access.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/rag-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RAG: Why AI Can Confidently Quote an Outdated Document","description":"A business-focused look at RAG: finding current company knowledge, enforcing access rights, measuring retrieval separately from answer quality, and knowing when not to use it.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/rag-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/rag-business.html">RU</a><a href="rag-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>RAG: How to Give AI Company Knowledge Without Retraining the Model</h1><p class="article-summary">A model may be excellent at language and know nothing about your contracts, products, or internal policies. RAG finds relevant company information first and gives it to the model when producing an answer.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>4 min read</span><span>·</span><span>Updated <time datetime="2026-10-24">24 October 2026</time></span></p><h1>RAG: Why AI Can Confidently Quote an Outdated Document</h1><p class="article-summary">Connecting documents to AI is the easy part. The hard part is retrieving the current version, respecting permissions and knowing whether the answer is supported.</p></div></header>
       <article class="article-content">
-        <p>A large language model knows what was available during training. It does not automatically know today's price list, an internal instruction, or the contents of a new contract.</p>
-        <p>The company can try to train a model on internal data, but those data change constantly. In many cases the business needs a simpler mechanism: provide the right information at the moment of the request.</p>
-        <p>RAG—Retrieval-Augmented Generation—is built around that idea.</p>
-
-        <h2>What problem are we solving?</h2>
-        <p>Before the model answers, the system searches internal sources such as documents, knowledge bases, product catalogs, or other data.</p>
-        <p>The relevant context is then sent to the model together with the user's question. The model does not have to store company knowledge inside itself; it receives that knowledge when needed.</p>
-        <p>This separates the general language capability of the model from the specific information of the business.</p>
-
-        <h2>What does the business gain?</h2>
-        <p>The main benefit is that company knowledge can change without retraining the model.</p>
-        <p>When a policy changes, a new product appears, or terms are updated, the source can be changed independently. This shortens the time between an information change and the moment the AI can use it.</p>
-        <p>RAG also makes specialized AI scenarios easier to launch: support assistants, internal search, documentation help, or product Q&A without building a separate model for every knowledge set.</p>
-        <p>There is a governance benefit too. Answers can be connected to specific documents and access rights, so quality discussions move beyond “the model invented something” toward the quality of retrieval and source data.</p>
-
-        <h2>What does the team gain?</h2>
-        <p>The team can evolve retrieval, the model, and data sources separately. The LLM can change without rebuilding the knowledge base, or the index can improve without retraining the model.</p>
-        <p>But a new chain appears: document preparation, chunking, indexing, retrieval, context assembly, and generation.</p>
-        <p>Failures can now happen outside the model. The system may fail to find the right document, choose an outdated version, or provide too little context.</p>
-
-        <h2>What does the user gain?</h2>
-        <p>Users receive answers grounded in knowledge specific to the company instead of only the model's general knowledge.</p>
-        <p>The experience is especially useful when sources are shown so a user can open the document and verify the basis of the answer.</p>
-        <p>RAG still does not guarantee truth. Even with the correct document, a model may interpret it incorrectly.</p>
-
-        <h2>What do we pay for it?</h2>
-        <p>The price is data quality, retrieval quality, and access control.</p>
-        <p>If the knowledge base contains contradictory or outdated documents, the AI may confidently use them. If permissions are ignored during retrieval, a user may receive context they should never have seen.</p>
-        <p>The team needs retrieval metrics, source update processes, and tests based on real user questions.</p>
-
-        <h2>When is RAG unnecessary?</h2>
-        <p>If the task does not require company-specific or fast-changing knowledge, retrieval may only add latency and complexity.</p>
-        <p>Sometimes a good system prompt and a small fixed context are enough.</p>
-
-        <h2>Questions to ask before deciding</h2>
-        <ul>
-          <li>Which knowledge does the AI actually need, and how often does it change?</li>
-          <li>Do we have a reliable source of truth for that information?</li>
-          <li>How will retrieval enforce access permissions?</li>
-          <li>How can users verify the source behind an answer?</li>
-          <li>How will we measure retrieval quality separately from model quality?</li>
-        </ul>
-
-        <h2>In the end</h2>
-        <p>RAG is not a way to make a model “smarter in general.” It makes the model more useful in a specific information context.</p>
-        <p><strong>For the business, its value is that company knowledge can change independently of the model—faster, cheaper, and with clearer control over sources.</strong></p>
-      </article>
+<p>The company updates a customer policy, yet its internal AI assistant keeps quoting the old one. It is tempting to blame the model. But if the retrieval system supplied an obsolete document, switching models may not help at all.</p>
+<p>That is the central challenge with RAG: giving AI access to documents is not the same as giving it reliable knowledge. Someone still has to own which sources were selected, who was allowed to see them and whether the answer follows from the evidence.</p>
+<figure class="architecture-illustration"><img src="../../assets/img/rag-architecture.svg" width="1440" height="900" alt="A company archive passes selected documents through an access-control gate to a language model, which prepares an answer for a user" loading="eager" decoding="async"><figcaption>Think of RAG as an assistant checking an archive before answering. It can only use what retrieval finds and what the user is allowed to read. A better model cannot recover a document that never made it into the context.</figcaption></figure>
+<h2>The model does not need to memorise your company</h2>
+<p>Retrieval-Augmented Generation searches external information before generating a response. For a company assistant, the sources might include policies, contracts, product documentation and a knowledge base.</p>
+<p>Documents are typically prepared in advance: split into chunks, associated with their source, version and permissions, and placed in a search index. When a question arrives, relevant passages are retrieved and supplied to the language model alongside the user's request.</p>
+<p>Search might use keywords, semantic similarity or both. <a href="vector-search-business.html">Vector search</a> is useful when people phrase the same question differently. But a strong semantic match can still be the wrong evidence. An older policy may look extremely relevant to a question about today's rules.</p>
+<p>Keeping information outside the model makes updates easier than retraining for every policy change. It does not make freshness automatic. The index must be refreshed, obsolete chunks retired and the new version made retrievable.</p>
+<h2>A wrong answer can have several different causes</h2>
+<p>Consider a question about the refund terms of a particular contract. The assistant can fail in at least three ways:</p>
+<ul>
+<li>It retrieves the general terms instead of the customer's specific agreement.</li>
+<li>It retrieves the right agreement but omits a key exception or effective date when assembling context.</li>
+<li>It receives the necessary context and still interprets it incorrectly.</li>
+</ul>
+<p>The customer sees the same symptom: a bad answer. The engineering work is different in every case. First inspect ranking and retrieval, then document preparation and the <a href="context-window-business.html">context supplied to the model</a>, and finally how the model uses that evidence.</p>
+<p>This is why I would not judge a RAG system by overall chatbot satisfaction alone. Build a test set from real questions with verified answers. Measure whether retrieval finds the necessary sources and whether the generated response actually agrees with them. Microsoft's <a href="https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators" target="_blank" rel="noopener noreferrer">RAG evaluation guidance</a> separates these concerns for good reason.</p>
+<h2>Permissions belong in retrieval, not in a polite instruction</h2>
+<p>Imagine restricted HR documents indexed beside public company policies. An employee asks a question, retrieval picks a confidential passage and the model paraphrases it. The leak has already happened before anyone evaluates the tone of the answer.</p>
+<p>Access controls have to be enforced on the retrieved material before it reaches the model. Permissions should follow document chunks, and changes or deletions in the source must propagate to the index. Telling the LLM not to disclose confidential content is not an access-control system.</p>
+<p>Retrieved documents also contain untrusted text. A sentence inside a document telling the assistant to ignore its rules must remain source material, not become a higher-priority instruction. The <a href="https://cheatsheetseries.owasp.org/cheatsheets/RAG_Security_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP RAG Security Cheat Sheet</a> covers these risks across ingestion, indexing and retrieval.</p>
+<h2>Who owns the truth in the knowledge base?</h2>
+<p>Even excellent search cannot fix an organisation that has no agreed version of a policy. If three departments publish contradictory guidance, the assistant cannot decide which one has authority merely by comparing embeddings.</p>
+<p>Before launch, assign ownership of source material, define versioning rules and decide how quickly updates and removals must reach retrieval. Deleted or newly restricted documents should not survive indefinitely in a derived index.</p>
+<p>Users should be able to open the source they are shown, with a meaningful date and reference. If the evidence is inadequate, saying that the answer was not found is better than guessing. A citation does not itself prove correctness: an answer may cite the right document and still misunderstand it.</p>
+<h2>When retrieval adds more work than value</h2>
+<p>Not every AI feature needs RAG. A small, stable set of instructions may fit in a verified prompt context. A live product price or stock count is better obtained from a structured API than from yesterday's indexed spreadsheet.</p>
+<p>RAG makes sense where answers depend on a substantial collection of changing, largely unstructured knowledge. I would start with real user questions, approved information sources and clear acceptance criteria before choosing a vector database or a framework.</p>
+<p><strong>RAG does not turn a disorganised archive into reliable knowledge. It makes document quality, search quality and access governance part of the quality of the AI product.</strong></p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
