@@ -3,64 +3,54 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What webhooks are, why systems may be better off notifying each other about changes instead of polling, and what delivery trade-offs come with that choice.">
+    <meta name="description" content="When webhooks beat polling, how to verify the sender, tolerate duplicate deliveries and recover missing payment or fulfilment updates.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Webhooks: Why It Is Better to Notify a System Than Wait for the Next Question">
-    <meta property="og:description" content="Webhooks in business terms: how to reduce delay and unnecessary requests between systems, and what delivery complexity you take on in return.">
+    <meta property="og:title" content="Webhooks: Your Partner Sent an Event. Should You Trust It?">
+    <meta property="og:description" content="When webhooks beat polling, how to verify the sender, tolerate duplicate deliveries and recover missing payment or fulfilment updates.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/webhooks-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>Webhooks: Why It Is Better to Notify a System Than Wait for the Next Question - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-10-24">
+    <title>Webhooks: Your Partner Sent an Event. Should You Trust It? - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/webhooks-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/webhooks-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/webhooks-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Webhooks: Why It Is Better to Notify a System Than Wait for the Next Question","description":"What webhooks are, why systems may be better off notifying each other about changes instead of polling, and what delivery trade-offs come with that choice.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/webhooks-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Webhooks: Your Partner Sent an Event. Should You Trust It?","description":"When webhooks beat polling, how to verify the sender, tolerate duplicate deliveries and recover missing payment or fulfilment updates.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/webhooks-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+    <header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/webhooks-business.html">RU</a><a href="webhooks-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#api">APIs and integrations</a><p class="article-kicker"><span>4 min read</span></p><h1>Webhooks: Why It Is Better to Notify a System Than Wait for the Next Question</h1><p class="article-summary">If one system needs to know what changed in another, it can keep asking every minute. Or it can receive a notification when the event happens. Webhooks use the second model.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">APIs and integrations</a><p class="article-kicker"><span>3 min read</span> · <time datetime="2026-10-24">Updated 24 October 2026</time></p><h1>Webhooks: Your Partner Sent an Event. Should You Trust It?</h1><p class="article-summary">A payment provider says the charge succeeded. Why receiving a webhook is not enough to complete the order safely.</p></div></header>
       <article class="article-content">
-        <p>Imagine an online store waiting for a payment result. One option is to keep asking the payment provider whether the status has changed.</p>
-        <p>That polling model is simple, but it creates repeated traffic and still introduces delay.</p>
-        <p>A webhook reverses the direction: the system where the event happened calls a predefined endpoint on the receiver.</p>
-        <h2>What problem are we solving?</h2>
-        <p>Webhooks deliver changes such as payment completed, order shipped, document signed, or user created without constant status checks.</p>
-        <h2>What does the business gain?</h2>
-        <p>The main benefit is a shorter delay between an event and the next business action.</p>
-        <p>A successful payment can move an order forward faster, a new lead can reach the CRM sooner, and a delivery event can trigger the customer notification immediately.</p>
-        <p>At the same time, systems make fewer empty requests. That becomes increasingly valuable as the number of integrations grows.</p>
-        <h2>What does the team gain?</h2>
-        <p>The team gets a more event-oriented integration model and less polling code.</p>
-        <p>But delivery becomes its responsibility. Receivers can be unavailable, return errors, or process the same notification twice.</p>
-        <p>Retries, signatures, idempotency, and delivery logs become part of the design.</p>
-        <h2>What does the customer gain?</h2>
-        <p>The customer experiences a faster process: payment status updates sooner, a signed document appears faster, and systems feel better synchronized.</p>
-        <h2>What do we pay for it?</h2>
-        <p>The price is delivery complexity. An HTTP request alone does not guarantee that the business event was processed exactly once.</p>
-        <p>The team must decide how long to retry, how to secure notifications, and what to do with events that cannot be delivered.</p>
-        <h2>When are webhooks unnecessary?</h2>
-        <p>If changes are rare, delay is unimportant, and the integration is simple, periodic polling may still be cheaper and easier.</p>
-        <h2>Questions to ask before deciding</h2>
-        <ul><li>Which events really need fast reaction?</li><li>What happens if the receiver is unavailable?</li><li>Can one event arrive more than once?</li><li>How do we verify the sender?</li><li>Do we need a history of failed deliveries?</li></ul>
-        <h2>In the end</h2>
-        <p>A webhook is a simple shift from repeatedly asking for state to being told when that state changes.</p>
-        <p><strong>Its business value is faster reaction with less wasteful traffic between systems.</strong></p>
-      </article>
+<p>A payment provider sends a successful-payment notification. The company can update the order, issue a receipt and trigger fulfilment. But what happens if the notification arrives twice? If someone forges a similar HTTP request? If the receiving service is temporarily down?</p>
+<p>A webhook reports a change without forcing the recipient to poll an API constantly. The idea is simple. The implementation gets serious once money and customer promises depend on it.</p>
+<h2>Where it beats polling</h2>
+<p>With polling, an application repeatedly asks whether anything has changed. Many requests return nothing. With webhooks, the sender calls an agreed endpoint when an event happens. This can reduce unnecessary traffic and shorten the time to react.</p>
+<p>But a webhook should not always be the only way to discover authoritative state. Reconciliation through the partner's API is valuable when notifications are delayed or missed, especially for payments, shipping or contract status.</p>
+<h2>Verify the sender before believing the message</h2>
+<p>An HTTP POST to the right URL proves very little. Providers may support signed payloads, shared secrets or other authentication mechanisms. Follow the actual provider contract, check message freshness where supported and do not treat an endpoint URL appearing in logs as a security boundary.</p>
+<p>A genuine webhook may also describe an intermediate state rather than a final outcome. Payment authorisation, capture, refund and cancellation can be separate events. Interpret them according to the partner's semantics.</p>
+<h2>Acknowledge quickly and process reliably</h2>
+<p>A handler that tries to update several systems and send an email inside the webhook request is more likely to time out. A safer design often verifies the message, persists it durably and processes the downstream work separately.</p>
+<p>Expect redelivery, possible ordering issues and provider-specific response requirements. Event IDs help with duplicate messages, while business operation IDs help avoid repeating the underlying effect when the partner sends a new event about the same operation.</p>
+<h2>Who notices a missing callback?</h2>
+<p>Monitoring should follow the business result, not only successful HTTP responses. If payment was captured but the order still has the wrong status, reconciliation should detect the discrepancy and recover from an authoritative source.</p>
+<p>For rare changes that are easy to read through a normal API call, operating webhook delivery and recovery may be unnecessary. Where delay and event volume matter, it can be well worth the effort.</p>
+<p><strong>A webhook shortens the path from fact to reaction. It does not remove authenticity checks, duplicate handling or ownership of the order's final state.</strong></p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
