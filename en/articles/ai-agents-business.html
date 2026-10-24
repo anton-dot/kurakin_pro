@@ -2,34 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What AI agents give the business, when AI should act instead of only answer, and what new risks appear when models receive tools and autonomy.">
+    <meta name="description" content="Why AI agents require stronger tool permissions, approval design, idempotency and outcome monitoring than a chatbot that merely drafts text.">
     <meta name="author" content="Anton Kurakin"><meta name="color-scheme" content="light">
-    <meta property="og:type" content="article"><meta property="og:title" content="AI Agents: When AI Should Act, Not Just Answer"><meta property="og:description" content="AI Agents in business language: give models tools and actions without turning autonomy into uncontrolled operational risk."><meta property="og:url" content="https://kurakin.pro/en/articles/ai-agents-business.html"><meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-08-12">
-    <title>AI Agents: When AI Should Act, Not Just Answer - Anton Kurakin</title>
+    <meta property="og:type" content="article"><meta property="og:title" content="AI Agents: When an Assistant Gets Permission to Act"><meta property="og:description" content="Why AI agents require stronger tool permissions, approval design, idempotency and outcome monitoring than a chatbot that merely drafts text."><meta property="og:url" content="https://kurakin.pro/en/articles/ai-agents-business.html"><meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-10-24">
+    <title>AI Agents: When an Assistant Gets Permission to Act - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/ai-agents-business.html"><link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/ai-agents-business.html"><link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/ai-agents-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Agents: When AI Should Act, Not Just Answer","description":"What AI agents give the business, when AI should act instead of only answer, and what new risks appear when models receive tools and autonomy.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/ai-agents-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Agents: When an Assistant Gets Permission to Act","description":"Why AI agents require stronger tool permissions, approval design, idempotency and outcome monitoring than a chatbot that merely drafts text.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/ai-agents-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en"><a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+    <header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/ai-agents-business.html">RU</a><a href="ai-agents-business.html" aria-current="page">EN</a></div></header>
-    <main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>AI Agents: When AI Should Act, Not Just Answer</h1><p class="article-summary">A chatbot ends with an answer. An agent can continue: call an API, retrieve data, create a task, or execute part of a business process. With that usefulness comes the core architecture question — which actions are we actually prepared to trust a model to perform?</p></div></header>
+    <main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>3 min read</span> · <time datetime="2026-10-24">Updated 24 October 2026</time></p><h1>AI Agents: When an Assistant Gets Permission to Act</h1><p class="article-summary">Drafting an email is one thing. Changing a contract, issuing a refund or deleting a record is another. What changes when AI can take action?</p></div></header>
       <article class="article-content">
-        <p>A large language model by itself generates text. It can suggest a plan, explain a problem, or choose a next step, but the real world has not changed yet.</p><p>An AI Agent appears when the model receives tools and can use them in sequence to pursue a goal.</p>
-        <h2>What problem are we solving?</h2><p>Instead of a simple “question — answer” interaction, the system runs a loop: understand the task, choose a tool, perform an action, inspect the result, and decide what to do next.</p><p>A tool can be search, an internal API, a CRM, a database, or another service. The model chooses among available steps while ordinary software limits what those steps are allowed to do.</p>
-        <h2>What does the business gain?</h2><p>The main benefit is that AI can automate part of a process rather than only generate one piece of text.</p><p>If an employee currently reads a request, looks up information in several systems, updates a record, and creates the next task, an agent can potentially connect those steps into one flow.</p><p>That reduces manual switching between systems and can scale repeatable operations without increasing human actions proportionally.</p><p>But the value depends on controlled error cost. The higher the financial, legal, or customer consequence, the less autonomy should be granted without human approval.</p>
-        <h2>What does the team gain?</h2><p>The team gets an architecture where the LLM chooses the next step while tools remain ordinary controlled APIs.</p><p>Permissions, limits, retries, state, action logs, and stopping conditions must all be designed. A good agent is not one large prompt; it is a system built around a model.</p>
-        <h2>What does the customer gain?</h2><p>The customer can receive an outcome instead of instructions. Instead of “here is how to change your booking,” the system can execute the allowed part of the operation.</p><p>The interface still needs clear boundaries: what has already happened, what is only proposed, and where confirmation is required.</p>
-        <h2>What do we pay for it?</h2><p>The price is unpredictability, model-call cost, and a new class of operational risk.</p><p>An agent can choose the wrong tool, repeat an action, enter a long loop, or receive excessive permissions. That is why idempotency, budgets, action allowlists, human approval for critical operations, and complete observability matter.</p>
-        <h2>When do you not need an AI Agent?</h2><p>If the process is deterministic and known in advance, an ordinary workflow is often cheaper and more reliable.</p><p>Do not give a model responsibility for choosing the next step when that choice can be described precisely in code once.</p>
-        <h2>What should we ask before deciding?</h2><ul><li>Which actions does the agent actually need?</li><li>What can it execute without confirmation?</li><li>What is the cost of a wrong action?</li><li>How do we stop a loop and cap the budget?</li><li>Can we reconstruct the full history of decisions and tool calls?</li></ul>
-        <h2>In the end</h2><p>An AI Agent is the move from generating an answer to controlling actions.</p><p><strong>Its business value starts when it shortens a real process. Architectural maturity starts when the company is equally clear about what the agent is not allowed to do.</strong></p>
-      </article></main><footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+<p>When AI drafts an email, somebody can review the mistake before it leaves the company. Give the same assistant access to the CRM and a Send button, and the same mistake now changes the world outside the chat. The model has not necessarily become worse. Its output has acquired consequences.</p>
+<p>An AI agent differs from a text assistant because it can select and use tools in pursuit of a goal. That makes writing quality only one part of the architecture problem.</p>
+<h2>Automating actions, not just answers</h2>
+<p>A staff member might ask an agent to find overdue invoices, check ownership and prepare reminders. The agent reads data, selects recipients, drafts messages and may make several tool calls in sequence.</p>
+<p>The business benefit comes from fewer manual transfers between systems. But in a longer chain, a mistaken interpretation at one step can affect every step that follows.</p>
+<h2>Permissions must survive a model mistake</h2>
+<p>A prompt is not an access-control system. When an agent calls an API, that API must check identity, resource ownership and whether the requested operation is allowed. Separate reading from writing, minimise available tools and carry the initiator's identity through important operations.</p>
+<p>A universal technical credential with broad access is particularly dangerous. An agent may mistake instructions hidden in an email or retrieved document for something the user wants. That is <a href="prompt-injection-defense.html">prompt injection</a>, not authorisation.</p>
+<h2>Approving what is hard to undo</h2>
+<p>Preparing an invoice and paying it carry different risks. For money, access rights and external commitments, a real human approval or deterministic rule may be needed before execution.</p>
+<p>The approval screen must show the actual customer, amount, recipient and effect. A generic Approve All button buried among dozens of similar requests can turn human oversight into theatre.</p>
+<p>State may change after approval, too. Recheck current permissions and parameters before executing consequential actions, and make retries safe through appropriate idempotency controls.</p>
+<h2>Limit the cost of mistakes as well as permissions</h2>
+<p>Agents need bounds on time, steps, spending and tool access. They need an action log that makes decisions traceable. Measure successfully completed business processes, not merely model invocations.</p>
+<p>Not every workflow needs an agent. When the sequence is predictable and governed by clear rules, a conventional workflow may be cheaper, easier to test and more dependable.</p>
+<p><strong>The difference between an AI assistant and an AI agent is not model size. It is the authority to change things outside the conversation.</strong></p>
+<p>OWASP's <a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer">LLM Top 10</a> includes Excessive Agency among the important security risks.</p>
+</article></main><footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
