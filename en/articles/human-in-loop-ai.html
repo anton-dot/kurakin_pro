@@ -2,53 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="When AI should hand a decision to a person: how Human-in-the-Loop limits the cost of errors while preserving automation speed, and when manual review becomes a bottleneck.">
+<meta name="description" content="How to design meaningful AI action approvals, choose which risks need human review and avoid rubber-stamp oversight.">
 <meta name="author" content="Anton Kurakin"><meta name="color-scheme" content="light">
-<meta property="og:type" content="article"><meta property="og:title" content="Human-in-the-Loop: Where AI Should Stop and Hand the Decision to a Person"><meta property="og:description" content="Human-in-the-Loop keeps people in control of critical AI actions and balances automation speed against the cost of mistakes."><meta property="og:url" content="https://kurakin.pro/en/articles/human-in-loop-ai.html"><meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-08-12">
-<title>Human-in-the-Loop: Where AI Should Stop and Hand the Decision to a Person - Anton Kurakin</title>
+<meta property="og:type" content="article"><meta property="og:title" content="Human-in-the-Loop: Give People a Real Stop Button for AI"><meta property="og:description" content="How to design meaningful AI action approvals, choose which risks need human review and avoid rubber-stamp oversight."><meta property="og:url" content="https://kurakin.pro/en/articles/human-in-loop-ai.html"><meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-10-24">
+<title>Human-in-the-Loop: Give People a Real Stop Button for AI - Anton Kurakin</title>
 <link rel="canonical" href="https://kurakin.pro/en/articles/human-in-loop-ai.html"><link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/human-in-loop-ai.html"><link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/human-in-loop-ai.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Human-in-the-Loop: Where AI Should Stop and Hand the Decision to a Person","description":"When AI should hand a decision to a person: how Human-in-the-Loop limits the cost of errors while preserving automation speed, and when manual review becomes a bottleneck.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/human-in-loop-ai.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Human-in-the-Loop: Give People a Real Stop Button for AI","description":"How to design meaningful AI action approvals, choose which risks need human review and avoid rubber-stamp oversight.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/human-in-loop-ai.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
 <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en"><a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/human-in-loop-ai.html">RU</a><a href="human-in-loop-ai.html" aria-current="page">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#ai">AI architecture</a><p class="article-kicker"><span>5 min read</span></p><h1>Human-in-the-Loop: Where AI Should Stop and Hand the Decision to a Person</h1><p class="article-summary">Automating everything does not always make the business faster. The more expensive an AI mistake is, the more important it becomes to define the boundary between actions the model can execute and actions it can only prepare for human approval.</p></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#ai">AI architecture</a><p class="article-kicker"><span>2 min read</span> · <time datetime="2026-10-24">Updated 24 October 2026</time></p><h1>Human-in-the-Loop: Give People a Real Stop Button for AI</h1><p class="article-summary">AI prepares a customer refund. What should the employee see before approving it — and does their approval actually mean anything?</p></div></header>
 <article class="article-content">
-<p>AI is strong when it needs to process large amounts of information quickly, propose an option, classify a request, or prepare the next step. But “can suggest” and “can execute independently” are different levels of architectural risk.</p>
-<p>If an error only produces an imperfect draft, full automation may be reasonable. If an error changes money, permissions, a legally significant decision, or a customer relationship, the cost of autonomy rises sharply.</p>
-<h2>What problem are we solving?</h2>
-<p>Human-in-the-Loop, or HITL, places a person at selected points in an AI-driven process. The model may prepare a decision, assess risk, or propose an action, but the final step requires approval.</p>
-<p>The person does not need to review everything. The architecture can route only low-confidence, high-impact, unusual, or high-risk operations to manual review.</p>
-<p>That makes human control a risk-management mechanism rather than evidence that automation has failed.</p>
-<h2>What does the business get?</h2>
-<p>The business can automate more processes without immediately accepting the maximum level of risk. Instead of choosing between “AI does everything” and “AI does nothing,” there is a controlled middle ground.</p>
-<p>This is particularly useful early in adoption. A company can launch a new AI use case sooner, collect real quality data, and gradually expand autonomy where performance has been proven.</p>
-<p>HITL also limits the cost of rare but expensive mistakes. In some processes, 99% accuracy is not enough if the remaining percentage can cause major financial or reputational damage.</p>
-<h2>What does the team get?</h2>
-<p>The team gets explicit escalation rules. Instead of a vague requirement that “AI must be safe,” the architecture defines specific conditions under which an action is not allowed without a person.</p>
-<p>Human decisions can become a valuable source of feedback. The team can see where reviewers most often correct the model, which request types remain difficult, and where prompts, policies, or architecture need improvement.</p>
-<p>But the feedback loop must be designed deliberately. If reviewer decisions are never captured, manual control remains only an additional cost.</p>
-<h2>What does the customer get?</h2>
-<p>Customers get AI speed where risk is low and human judgment where consequences matter.</p>
-<p>Good HITL should not feel like a random delay. Customers should understand when an answer or action needs additional review and why that extra step exists.</p>
-<h2>What do we pay for it?</h2>
-<p>The main cost is people and time. If the architecture sends too many operations to manual review, the queue quickly becomes the new bottleneck.</p>
-<p>The organization needs a review interface, priorities, SLAs, and clear ownership. A poor interface can reduce the human role to mechanically clicking “approve,” turning control into theater.</p>
-<p>There is also a risk of false confidence: adding a person does not guarantee quality. If the reviewer lacks context, time, or authority, the control exists only on the architecture diagram.</p>
-<h2>When is Human-in-the-Loop unnecessary?</h2>
-<p>For low-risk actions where errors are easy to detect and reverse, mandatory approval can destroy the economics of automation.</p>
-<p>HITL is most useful when mistakes are expensive, model confidence varies, the process is regulated, or the organization has not yet collected enough evidence for full autonomy.</p>
-<h2>What should we ask before designing it?</h2>
-<ul><li>What is the cost of a wrong action in this process?</li><li>Which operations can AI execute safely on its own?</li><li>Which signals should route a case to a person?</li><li>How many manual reviews can the process handle without building a queue?</li><li>Are human decisions used to improve the system over time?</li></ul>
-<h2>In the end</h2>
-<p>Human-in-the-Loop is not a rejection of automation. It is a way to grant AI authority gradually.</p>
-<p><strong>The business can expand automation as quality is proven while keeping people at the points where the cost of an AI mistake is still higher than the cost of human review.</strong></p>
+<p>AI prepares a customer refund, including the amount, recipient and reason. An employee clicks Approve. But if the interface shows little more than “approved by the system”, this is almost an autonomous payment: the human is present in name, with nothing useful to verify.</p>
+<p>Human-in-the-Loop belongs where the cost of an autonomous mistake exceeds the benefit of full automation. The goal is not to put a person after every model response. It is to give them a meaningful chance to change or stop the right action at the right moment.</p>
+<h2>Not every step needs approval</h2>
+<p>Drafting a summary, sorting requests and proposing a reply are relatively reversible tasks. Changing bank details, access rights or contractual obligations is very different.</p>
+<p>Classify actions by consequences, not just by how confident the model sounds. High confidence is not evidence that payment details are correct. Consequential actions need explicit boundaries on autonomy.</p>
+<h2>Give the reviewer something to review</h2>
+<p>Meaningful oversight shows the original request, relevant evidence, exact parameters, expected effect and important exceptions. If the evidence conflicts, expose the conflict instead of hiding it beneath a fluent summary.</p>
+<p>People must be able to reject or modify the action without asking engineering for help. Bulk approval is risky when the volume makes individual review physically unrealistic.</p>
+<h2>An approval can go stale</h2>
+<p>The customer's state may change while the employee reviews the proposal. Before execution, the system should recheck current state and the initiator's permissions. Otherwise a correct decision based on old facts becomes a wrong action.</p>
+<p>The audit trail should record what the model proposed, what the human saw, what they changed and what actually executed. That helps investigate mistakes and improve the review process itself.</p>
+<h2>When the human becomes the bottleneck</h2>
+<p>If every trivial operation needs review, the approval queue can erase the gains from automation. Choose points where oversight meaningfully reduces high-consequence risk, and apply deterministic rules and monitoring to lower-risk work.</p>
+<p><strong>Human-in-the-Loop is not a person drawn on a workflow chart. It only works when reviewers have enough context, real authority to say no and time to use it.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer></body></html>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer></body></html>
