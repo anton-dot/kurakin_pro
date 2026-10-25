@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="How event sourcing records business facts, rebuilds state, handles schema evolution and replay without accidentally repeating external effects.">
+    <meta name="description" content="When events should be the source of state: audit-log alternatives, rebuilding projections, concurrent writes and safe historical replay.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Event Sourcing: When the History Matters More Than the Latest Row">
-    <meta property="og:description" content="How event sourcing records business facts, rebuilds state, handles schema evolution and replay without accidentally repeating external effects.">
+    <meta property="og:description" content="When events should be the source of state: audit-log alternatives, rebuilding projections, concurrent writes and safe historical replay.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/event-sourcing-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-10-24">
+    <meta property="article:modified_time" content="2026-10-25">
     <title>Event Sourcing: When the History Matters More Than the Latest Row - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/event-sourcing-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/event-sourcing-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/event-sourcing-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Event Sourcing: When the History Matters More Than the Latest Row","description":"How event sourcing records business facts, rebuilds state, handles schema evolution and replay without accidentally repeating external effects.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/event-sourcing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Event Sourcing: When the History Matters More Than the Latest Row","description":"When events should be the source of state: audit-log alternatives, rebuilding projections, concurrent writes and safe historical replay.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-25","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/event-sourcing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
@@ -26,37 +26,46 @@
     <header class="site-header">
       <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="../index.html">Home</a>
-  <a href="../projects.html">Projects</a>
-  <a href="../experience.html">About</a>
-  <a href="index.html">Writing</a>
-  <a href="../architecture/index.html" aria-current="page">Architecture</a>
-  <a href="../index.html#contact">Contact</a>
-</nav>
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../experience.html">About</a>
+        <a href="index.html">Writing</a>
+        <a href="../architecture/index.html" aria-current="page">Architecture</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/event-sourcing-business.html">RU</a><a href="event-sourcing-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><span>3 min read</span> · <time datetime="2026-10-24">Updated 24 October 2026</time></p><h1>Event Sourcing: When the History Matters More Than the Latest Row</h1><p class="article-summary">The order total is correct, but nobody can explain how it got there. When keeping business events as the source of truth is worth the long-term cost.</p></div></header>
+      <header class="article-hero">
+        <div class="article-hero-copy">
+          <a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a>
+          <p class="article-kicker"><span>3 min read</span><span>·</span><span>Published <time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>Updated <time datetime="2026-10-25">25 October 2026</time></span></p>
+          <h1>Event Sourcing: When the History Matters More Than the Latest Row</h1>
+          <p class="article-summary">Keeping a history does not automatically require Event Sourcing. The stronger requirement is rebuilding state from events while preserving their meaning over time.</p>
+        </div>
+      </header>
       <article class="article-content">
-<p>An order total has changed. The current value is correct, but months later a manager asks why that particular discount was applied. If every update simply overwrote the previous state, the system may no longer contain enough information to answer.</p>
-<p>Event Sourcing makes the history of business facts the primary record and derives current state from it. That can be valuable when the path to an outcome matters as much as the outcome itself. It also requires treating history as a long-lived data model, not as a convenient log file.</p>
-<h2>State is the result; events are the evidence</h2>
-<p>A conventional order row may store today's total and status. With Event Sourcing, the primary record is an ordered sequence of events: order created, item added, discount applied, payment confirmed. The current state is rebuilt by applying those events.</p>
-<p>That does not mean a customer screen should replay the entire history for every request. Applications usually maintain read projections and may store snapshots to speed up recovery. The events, however, remain the source of truth.</p>
-<p>Do not confuse this with <a href="event-driven-business.html">event-driven architecture</a>. A service can publish events to other systems while storing its own current state normally. Event Sourcing can also be implemented within one application without an extensive inter-service event platform.</p>
-<h2>Questions the history can answer</h2>
-<p>A well-designed event history lets the team reconstruct how an entity changed and build new views from past facts. It might reveal when an order reached its final price or support recalculating a report with a different projection.</p>
-<p>But it is not a mind-reading audit system. “Discount applied” does not explain who approved an exception or why unless that information was recorded at the time. The usefulness of history depends on the quality of the events.</p>
-<p>Corrections usually become new events rather than edits that silently rewrite the past. The sequence has to keep a meaningful relationship between cause and effect.</p>
-<h2>Tomorrow's code must understand yesterday's events</h2>
-<p>Event schemas change. Older orders may lack fields introduced later, and the meaning of a status may evolve. Rebuilding state requires either maintaining support for historical event versions or carefully migrating them.</p>
-<p>Replay must also be separated from external side effects. Rebuilding a projection should not charge customers again or resend years of notifications. Append-only storage does not make that safe automatically.</p>
-<p>Personal data creates another difficult boundary. Keeping names, addresses or sensitive details inside permanent events can complicate correction, retention and deletion requirements. Access controls and a data-lifecycle design need to be part of the initial decision.</p>
-<h2>An audit log may be enough</h2>
-<p>Sometimes the business only needs a record of who changed an important value and when. Audit logs or row versioning can solve that without making every entity an event stream.</p>
-<p>I would choose Event Sourcing only when the history of business facts is central to the product, to investigations, or to rebuilding different views — and the team can afford to maintain that history through future schema changes.</p>
-<p><strong>Event Sourcing is justified when the past is part of the product. If someone merely wants to check the past now and then, a simpler audit trail is often the better investment.</strong></p>
-</article>
+<p>A well-designed audit log can usually answer who changed an order total. That requirement alone does not justify converting the product to Event Sourcing. The stronger requirement is that the state of a chosen part of the system can be reconstructed from its recorded events.</p>
+<p>Inventory movements offer a useful illustration. Receipt, reservation, release and dispatch represent different business facts. Their history can support stock balances and other views. But keeping a warehouse journal does not, by itself, establish Event Sourcing: the important distinction is what the application treats as its source of state.</p>
+
+<h2>Which record is authoritative?</h2>
+<p>A conventional application may treat the current stock row as primary and keep an additional history for inspection. With Event Sourcing, the event stream is primary and applying it produces state. If rebuilding still needs another table containing unrecorded business facts, the reconstruction promise is incomplete.</p>
+<p>A snapshot stores state at a particular stream position so the application can apply only later events. Screens and reports may use separate projections. Snapshots accelerate access; they do not replace the authoritative stream or its backups.</p>
+<p>This is not synonymous with <a href="event-driven-business.html">event-driven architecture</a>. A service can publish messages without storing its own model as events. The distinction between recording history and rebuilding state is discussed in the <a href="https://martinfowler.com/eaaDev/EventSourcing.html" target="_blank" rel="noopener noreferrer">Event Sourcing reference</a>.</p>
+
+<h2>Do not reconstruct yesterday using today's decisions</h2>
+<p>Suppose a sale included a discount. Replaying it by querying today's price list and rerunning today's discount rule may produce a different result. Preserve enough facts about the original decision: the amount used, the rule version or the relevant inputs, according to the model.</p>
+<p>Event formats evolve too. An old field must not silently acquire a new meaning. Support historical versions or explicitly transform their representation without changing the underlying fact. A correction to a business fact usually becomes another event.</p>
+<p>Be deliberate about personal information in the stream. Unnecessary names, addresses or other details make later correction, access control and deletion harder. Data-lifecycle requirements belong in the storage design, not in a discussion after years of history have accumulated.</p>
+
+<h2>Two writers can still reserve the same stock</h2>
+<p>Append-only storage does not remove concurrency problems. Two handlers can read the same state and both decide inventory is available. Appending an event needs a check that the stream has not changed since the decision was made. On a conflict, reload and reconsider the operation.</p>
+<p>That protects a particular stream, not an automatic transaction spanning every stock item, payment and supplier. The <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing" target="_blank" rel="noopener noreferrer">Azure Architecture Center guide</a> discusses concurrency, snapshots and derived views.</p>
+
+<h2>Rebuilding a report must not repeat a shipment</h2>
+<p>Replay should rebuild a representation, not send old emails or ask the carrier to ship again. Keep reconstruction separate from external effects. Account for newly arriving events so that switching to a rebuilt view creates neither gaps nor duplicates.</p>
+<p>Before committing to the design, run a small experiment in one domain: discard a derived view in a test environment, reconstruct it and compare the result. Include historical event versions and verify that no external actions repeat. If the business does not need that capability and mainly wants to investigate changes, start by assessing audit logging and record versioning instead. They need not change how the entire application works.</p>
+      </article>
     </main>
     <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
