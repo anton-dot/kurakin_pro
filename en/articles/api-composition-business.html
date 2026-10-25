@@ -3,66 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="What API Composition gives the business: how to combine results from several services without exposing internal architecture complexity to every client.">
+  <meta name="description" content="When to compose responses from several backend services: client latency, partial failures, product contract ownership and the cost of an aggregation layer.">
   <meta name="author" content="Anton Kurakin">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="API Composition: Why Clients Should Not Assemble the Product From Internal Services">
-  <meta property="og:description" content="Sometimes it is better to combine data from several services inside the platform than to make every client coordinate many calls on its own.">
+  <meta property="og:title" content="API Composition: Customers Buy a Product, Not Your Microservices">
+  <meta property="og:description" content="When to compose responses from several backend services: client latency, partial failures, product contract ownership and the cost of an aggregation layer.">
   <meta property="og:url" content="https://kurakin.pro/en/articles/api-composition-business.html">
   <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
-  <meta property="article:modified_time" content="2026-08-12">
-  <title>API Composition: Why Clients Should Not Assemble the Product From Internal Services - Anton Kurakin</title>
+  <meta property="article:modified_time" content="2026-10-25">
+  <title>API Composition: Customers Buy a Product, Not Your Microservices - Anton Kurakin</title>
   <link rel="canonical" href="https://kurakin.pro/en/articles/api-composition-business.html">
   <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/api-composition-business.html">
   <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/api-composition-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"API Composition: Why Clients Should Not Assemble the Product From Internal Services","description":"What API Composition gives the business: how to combine results from several services without exposing internal architecture complexity to every client.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/api-composition-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"API Composition: Customers Buy a Product, Not Your Microservices","description":"When to compose responses from several backend services: client latency, partial failures, product contract ownership and the cost of an aggregation layer.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-25","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/api-composition-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/api-composition-business.html">RU</a><a href="api-composition-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#api">APIs and integrations</a><p class="article-kicker"><span>5 min read</span></p><h1>API Composition: Why Clients Should Not Assemble the Product From Internal Services</h1><p class="article-summary">Microservices can help divide responsibility inside a company, but clients do not need to know how many services exist behind one screen. API Composition combines several internal calls into one product-oriented response.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">APIs and integrations</a><p class="article-kicker"><span>3 min read</span> · <time datetime="2026-10-25">Updated 25 October 2026</time></p><h1>API Composition: Customers Buy a Product, Not Your Microservices</h1><p class="article-summary">One order screen needs data from several services. Why shouldn't the client assemble it, and what happens when a dependency fails?</p></div></header>
 <article class="article-content">
-<p>Splitting a system into services is an internal architecture decision. If a mobile app has to call seven services for one screen, handle all their failures, and merge their responses, the complexity has simply moved outside the backend.</p>
-<p>API Composition addresses that problem. A dedicated layer or endpoint calls the required internal components, combines their results, and exposes one contract to the client.</p>
-<h2>How the solution works</h2>
-<p>The composition component understands which sources are needed for a user scenario. It can call them sequentially or in parallel and then build one response.</p>
-<p>This can live in a BFF, an API Gateway, a dedicated service, or another orchestration layer. The label matters less than the responsibility: clients consume a product contract rather than a map of internal systems.</p>
-<h2>What the business gets</h2>
-<p>The main benefit is more freedom to change the internal architecture without forcing client channels to change at the same pace. Services can be split, merged, or replaced while the external contract stays stable.</p>
-<p>That lowers coordination cost between backend and client teams. A new screen or partner integration depends less on how many internal systems happen to participate in the workflow.</p>
-<p>It can also speed up complex product delivery because client teams work with one coherent contract instead of a collection of technical APIs.</p>
-<h2>What the team gets</h2>
-<p>Frontend, mobile, and external consumers carry less networking and orchestration logic. Backend teams can centrally decide which calls should run in parallel, where fallbacks are acceptable, and how partial failures are handled.</p>
-<p>But the composition layer can easily become a new god service. If business rules from every domain accumulate there, it turns into another center of coupling.</p>
-<h2>What the customer gets</h2>
-<p>Customers get fewer network round trips and more predictable screen behavior. This matters especially on mobile networks and for views that would otherwise require many sequential calls.</p>
-<p>Controlled degradation also becomes easier. If a secondary dependency fails, the composition layer can sometimes return the critical part of the response without it.</p>
-<h2>What we pay for it</h2>
-<p>There is another component to deploy, observe, and scale. Because it depends on several services at once, latency and failure behavior from lower layers can accumulate.</p>
-<p>Teams must think about timeouts, parallelism, caching, partial errors, and ownership of the composed contract.</p>
-<p>There is also an organizational risk: if every team must go through one central composition layer for any change, the architecture may recreate the coordination bottleneck it was meant to reduce.</p>
-<h2>When it is not needed</h2>
-<p>If a client needs one simple service or only a few calls, a separate composition layer may add complexity without enough value.</p>
-<p>It becomes more useful when one product scenario genuinely spans several domains and exposing those internal dependencies to every client would be expensive.</p>
-<h2>What to ask before adopting it</h2>
-<ul><li>How many internal services does a client need to understand today?</li><li>Who owns the external product contract?</li><li>What should happen when only some dependencies fail?</li><li>Are business rules leaking into the composition layer?</li><li>Could this layer become a new approval queue?</li></ul>
-<h2>In the end</h2>
-<p>API Composition is not valuable because it “merges JSON.” It creates a boundary between internal architecture and what a consumer actually needs to know.</p>
-<p><strong>For the business, it is a way to evolve internal services more freely without forcing every client to rebuild the product from technical details.</strong></p>
+<p>A customer opens an order. They expect a total, purchased items, payment status and delivery date. Inside the company, these may belong to four different teams and services. The customer needs one understandable screen, not a guided tour of the backend architecture.</p>
+<p>If the mobile app calls every internal service directly, it has to understand their endpoints, errors and independent changes. That may be called microservice independence on an architecture diagram. To the client team it often looks like doing somebody else's integration work.</p>
+
+<figure class="architecture-illustration"><img src="../../assets/img/api-composition-architecture.webp" width="1279" height="720" alt="Order, delivery and payment systems send data to one aggregation point that prepares a response for a customer's mobile device" loading="eager" decoding="async"><figcaption>Different internal services can contribute to one customer-facing response. The illustration represents responsibility boundaries, not a promise that every backend is always available.</figcaption></figure>
+
+<h2>Compose the product response on the server</h2>
+<p>API Composition moves the assembly work to a dedicated component. The client asks for an order view; the composition layer requests data from the relevant internal services, combines it and returns a contract shaped for that screen or external consumer.</p>
+<p>Some calls can run in parallel, reducing the time a client spends waiting across several network round trips. This can matter on mobile connections. But the internal dependencies have not disappeared. They are now hidden behind a more useful product boundary.</p>
+<p>Composition may live in a <a href="bff-business.html">Backend for Frontend</a>, a dedicated aggregator or sometimes an <a href="api-gateway-business.html">API Gateway</a>. Heavy business orchestration should not automatically become part of the central routing path for every request. The more that central component owns, the more disruptive its failure becomes.</p>
+
+<h2>One dependency failed. What does the customer see?</h2>
+<p>Suppose product recommendations are unavailable on the order page. Annoying, but checkout can continue. Now suppose payment confirmation is missing. Pretending the order is complete would be a very different kind of failure.</p>
+<p>The composition layer needs an explicit distinction between required and optional information. Sometimes a partial response with a clear missing-data state is appropriate. Other times the whole operation must fail rather than make a promise the system cannot verify.</p>
+<p>Deadlines, concurrency limits, tracing of each downstream call and considered fallback behaviour are important. Otherwise one slow dependency holds up the entire response, and troubleshooting becomes guesswork.</p>
+<p>Nor does stitching several responses together provide a consistent snapshot automatically. Payment and shipping may have been queried at different moments. If one atomic view is a hard business requirement, API Composition alone cannot guarantee it.</p>
+
+<h2>Who owns the customer-facing contract?</h2>
+<p>The organisation can recreate the bottleneck it was trying to remove. Clients no longer know the internal services, but every product change now needs approval from the central aggregation team. Seven APIs become one waiting line.</p>
+<p>I would define who owns the external contract, who can change the response and who decides which information is optional during an incident. The aggregator should not quietly take over domain rules such as discounts, refund permissions or payment confirmation.</p>
+
+<h2>When another layer is not worth it</h2>
+<p>If a screen uses one service and a few fields, a separate composition layer adds little. If the problem is merely several queries to one backend, a better endpoint may be sufficient. Measure actual client latency, duplicated orchestration code and coordination overhead before introducing a new component.</p>
+<p>The <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation" target="_blank" rel="noopener noreferrer">Gateway Aggregation pattern</a> from Azure Architecture Center covers similar trade-offs around parallel calls, timeouts, partial responses and the cost of an intermediary.</p>
+<p><strong>API Composition earns its keep when the customer gets a coherent journey and the company can change internal services without dragging every client along. But hiding complexity is not removing it: somebody still has to operate it and own the outcome.</strong></p>
 </article>
 </main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
 </body>
 </html>
