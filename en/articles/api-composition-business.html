@@ -37,7 +37,7 @@
 <p>A customer opens an order. They expect a total, purchased items, payment status and delivery date. Inside the company, these may belong to four different teams and services. The customer needs one understandable screen, not a guided tour of the backend architecture.</p>
 <p>If the mobile app calls every internal service directly, it has to understand their endpoints, errors and independent changes. That may be called microservice independence on an architecture diagram. To the client team it often looks like doing somebody else's integration work.</p>
 
-<figure class="architecture-illustration"><img src="../../assets/img/api-composition-architecture.webp" width="1279" height="720" alt="Order, delivery and payment systems send data to one aggregation point that prepares a response for a customer's mobile device" loading="eager" decoding="async"><figcaption>Different internal services can contribute to one customer-facing response. The illustration represents responsibility boundaries, not a promise that every backend is always available.</figcaption></figure>
+
 
 <h2>Compose the product response on the server</h2>
 <p>API Composition moves the assembly work to a dedicated component. The client asks for an order view; the composition layer requests data from the relevant internal services, combines it and returns a contract shaped for that screen or external consumer.</p>
