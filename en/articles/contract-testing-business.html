@@ -2,52 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="How Contract Testing reduces integration risk by checking consumer expectations before release and when the added testing discipline is worth the cost.">
+<meta name="description" content="How consumer contracts protect independently deployed APIs: provider verification, version compatibility and limits beyond end-to-end business tests.">
 <meta name="author" content="Anton Kurakin"><meta name="color-scheme" content="light">
-<meta property="og:type" content="article"><meta property="og:title" content="Contract Testing: How to Change a Service Without Breaking Its Consumers"><meta property="og:description" content="Contract Testing validates expectations between systems before release and reduces the coordination cost of independent teams."><meta property="og:url" content="https://kurakin.pro/en/articles/contract-testing-business.html"><meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-08-12">
-<title>Contract Testing: How to Change a Service Without Breaking Its Consumers - Anton Kurakin</title>
+<meta property="og:type" content="article"><meta property="og:title" content="Contract Testing: Two Green Services Can Still Break Checkout"><meta property="og:description" content="How consumer contracts protect independently deployed APIs: provider verification, version compatibility and limits beyond end-to-end business tests."><meta property="og:url" content="https://kurakin.pro/en/articles/contract-testing-business.html"><meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png"><meta property="article:published_time" content="2026-08-12"><meta property="article:modified_time" content="2026-10-25">
+<title>Contract Testing: Two Green Services Can Still Break Checkout - Anton Kurakin</title>
 <link rel="canonical" href="https://kurakin.pro/en/articles/contract-testing-business.html"><link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/contract-testing-business.html"><link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/contract-testing-business.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Contract Testing: How to Change a Service Without Breaking Its Consumers","description":"How Contract Testing reduces integration risk by checking consumer expectations before release and when the added testing discipline is worth the cost.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/contract-testing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Contract Testing: Two Green Services Can Still Break Checkout","description":"How consumer contracts protect independently deployed APIs: provider verification, version compatibility and limits beyond end-to-end business tests.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-25","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/contract-testing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
 <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en"><a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/contract-testing-business.html">RU</a><a href="contract-testing-business.html" aria-current="page">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#api">APIs and integrations</a><p class="article-kicker"><span>5 min read</span></p><h1>Contract Testing: How to Change a Service Without Breaking Its Consumers</h1><p class="article-summary">An integration can look stable until one team changes a field, status, or response format. Contract Testing checks not only the service itself, but also the expectations of its consumers before incompatibility reaches production.</p></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#api">APIs and integrations</a><p class="article-kicker"><span>3 min read</span> · <time datetime="2026-10-25">Updated 25 October 2026</time></p><h1>Contract Testing: Two Green Services Can Still Break Checkout</h1><p class="article-summary">The orders team changed a response; payments still expects the old shape. Both services pass their own tests, yet checkout fails.</p></div></header>
 <article class="article-content">
-<p>The more systems are connected through APIs and events, the more expensive hidden dependencies become. A team can make a change that is perfectly valid according to its own tests and still break another product.</p>
-<p>The problem is that an integration contract lives in more than documentation. It lives in concrete consumer expectations: which fields are required, which values are valid, how errors are interpreted, and what counts as a compatible change.</p>
-<h2>What problem are we solving?</h2>
-<p>Contract Testing verifies that the provider of an interface and its consumers understand the contract in the same way. In a consumer-driven approach, consumers formalize what they rely on, and the provider checks those expectations automatically when it changes.</p>
-<p>This does not replace unit or integration tests. It addresses a specific risk: every service can work correctly in isolation while the combined system fails because the contract changed incompatibly.</p>
-<h2>What does the business get?</h2>
-<p>The main benefit is fewer unexpected integration failures across teams and partners. Compatibility problems are discovered before release, when fixing them is usually cheaper and does not affect customers.</p>
-<p>Contract Testing also reduces coordination cost. Not every API change needs a meeting with every consumer or one shared release date. If compatibility is checked automatically, teams can move independently more often.</p>
-<p>This matters especially when one internal platform serves several products or channels. The more consumers there are, the more expensive manual coordination becomes.</p>
-<h2>What does the team get?</h2>
-<p>The API provider gets a concrete answer to the question: “Who will I break with this change?” Consumers get confidence that their critical expectations are checked in the provider's delivery pipeline.</p>
-<p>The tests separate real compatibility from guesswork. Sometimes an API changes formally, but no consumer relies on that part. In other cases, a small response-format change breaks a critical flow.</p>
-<p>Teams can also remove old contract behavior with more confidence because they can see which expectations are still active.</p>
-<h2>What does the customer get?</h2>
-<p>Customers see fewer regressions in end-to-end journeys. They do not care that two services are independently green in CI if an order, payment, or registration stops working between them.</p>
-<p>More independent releases can also improve delivery speed because teams spend less time waiting for coordinated integration windows.</p>
-<h2>What do we pay for it?</h2>
-<p>Contracts need maintenance. If tests capture implementation details instead of meaningful behavior, they begin to block healthy API evolution.</p>
-<p>The organization also needs a way to version and remove stale expectations. Otherwise providers end up supporting consumers that no longer exist.</p>
-<p>Contract Testing does not prove that the entire business process works. It validates the shape of interaction, but it does not replace data checks, authorization, performance testing, or selected end-to-end scenarios.</p>
-<h2>When is it unnecessary?</h2>
-<p>If one interface has one consumer and both sides are changed by the same team at the same time, a dedicated contract-testing setup may add little value.</p>
-<p>It becomes useful when consumers are numerous, teams are independent, releases are frequent, and compatibility failures are expensive.</p>
-<h2>What should we ask before adopting it?</h2>
-<ul><li>How many independent consumers depend on this interface?</li><li>Which changes have broken integrations in the past?</li><li>Which expectations reflect real behavior rather than implementation details?</li><li>How will obsolete consumer contracts be removed?</li><li>Which end-to-end risks remain outside Contract Testing?</li></ul>
-<h2>In the end</h2>
-<p>A contract is more than an OpenAPI file or a message schema. It is a promise between independent parts of the business.</p>
-<p><strong>Contract Testing lowers the price of team independence: services can evolve faster without turning every release into a coordinated compatibility exercise.</strong></p>
+<p>The orders service releases a new version. Its tests pass. Payments is green too. Then checkout breaks: the consumer expects a status in one format while the provider has started returning it in another.</p>
+<p>Both applications may be perfectly healthy in isolation. Their shared agreement is not. Contract testing aims to catch this kind of incompatibility before release without having to deploy the entire system and coordinate every team for a full integration test.</p>
+
+<h2>What a contract actually checks</h2>
+<p>An API is more than documentation and a list of fields. Consumers rely on concrete interactions: a request shape, a response status, required data and agreed error behaviour. A response may be valid according to the provider's new schema and still unusable by a client that expects the old one.</p>
+<p>With consumer-driven contract testing, the consumer describes the minimum interactions it depends on. The provider then verifies those expectations against its implementation. There is no reason to freeze the entire response if the consumer only needs two fields. Overly strict snapshots turn harmless API extensions into red builds.</p>
+<p>A contract test also differs from a client-side mock test alone. A mock invented by the consumer team may confirm any assumption the team happens to like. Confidence comes when the provider actually verifies those expectations.</p>
+
+<h2>Verification needs to happen before deployment</h2>
+<p>Suppose the orders team wants to change a field type. Before deploying, its build verifies the contracts of relevant consumers. If one application cannot interpret the new response, the mismatch becomes visible in CI rather than in a customer's failed purchase.</p>
+<p>That requires a way to share contracts, match them to consumer versions and connect verification results to what is actually deployed. Checking two development branches once is not enough to prove that a particular production combination is safe.</p>
+<p>The <a href="https://docs.pact.io/provider" target="_blank" rel="noopener noreferrer">Pact provider documentation</a> describes verification against a running provider in CI. The tool does not remove the need for agreement about API behaviour; it makes the consequences of changes visible earlier.</p>
+
+<h2>What green contract tests cannot prove</h2>
+<p>A passing contract test confirms specific interactions. It does not prove that a customer paid successfully, received a message and saw the correct total. Services can agree on fields while disagreeing about the actual business rule.</p>
+<p>Authorisation, realistic data, timeouts, performance and selected end-to-end customer journeys still need their own checks. Contract tests complement those tests and can reduce the pressure to run expensive full-system checks after every minor change.</p>
+<p>Tests that lock down accidental implementation details are especially harmful. If a client does not depend on an extra response field or on the order in which object properties appear, blocking such harmless changes buys very little safety.</p>
+
+<h2>Who removes the contract of a retired consumer?</h2>
+<p>When an API supports several products, consumer contracts can outlive the applications that created them. An abandoned test may keep preventing sensible changes. Contracts need owners, version awareness and a way to retire obsolete expectations.</p>
+<p>I would start with the last actual integration failure rather than with a tool purchase. Which incompatible assumption caused it? Would a consumer contract have caught it? How often do independent teams change this API?</p>
+<p>For an interface maintained and consumed by one small team on the same release cycle, elaborate contract-testing infrastructure may add more work than benefit. For independently deployed products with expensive compatibility failures, verified contracts can materially reduce coordination cost.</p>
+<p><strong>Contract tests help teams ship independently. They guarantee what was actually verified, not that the entire customer journey has become safe.</strong></p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer></body></html>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer></body></html>
