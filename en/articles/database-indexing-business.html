@@ -1,72 +1,67 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="How database indexes speed up reads, why every index increases write and storage cost, and when query optimization becomes an architecture decision.">
-    <meta name="author" content="Anton Kurakin">
-    <meta name="color-scheme" content="light">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Database Indexing: Why Faster Reads Make Writes More Expensive">
-    <meta property="og:description" content="An index can turn a slow lookup into a fast one. But every new index must be stored and updated when data changes. Faster reads inevitably make writes more expensive.">
-    <meta property="og:url" content="https://kurakin.pro/en/articles/database-indexing-business.html">
-    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
-    <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>Database Indexing: Why Faster Reads Make Writes More Expensive - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin.pro/en/articles/database-indexing-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/database-indexing-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/database-indexing-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Database Indexing: Why Faster Reads Make Writes More Expensive","description":"How database indexes speed up reads, why every index increases write and storage cost, and when query optimization becomes an architecture decision.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/database-indexing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
-    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../../assets/styles.css">
-  </head>
-  <body data-page="article" data-lang="en">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
-</nav>
-      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/database-indexing-business.html">RU</a><a href="database-indexing-business.html" aria-current="page">EN</a></div>
-    </header>
-    <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Database Indexing: Why Faster Reads Make Writes More Expensive</h1><p class="article-summary">An index can turn a slow lookup into a fast one. But every new index must be stored and updated when data changes. Faster reads inevitably make writes more expensive.</p></div></header>
-      <article class="article-content">
-        <p>When a database is small, almost every query feels fast. The problem appears later: tables grow, filters multiply, reports get heavier, and a familiar query suddenly takes seconds.</p>
-        <p>The first answer is often simple: add an index. That can absolutely solve the problem, but an index is not a free accelerator.</p>
-        <h2>What problem are we solving?</h2>
-        <p>An index creates an additional structure that lets the database find rows without scanning the whole table.</p>
-        <p>The trade-off is that inserts, deletes, and updates also have to maintain that structure. More indexes mean more write cost and more storage.</p>
-        <p>So the real question is not whether a query can be faster. It is which read scenarios matter enough to justify paying for that speed continuously.</p>
-        <h2>What does the business get?</h2>
-        <p>Fast reads directly affect search, product catalogs, customer accounts, availability checks, and employee workflows.</p>
-        <p>Well-chosen indexes can extend the useful life of the current database architecture without a technology migration or major infrastructure expansion.</p>
-        <p>But indexing everything is a bad bargain. If a rare report becomes fast while high-volume order writes slow down, the business trade-off is negative.</p>
-        <h2>What does the team get?</h2>
-        <p>The team gets a precise and relatively cheap performance tool. A correct index is often more effective than adding servers.</p>
-        <p>In return, engineers must understand query plans, data distribution, selectivity, and the real workload. Old indexes also need to be removed, not just accumulated.</p>
-        <h2>What does the customer get?</h2>
-        <p>Customers get faster screens and more predictable response times in read-heavy flows.</p>
-        <p>Too many indexes can indirectly slow down write operations such as placing an order or updating an account.</p>
-        <h2>What do we pay for it?</h2>
-        <p>Extra storage, more expensive INSERT/UPDATE/DELETE operations, maintenance work, and more complicated diagnosis.</p>
-        <p>An index that works well today may stop being optimal when data distribution or usage patterns change.</p>
-        <h2>When is another index unnecessary?</h2>
-        <p>If a query is rare and has little business impact, leaving it slow or running it separately may be cheaper.</p>
-        <p>An index also cannot fix a poor data model, fetching too much data, or a query that is inherently doing unnecessary work.</p>
-        <h2>What should we ask before deciding?</h2>
-        <ul><li>Which user or business flow are we accelerating?</li><li>How often does this query run?</li><li>How will write cost change?</li><li>Can we remove work from the query instead of adding an index?</li><li>Are there indexes nobody uses anymore?</li></ul>
-        <h2>In the end</h2>
-        <p>An index is an exchange: we pay continuously to maintain another structure so reads can be faster later.</p>
-        <p><strong>For the business, a good index is not optimization for milliseconds. It is an intentional investment in an important read path.</strong></p>
-      </article>
-    </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Evaluate an index through a real query: execution plans, composite keys, write overhead, safe deployment and the risks of removing unused indexes.">
+<meta name="author" content="Anton Kurakin">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Database Indexing: Why Faster Reads Make Writes More Expensive">
+<meta property="og:description" content="Evaluate an index through a real query: execution plans, composite keys, write overhead, safe deployment and the risks of removing unused indexes.">
+<meta property="og:url" content="https://kurakin.pro/en/articles/database-indexing-business.html">
+<meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+<meta property="article:published_time" content="2026-08-12">
+<meta property="article:modified_time" content="2026-10-25">
+<title>Database Indexing: Why Faster Reads Make Writes More Expensive - Anton Kurakin</title>
+<link rel="canonical" href="https://kurakin.pro/en/articles/database-indexing-business.html">
+<link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/database-indexing-business.html">
+<link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/database-indexing-business.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Database Indexing: Why Faster Reads Make Writes More Expensive","description":"Evaluate an index through a real query: execution plans, composite keys, write overhead, safe deployment and the risks of removing unused indexes.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-25","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/database-indexing-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+<nav class="site-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html" aria-current="page">Architecture</a><a href="../index.html#contact">Contact</a></nav>
+<div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/database-indexing-business.html">RU</a><a href="database-indexing-business.html" aria-current="page">EN</a></div>
+</header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy">
+<a class="article-back-link" href="../architecture/index.html#data">Data and databases</a>
+<p class="article-kicker"><span>5 min read</span><span>Published <time datetime="2026-08-12">12 August 2026</time></span><span>Updated <time datetime="2026-10-25">25 October 2026</time></span></p>
+<h1>Database Indexing: Why Faster Reads Make Writes More Expensive</h1>
+<p class="article-summary">An index can improve one screen while adding work elsewhere. Evaluate the complete workload, including the operation that builds the index in production.</p>
+</div></header>
+<article class="article-content">
+<p>A support employee opens a large customer's case history. The small test database responds immediately; production makes them wait. The team suggests a larger server. Before approving that expense, find out how the database locates the cases. It may be examining far more data than the screen needs.</p>
+<p>An index is an additional lookup structure. It can locate records by selected attributes without scanning the entire table. Its value depends on the queries and the distribution of data, however. Merely having an index does not make a search cheap.</p>
+<h2>One real query is more revealing than table size</h2>
+<p>Suppose support needs a company's most recent open cases. The query includes a customer, a status, a time ordering and a result limit. An index on status alone may offer little help: there may be many open cases, with the customer's records still to be found among them.</p>
+<p>A composite index is one candidate. The customer identifier can narrow the search while later fields support filtering and ordering. That does not justify putting every available field into one index. Field order, index type, query variants and the size of the selected population all matter. PostgreSQL documents the behaviour of <a href="https://www.postgresql.org/docs/current/indexes-multicolumn.html" target="_blank" rel="noopener noreferrer">multicolumn indexes</a>.</p>
+<p>One customer has a short history; another has years of correspondence. One employee wants unresolved cases; another exports an entire quarter. Testing a single convenient example can demonstrate an improvement that other users never receive.</p>
+<p>A partial index may help when a frequently requested subset is small, such as unresolved cases within a much larger history. It stores only records meeting its predicate. That can reduce its size, but it only helps suitable queries, and status changes must update membership correctly.</p>
+<h2>A query plan tests the hypothesis</h2>
+<p>The database chooses an execution plan: where to read records and how to join, filter and sort them. An engineer can inspect that plan with EXPLAIN. A manager does not need to interpret every line. Ask which unnecessary work the proposed change removes.</p>
+<p>Comparing estimated record counts with actual counts is useful. A large discrepancy can suggest stale statistics or an unusual data distribution. In that case, adding another index may miss the underlying problem. If the query returns most of a table, a sequential scan can also be a sensible choice rather than evidence of a broken database.</p>
+<p>EXPLAIN and EXPLAIN ANALYZE are not interchangeable: the latter executes the query. Running it on a demanding operation or a statement that changes production data needs care. The <a href="https://www.postgresql.org/docs/current/using-explain.html" target="_blank" rel="noopener noreferrer">execution-plan documentation</a> explains a diagnostic tool, not a licence to experiment freely on customer records.</p>
+<p>The application may also fetch customer details separately for every case in the list. Even a fast individual query is then repeated many times. An index can reduce each call's cost without removing the unnecessary round trips. It cannot reduce the transfer of a huge response when the screen only needs a few records, either. Trace the path from the employee's action to the finished screen; database execution is only part of the wait. Changing the loading pattern may deliver more value without another permanent structure to maintain.</p>
+<h2>Maintaining the structure has a cost</h2>
+<p>Indexes require storage and maintenance when relevant data changes. They compete for memory and disk resources and can increase logging work. A collection of indexes created for occasional reports may make bulk ingestion substantially more expensive.</p>
+<p>But not every row change has an identical cost for every index. The details depend on the engine, index structure and changed fields. An index may also help an UPDATE or DELETE find its target rows faster. Measure the whole operation instead of assuming that every write must become slower by a fixed amount.</p>
+<p>For the support example, test case creation as well as opening the case list. Faster browsing is not an unqualified success if incoming requests now accumulate. A different index or a separate reporting path may offer a better compromise.</p>
+<h2>Building an index is a production operation</h2>
+<p>Creating an index on a large table can take time and compete with customer traffic. A standard build may block writes; alternatives depend on the database. PostgreSQL provides <a href="https://www.postgresql.org/docs/current/sql-createindex.html" target="_blank" rel="noopener noreferrer">CREATE INDEX CONCURRENTLY</a>, but it has additional work and operational restrictions rather than making the change free.</p>
+<p>The rollout needs enough storage, awareness of current load, a cancellation plan and a way to verify completion. If the build fails, check what state it left behind. A message saying “index added” does not replace monitoring latency and errors after deployment.</p>
+<p>Keep unrelated changes out of the experiment. If a release simultaneously changes the query, the server size and several indexes, it becomes hard to tell what helped or what to undo when another operation deteriorates.</p>
+<h2>Rarely used does not necessarily mean unnecessary</h2>
+<p>Usage statistics help identify removal candidates, but an ordinary week may miss month-end reporting, seasonal activity or an incident investigation. Some indexes enforce uniqueness. A quiet read counter is not enough reason to remove them.</p>
+<p>For each candidate, establish its purpose, the constraints it supports, the observation period and how it would be restored. Revisit the collection as the product changes: a retired screen or report can leave the database maintaining a structure that nobody needs.</p>
+<p>A completed optimisation has a concrete outcome: an improved user workflow, measured write and storage overhead, and a safe deployment procedure. If the change did not improve its intended operation, do not retain it merely to preserve evidence that work was done. It will keep consuming resources long after the experiment is forgotten.</p>
+</article>
+</main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body>
 </html>
