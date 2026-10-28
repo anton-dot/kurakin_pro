@@ -3,46 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="When Materialized Views make reads and analytics faster, why data is stored in a precomputed form, and what we pay for that speed.">
+  <meta name="description" content="Materialized views for faster reporting: aggregate design, actual data freshness, refresh costs, late corrections and recovery when maintenance fails.">
   <meta name="author" content="Anton Kurakin">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time">
-  <meta property="og:description" content="How to speed up expensive reads with precomputed data without forgetting the cost of refreshes and stale results.">
+  <meta property="og:description" content="Materialized views for faster reporting: aggregate design, actual data freshness, refresh costs, late corrections and recovery when maintenance fails.">
   <meta property="og:url" content="https://kurakin.pro/en/articles/materialized-views-business.html">
   <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
-  <meta property="article:modified_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-10-28">
   <title>Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time - Anton Kurakin</title>
   <link rel="canonical" href="https://kurakin.pro/en/articles/materialized-views-business.html">
   <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/materialized-views-business.html">
   <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/materialized-views-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time","description":"When Materialized Views make reads and analytics faster, why data is stored in a precomputed form, and what we pay for that speed.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/materialized-views-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time","description":"Materialized views for faster reporting: aggregate design, actual data freshness, refresh costs, late corrections and recovery when maintenance fails.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-28","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/materialized-views-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/materialized-views-business.html">RU</a><a href="materialized-views-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#data">Data and databases</a><p class="article-kicker"><span>5 min read</span></p><h1>Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time</h1><p class="article-summary">Some queries are too expensive to rebuild from source tables every time a screen or report opens. A Materialized View stores a precomputed result and changes the trade-off: reads get cheaper while keeping the result fresh becomes more complex.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#data">Data and databases</a><p class="article-kicker"><span>5 min read</span> · <span>Published <time datetime="2026-08-12">12 August 2026</time></span> · <span>Updated <time datetime="2026-10-28">28 October 2026</time></span></p><h1>Materialized Views: When Precomputing the Answer Is Better Than Recalculating It Every Time</h1><p class="article-summary">A fast report is useful only when its data is understood. Precomputation, late corrections and what the product should do when refresh stops.</p></div></header>
 <article class="article-content">
-<h2>What problem are we solving?</h2><p>As data grows, one screen or report may require several joins, aggregations, and filters across large tables. Even good indexes do not always make that query cheap.</p><p>If the same expensive result is read thousands of times, repeating all of that work for every request is wasteful.</p>
-<h2>How a Materialized View works</h2><p>The system computes a useful representation in advance and stores it as a separate read structure. The client reads a prepared result instead of running the full expensive calculation.</p><p>Refresh can happen on a schedule, after changes, or incrementally. That choice determines how fresh the result is and how much work is required to maintain it.</p>
-<h2>What the business gets</h2><p>The main benefit is faster product screens and reports without continuously scaling the primary database.</p><p>The company can keep response times predictable for frequently used summaries and analytics even as source data becomes more complex.</p><p>In some cases, this is cheaper than adding database capacity only to support repeated expensive reads.</p>
-<h2>What the team gets</h2><p>The team can separate the write model from a read representation optimized for a specific use case. Application queries become simpler and pressure on transactional tables falls.</p><p>Refresh frequency can be chosen according to actual freshness requirements rather than assuming every result must be real time.</p>
-<h2>What the customer gets</h2><p>Customers get faster screens, lists, and reports, especially where each request previously depended on heavy aggregation over large datasets.</p><p>The trade-off is that the result may not always be perfectly current.</p>
-<h2>What do we pay for it?</h2><p>The same information now exists in more than one form. The view must be refreshed, rebuilt after failures, and monitored for acceptable lag.</p><p>Every additional view is another structure to operate. Creating them without real demand quickly turns the data layer into a collection of expensive copies.</p>
-<h2>When it is unnecessary</h2><p>If queries are already fast, datasets are small, or most results are unique, a Materialized View may provide little value.</p><p>Query design, indexes, and the underlying model should be checked first. Precomputation is useful when the real problem is repeated expensive reading.</p>
-<h2>Questions to ask before deciding</h2><ul><li>How often is this expensive query executed?</li><li>How fresh must the result be?</li><li>Can the view be refreshed incrementally?</li><li>What happens if refresh stops temporarily?</li><li>Would optimizing the source query be cheaper first?</li></ul>
-<h2>In the end</h2><p>A Materialized View is a deliberate trade: spend storage and refresh complexity so every read does not have to pay the full computation cost.</p><p><strong>For the business, it is useful when fast access to a frequently repeated result matters more than keeping the storage model absolutely simple.</strong></p>
+<p>The sales report is opened at every management meeting, and each time the database joins purchases, refunds, categories and business units from scratch. A minute later, another manager opens the same summary and the work starts again. If the result barely changed between those reads, much of the computation serves repeated presentation rather than a new question.</p>
+<p>A materialized view stores a query's result. The application reads prepared data instead of rebuilding the report on demand. That can be valuable, but somebody now has to maintain the result and make clear which information it represents.</p>
+
+<h2>A regular view stores a query; a materialized view also stores its result</h2>
+<p>A conventional view gives a complex query a usable name and interface. It does not by itself promise precomputed rows. A materialized view persists the result: instead of scanning every sale and refund for the month, the application might read totals prepared by day and business unit. Many implementations also allow indexes on that stored result.</p>
+<p>This need not become a separate analytics platform. A modest view may live in the same database. Its refresh, however, uses that database's CPU, storage, memory and sometimes locks. Moving work from read time to refresh time does not make it free.</p>
+<p>First inspect the source query and its <a href="database-indexing-business.html">indexes</a>. If a report is rarely opened and refreshing is expensive, scheduled precomputation may increase total load. Compare the cost of all the reads it replaces with storage, refresh and maintenance, not just the response time of one dashboard.</p>
+
+<h2>The data shape determines which questions remain answerable</h2>
+<p>Suppose the summary stores only daily sales per business unit. It can quickly show how each branch performed. It cannot reconstruct a filter by salesperson when that dimension was discarded during aggregation. If every new question needs another grouping, the system may accumulate many similar views, each with its own refresh schedule and operating cost.</p>
+<p>Even familiar metrics need care. The company's average purchase value is not generally the unweighted average of branch averages: branches have different numbers of purchases. Preserve totals and counts when later aggregation needs them, rather than keeping only a precomputed average.</p>
+<p>Refunds, cancellations and changing reference data raise further questions. Which date owns a refund? Which product category should a historical sale use after the product is recategorised? Materialization preserves the chosen calculation; it does not decide the definition for the business. The report, source query and validation process need the same definition.</p>
+
+<h2>“Refresh every five minutes” is not a five-minute freshness guarantee</h2>
+<p>A schedule specifies when a job should start. It does not guarantee when it will complete. Refreshes may wait for capacity, run longer than expected or fail. The source used to build the view may itself receive updates late.</p>
+<p>Distinguish the time of the last successful refresh, the calculation's duration and the point through which input data is actually represented. “Updated just now” can be misleading when a calculation has only just finished reading a source that was already behind.</p>
+<p>A management meeting may be well served by a summary of the previous completed day. An immediate decision about allocating credit or selling the last available resource should not generally rely on an outdated aggregate as its only safeguard. Validate the consequential action against authoritative state even if the overview remains fast and asynchronous.</p>
+
+<h2>Refresh behaviour is implementation-specific</h2>
+<p>Do not promise incremental maintenance simply because a database object is called a materialized view. In PostgreSQL 18, the standard REFRESH MATERIALIZED VIEW runs its defining query again. CONCURRENTLY permits ordinary reads during refresh, but requires an already populated view and a suitable unique index covering all rows. It does not turn full computation into a free append of newly arrived records.</p>
+<p>Other systems offer different arrangements. SQL Server's indexed views are maintained when the underlying tables change, adding work to those writes. The freshness decision is therefore linked to another question: when is the maintenance performed, and which workload pays for it?</p>
+<p>A custom incremental pipeline must handle corrections as well as new records. A refund arriving after a day has closed will not repair yesterday's total if the pipeline only considers rows dated today. It needs rules for affected periods, duplicate handling and reconciliation against a complete calculation.</p>
+
+<h2>When refresh stops, the interface needs to notice</h2>
+<p>A fast report can look entirely healthy after several refresh failures. The user sees no latency, but the information behind their decision is stale. Monitor data age against an agreed limit and define what happens when that limit is exceeded: show a warning, disable a dependent action or stop serving the result.</p>
+<p>Automatically sending all readers to the expensive source query can be dangerous too. If the view exists to reduce database load, that fallback restores the load precisely during a failure. An explicit temporary-unavailability message may be safer.</p>
+<p>Test recovery using a separate copy: rebuild the history, compare control totals, include a late correction and only then switch readers. Check permissions on the derived result as well. An aggregate must not accidentally expose information across tenants merely because it was computed from their shared underlying tables.</p>
+<p>The decision has a practical boundary. Frequent reads, a reasonably stable shape and a defined tolerance for delay can make precomputation worthwhile. For mostly unique requests or work requiring current information without lag, compare maintenance costs with other options, from query improvements to a separate <a href="data-warehouse-business.html">analytics store</a>. Speeding up one screen should not quietly create another reporting system that nobody owns.</p>
+<aside class="article-source"><p>Implementation references: PostgreSQL's <a href="https://www.postgresql.org/docs/18/rules-materializedviews.html" target="_blank" rel="noopener noreferrer">materialized views</a> and <a href="https://www.postgresql.org/docs/18/sql-refreshmaterializedview.html" target="_blank" rel="noopener noreferrer">REFRESH CONCURRENTLY requirements</a>; SQL Server's <a href="https://learn.microsoft.com/en-us/sql/relational-databases/views/create-indexed-views?view=sql-server-ver17" target="_blank" rel="noopener noreferrer">indexed views</a>; and the <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view" target="_blank" rel="noopener noreferrer">Azure Architecture Center pattern</a>.</p></aside>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
 </body></html>
