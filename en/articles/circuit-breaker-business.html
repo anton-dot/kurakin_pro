@@ -1,84 +1,73 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A circuit breaker can stop a slow dependency from dragging down the rest of a product. Here is how it works, what to do during failure, and when it is worth adding.">
-    <meta name="author" content="Anton Kurakin">
-    <meta name="color-scheme" content="light">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Circuit Breaker: When to Stop Calling a Failing Service">
-    <meta property="og:description" content="A circuit breaker can stop a slow dependency from dragging down the rest of a product. Here is how it works, what to do during failure, and when it is worth adding.">
-    <meta property="og:url" content="https://kurakin.pro/en/articles/circuit-breaker-business.html">
-    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
-    <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-10-13">
-    <title>Circuit Breaker: When to Stop Calling a Failing Service - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin.pro/en/articles/circuit-breaker-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/circuit-breaker-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/circuit-breaker-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Circuit Breaker: When to Stop Calling a Failing Service","description":"A circuit breaker can stop a slow dependency from dragging down the rest of a product. Here is how it works, what to do during failure, and when it is worth adding.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/circuit-breaker-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
-    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../../assets/styles.css">
-  </head>
-  <body data-page="article" data-lang="en">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
-</nav>
-      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/circuit-breaker-business.html">RU</a><a href="circuit-breaker-business.html" aria-current="page">EN</a></div>
-    </header>
-    <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-13">13 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Circuit Breaker: When to Stop Calling a Failing Service</h1><p class="article-summary">A payment provider is slow. Waiting for it should not make the rest of the product slow as well. A circuit breaker puts a limit on how long the application keeps trying.</p></div></header>
-      <article class="article-content">
-        <p>A payment provider stops answering promptly. It is not completely down, which makes the incident harder to spot. Requests sit there waiting for a timeout. Meanwhile, the application keeps sending new ones.</p>
-        <p>The obvious problem is that people cannot pay. The less obvious one is that waiting requests consume connections and workers. A failure in one external system can start affecting parts of the product that have nothing to do with payments.</p>
-        <p>A circuit breaker is a way to stop making that situation worse. Once a dependency is showing sustained signs of trouble, the application temporarily stops calling it. This is a deliberate failure instead of a slow, uncontrolled one.</p>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How circuit breakers classify failures, scope protection, limit recovery probes and keep an unavailable supplier from disrupting unrelated work.">
+<meta name="author" content="Anton Kurakin">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Circuit Breaker: When to Stop Calling a Failing Service">
+<meta property="og:description" content="How circuit breakers classify failures, scope protection, limit recovery probes and keep an unavailable supplier from disrupting unrelated work.">
+<meta property="og:url" content="https://kurakin.pro/en/articles/circuit-breaker-business.html">
+<meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+<meta property="article:published_time" content="2026-08-12">
+<meta property="article:modified_time" content="2026-10-28">
+<title>Circuit Breaker: When to Stop Calling a Failing Service - Anton Kurakin</title>
+<link rel="canonical" href="https://kurakin.pro/en/articles/circuit-breaker-business.html">
+<link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/circuit-breaker-business.html">
+<link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/circuit-breaker-business.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Circuit Breaker: When to Stop Calling a Failing Service","description":"How circuit breakers classify failures, scope protection, limit recovery probes and keep an unavailable supplier from disrupting unrelated work.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-28","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/circuit-breaker-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/circuit-breaker-business.html">RU</a><a href="circuit-breaker-business.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Scaling and reliability</a><p class="article-kicker"><time datetime="2026-08-12">12 August 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-28">28 October 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Circuit Breaker: When to Stop Calling a Failing Service</h1><p class="article-summary">One supplier is unresponsive, but other workflows can remain usable. Decide which calls to stop, what employees see and how traffic returns after recovery.</p></div></header>
+<article class="article-content">
+<p>A purchasing portal gathers availability from several suppliers. One supplier has almost stopped responding. The others are healthy, yet employees cannot open the combined view: calls to the struggling partner occupy shared connections and remain unfinished.</p>
+<p>A timeout can make each individual request finish eventually. But the next employee will wait for the same supplier, followed by the next. A circuit breaker adds memory of recent failures to that individual time limit. It asks whether another call is worth starting at all right now.</p>
 
-        <h2>Waiting is not neutral</h2>
-        <p>Engineers are used to thinking of a request as successful or unsuccessful. But an unanswered request has a cost before it returns either result. It occupies some of the resources needed to serve the next request.</p>
-        <p>Under normal load, a few slow calls may not matter. When a dependency remains unhealthy, the waiting accumulates. Clients retry. The next layer may retry too. Eventually the original problem is only one part of the incident.</p>
-        <p>A timeout puts a maximum wait on an individual call. That is necessary, but it does not stop the next request from going to the same unhealthy dependency. And another timeout after another timeout is still a lot of wasted capacity.</p>
-        <p>The circuit breaker adds memory to the decision. It asks whether the recent pattern of failures makes another call worth attempting at all.</p>
+<h2>Stopping calls does not repair the dependency</h2>
+<p>When recent failures cross a configured threshold, the mechanism temporarily stops normal calls. New requests are rejected locally without reaching the dependency. This reduces repeated waiting inside the application and relieves some outgoing load. The original fault still needs to be fixed.</p>
+<p>The protection is useful when an unhealthy participant can damage unrelated workflows. If calls are infrequent, bounded and already isolated, another state machine may cost more to maintain than it saves. Having an external API is not, by itself, a reason to put a breaker around every operation.</p>
+<p>Nor can the design automatically promise complete containment. While the breaker gathers observations, requests are already waiting. Without concurrency limits, capacity can run out before the failure threshold takes effect. <a href="timeouts-deadlines-business.html">Timeouts</a> and <a href="bulkhead-business.html">resource isolation</a> address different parts of that problem.</p>
 
-        <h2>What actually happens when the circuit opens</h2>
-        <p>Most implementations have three states. The names sound electrical, but the behaviour is straightforward.</p>
-        <p><strong>Closed:</strong> calls go through as usual. The breaker observes failures and slow responses over a period of time. A single bad request should not normally be enough to declare an outage.</p>
-        <p><strong>Open:</strong> the dependency has crossed the failure threshold. New calls are rejected immediately, without being sent to it. That protects local resources and gives the dependency room to recover.</p>
-        <p><strong>Half-open:</strong> after a pause, a small number of trial calls are allowed through. If the dependency is healthy again, traffic can resume. If not, the circuit opens again.</p>
-        <p>The half-open state matters more than it first appears. Sending the entire backlog into a service that has just recovered can recreate the outage. Recovery needs a controlled return, not a starting pistol.</p>
+<h2>Three states become part of normal operations</h2>
+<p>In the closed state, calls pass through and their outcomes are recorded. The terminology comes from an electrical circuit: closed means the path conducts. Depending on the implementation, the breaker may consider failures, slow calls or both.</p>
+<p>In the open state, normal calls are rejected without reaching the dependency. An immediate retry is particularly unhelpful here. Calling the same protected operation again does not make the remote system healthy.</p>
+<p>After a pause, a limited number of trial calls can pass through: the half-open state. They test recovery without releasing the entire workload at once. Healthy results allow normal calls to resume; poor results keep protection active. The exact transition conditions depend on the implementation and the service's workload.</p>
+<p>The trial must also represent the operation being protected. A healthy “process is alive” endpoint does not prove that stock availability queries work again. Creating fake purchases as health probes would introduce another problem. Choose representative calls with safe business effects.</p>
 
-        <h2>The awkward part is what the customer sees</h2>
-        <p>Opening a circuit does not magically complete the business operation. It changes how the failure is presented and contained.</p>
-        <p>Suppose payments are unavailable but customers can still browse their accounts and review an order. Keeping those functions alive has value. Presenting a failed payment as a successful purchase does not.</p>
-        <p>The application may return a clear temporary error. Some workflows can put work into an explicit pending state; others cannot proceed until the provider is available. A read-only function may tolerate cached data, while a financial operation may require a much stricter response.</p>
-        <p>That distinction should be agreed with the product owner before an incident, not invented by an exception handler on the day.</p>
-        <p>I would rather have an honest message saying a payment could not be completed than a reassuring screen that leaves the customer wondering whether they have been charged.</p>
+<h2>Not every rejection is evidence of an outage</h2>
+<p>A supplier can correctly report that an item is unavailable. That is a valid business result, not a dependency failure. Invalid request parameters or missing permission for one customer should not automatically take a healthy service offline for everyone else.</p>
+<p>Start with error classification rather than a failure percentage. Which outcomes indicate dependency health? Does the problem affect the whole supplier, one method, a region or one account? An excessively broad breaker turns a local problem into an outage created by our own application.</p>
+<p>A percentage without a sample size can also mislead. A few infrequent calls provide weak evidence, while a large workload can consume substantial capacity even with a relatively small proportion of hung requests. Observation windows, minimum samples and thresholds need to be tested against actual traffic rather than copied from a library example.</p>
+<p>In a deployment with several application instances, breaker state is often local. One instance may have stopped calls while another is still testing the supplier. That can be reasonable, but a per-instance probe limit is not a platform-wide limit. Process restarts may also discard the accumulated history.</p>
 
-        <h2>Bad thresholds create a different kind of outage</h2>
-        <p>There is no universal setting for how many failures should open the circuit or how long it should remain open. An internal service with heavy traffic and a rarely used third-party API have very different patterns.</p>
-        <p>Start by deciding which failures count. A timeout or a provider outage may indicate dependency health. A customer's invalid input or an ordinary business rejection usually does not. Treating every unsuccessful response as an infrastructure failure is an easy way to disable a healthy service.</p>
-        <p>The measurement window matters too. A high failure percentage over very few requests can be misleading. A threshold that is too slow to react offers little protection. One that is too sensitive creates needless unavailability.</p>
-        <p>Then decide what you will observe in production: circuit state changes, calls rejected while open, trial-call results, and the effect on customer-facing operations. A breaker that quietly stays open long after recovery is not a successful safety feature.</p>
+<h2>What the employee sees while calls are blocked</h2>
+<p>The purchasing portal may still show results from healthy suppliers while marking one partner's information unavailable. It should not translate a missing response into “out of stock”. Employees may make different purchasing decisions based on those two statements.</p>
+<p>Older data is acceptable only when its age and purpose are understood. Yesterday's availability may be useful context; it is not confirmation that the supplier can fulfil a commitment today. If current verification is required, that part of the workflow must stop or enter an explicitly agreed pending state.</p>
+<p>The fallback has a capacity limit too. Redirecting all requests to a second supplier or the primary database without checking their headroom can merely move the incident. Test the alternate path under the traffic it will receive during failure, not only with one successful request.</p>
 
-        <h2>It is not a substitute for other limits</h2>
-        <p>A breaker does not make the dependency faster, repair a database, or guarantee that the rest of the application has enough capacity.</p>
-        <p>For temporary failures, <a href="retry-backoff-business.html">limited retries with backoff</a> may help. But a retry loop should respect an open circuit, not fight it. If the problem is one workload consuming all available connections, <a href="bulkhead-business.html">resource isolation with a bulkhead</a> solves a different part of the problem. If jobs keep arriving faster than anyone can process them, <a href="backpressure-business.html">backpressure</a> is the relevant control.</p>
-        <p>These mechanisms are often discussed together because incidents do not respect architecture diagrams. That does not mean every system needs all of them.</p>
+<h2>Recovery deserves its own test</h2>
+<p>Turning off a dependency and observing a fast error is only half the exercise. Bring it back with limited capacity. Do trial calls and queued jobs produce a new burst? Can the breaker remain open unnecessarily? Do the library's health metrics match the function employees can actually use?</p>
+<p>Track remote failures, locally rejected calls and probe outcomes separately. One combined error count obscures whether the supplier is still down or the application has not yet resumed normal access.</p>
+<p>Include application restarts during the outage in the test. New instances may lack failure history, so the remaining controls still need to contain demand while their breakers gather evidence.</p>
+<p>The configuration also needs an owner: someone who can adjust thresholds, investigate frequent transitions and intervene carefully after a mistaken opening. Otherwise a small library becomes another decision-making system that nobody can explain during an incident.</p>
 
-        <h2>When I would leave it out</h2>
-        <p>If the dependency is reliable enough for the workload, calls have clear deadlines, retries are bounded, and one failure cannot tie up shared resources, adding a circuit breaker may be more trouble than it is worth. It introduces states that have to be understood, tuned and tested.</p>
-        <p>Before adding one, I would answer three practical questions. Can this dependency make unrelated parts of the product unavailable? What exactly happens to the customer when we stop calling it? And how will we know it is safe to start again?</p>
-        <p>If those answers are clear, the implementation is usually the easier part. The important decision has already been made: how much of the product are we willing to lose when one dependency fails?</p>
-      </article>
-    </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
-  </body>
+<aside class="article-source" aria-label="Technical references"><p>Mechanics and limitations: the <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker" target="_blank" rel="noopener noreferrer">Azure Circuit Breaker pattern</a>. For a concrete implementation with observation windows, slow-call thresholds and limited probes, see the <a href="https://resilience4j.readme.io/docs/circuitbreaker" target="_blank" rel="noopener noreferrer">Resilience4j documentation</a>.</p></aside>
+</article>
+</main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body>
 </html>

@@ -1,86 +1,76 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A bulkhead protects critical functions by separating the resources they depend on. Learn where isolation helps, what it costs, and what it cannot protect.">
-    <meta name="author" content="Anton Kurakin">
-    <meta name="color-scheme" content="light">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Bulkhead Pattern: Stop One Workload From Taking Down the Rest">
-    <meta property="og:description" content="A bulkhead protects critical functions by separating the resources they depend on. Learn where isolation helps, what it costs, and what it cannot protect.">
-    <meta property="og:url" content="https://kurakin.pro/en/articles/bulkhead-business.html">
-    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
-    <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-10-13">
-    <title>Bulkhead Pattern: Stop One Workload From Taking Down the Rest - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin.pro/en/articles/bulkhead-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bulkhead-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bulkhead-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bulkhead Pattern: Stop One Workload From Taking Down the Rest","description":"A bulkhead protects critical functions by separating the resources they depend on. Learn where isolation helps, what it costs, and what it cannot protect.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/bulkhead-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
-    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../../assets/styles.css">
-  </head>
-  <body data-page="article" data-lang="en">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
-</nav>
-      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/bulkhead-business.html">RU</a><a href="bulkhead-business.html" aria-current="page">EN</a></div>
-    </header>
-    <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-13">13 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Bulkhead Pattern: Stop One Workload From Taking Down the Rest</h1><p class="article-summary">A slow report should not prevent a customer from placing an order. Bulkheads reserve separate capacity for work that must not fail together.</p></div></header>
-      <article class="article-content">
-        <p>A reporting job slows down and starts holding database connections. Nothing is wrong with the checkout code. Yet checkout becomes slower too, because both operations are competing for the same finite pool.</p>
-        <p>This is an uncomfortable kind of incident. The team responsible for checkout can do everything correctly and still lose availability because another part of the product has consumed the resources it needs.</p>
-        <p>The Bulkhead Pattern addresses that shared fate. Instead of allowing every workload to draw from one common pool without limits, it separates capacity so a problem in one area does not automatically spread to the others.</p>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How to isolate heavy jobs from interactive work through resource pools, database limits, bounded queues, tenant fairness and overload testing.">
+<meta name="author" content="Anton Kurakin">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bulkhead Pattern: Stop One Workload From Taking Down the Rest">
+<meta property="og:description" content="How to isolate heavy jobs from interactive work through resource pools, database limits, bounded queues, tenant fairness and overload testing.">
+<meta property="og:url" content="https://kurakin.pro/en/articles/bulkhead-business.html">
+<meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+<meta property="article:published_time" content="2026-08-12">
+<meta property="article:modified_time" content="2026-10-28">
+<title>Bulkhead Pattern: Stop One Workload From Taking Down the Rest - Anton Kurakin</title>
+<link rel="canonical" href="https://kurakin.pro/en/articles/bulkhead-business.html">
+<link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/bulkhead-business.html">
+<link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/bulkhead-business.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bulkhead Pattern: Stop One Workload From Taking Down the Rest","description":"How to isolate heavy jobs from interactive work through resource pools, database limits, bounded queues, tenant fairness and overload testing.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-28","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/bulkhead-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
+</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/bulkhead-business.html">RU</a><a href="bulkhead-business.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Scaling and reliability</a><p class="article-kicker"><time datetime="2026-08-12">12 August 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-28">28 October 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Bulkhead Pattern: Stop One Workload From Taking Down the Rest</h1><p class="article-summary">An annual export should not prevent staff from opening a case. Separate capacity where it matters, account for shared bottlenecks and test the protected workflow.</p></div></header>
+<article class="article-content">
+<p>A service company starts an annual export of customer cases. The export is still running, and employees can no longer open an ordinary case. Nobody changed the case-screen code. The export simply occupied the database connections and workers shared by the rest of the application.</p>
+<p>Adding application instances will not necessarily help. If each new instance sends more work to the same database, contention for the limited resource can get worse. First identify the workflow that must remain available and the neighbouring workload capable of preventing it.</p>
 
-        <h2>The hidden dependency is the pool</h2>
-        <p>We usually draw dependencies between services, databases and external APIs. But resources are dependencies too. Two unrelated features may share application workers, database connections, concurrency slots, memory or a queue.</p>
-        <p>Under ordinary conditions, sharing looks efficient. Idle capacity is available to whoever needs it. That is a sensible design until one activity becomes much slower or more popular than expected.</p>
-        <p>Now the shared pool behaves like a single narrow doorway. Reporting requests keep arriving and occupy available connections. Checkout has no special claim on the remaining capacity, even though the business consequence of delaying checkout is quite different from delaying a report.</p>
-        <p>More servers might help for a while. But if the real constraint is a shared connection limit or an unbounded expensive workload, scaling every application instance can simply create more competition for the same constrained resource.</p>
+<h2>Separate menu items are not isolated resources</h2>
+<p>A bulkhead separates capacity between types of work. Exports may have their own bounded worker group while interactive requests use another. Calls to a slow external provider can have a separate connection pool so they do not consume every connection available to the application.</p>
+<p>This does not automatically require another microservice. Separate pools or a limit on concurrent dependency calls inside one application may be sufficient. Other failures require isolation at process, container or infrastructure level. The choice depends on the resource being exhausted and the failure the company needs to contain.</p>
+<p>Those levels provide different protection. Separate workers can limit task concurrency without isolating a process's memory. Two containers on one host still share underlying capacity. Independent applications accessing one database may simply meet in a queue there instead. Drawing separate boxes does not remove these dependencies.</p>
 
-        <h2>Give different work different budgets</h2>
-        <p>A bulkhead is a resource boundary, not necessarily a new microservice.</p>
-        <p>One application can use a separate connection pool for a slow external provider, another pool for an essential database operation, and a different limit for background work. Separate worker groups or queues can achieve a similar effect. Some systems need stronger isolation at the process or infrastructure level, but that is not the default answer for every feature.</p>
-        <p>The point is that one category of work gets a budget it cannot silently exceed. When it reaches that limit, additional work waits within an agreed boundary or is rejected. Other categories retain access to their own allocation.</p>
-        <p>This changes the shape of the incident. Reports may take longer or fail temporarily. Checkout may continue. The company has accepted a local degradation rather than an indiscriminate one.</p>
+<h2>A workload limit is not the same as reserved capacity</h2>
+<p>Restricting the number of simultaneous exports is useful, but it does not guarantee a responsive case screen. Each permitted export may scan a large dataset or hold disruptive locks. The design must account for the cost of individual operations and shared database, storage and network limits.</p>
+<p>If a critical journey needs protected capacity, explain how that capacity remains available. It may be a separate pool combined with limits on neighbouring workloads, or a deeper separation of execution. A counter on one feature is not sufficient evidence of a real reservation.</p>
+<p><a href="rate-limiting-business.html">Requests-per-second limits</a> are not enough on their own either. When a dependency slows down, an unchanged arrival rate can leave more operations waiting concurrently. Rate and concurrency controls address different dimensions of demand.</p>
+<p>Count the entire deployment as well. A separate <a href="connection-pooling-business.html">connection pool</a> in every application instance increases the potential connection total as the application scales. A safe setting for one process does not prove that the shared database can support all processes together.</p>
 
-        <h2>Which boundary matters to the business?</h2>
-        <p>Engineering teams can isolate almost anything if given enough time. The harder question is what deserves isolation.</p>
-        <p>I would start with critical user journeys, not with the current service diagram. Which functions must remain available when another one misbehaves? What can reasonably wait? Can work from one customer prevent other customers from using the product?</p>
-        <p>For example, bulk export and interactive account access may run on the same backend, but they have different expectations. Export jobs can often be queued and processed at a controlled rate. An interactive action may need protected capacity to remain usable.</p>
-        <p>A shared multi-tenant system raises another question: how much damage can one unusually busy customer cause to the others? A per-tenant limit or separate capacity for certain classes of customers may help. That comes with a commercial and operational cost, so the boundary should not be chosen in isolation from the product model.</p>
+<h2>What happens to work that does not fit?</h2>
+<p>An export can wait in a queue. An unbounded queue, however, turns an explicit rejection into a promise the system may never fulfil. Accepted work needs a limit, an expiry policy and a status the employee can understand.</p>
+<p>For an interactive case screen, a long queue is especially unhelpful: the employee may leave before a worker becomes available. A short bounded wait followed by a clear rejection may be preferable. Freed capacity should not be spent on requests whose deadlines have already expired.</p>
+<p>Retries must respect the same boundaries. Otherwise the original workload is constrained while recovery attempts get an unlimited bypass. A fallback that accesses the shared database directly can undermine isolation in the same way.</p>
+<p>This is where bulkheads meet <a href="backpressure-business.html">backpressure</a>: the system stops admitting additional work or asks the sender to slow down. Splitting pools does not reduce incoming demand by itself.</p>
 
-        <h2>Isolation costs something even when nobody is failing</h2>
-        <p>Separate pools do not use capacity as efficiently as one completely shared pool. Some reserved capacity can sit idle while another pool is saturated. That may be an acceptable price for protecting a critical workflow, but it is still a price.</p>
-        <p>There is also the risk of choosing the wrong size. A tight limit can become an artificial bottleneck on a healthy function. A generous one can leave too little protection for its neighbours.</p>
-        <p>And each new boundary needs ownership. Someone must understand why the limits exist, monitor when they are reached, and revisit them as workloads change. Configuration that nobody remembers tends to survive long after the assumptions behind it have disappeared.</p>
-        <p>This is why I would avoid giving every small feature its own pool just to make the architecture look resilient. Compartments are useful when they separate meaningful failure domains. Otherwise they add operating overhead without buying much.</p>
+<h2>A large customer can still monopolise the export pool</h2>
+<p>In a multi-tenant product, one customer may submit enough expensive jobs to occupy the entire export allocation. Interactive work is protected, but other customers still cannot get their reports. The first boundary solved only part of the problem.</p>
+<p>Options include per-customer job limits, scheduling across customer groups and dedicated capacity for unusually demanding workloads. A separate infrastructure deployment for every tenant is not mandatory. The important point is that priority and acceptable waiting times match what the product promises.</p>
+<p>Background work also has obligations. If interactive traffic always receives every available resource, synchronisation or required exports may never finish. Priority needs an accompanying policy for how less urgent work eventually receives a share.</p>
 
-        <h2>Know where isolation ends</h2>
-        <p>A separate worker pool does not protect checkout if reporting can still saturate the same underlying database, network link or storage system. The resources might be separate at one layer and completely shared at the next.</p>
-        <p>That is an important testing question. During overload, does the protected flow actually remain usable? Or have we just moved the queue from application workers to the database?</p>
-        <p>Useful signals include resource-pool saturation, waiting time, rejected operations, queue age and the latency of the supposedly protected customer journey. A healthy bulkhead shows its limits under pressure. It is not something to verify only by inspecting configuration files.</p>
+<h2>The cost is visible even on a quiet day</h2>
+<p>With strict partitioning, one allocation can sit idle while another is saturated. That is not automatically a defect: the spare capacity was reserved to protect a particular workflow. Its cost should nevertheless be compared with the consequences of losing that workflow, rather than hidden under the label of reliability.</p>
+<p>Borrowing idle capacity dynamically can improve utilisation, but it complicates the promise. When the protected workload needs its allocation back, long-running jobs may not release it immediately. Reclaim behaviour must be tested rather than assumed.</p>
+<p>Each boundary also adds configuration and monitoring: concurrency, queue limits, timeouts and an owner. A simple workload may be adequately protected by a shared limit and sensible deadlines. Dozens of small pools without a clear purpose make operation harder without establishing useful protection.</p>
 
-        <h2>Bulkhead, circuit breaker or backpressure?</h2>
-        <p>These patterns are related, but they protect different boundaries.</p>
-        <p>A <a href="circuit-breaker-business.html">circuit breaker</a> stops calls to a dependency that appears unhealthy. A bulkhead limits how much of our own capacity that dependency or workload can consume. <a href="backpressure-business.html">Backpressure</a> controls how much incoming work the system accepts when processing falls behind.</p>
-        <p>One incident may need all three. But adding all three by default is not an architecture strategy. First identify what is being exhausted, where the overload is entering, and which business operation must continue.</p>
+<h2>Prove that the case screen remains usable</h2>
+<p>Run the permitted number of heavy exports together, then slow down their database or external dependency. At the same time, open and update ordinary cases. Measure the duration and success of those employee actions, not merely whether application processes remain alive.</p>
+<p>Inspect queue limits, rejected work, the oldest queued job and utilisation at every shared layer. Then remove the overload. The backlog should drain at a controlled rate rather than produce a second surge. If the interactive workflow still fails, the test has identified a concrete shared resource that the current isolation does not yet protect.</p>
 
-        <h2>When not to split the pools</h2>
-        <p>If the application is small, workloads are similar, and overload cannot affect important neighbouring operations, shared capacity with clear concurrency and timeout limits may be enough.</p>
-        <p>A bulkhead earns its place when the company can name the failure it wants to contain. The goal is not to keep every feature alive at any cost. It is to make sure the wrong feature does not get to decide which part of the business goes down next.</p>
-      </article>
-    </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
-  </body>
+<aside class="article-source" aria-label="Technical references"><p>Pattern foundation: <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead" target="_blank" rel="noopener noreferrer">Bulkhead in Azure Architecture Center</a>. For workload cost, resource limits and customer quotas, see <a href="https://sre.google/sre-book/handling-overload/" target="_blank" rel="noopener noreferrer">Handling Overload in Google SRE</a>.</p></aside>
+</article>
+</main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body>
 </html>
