@@ -3,77 +3,66 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Disaster Recovery in business language: how to agree in advance on acceptable downtime and data loss, and why having a backup is not the same as being able to recover.">
+    <meta name="description" content="Plan and test disaster recovery through business acceptance: recovery objectives, known-good data, protected backups, reconciliation and executable procedures.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Disaster Recovery: How Much Downtime and Data Loss Can the Business Accept?">
-    <meta property="og:description" content="How to design recovery around acceptable downtime, acceptable data loss, and the order in which critical business capabilities must return.">
+    <meta property="og:description" content="Plan and test disaster recovery through business acceptance: recovery objectives, known-good data, protected backups, reconciliation and executable procedures.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/disaster-recovery-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-10-29">
     <title>Disaster Recovery: How Much Downtime and Data Loss Can the Business Accept? - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/disaster-recovery-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/disaster-recovery-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/disaster-recovery-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Disaster Recovery: How Much Downtime and Data Loss Can the Business Accept?","description":"Disaster Recovery in business language: how to agree in advance on acceptable downtime and data loss, and why having a backup is not the same as being able to recover.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/disaster-recovery-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Disaster Recovery: How Much Downtime and Data Loss Can the Business Accept?","description":"Plan and test disaster recovery through business acceptance: recovery objectives, known-good data, protected backups, reconciliation and executable procedures.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-29","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/disaster-recovery-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+    <header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/disaster-recovery-business.html">RU</a><a href="disaster-recovery-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><span>5 min read</span></p><h1>Disaster Recovery: How Much Downtime and Data Loss Can the Business Accept?</h1><p class="article-summary">A backup by itself does not save a company. You need to know how long recovery will take, how fresh the restored data will be, and who does what when the primary system is truly unavailable.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Scaling and reliability</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-29">29 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Disaster Recovery: How Much Downtime and Data Loss Can the Business Accept?</h1><p class="article-summary">A database that starts is only one recovery milestone. Staff must be able to resume agreed work, while missing history and external actions are reconciled.</p></div></header>
       <article class="article-content">
-        <p>Normal resilience helps systems survive individual server or service failures. But some incidents are larger: a lost region, major data corruption, an attack, or a serious infrastructure failure.</p>
-        <p>At that point, the question is no longer “how do we avoid going down?” but “how do we get back to work?”</p>
-
-        <h2>What problem are we solving?</h2>
-        <p>Disaster Recovery is a plan for restoring a system after a major disruption.</p>
-        <p>The conversation usually comes down to two questions: how long can the business be unavailable, and how much recent data can it afford to lose?</p>
-        <p>Those expectations shape the architecture far more than the choice of a specific backup tool.</p>
-
-        <h2>What does the business get?</h2>
-        <p>The main value is a more predictable cost of a major incident.</p>
-        <p>The company agrees which processes must return first, how many hours of downtime are acceptable, and how much data loss is still tolerable.</p>
-        <p>That turns reliability from an abstract “we cannot go down” requirement into a concrete trade-off between risk and the cost of protection.</p>
-        <p>For critical systems, fast recovery may justify expensive standby infrastructure. For a secondary internal tool, that level of protection may make no economic sense.</p>
-
-        <h2>What does the team get?</h2>
-        <p>The team gets a clear recovery sequence: where backups live, how infrastructure is recreated, which dependencies start first, and who decides when to switch over.</p>
-        <p>But a plan is only useful if it is tested. A backup that has never been restored is an assumption, not a guarantee.</p>
-        <p>Regular recovery exercises are needed to understand the real duration of the procedure.</p>
-
-        <h2>What does the customer get?</h2>
-        <p>The customer gets more predictable service recovery after a rare but serious incident.</p>
-        <p>Sometimes it is better to restore critical capabilities first and secondary ones later than to wait for the entire product to be fully operational.</p>
-
-        <h2>What do we pay for it?</h2>
-        <p>The price is standby infrastructure, backup storage, automation, testing, and operational discipline.</p>
-        <p>The less downtime and data loss the business accepts, the more expensive the architecture becomes.</p>
-        <p>There is also an organizational cost: recovery must be a real team responsibility, not a document nobody has opened for two years.</p>
-
-        <h2>When is complex disaster recovery unnecessary?</h2>
-        <p>Not every system needs a standby region and recovery measured in minutes.</p>
-        <p>If a service can be restored within a working day without serious damage, expensive active standby infrastructure may be excessive.</p>
-
-        <h2>What should we ask before deciding?</h2>
-        <ul><li>How long can this business process be unavailable?</li><li>How much recent data can we lose?</li><li>Which capabilities must return first?</li><li>When did we last perform a real restore from backup?</li><li>Who decides to switch to disaster mode?</li></ul>
-
-        <h2>In the end</h2>
-        <p>Disaster Recovery starts not with a backup server but with the business defining acceptable damage.</p>
-        <p><strong>The less downtime and data loss a company is willing to accept, the more it pays in advance. The important part is that the trade-off is deliberate and the recovery process is proven, not assumed.</strong></p>
-      </article>
+<p>The database has been restored, the application starts and its health check passes. Is the incident over? Consider a repair centre. Staff can see service tickets again, but some equipment already returned to customers is still listed as under repair. Documents sent out during the missing period are absent. Continuing without reconciliation risks making decisions against the wrong history.</p>
+<p>Disaster recovery should return the company to agreed operations with data it understands. Database startup is only one milestone. The rest is easily left out when infrastructure availability is the sole measure of success.</p>
+<h2>Two objectives that need business owners</h2>
+<p>RTO is the target limit between service disruption and restoration of the agreed service. Detection, the recovery decision, environment preparation, restoring data and required checks all consume that time. Starting the stopwatch only when an engineer launches a script produces a flattering number while ignoring the time the business has already lost.</p>
+<p>RPO describes the tolerated time gap between the incident and the recovery point the organisation needs to be able to reach. It expresses how much recent history may be lost or reconstructed separately. A backup schedule does not demonstrate compliance: the newest copy may be inaccessible, damaged or already contain corrupted records.</p>
+<p>Apply these objectives to a particular workflow. Historical repair archives and handing equipment back to customers may have different requirements. Calling everything critical obscures recovery priorities and turns secondary dependencies into mandatory blockers.</p>
+<p>Google Cloud's <a href="https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide" target="_blank" rel="noopener noreferrer">DR planning guide</a> connects recovery objectives with strategy. It does not establish a universal acceptable outage: that decision remains with the business.</p>
+<h2>A failed server and damaged data need different responses</h2>
+<p>A healthy replica may help when a machine fails. If the application wrote incorrect records, the replica may have copied them. Switching machines then restores access to the same bad state.</p>
+<p>Logical corruption calls for a known-good point, suitable backups and, where supported, the logs needed for point-in-time recovery. The newest possible point is not automatically the correct one. Establish when the damage began first.</p>
+<p>Valid work may have happened alongside the bad writes. Rewinding the whole database also removes that work. The repair centre must identify repairs completed, equipment collected and documents sent after the selected recovery point. Reconciliation with external systems and original records belongs in the plan, rather than becoming an unexplained backlog for support.</p>
+<h2>What belongs in a recoverable set?</h2>
+<p>A database archive alone may be insufficient. The company also needs files, a compatible application version, configuration, encryption-key availability and an authorised way to gain access. A surviving encrypted backup is not usable data if its key was lost with the original environment.</p>
+<p>Backup protection should be separated from ordinary application privileges. A compromised production identity should not automatically be able to delete every recovery point. Access separation, protected retention and storage controls need to match the platform and the threat being addressed.</p>
+<p>Restoring into an isolated environment is useful, provided its external effects are controlled. A restored worker must not resend real documents, trigger payments or deliver old jobs to partners. Starting a copy successfully can create a fresh incident if the test is allowed to act on the outside world.</p>
+<h2>Restore useful work in a deliberate order</h2>
+<p>Read-only repair history might return before new changes are permitted. Receiving enquiries might resume while equipment handover remains unavailable. That <a href="graceful-degradation-business.html">limited mode</a> should be explicit and agreed beforehand. Employees must not mistake a temporary interface for a fully recovered service.</p>
+<p>Validate relationships, permissions, documents and representative operations after restoration. Matching row counts is not enough. Ticket totals can agree while customer links or attachments are missing.</p>
+<p>Queues require reconciliation too. A message may survive even though its external action already completed and the local completion marker was lost. Before restarting consumers at full speed, establish how duplicates will be identified and which effects need verification with the recipient.</p>
+<h2>A procedure someone else can execute</h2>
+<p>Name the person authorised to start recovery, a substitute and a communication path for when normal tools are unavailable. Instructions and approved emergency access must not exist only inside the system being restored. Urgency does not remove the need to control privileges and record actions.</p>
+<p>During a drill, have someone other than the author follow the procedure. This exposes unwritten steps: locating a compatible release, replacing a certificate or finding the person qualified to validate the result. Capturing those gaps matters more than declaring success after the author quietly rescued the exercise.</p>
+<p>Azure's <a href="https://learn.microsoft.com/en-us/azure/well-architected/design-guides/disaster-recovery" target="_blank" rel="noopener noreferrer">DR planning guidance</a> treats ownership, communication and sequencing as part of recovery. For a small product, a short executable procedure may be enough; a large document is not the objective.</p>
+<h2>The evidence a drill should leave</h2>
+<p>Record when work was disrupted, when recovery was authorised, when data became available and when the workflow owner verified the agreed operations. Record the recovered point, discrepancies and manual reconstruction separately.</p>
+<p>If the time target was met only because the team secretly pre-provisioned resources absent from the plan, qualify the result. If service returned but redundancy did not, restoring protection is still outstanding work. The next failure would otherwise arrive with no reserve left.</p>
+<p>Start acceptance with one important workflow and carry it through. An employee should complete real work safely and account for operations caught in the gap, not merely recognise the interface. Only then is it useful to compare backup restoration, standby environments and multiple active sites. <a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_planning_for_recovery_disaster_recovery.html" target="_blank" rel="noopener noreferrer">AWS Well-Architected</a> describes those recovery strategies.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>

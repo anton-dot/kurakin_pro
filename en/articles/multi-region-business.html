@@ -3,142 +3,65 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What multi-region architecture is, active-active vs active-passive, RTO and RPO, data replication, failover, split-brain risk, testing, and when a second region is worth the cost.">
+    <meta name="description" content="How to assess multi-region recovery: write ownership, replication gaps, independent dependencies, standby capacity and a safe return after failover.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Multi-Region Architecture: Active-Active, Active-Passive, Failover, and Cost">
-    <meta property="og:description" content="A practical guide to multi-region architecture: why companies add a second region, active-active vs active-passive, data replication, failover, RTO/RPO, and the operational price of resilience.">
+    <meta property="og:description" content="How to assess multi-region recovery: write ownership, replication gaps, independent dependencies, standby capacity and a safe return after failover.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/multi-region-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-17">
+    <meta property="article:modified_time" content="2026-10-29">
     <title>Multi-Region Architecture: Active-Active, Active-Passive, Failover, and Cost - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/multi-region-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/multi-region-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/multi-region-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Multi-Region Architecture: Active-Active, Active-Passive, Failover, and Cost","description":"What multi-region architecture is, active-active vs active-passive, RTO and RPO, data replication, failover, split-brain risk, testing, and when a second region is worth the cost.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-17","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/multi-region-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Multi-Region Architecture: Active-Active, Active-Passive, Failover, and Cost","description":"How to assess multi-region recovery: write ownership, replication gaps, independent dependencies, standby capacity and a safe return after failover.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-29","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/multi-region-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+    <header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/multi-region-business.html">RU</a><a href="multi-region-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#scale">Scaling and reliability</a><p class="article-kicker"><span>7 min read</span></p><h1>Multi-Region Architecture: Active-Active, Active-Passive, Failover, and Cost</h1><p class="article-summary">Multi-region architecture is not just “deploy the same application twice.” The real work is data, routing, failover, recovery, and operating the business when one region disappears. A second region reduces risk only when the whole system can actually survive the loss of the first.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#scale">Scaling and reliability</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-29">29 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Multi-Region Architecture: Active-Active, Active-Passive, Failover, and Cost</h1><p class="article-summary">A healthy standby is not necessarily a working business. Follow data, dependencies, traffic and write ownership through regional failover and the return journey.</p></div></header>
       <article class="article-content">
-        <p>One cloud or data-center region can be highly reliable and still remain one geographic dependency.</p>
-        <p>If an incident affects the whole region, redundancy inside that region no longer helps. Multi-region architecture tries to remove that single point of dependency by running critical parts of the system in more than one geographic region.</p>
-        <p>The difficult part is not deploying application servers twice. The difficult part is deciding where data lives, how traffic moves, what happens during network partition, and how the company returns to normal after failover.</p>
-
-        <h2>What is multi-region architecture?</h2>
-        <p>A multi-region system operates across at least two independent regions.</p>
-        <p>Those regions can play different roles. One can serve production traffic while another waits as a recovery environment, or several regions can actively serve users at the same time.</p>
-        <p>Multi-region can be used for resilience, latency, geographic expansion, or data-location requirements. Those goals overlap, but they are not the same. A design that improves latency does not automatically provide reliable disaster recovery.</p>
-
-        <h2>Active-passive multi-region</h2>
-        <p>In an active-passive design, one region normally serves production traffic while another is prepared to take over.</p>
-        <p>The passive region may be fully running, partially running, or created from infrastructure automation during recovery. Data is replicated according to the required recovery model.</p>
-        <p>The advantage is relative simplicity: only one region is normally accepting the main workload and authoritative writes.</p>
-        <p>The disadvantage is that the secondary environment may hide problems until the day it is needed. If failover is rarely tested, configuration drift, missing dependencies, insufficient capacity, or stale operational procedures can turn a “backup region” into a false sense of safety.</p>
-
-        <h2>Active-active multi-region</h2>
-        <p>In an active-active design, more than one region serves traffic during normal operation.</p>
-        <p>This can reduce latency for users in different geographies and reduce the amount of traffic that must move during a regional failure.</p>
-        <p>But active-active makes state much harder. If users can write in several regions, the system needs a model for replication, conflicts, ordering, and what happens when regions cannot communicate.</p>
-        <p>Running two active regions is not simply twice the same application. It is a distributed system with distributed failure modes.</p>
-
-        <h2>RTO and RPO should come before the architecture</h2>
-        <p>Before choosing a topology, the business should define two practical expectations.</p>
-        <p><strong>Recovery Time Objective (RTO)</strong> answers: how long can the service remain unavailable after a major failure?</p>
-        <p><strong>Recovery Point Objective (RPO)</strong> answers: how much recent data can the business afford to lose or recreate?</p>
-        <p>A system that can be down for hours and restore from a recent backup needs a very different architecture from a system expected to continue with minimal interruption and almost no data loss.</p>
-        <p>Without those expectations, teams can spend heavily on resilience without knowing what business requirement they are buying.</p>
-
-        <h2>Data is the hard part</h2>
-        <p>Stateless application components are usually easier to reproduce in another region. Data creates the real architectural trade-offs.</p>
-        <p>The design needs to answer:</p>
-        <ul>
-          <li>which region is authoritative for each write;</li>
-          <li>how quickly data is replicated;</li>
-          <li>whether replication is synchronous or asynchronous;</li>
-          <li>what happens to writes when connectivity between regions is lost;</li>
-          <li>how conflicts are detected or prevented;</li>
-          <li>how the system returns to normal after the failed region comes back.</li>
-        </ul>
-        <p>Asynchronous replication can reduce cross-region coordination but may introduce a recovery window where the newest data has not reached the second region yet. That is one form of <a href="eventual-consistency-business.html">eventual consistency</a> the business may need to understand.</p>
-
-        <h2>What is split-brain risk?</h2>
-        <p>A dangerous situation appears when two regions cannot communicate but both believe they should continue acting as the authoritative system.</p>
-        <p>If both accept conflicting writes, recovery becomes a data-reconciliation problem rather than a simple infrastructure switch.</p>
-        <p>The architecture therefore needs explicit rules for leadership, write ownership, quorum, fencing, or another mechanism appropriate to the technology. The important business point is simple: “both regions stay active no matter what” can be worse than temporarily refusing some operations.</p>
-
-        <h2>Traffic failover is its own system</h2>
-        <p>Even if the second region is healthy, users and integrations still need to reach it.</p>
-        <p>Routing may involve DNS, global load balancing, gateways, clients with several endpoints, or other mechanisms. Each has its own detection and propagation behavior.</p>
-        <p>The team should know who or what decides that a region is unhealthy, what evidence triggers failover, how quickly traffic moves, and how false failover is avoided.</p>
-        <p>Automatic failover sounds ideal until a monitoring mistake redirects the whole business away from a healthy region.</p>
-
-        <h2>External dependencies can break the plan</h2>
-        <p>A multi-region application may still depend on something that exists in only one place.</p>
-        <p>Identity, payment integration, secrets, queues, third-party APIs, certificate management, deployment tooling, observability, or administrative access can all become hidden single-region dependencies.</p>
-        <p>A useful disaster-recovery review follows the full customer journey, not just the compute layer.</p>
-
-        <h2>What does the business gain?</h2>
-        <p>The main benefit is reduced exposure to a large infrastructure or geographic failure.</p>
-        <p>If the product is critical to revenue, operations, customer commitments, or contractual availability, the ability to continue elsewhere can have direct economic value.</p>
-        <p>Multi-region can also support geographic growth and reduce latency, but those should be measured as separate benefits rather than used to justify resilience after the fact.</p>
-
-        <h2>What does the team pay for?</h2>
-        <p>The cost is not only duplicate infrastructure.</p>
-        <p>The team pays for:</p>
-        <ul>
-          <li>data replication and conflict handling;</li>
-          <li>traffic management and health detection;</li>
-          <li>more complex deployments;</li>
-          <li>region-aware observability;</li>
-          <li>capacity in the secondary region;</li>
-          <li>failover and failback procedures;</li>
-          <li>regular resilience testing;</li>
-          <li>a harder mental model for every future system change.</li>
-        </ul>
-        <p>The permanent operational cost should be compared with the outage risk it reduces.</p>
-
-        <h2>Failover must be tested</h2>
-        <p>A secondary region that has never carried realistic production traffic is an assumption, not a recovery capability.</p>
-        <p>Testing should verify more than whether servers start. Can users authenticate? Are current secrets available? Are queues draining? Can the region handle required capacity? Do operators know what to do? Can the company fail back safely afterwards?</p>
-        <p>The test does not need to be reckless. But the architecture needs evidence that the recovery path actually works.</p>
-
-        <h2>When do you not need multi-region?</h2>
-        <p>If the business can tolerate a meaningful outage and restore from backups, full multi-region architecture may have poor economics.</p>
-        <p>Strong single-region design, backups, infrastructure as code, tested restore procedures, and a clear disaster-recovery plan may provide enough resilience at a much lower cost.</p>
-        <p>Multi-region is not the default next step after high availability. It is insurance against a specific class of failure.</p>
-
-        <h2>Questions to ask before deciding</h2>
-        <ul>
-          <li>What is the required RTO?</li>
-          <li>What is the required RPO?</li>
-          <li>Do we need active-active, or is active-passive enough?</li>
-          <li>Where is the authoritative write path?</li>
-          <li>What happens during a network partition?</li>
-          <li>How is traffic moved to another region?</li>
-          <li>Which external dependencies are still single-region?</li>
-          <li>How often do we test failover and failback?</li>
-          <li>Is the permanent cost of multi-region lower than the business impact it protects against?</li>
-        </ul>
-
-        <h2>In the end</h2>
-        <p>Multi-region architecture is not a badge of maturity.</p>
-        <p><strong>It is an expensive way to reduce a specific business risk. It is justified when losing an entire region can genuinely cost more than continuously operating and testing the ability to survive that loss.</strong></p>
-      </article>
+<p>A field-service company has a standby region. The application starts, the database replicates and the health check is green. During a switch, however, dispatchers cannot open photographs attached to a job: the files remain in the original region. New staff cannot sign in either, because authentication still depends on that site. The servers have moved. The business has not.</p>
+<p>This is a more useful starting point than counting regions. Which work must continue after a site is lost, and what does it depend on? A second application deployment protects only the parts of the workflow that can actually operate independently.</p>
+<h2>Decide which failure you are covering</h2>
+<p>Several servers in one region help with individual machine failures. Multiple availability zones extend that protection but do not remove regional dependencies. Multi-region planning addresses a wider event: the primary region is unavailable, or it is no longer safe to operate there.</p>
+<p>Define the required service first. Dispatchers may need to assign engineers, while engineers must read jobs and attach documents. Historical reporting might wait. Agree on recovery time and acceptable loss of recent changes: RTO and RPO. These are objectives to demonstrate, not automatic features of a second cloud bill.</p>
+<p>Proximity to users is a separate benefit. Regional hosting can improve some journeys without providing a recovery path. A responsive local screen says little about whether a customer can continue working after the authoritative data source fails.</p>
+<h2>Active-active does not mean unrestricted writes everywhere</h2>
+<p>With active-passive, one region normally handles the workload. The other may be fully provisioned, running at reduced capacity, or waiting for additional components to be started. Recovery planning must include the time required to obtain capacity and make the entire service usable.</p>
+<p>With active-active, both regions serve users during normal operation. That does not require both to update every record independently. Customers may have an assigned write region, or reads may be distributed around a single write path. Data ownership matters more than the topology label.</p>
+<p>Consider engineer appointments. If two regions independently see the same slot as available, both may confirm it. The company needs a way to prevent conflicting assignments or a defined product response when connectivity is lost. Conflict handling cannot be deferred until the incident.</p>
+<h2>The awkward gap contains work already confirmed</h2>
+<p>Asynchronous replication leaves time between a primary write and its arrival in another region. Failover may therefore expose a copy missing changes already acknowledged to users. Low average replication lag does not prove that the gap stays small under stress.</p>
+<p>Synchronous replication provides different guarantees within the selected platform and configuration. It adds coordination latency and makes writes depend on the required participants being reachable. “Fast, always available and conflict-free” is not a sufficient design. AWS's <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-multi-region-fundamentals/fundamental-2.html" target="_blank" rel="noopener noreferrer">multi-region data guidance</a> discusses these trade-offs.</p>
+<p>After switching, the team may need to reconcile appointments, uploaded files and partner confirmations. A booking missing from the recovered database has not necessarily disappeared from the engineer's schedule. Stable operation identities and a way to inspect the external outcome are essential before repeating consequential actions.</p>
+<h2>Who is allowed to write after the switch?</h2>
+<p>A broken network connection does not prove the original region has stopped. It may still serve some clients while the standby believes it has failed. A single-writer design needs a mechanism that prevents competing authorities, such as controlled leadership with enforceable write permissions appropriate to the database.</p>
+<p>Changing DNS does not establish that boundary. Some clients may retain an old address or an existing connection. Traffic routing and write ownership must move coherently, rather than being treated as unrelated tasks.</p>
+<p>There is also a decision to authorise. Automation can execute a recovery procedure, but activation criteria, tolerated data loss and handling of an ambiguous outage need agreement beforehand. Otherwise the first serious discussion happens while dispatchers are already taking jobs over the phone.</p>
+<h2>Exercise a working journey, not just a landing page</h2>
+<p>Files, queues, keys, certificates, staff login and partner APIs must all be usable from the recovery region. The mechanism used to switch must not require the failed region to cooperate. This is the focus of AWS's <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-multi-region-fundamentals/fundamental-3.html" target="_blank" rel="noopener noreferrer">regional dependency review</a>.</p>
+<p>For the field-service example, a useful exercise follows an ordinary employee: sign in, inspect an existing job, assign a new one, attach a document and receive the engineer's confirmation. A successful login-page check answers very little about that complete journey.</p>
+<p>Then apply the agreed recovery workload. If both regions normally handle their own customers, the survivor needs capacity for whatever additional traffic the recovery plan accepts. An assumption that capacity will appear immediately should be tested against quotas, startup time and downstream limits.</p>
+<h2>Returning is a separate recovery step</h2>
+<p>When the original site comes back, its data may be stale. Sending traffic there simply because its servers respond is unsafe. Establish the authoritative state, restore the correct replication direction, reconcile unfinished work and then plan the return. Keeping the new primary for a while may be safer than rushing back to a familiar diagram.</p>
+<p>Those exercises, configuration upkeep and checks after significant changes belong in the operating cost. For a small workflow that tolerates a longer interruption, <a href="disaster-recovery-business.html">restoration from protected backups</a> may be sufficient. For a critical workflow, accept the multi-region capability against a demonstrated switch and return, not the existence of healthy standby servers.</p>
+<p>AWS's <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-multi-region-fundamentals/fundamental-4.html" target="_blank" rel="noopener noreferrer">operational readiness guidance</a> covers recovery decisions, procedures and testing.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
