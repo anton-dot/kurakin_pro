@@ -1,64 +1,58 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="What containers give business and teams: reproducible environments, more predictable releases, and portability — and why that introduces another infrastructure layer.">
-  <meta name="author" content="Anton Kurakin">
-  <meta name="color-scheme" content="light">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Containers: Why Packaging Applications Consistently Lowers the Cost of Change">
-  <meta property="og:description" content="Containers do not make a system scalable or reliable automatically. Their core value is simpler: the application and its dependencies arrive in a reproducible package.">
-  <meta property="og:url" content="https://kurakin.pro/en/articles/containers-business.html">
-  <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
-  <meta property="article:published_time" content="2026-08-12">
-  <meta property="article:modified_time" content="2026-08-12">
-  <title>Containers: Why Packaging Applications Consistently Lowers the Cost of Change - Anton Kurakin</title>
-  <link rel="canonical" href="https://kurakin.pro/en/articles/containers-business.html">
-  <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/containers-business.html">
-  <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/containers-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Containers: Why Packaging Applications Consistently Lowers the Cost of Change","description":"What containers give business and teams: reproducible environments, more predictable releases, and portability — and why that introduces another infrastructure layer.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/containers-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
-  <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../../assets/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How containers make releases reproducible: fixed images, external configuration, durable files, dependency updates and the limits of application rollback.">
+<meta name="author" content="Anton Kurakin">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Containers: Why Packaging Applications Consistently Lowers the Cost of Change">
+<meta property="og:description" content="How containers make releases reproducible: fixed images, external configuration, durable files, dependency updates and the limits of application rollback.">
+<meta property="og:url" content="https://kurakin.pro/en/articles/containers-business.html">
+<meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+<meta property="article:published_time" content="2026-08-12">
+<meta property="article:modified_time" content="2026-10-29">
+<title>Containers: Why Packaging Applications Consistently Lowers the Cost of Change - Anton Kurakin</title>
+<link rel="canonical" href="https://kurakin.pro/en/articles/containers-business.html">
+<link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/containers-business.html">
+<link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/containers-business.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Containers: Why Packaging Applications Consistently Lowers the Cost of Change","description":"How containers make releases reproducible: fixed images, external configuration, durable files, dependency updates and the limits of application rollback.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-29","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/containers-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
-</nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/containers-business.html">RU</a><a href="containers-business.html" aria-current="page">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#cloud">Cloud & infrastructure</a><p class="article-kicker"><span>5 min read</span></p><h1>Containers: Why Packaging Applications Consistently Lowers the Cost of Change</h1><p class="article-summary">Containers do not make a system scalable or reliable automatically. Their core value is simpler: the application and its dependencies arrive in a reproducible package.</p></div></header>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../projects.html">Projects</a><a href="../experience.html">About</a><a href="index.html">Writing</a><a href="../architecture/index.html" aria-current="page">Architecture</a><a href="../index.html#contact">Contact</a></nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/containers-business.html">RU</a><a href="containers-business.html" aria-current="page">EN</a></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#cloud">Cloud &amp; infrastructure</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-29">29 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Containers: Why Packaging Applications Consistently Lowers the Cost of Change</h1><p class="article-summary">The tested application and the deployed package should not differ by accident. What belongs in a container image, and what still needs separate verification?</p></div></header>
 <article class="article-content">
-<h2>What problem are we solving?</h2>
-<p>An application is rarely just its own code. It depends on libraries, a runtime, system packages, and configuration. If every environment is assembled independently, familiar failures appear: it works on a laptop, differently in test, and production has another dependency version.</p>
-<p>The more teams and environments exist, the more expensive that unpredictability becomes.</p>
-<h2>How containers work</h2>
-<p>A container packages the application with most of its runtime dependencies into an image. The same image can move through test and production environments while configuration is supplied externally.</p>
-<p>Containers are not the same thing as Kubernetes. A container is a packaging and runtime boundary. Kubernetes and other orchestrators solve the next problem: managing many containers.</p>
-<h2>What the business gets</h2>
-<p>The business gets a more predictable path from change to production. Less time is lost to environment differences and manual server preparation.</p>
-<p>New environments and services become easier to reproduce, so launching a product, region, or temporary environment depends less on unique manual setup.</p>
-<p>Containers can reduce some infrastructure coupling, but they do not automatically create cloud independence: databases, networking, and managed services may still be provider-specific.</p>
-<h2>What the team gets</h2>
-<p>The team gets one release artifact, a more reproducible local environment, and a clearer boundary between application and infrastructure.</p>
-<p>Dependencies become more explicit, and runtime upgrades can be tested as image changes rather than manual server operations.</p>
-<h2>What the customer gets</h2>
-<p>Customers get an indirect benefit: fewer environment-specific failures and more consistent releases. Fixes can be delivered through the same mechanism to every application instance.</p>
-<h2>What do we pay for it?</h2>
-<p>A new layer appears: image builds, registries, vulnerability scanning, version management, and container runtime operations.</p>
-<p>A poor Dockerfile or insecure base image simply standardizes the problem. And adding complex orchestration too early can cost more than containers save.</p>
-<h2>When not to add the complexity</h2>
-<p>For one simple application on a stable platform, containerization may not repay the transition cost, especially when deployment is already reproducible and changes rarely.</p>
-<p>The value grows with the number of services, environments, teams, and releases.</p>
-<h2>What should we ask before deciding?</h2>
-<ul><li>Which environment problems are we actually trying to remove?</li><li>Do we need only container packaging or an orchestrator too?</li><li>Who owns base images and updates?</li><li>How will images be scanned and signed?</li><li>How much portability does the business really need?</li></ul>
-<h2>In the end</h2>
-<p>Containers are useful not because they are more modern than virtual machines, but because they reduce the number of unique ways to build and run the same application.</p>
-<p><strong>For the business, a container is first a cheaper way to reproduce change — and only then a foundation for a large cloud platform.</strong></p>
+<p>A quotation looks correct in testing, but its tables break and some characters disappear on the production server. The application code is identical. The difference turns out to be fonts and a PDF library. The release is delayed by dependencies that were never included in the delivery checklist.</p>
+<p>Containers help make those dependencies explicit. The team builds an image containing the application, its runtime and required files, then starts containers from it. A particular package passes through testing and deployment. The useful management question becomes answerable: did we release the thing we actually tested?</p>
+<h2>The same recipe can produce a different release</h2>
+<p>Rebuilding from instructions is different from running an existing image. Instructions that download the latest library can produce a different result tomorrow without a product-code change. Image tags can move too. A content digest identifies a specific image rather than a reusable label. Docker explains the distinction in its <a href="https://docs.docker.com/reference/cli/docker/image/pull/" target="_blank" rel="noopener noreferrer">image pull documentation</a>.</p>
+<p>Build the artifact, test it and promote that artifact. Rebuilding “the same version” immediately before deployment introduces another opportunity for change. Environment-specific configuration stays separate: a test database address should not be baked into the production package.</p>
+<p>For the quotation service, fonts and the rendering library belong in the tested package. Template access, file permissions and external settings still need checking. Containers reduce the number of unknowns; they do not contain the entire operating environment.</p>
+<h2>What still lives outside the image</h2>
+<p>Conventional Linux containers share the host kernel. They are isolated processes, not complete virtual machines with separate kernels. Compatible operating environments and processor architectures remain necessary, and some applications require particular hardware. Docker's <a href="https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/" target="_blank" rel="noopener noreferrer">container introduction</a> describes this boundary.</p>
+<p>Databases, networking, certificates, document storage and external services remain dependencies. The same image may start at two sites but only do useful work at one, because the other cannot reach a corporate database.</p>
+<p>Test portability through a user's operation: open the application, generate a document, save it and download it with the correct permissions. A running process demonstrates only the first technical step, not a working replacement environment.</p>
+<h2>Documents must survive replacement</h2>
+<p>A container has a writable filesystem. Data stored there can disappear when that container is removed and replaced. Restarting the same container is a different operation. “We restarted it and the file survived” does not prove the file will survive an upgrade.</p>
+<p>Durable results belong in suitable volumes, databases or object storage, with their own access, backup and recovery policies. A volume that survives container removal is not protection against disk loss or accidental deletion. The <a href="https://docs.docker.com/engine/storage/volumes/" target="_blank" rel="noopener noreferrer">Docker volume guide</a> explains the lifecycle.</p>
+<p>For quotations, separate temporary working files from completed documents. Temporary files may be recreated. A delivered quotation may already represent a commitment to a customer. One general-purpose output directory hides that distinction until an instance is replaced.</p>
+<h2>An old image does not restore old data</h2>
+<p>Keeping a previous image makes reverting application code easier. But if the new version changed the database structure or document format, the previous version may no longer understand the data. Application rollback and data recovery need separate plans; a compatibility period is more useful than assuming the rollback button solves both.</p>
+<p>The application must also handle shutdown. It should stop accepting new jobs and finish current work, or leave it safe to retry. Termination halfway through document generation must not leave a request marked successfully completed.</p>
+<p>Starting several containers can also start the same background task several times. Before increasing the count, establish how jobs are assigned and duplicates recognised. Packaging an application does not change its concurrency rules.</p>
+<h2>Somebody must update the version we pinned</h2>
+<p>Pinned dependencies avoid surprise upgrades but retain vulnerabilities until updated. Base images need an owner and a routine path through rebuilding, testing, deployment and retirement. Docker's <a href="https://docs.docker.com/build/building/best-practices/" target="_blank" rel="noopener noreferrer">build guidance</a> discusses rebuilding regularly and keeping images focused.</p>
+<p>Passwords and API keys do not belong inside the image. Removing a file later in the build does not guarantee its removal from earlier layers. Build-time credentials and runtime secrets need appropriate delivery mechanisms. They are separate concerns, as the <a href="https://docs.docker.com/build/building/secrets/" target="_blank" rel="noopener noreferrer">build-secrets documentation</a> makes clear.</p>
+<p>The image registry also becomes a recovery dependency. Its outage may go unnoticed while existing instances keep running. Replacing a server reveals that the required image cannot be downloaded. Retention of deployed artifacts, provenance checks and recovery access therefore belong in operations planning.</p>
+<p>Assigning this work matters even for a small service. A container project is not finished when someone creates its first image. The company needs to know who replaces vulnerable dependencies and who verifies that the next image still produces the same usable documents.</p>
+<h2>A useful trial does not require a large platform</h2>
+<p>Choose one application with known environment-related failures. Build its image, move it to a clean compatible environment and perform normal work. Replace the container, revert the application version and inspect both finished documents and unfinished jobs. Record any remaining manual setup rather than treating it as an exception to the test.</p>
+<p>None of this requires an immediate move to <a href="kubernetes-business.html">Kubernetes</a>. A managed container service or a straightforward virtual-machine deployment may be sufficient. Compare the result with the old release process: which delays disappeared, which maintenance costs appeared, and can another engineer reproduce the deployment without verbal instructions?</p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
-</body></html>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body>
+</html>
