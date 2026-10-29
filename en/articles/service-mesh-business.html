@@ -3,80 +3,64 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What a Service Mesh is, when shared network rules between services justify the extra infrastructure layer, and what the business gains from it.">
+    <meta name="description" content="When a service mesh simplifies shared network rules, where its protection ends, and who owns authorisation, retries and safe policy changes.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Service Mesh: When Network Rules Belong Outside Individual Services">
-    <meta property="og:description" content="Service Mesh in business terms: how to standardize security, observability, and traffic management across services — and why that infrastructure is not free.">
+    <meta property="og:title" content="Service Mesh: When Network Rules Should Move Out of Every Service">
+    <meta property="og:description" content="When a service mesh simplifies shared network rules, where its protection ends, and who owns authorisation, retries and safe policy changes.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/service-mesh-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
-    <title>Service Mesh: When Network Rules Belong Outside Individual Services - Anton Kurakin</title>
+    <meta property="article:modified_time" content="2026-10-29">
+    <title>Service Mesh: When Network Rules Should Move Out of Every Service - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/service-mesh-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/service-mesh-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/service-mesh-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Service Mesh: When Network Rules Belong Outside Individual Services","description":"What a Service Mesh is, when shared network rules between services justify the extra infrastructure layer, and what the business gains from it.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/service-mesh-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Service Mesh: When Network Rules Should Move Out of Every Service","description":"When a service mesh simplifies shared network rules, where its protection ends, and who owns authorisation, retries and safe policy changes.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-29","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/service-mesh-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+    <header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/service-mesh-business.html">RU</a><a href="service-mesh-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#cloud">Cloud and infrastructure</a><p class="article-kicker"><span>5 min read</span></p><h1>Service Mesh: When Network Rules Belong Outside Individual Services</h1><p class="article-summary">As the number of services grows, each one starts solving similar problems: encryption, retries, metrics, routing, and access rules. A Service Mesh moves part of that work into a shared infrastructure layer.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#cloud">Cloud and infrastructure</a><p class="article-kicker"><time datetime="2026-08-12">12 August 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-29">29 October 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Service Mesh: When Network Rules Should Move Out of Every Service</h1><p class="article-summary">Shared encryption and traffic policies need clear boundaries. What belongs in the mesh, what stays in applications, and how to judge the operating cost.</p></div></header>
       <article class="article-content">
-        <p>In a small system, service-to-service networking rarely feels like a separate problem. As the number of services grows, the same infrastructure responsibilities start being implemented again and again.</p>
-        <p>A Service Mesh is an attempt to make those rules consistent.</p>
-
-        <h2>What problem are we solving?</h2>
-        <p>A Service Mesh adds an infrastructure layer around service communication. It can centrally provide traffic encryption, service authentication, routing, retries, circuit breaking, and network telemetry.</p>
-        <p>Business logic stays in applications while communication policies are managed separately.</p>
-
-        <h2>What does the business gain?</h2>
-        <p>The main business benefit is more consistent control of a large distributed system.</p>
-        <p>If the company already operates many services and teams, central network policies can reduce the cost of rolling out shared security and observability requirements. The company does not have to wait for every team to implement the same mechanism independently.</p>
-        <p>It can also simplify broad infrastructure changes, such as mandatory encryption of internal traffic or common access policies.</p>
-        <p>But that value appears at scale. In a small system, a Service Mesh often creates more operating cost than it removes.</p>
-
-        <h2>What does the team gain?</h2>
-        <p>Service teams spend less time on repeated networking infrastructure. A platform team gets one place for policies, telemetry, and traffic management.</p>
-        <p>In return, there is another layer to understand. A routing or policy mistake in the mesh can affect many services at once.</p>
-
-        <h2>What does the customer gain?</h2>
-        <p>Customers do not see the Service Mesh directly. They may feel the result through more predictable reliability, security, and faster infrastructure changes.</p>
-        <p>But a badly configured mesh can also create extra latency or a broad outage caused by one centralized mistake.</p>
-
-        <h2>What do we pay for it?</h2>
-        <p>The price is infrastructure complexity, compute overhead, and a new skill set.</p>
-        <p>The team must diagnose problems not only in applications but also in the network layer. There is a real risk of building a powerful platform that nobody can safely change.</p>
-
-        <h2>When do you not need a Service Mesh?</h2>
-        <p>If there are only a few services and common networking concerns are already solved by simple libraries or the platform, a Service Mesh may be premature.</p>
-        <p>It is especially questionable if the company does not yet operate container and networking infrastructure reliably without one.</p>
-
-        <h2>What should we ask before deciding?</h2>
-        <ul>
-          <li>How many services and teams are really repeating the same networking work?</li>
-          <li>Are there requirements that must be applied centrally to all services?</li>
-          <li>Who will own and operate the mesh?</li>
-          <li>How will we diagnose failures between the application and network layer?</li>
-          <li>Can the problem be solved at the platform level without a full Service Mesh?</li>
-        </ul>
-
-        <h2>In the end</h2>
-        <p>A Service Mesh is not a mandatory companion to microservices. It centralizes communication responsibilities when their scale has become a separate problem.</p>
-        <p><strong>For the business, it makes sense when the cost of repeated network rules and inconsistent implementation becomes higher than the cost of one more complex infrastructure layer.</strong></p>
-      </article>
+<p>The company agrees to encrypt internal connections and put limits on calls to external services. Then ordinary delivery work begins: one team upgrades a library, another waits for its next release, and a third maintains a different language stack. A month later, the policy supposedly applies, but nobody can explain its actual coverage or exceptions.</p>
+<p>A service mesh can move some of these responsibilities out of application code and into a managed communication layer. There is a concrete problem to solve: implementing and checking the same requirements repeatedly. Central management also makes it easier to distribute a mistake.</p>
+<h2>Shared rules do not require one server for every request</h2>
+<p>A mesh usually separates the components handling traffic from the components configuring them. The data plane consists of intermediaries that route connections, enforce policies and collect technical signals. The control plane distributes configuration and performs related management tasks.</p>
+<p>That does not necessarily mean all traffic crosses one central appliance. Proxies may run alongside applications or at node level. Istio, for example, documents several <a href="https://istio.io/latest/docs/overview/dataplane-modes/" target="_blank" rel="noopener noreferrer">data-plane arrangements</a>. Available capabilities depend on the implementation and mode, not merely on calling the design a mesh.</p>
+<p>The distinction matters during an outage. Losing management and losing the traffic path can have different consequences. Existing communication may continue while new configuration or new workloads cannot be prepared. Establish that behaviour for the actual platform, including certificate renewal, rather than treating the mesh as either completely healthy or completely unavailable.</p>
+<h2>A service certificate does not authorise an employee to read a contract</h2>
+<p>Mutual TLS, or mTLS, lets communicating parties authenticate their technical identities and protects data in transit. A policy may allow the requests service to call the documents service. That does not establish whether a particular employee may read a particular contract.</p>
+<p>Document ownership, employee roles and permitted business changes still need application-level authorisation. The mesh can help validate credentials and enforce broader access policies, but it cannot infer rules that nobody has defined. Istio's <a href="https://istio.io/latest/docs/concepts/security/" target="_blank" rel="noopener noreferrer">security documentation</a> separates transport authentication from access policies.</p>
+<p>Coverage matters during adoption. Are any calls bypassing the protected path? What happens to applications not yet migrated? A transitional mode that accepts older connections may be necessary. Its existence is not evidence that mandatory encryption is already enforced everywhere.</p>
+<h2>A convenient retry policy can repeat the wrong action</h2>
+<p>A platform team may prefer one standard: wait briefly, then retry after failure. For fetching a reference list, that may help. For confirming equipment handover, a missing response means something else: the action might have completed even though its caller does not know.</p>
+<p>A proxy cannot make that operation safe to repeat. The application owner must define <a href="idempotency-business.html">idempotency</a>, the overall time budget and which failures justify a retry. Application retries and mesh retries must not silently multiply. Changing communication policy without redeploying code does not remove the need to understand the operation.</p>
+<p>Timeouts have a similar boundary. Stopping the wait for a response does not prove downstream work has stopped. The available controls are described in <a href="https://istio.io/latest/docs/concepts/traffic-management/" target="_blank" rel="noopener noreferrer">Istio traffic management</a>; appropriate settings come from the workflow rather than one number imposed on every method.</p>
+<h2>A connection map does not explain the whole delay</h2>
+<p>A mesh can expose failures between services and the response times seen by its proxies. That is useful evidence when narrowing down an unhealthy dependency. But a slow response can include application processing, database waits and other internal work. A signal emitted by a network proxy does not prove the network is at fault.</p>
+<p>Applications may still need to <a href="https://istio.io/latest/docs/tasks/observability/distributed-tracing/overview/" target="_blank" rel="noopener noreferrer">propagate tracing context</a> to connect an incoming request with its outgoing calls. An automatically generated dependency map will not necessarily reconstruct the whole business process, particularly across queues. Network signals work better when connected to the state of the operation than when presented as another separate dashboard.</p>
+<p>Agree on diagnostic ownership explicitly. The platform team should be able to explain delivery and applied policies; the product team should explain execution. During an incident, following that path must not require an argument about who now owns networking.</p>
+<h2>Treat policy changes as releases</h2>
+<p>A mistaken shared access rule can disconnect many applications. An overly permissive rule may remain unnoticed precisely because everything continues working. Policies need review, limited initial exposure and a way to identify the configuration actually active at each intermediary.</p>
+<p>An accepted management command is not the same as a completed fleet-wide change. Configuration propagates while components restart or temporarily disappear. For an important policy, verify an allowed call, a prohibited call and the transition itself. Reverting the configuration must preserve the access restrictions the business still needs.</p>
+<p>The mesh also brings maintenance costs: proxy resources, upgrades, certificate handling, diagnosis and protocol compatibility. Splitting control planes can contain some configuration failures, at the cost of more operations. The <a href="https://istio.io/latest/docs/ops/deployment/deployment-models/" target="_blank" rel="noopener noreferrer">deployment-model guidance</a> describes these choices.</p>
+<h2>Count the repeated work first</h2>
+<p>A credible adoption case identifies requirements that are genuinely expensive to implement consistently. Who renews certificates? How are access rules verified? How many teams must modify a networking library? An existing platform may already handle enough of that work without another layer.</p>
+<p>A pilot should include one meaningful service relationship, a certificate change, a bad policy, a new workload and loss of management availability. Compare the engineering effort and customer consequences with the current arrangement. That gives the company evidence about whether it is buying consistent controls or creating another queue for a scarce specialist.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
