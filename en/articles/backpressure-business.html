@@ -1,88 +1,71 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Backpressure prevents queues and requests from growing beyond useful capacity. A practical look at admission limits, delayed work, retries, and business priorities.">
-    <meta name="author" content="Anton Kurakin">
-    <meta name="color-scheme" content="light">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Backpressure: When Your System Must Say Not Yet">
-    <meta property="og:description" content="Backpressure prevents queues and requests from growing beyond useful capacity. A practical look at admission limits, delayed work, retries, and business priorities.">
-    <meta property="og:url" content="https://kurakin.pro/en/articles/backpressure-business.html">
-    <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
-    <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-10-13">
-    <title>Backpressure: When Your System Must Say Not Yet - Anton Kurakin</title>
-    <link rel="canonical" href="https://kurakin.pro/en/articles/backpressure-business.html">
-    <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/backpressure-business.html">
-    <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/backpressure-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Backpressure: When Your System Must Say Not Yet","description":"Backpressure prevents queues and requests from growing beyond useful capacity. A practical look at admission limits, delayed work, retries, and business priorities.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-13","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/backpressure-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
-    <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../../assets/styles.css">
-  </head>
-  <body data-page="article" data-lang="en">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
-      <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How backpressure controls incoming work through feedback, bounded queues, in-flight limits, tenant fairness and recovery after overload.">
+<meta name="author" content="Anton Kurakin">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Backpressure: When Your System Must Say Not Yet">
+<meta property="og:description" content="How backpressure controls incoming work through feedback, bounded queues, in-flight limits, tenant fairness and recovery after overload.">
+<meta property="og:url" content="https://kurakin.pro/en/articles/backpressure-business.html">
+<meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
+<meta property="article:published_time" content="2026-08-12">
+<meta property="article:modified_time" content="2026-10-29">
+<title>Backpressure: When Your System Must Say Not Yet - Anton Kurakin</title>
+<link rel="canonical" href="https://kurakin.pro/en/articles/backpressure-business.html">
+<link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/backpressure-business.html">
+<link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/backpressure-business.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Backpressure: When Your System Must Say Not Yet","description":"How backpressure controls incoming work through feedback, bounded queues, in-flight limits, tenant fairness and recovery after overload.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-29","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/backpressure-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+<link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body data-page="article" data-lang="en">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+<nav class="site-nav" aria-label="Main navigation">
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../experience.html">About</a>
+<a href="index.html">Writing</a>
+<a href="../architecture/index.html" aria-current="page">Architecture</a>
+<a href="../index.html#contact">Contact</a>
 </nav>
-      <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/backpressure-business.html">RU</a><a href="backpressure-business.html" aria-current="page">EN</a></div>
-    </header>
-    <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#events">Events and messaging</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-13">13 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Backpressure: When Your System Must Say Not Yet</h1><p class="article-summary">Accepting every request sounds customer-friendly until the queue becomes too large to finish. Backpressure makes overload a controlled decision instead of a surprise outage.</p></div></header>
-      <article class="article-content">
-        <p>A product gets a burst of traffic. Orders, notifications and background jobs enter the system faster than the workers can finish them. At first everything looks fine: requests are accepted, the queue keeps filling, and nobody sees a hard error.</p>
-        <p>Later, jobs that should have finished quickly are still waiting. Some may no longer be useful by the time they run. The service has not solved the overload. It has postponed the moment when customers discover it.</p>
-        <p>Backpressure is the mechanism for stopping that accumulation. When the consumer cannot keep up, the system needs a way to slow the producer, limit the backlog, or decline work it cannot reasonably complete.</p>
-
-        <h2>A queue is a buffer, not extra capacity</h2>
-        <p>Queues are excellent at absorbing temporary bursts. They allow producers and consumers to work at different speeds for a while. The trouble begins when incoming work stays faster than completed work.</p>
-        <p>As long as that difference continues, the backlog grows. More storage may postpone the limit, but it does not make the system process work faster.</p>
-        <p>The useful question is not only how many messages fit in the queue. It is how old the oldest item will be by the time a worker picks it up. A delayed invoice export may still be useful. A notification about an event that ended hours ago may not be.</p>
-        <p>That gives the business a role in capacity design. Not every operation has the same deadline, and not every delay is acceptable.</p>
-
-        <h2>Sometimes the right response is to accept less work</h2>
-        <p>Backpressure can appear in several forms, depending on how the producer and consumer communicate.</p>
-        <p>In a streaming pipeline, a consumer may signal that it is ready for fewer items. A background system may pause or slow producers when queue age crosses a limit. A synchronous API can enforce concurrency or request-rate limits and return a clear error rather than allowing a request to wait indefinitely.</p>
-        <p>If HTTP is involved, a rate-limit response such as <code>429</code>, sometimes with a <code>Retry-After</code> hint, can tell a cooperating caller to slow down. But that is only useful if callers are designed to respect it.</p>
-        <p>Blindly rejecting everything is not a good overload policy either. Some work must continue. Other work can wait. Some should be dropped or rejected before it enters the system. Someone has to decide which is which.</p>
-
-        <h2>Move the decision toward the entrance</h2>
-        <p>If an application accepts a job and only discovers overload after storing it deep inside several queues, it has already made a promise. The customer may have received a confirmation while the system has little idea when the work will finish.</p>
-        <p>Where possible, put admission limits near the point where work enters the system. Tell the caller early whether the request can be processed now, accepted for later processing, or not accepted at all.</p>
-        <p>Those states should mean different things in the product. A response that says “accepted for processing” must not be presented as “completed.” If a task expires before execution, the system also needs a rule for what happens next.</p>
-        <p>This may sound like interface detail. It becomes a support problem very quickly when a customer retries an uncertain operation and accidentally submits it twice. Clear statuses, bounded retries and idempotent handling matter as much as the queue implementation.</p>
-
-        <h2>Choose who gets to keep moving</h2>
-        <p>Consider a system that handles checkout, recommendations and background analytics through shared processing capacity. Under overload, serving all three in the same order can be a poor business decision.</p>
-        <p>Checkout may need priority because a long delay changes the customer journey. Analytics can often run later. Recommendations might use existing results for a while. The exact priorities depend on the product, but they should not be decided accidentally by whichever request arrived first.</p>
-        <p>Some workloads also need a fairness rule. Without one, a single noisy customer or integration can consume the entire queue and make everyone else wait.</p>
-        <p>This is where <a href="bulkhead-business.html">bulkheads</a> can complement backpressure. Separate resource budgets protect critical work from other workloads. Backpressure controls what happens when even a protected budget reaches its limit.</p>
-
-        <h2>More workers might make the incident worse</h2>
-        <p>A common reaction to a growing queue is to increase the number of consumers. Sometimes that is exactly right: there is spare capacity downstream, and workers are the bottleneck.</p>
-        <p>But imagine every worker is waiting on a database or an external API that is already saturated. Adding workers sends more concurrent requests into the same problem. Queue length may change while the failing dependency gets less room to recover.</p>
-        <p>In that case, a <a href="circuit-breaker-business.html">circuit breaker</a> may stop futile calls to an unhealthy service. A <a href="retry-backoff-business.html">bounded retry policy</a> can prevent clients from multiplying the overload. None of these removes the need to understand actual processing capacity.</p>
-        <p>It helps to measure arrival rate, completion rate, oldest-item age, rejected work, retries and the time customers spend waiting. Queue depth alone can be misleading: a short queue can still be unhealthy if nothing is finishing.</p>
-
-        <h2>Do not hide the cost of rejection</h2>
-        <p>Setting a firm limit often makes system metrics look less chaotic. Some requests will fail immediately instead of joining an unbounded backlog. That is usually better for the platform, but there is a trade-off.</p>
-        <p>Rejection must be handled by the product and its users. Can the caller try again safely? Will the user lose work? Is there a useful “try later” state, or are we making the customer repeat an entire process?</p>
-        <p>A well-designed overload policy also distinguishes short spikes from sustained excess demand. A small buffer can smooth a burst. It cannot compensate for a service that is chronically unable to keep up with ordinary traffic. At that point the business needs more capacity, less work, or a change in the process.</p>
-
-        <h2>When backpressure is not worth a separate mechanism</h2>
-        <p>A small application with naturally bounded workload may need no elaborate flow-control system. Basic request limits, timeouts and a modest queue can be sufficient.</p>
-        <p>But when work can accumulate faster than anyone can process it, accepting everything is not neutral. It is a choice to create future delay and uncertainty.</p>
-        <p>I would want one answer before choosing the mechanism: when capacity runs out, what promise are we still willing to make to the customer? Once that is clear, the technical limits can be designed around it.</p>
-      </article>
-    </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
-  </body>
+<div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/backpressure-business.html">RU</a><a href="backpressure-business.html" aria-current="page">EN</a></div>
+</header>
+<main class="article-page" id="main">
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#events">Events and messaging</a><p class="article-kicker"><time datetime="2026-08-12">12 Aug 2026</time><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-29">29 Oct 2026</time></span><span aria-hidden="true">·</span><span>5 min read</span></p><h1>Backpressure: When Your System Must Say Not Yet</h1><p class="article-summary">Photo uploads succeed while property listings wait indefinitely. Slow the source, account for accepted work and clear the backlog without recreating overload.</p></div></header>
+<article class="article-content">
+<p>A property agency uploads photos. The service accepts the files quickly, queues image-processing tasks and reports success. During a bulk upload, the backlog grows while new listings remain without pictures. Technically the service is available. For the people trying to publish listings, work has stopped.</p>
+<p>The buffer absorbed incoming work; it did not create processing capacity. If arrivals consistently exceed completions, a larger queue merely postpones unacceptable delay. The system needs feedback: the receiver is falling behind, so the source must reduce its output.</p>
+<h2>What backpressure actually means</h2>
+<p>Strictly, backpressure communicates a receiver's capacity constraint upstream. A consumer indicates how much work it can accept or causes the producer to pause until capacity is available. A worker might request another batch only after freeing its resources. This demand-based approach is central to <a href="https://www.reactive-streams.org/" target="_blank" rel="noopener noreferrer">Reactive Streams</a>.</p>
+<p>Related protections include rate limits, admission control and load shedding. They can protect a service without necessarily creating that feedback loop. Returning “busy” to a client that immediately tries again has not made the source slow down.</p>
+<p>Follow the signal all the way upstream. The worker slows, stops taking jobs and the queue reaches a threshold: what changes at the uploader? If it keeps accepting files without a limit, pressure has simply moved into storage. Intermediate buffers need boundaries too.</p>
+<h2>Estimate waiting, not just storage space</h2>
+<p>Take a deliberately simplified example with equal-cost jobs. Workers finish 100 jobs a second while 80 new jobs arrive. Only 20 jobs a second of spare capacity remain to clear a backlog of 6,000. At unchanged rates, that takes about five minutes, not one. If incoming work equals processing capacity, the old backlog does not shrink.</p>
+<p>Actual photos have different sizes, formats and processing requirements. Queue length therefore cannot be turned directly into a promised completion time. Measure completion throughput, outstanding age, in-flight work and the workload's cost distribution.</p>
+<p>Depth and age are both useful, but neither tells the whole story. A few permanently failing jobs may remain old while the main flow is healthy. A large fresh queue may represent a short burst that will clear quickly. Waiting-time distributions and completion against the customer deadline provide a better picture.</p>
+<p>Include work already fetched by workers. It may disappear from the ready queue while still occupying memory and waiting on another system. A controller watching only that queue can reopen intake too soon. Outstanding-work limits must account for these in-flight jobs as well.</p>
+<h2>Accepting a file creates an obligation</h2>
+<p>Before acceptance, the service can decline more work clearly while preserving the user's draft. After acceptance, it needs durable original storage, a recorded processing obligation and a way for the customer to learn the outcome. A queue limit is not permission to silently forget work already acknowledged.</p>
+<p>Keep “not accepted”, “accepted and waiting”, “processing”, “ready” and “needs attention” distinct. A retry using the same operation identity should not enqueue another copy. Otherwise customers trying to accelerate publication make the backlog worse.</p>
+<p>Cancellation depends on meaning. An old thumbnail task may be superseded if the source image is safe, a new version makes the old work unnecessary and the product explicitly allows replacement. The same rule cannot erase the only record of an accepted obligation. Distinguish replaceable computation from work that must reach an accounted-for outcome.</p>
+<h2>One archive import should not occupy everybody's day</h2>
+<p>A single first-in-first-out queue is simple until a large agency submits its entire archive before everybody else's everyday work. Per-organisation limits on outstanding jobs, separate interactive and bulk queues, or allocated shares of processing capacity can help.</p>
+<p>Giving new listings permanent priority can also starve the archive import indefinitely. Background work needs some guaranteed progress, not merely a polite name for lowest priority. Capacity allocation should reflect the service the company has promised each customer.</p>
+<p>This is different from adding workers without limit. If they already saturate shared storage, more workers increase the pressure. The <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling" target="_blank" rel="noopener noreferrer">Azure queue-based load-leveling guidance</a> discusses aggregate processing limits and downstream constraints.</p>
+<h2>Resuming the flow is part of the design</h2>
+<p>When the queue drops just below a threshold, releasing every waiting producer at once can recreate overload. The system oscillates between full traffic and full stop. Separate slowdown and recovery conditions, followed by a gradual increase in intake, can avoid that pattern.</p>
+<p>Waiting also needs a limit at the source. A producer that cannot pause or store its work may lose data or fail when the feedback arrives. The product then needs a different agreement: bounded acceptance, durable deferred storage or explicitly permitted dropping. Identify that consequence before a buffer fills.</p>
+<p>Retries count as traffic too. If every rejection immediately causes another attempt, even refusing work can consume the service's capacity. <a href="https://sre.google/sre-book/handling-overload/" target="_blank" rel="noopener noreferrer">Google SRE's overload guidance</a> covers cooperation between clients and backends. <a href="retry-backoff-business.html">Bounded retries with backoff</a> help only when they respect the overall deadline and are safe for the operation.</p>
+<h2>Keep testing until the backlog is accounted for</h2>
+<p>Slow the image processor in a controlled test while ordinary uploads continue. Check memory and queue bounds, the producer's reaction, preservation of accepted work and the ability of other customers to publish listings. Restore capacity and follow the deferred work through to an outcome.</p>
+<p>The result should include more than CPU charts. Each accepted test task should be completed, explicitly cancelled under the agreed rules or assigned for investigation. Measure how long normal waiting times take to return. A system that survives the peak but spends tomorrow processing yesterday's work has not yet recovered in the way the business needs.</p>
+</article>
+</main>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
+</body>
 </html>
