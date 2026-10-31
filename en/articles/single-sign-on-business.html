@@ -3,70 +3,68 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What Single Sign-On gives the business: one login, centralized access lifecycle, fewer scattered accounts, and the clear cost of a shared identity dependency.">
+    <meta name="description" content="Introducing single sign-on without losing account history or control: identity mapping, provisioning, role changes, session revocation and provider outages.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Single Sign-On: Why One Login Is Better Than Ten Independent Passwords">
-    <meta property="og:description" content="SSO simplifies access across products and centralizes identity management, but it also makes the identity platform a critical shared dependency.">
+    <meta property="og:description" content="Introducing single sign-on without losing account history or control: identity mapping, provisioning, role changes, session revocation and provider outages.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/single-sign-on-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-10-31">
     <title>Single Sign-On: Why One Login Is Better Than Ten Independent Passwords - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/single-sign-on-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/single-sign-on-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/single-sign-on-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Single Sign-On: Why One Login Is Better Than Ten Independent Passwords","description":"What Single Sign-On gives the business: one login, centralized access lifecycle, fewer scattered accounts, and the clear cost of a shared identity dependency.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/single-sign-on-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Single Sign-On: Why One Login Is Better Than Ten Independent Passwords","description":"Introducing single sign-on without losing account history or control: identity mapping, provisioning, role changes, session revocation and provider outages.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-31","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/single-sign-on-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/single-sign-on-business.html">RU</a><a href="single-sign-on-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>Single Sign-On: Why One Login Is Better Than Ten Independent Passwords</h1><p class="article-summary">When a company has many products and internal systems, a separate account in each one stops being simple. Single Sign-On turns identity into a shared platform capability — and with that convenience comes a critical shared dependency.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>5 min read</span><span>·</span><span>Updated <time datetime="2026-10-31">31 October 2026</time></span></p><h1>Single Sign-On: Why One Login Is Better Than Ten Independent Passwords</h1><p class="article-summary">A successful login does not complete the migration. Existing accounts, changing permissions, active sessions and provider failures all need their own treatment.</p></div></header>
       <article class="article-content">
-        <p>When there are only a few systems, independent login flows look reasonable. As the company grows, the result becomes dozens of accounts, different password rules, separate deactivation procedures, and the recurring question of where access still needs to be removed for an employee, partner, or customer.</p>
-        <p>The problem is no longer just inconvenience. Fragmented identity increases administrative cost and makes the access lifecycle harder to control.</p>
-        <h2>How Single Sign-On works</h2>
-        <p>SSO moves identity verification into a shared identity provider. Each application no longer needs to store the password itself or decide how the user proves who they are. It trusts the result of centralized authentication and receives a verified identity.</p>
-        <p>This does not mean every application gives the user the same permissions. SSO mainly answers “who is this?” The decision “what are they allowed to do?” still belongs to the product and its business context.</p>
-        <h2>What the business gets</h2>
-        <p>The first benefit is easier expansion. New products and new user groups can reuse the existing identity model instead of creating another login system from scratch.</p>
-        <p>The second is a more manageable access lifecycle. When an employee changes role or leaves the company, centralized identity reduces the chance that a forgotten account remains active in some old service.</p>
-        <p>For customer ecosystems, SSO can also reduce friction between products. One identity layer makes the experience feel like one company rather than a collection of unrelated applications.</p>
-        <h2>What the team gets</h2>
-        <p>Teams spend less time rebuilding registration, password recovery, multi-factor authentication, and other standard identity mechanisms. They get a common identity contract that multiple services can rely on.</p>
-        <p>Responsibility does not disappear. Teams still need to handle tokens and sessions correctly, separate authentication from authorization, manage access lifetime, and design behavior for identity-provider outages.</p>
-        <h2>What the customer gets</h2>
-        <p>The customer does not need a separate password for every product from the same company. Moving between services becomes simpler, and security settings can be applied more consistently.</p>
-        <p>The benefit is especially visible in B2B and internal environments where users work with several applications every day.</p>
-        <h2>What we pay for</h2>
-        <p>The main cost is dependency concentration. If the central identity system is unavailable or misconfigured, many products can be affected at the same time.</p>
-        <p>There is also migration work: existing accounts must be connected to the new identity model, old identifiers need to be reconciled, sessions need a clear lifecycle, and failure recovery has to be designed.</p>
-        <p>There is an organizational cost too. Someone must own the shared identity platform, its reliability, security, integration standards, and changes.</p>
-        <h2>When SSO is not needed</h2>
-        <p>For one small product without a broader user ecosystem, a shared identity platform may be unnecessary complexity. Not every login form needs to become an enterprise platform.</p>
-        <p>SSO starts paying off when the number of systems grows, the same users work across several products, and manual access management becomes a real operational cost.</p>
-        <h2>What to ask before deciding</h2>
-        <ul><li>Which user groups actually need one shared identity layer?</li><li>What happens to products if the identity provider is unavailable?</li><li>Who owns account lifecycle and access removal?</li><li>How are authentication and product permissions separated?</li><li>How will existing accounts be migrated without locking users out?</li></ul>
-        <h2>In the end</h2>
-        <p>Single Sign-On is not just a convenient login button. It is a decision to move identity out of individual products and into shared company infrastructure.</p>
-        <p><strong>The business gets more manageable access and less duplication, but pays for it by making the identity platform a critical shared dependency.</strong></p>
-      </article>
+<p>After single sign-on is enabled, an employee opens the travel-expenses system and finds an empty history. The old reports still exist: the application has simply created another profile. The login demonstration passed, but the employee now has to establish that the previous account belongs to them too.</p>
+<p>Single Sign-On makes moving between applications easier by reusing a trusted authentication result. The project extends beyond a new button. Existing accounts must be linked, correct permissions preserved, and changes of role or employment translated into actual application access.</p>
+<h2>One sign-in is not one password copied everywhere</h2>
+<p>In a federated design, an application redirects the user to an Identity Provider. The provider authenticates them and returns confirmation through a protocol such as SAML or OpenID Connect. Each product need not receive the primary password. This differs from password-filling mechanisms also marketed as SSO; the <a href="https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/what-is-single-sign-on" target="_blank" rel="noopener noreferrer">Microsoft Entra overview</a> distinguishes the approaches.</p>
+<p>The application must verify the confirmation's source, intended recipient and validity for the sign-in attempt. It commonly establishes its own session afterwards. What feels like one continuous experience rests on several separate trust relationships.</p>
+<p>Additional authentication for a sensitive action is compatible with SSO. Approving a routine request and changing payment details carry different risks. Convenience means avoiding unnecessary repetition, not promising never to verify identity again.</p>
+<h2>Email is a poor permanent account identifier</h2>
+<p>An address can change after a name or domain change and may later be assigned to someone else. Automatically merging accounts on an email match is therefore risky. OpenID Connect uses the issuer and subject together — <code>iss</code> and <code>sub</code> — as a stable identifier. The <a href="https://openid.net/specs/openid-connect-core-1_0.html#ClaimStability" target="_blank" rel="noopener noreferrer">specification</a> explains why other profile fields do not carry the same guarantee.</p>
+<p>Migration needs a verified mapping from the old account to the new identity. Investigate ambiguity rather than giving the first similar-looking user access to somebody's history. For expenses, test past approvals, unfinished reports and delegated permissions, not just whether a dashboard opens.</p>
+<p>External participants may belong to different organisations and authentication systems. Similar display names do not make them the same security principal. Organisation membership must remain explicit, especially in a product serving several corporate customers.</p>
+<h2>Provisioning an account is not authenticating it</h2>
+<p>SSO does not necessarily create, update or deactivate every application's user record. Those tasks may use separate interfaces, including SCIM. <a href="https://learn.microsoft.com/en-us/entra/identity/app-provisioning/user-provisioning" target="_blank" rel="noopener noreferrer">Microsoft's provisioning guidance</a> distinguishes this lifecycle management from federation-based sign-in.</p>
+<p>Creating a profile on first login can be convenient. It still needs rules about who may receive an account and which permissions it initially carries. A successful sign-in should not silently confer administration of a newly created organisation.</p>
+<p>A role change also requires removing old privileges. Updating a central group does not fix a separate local permission that an application retains. Give each mapping from directory groups to product actions an owner and measure how long changes take to become effective.</p>
+<h2>Logout, blocking and offboarding have different outcomes</h2>
+<p>Signing out of an application, ending the provider session and removing all employee access are separate actions. An application may continue accepting its own session after new sign-ins are blocked. Microsoft's <a href="https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access" target="_blank" rel="noopener noreferrer">access-revocation guidance</a> explicitly notes that Entra cannot directly revoke another application's session token.</p>
+<p>Agree on actual termination: how the application learns of a block, when previous sessions stop working, and what happens to mobile clients. Single logout depends on participating applications and configuration, not the button's label.</p>
+<p>Personal API tokens, local passwords and integrations may follow separate lifecycles. Include them explicitly in offboarding. Revoking a session cannot erase reports already downloaded; handling those copies is another responsibility.</p>
+<h2>The common login becomes a common dependency</h2>
+<p>A provider outage may prevent fresh sign-ins while some established sessions keep working. One long-open browser tab is a poor outage test. Try a new browser, an expired session and recovery after the dependency returns.</p>
+<p>Administrators need a controlled route to correct a broken shared policy. Its design must address the failure being considered: a backup login using the same unavailable chain offers little help. <a href="https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access" target="_blank" rel="noopener noreferrer">Microsoft's emergency-access guidance</a> discusses dedicated accounts and monitored use. Leaving a permanent bypass for everyone is not the same thing.</p>
+<p>Centralised identity also raises the importance of administrator protection and account recovery. Extra authentication on the main screen is little comfort if support can be persuaded to hand an account to the wrong person. Nor should federation distribute profile data applications do not need.</p>
+<h2>Connect a few applications completely</h2>
+<p>Choose a pilot with different applications: a modern one, one with historical accounts and an external service. Walk through an ordinary working day, an email change, a transfer and offboarding with sessions still open. Check both the interface and other client paths actually used.</p>
+<p>The cost includes integration, licences, maintenance and remaining manual tasks. An existing provider's service may be sufficient; building a separate identity platform is not mandatory. For every application, establish a revocation time, a permissions-change process and an exception owner. Then “one sign-in” describes usable access under control rather than an identical page in front of several unrelated account problems.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>

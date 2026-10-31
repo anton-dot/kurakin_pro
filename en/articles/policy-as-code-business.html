@@ -3,74 +3,68 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What policy as code gives the business: turn security and infrastructure rules into versioned, testable policies and reduce dependence on manual approval.">
+    <meta name="description" content="How security requirements become effective checks: enforcement coverage, policy tests, temporary exceptions, rollout and handling evaluation failures.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Policy as Code: Why Security Rules Should Not Live Only in Documents">
-    <meta property="og:description" content="If a rule matters, it helps to verify it automatically. Policy as code turns part of governance into executable constraints.">
+    <meta property="og:description" content="How security requirements become effective checks: enforcement coverage, policy tests, temporary exceptions, rollout and handling evaluation failures.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/policy-as-code-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-10-31">
     <title>Policy as Code: Why Security Rules Should Not Live Only in Documents - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/policy-as-code-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/policy-as-code-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/policy-as-code-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Policy as Code: Why Security Rules Should Not Live Only in Documents","description":"What policy as code gives the business: turn security and infrastructure rules into versioned, testable policies and reduce dependence on manual approval.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/policy-as-code-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Policy as Code: Why Security Rules Should Not Live Only in Documents","description":"How security requirements become effective checks: enforcement coverage, policy tests, temporary exceptions, rollout and handling evaluation failures.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-31","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/policy-as-code-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/policy-as-code-business.html">RU</a><a href="policy-as-code-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>Policy as Code: Why Security Rules Should Not Live Only in Documents</h1><p class="article-summary">A policy can be perfectly correct in a PDF and still have no effect on the real system. Policy as code turns some security, infrastructure, and compliance requirements into rules that can be checked automatically before change reaches production.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>5 min read</span><span>·</span><span>Updated <time datetime="2026-10-31">31 October 2026</time></span></p><h1>Policy as Code: Why Security Rules Should Not Live Only in Documents</h1><p class="article-summary">A pipeline rejected public storage, but an administrator enabled it through the console. Where must policy run, and what proves that it is being enforced?</p></div></header>
       <article class="article-content">
-        <p>Companies quickly accumulate rules: databases must not be public, resources need owners, production access is restricted, and certain data cannot be stored in the wrong region.</p>
-        <p>The problem is not that these rules are unknown. The problem is the gap between a document and a real change. An engineer may not know a rule, may forget it, or may interpret it differently. Manual review works while the number of changes stays small.</p>
-        <h2>What problem are we solving?</h2>
-        <p>Policy as code expresses part of the rules in a form software can evaluate.</p>
-        <p>For example, a pipeline may reject an infrastructure change if a database becomes internet-accessible, a resource lacks required ownership metadata, or a configuration violates an agreed constraint.</p>
-        <p>The policy becomes versioned. The company can see who changed it, why, when the new rule took effect, and which systems are now evaluated against it.</p>
-        <h2>What does the business get?</h2>
-        <p>The main benefit is more scalable risk control.</p>
-        <p>If every change requires a security architect to review it manually, growth quickly turns that role into a bottleneck. Automated policies allow standard decisions to be checked without a separate approval meeting.</p>
-        <p>This can also reduce compliance cost where evidence matters to auditors or customers. Version history and automated checks are usually stronger than “we always do it this way.”</p>
-        <p>The business can let teams move faster without removing non-negotiable constraints.</p>
-        <h2>What does the team get?</h2>
-        <p>The team gets fast feedback. A violation can be found in a pull request or deployment pipeline rather than during an audit or after an incident.</p>
-        <p>Rules become consistent across teams and environments instead of depending on who performs the review that day.</p>
-        <p>But a bad policy can scale a bad decision just as efficiently. If the rule is too strict or outdated, automation will systematically block everyone.</p>
-        <h2>What does the customer get?</h2>
-        <p>Customers get more predictable enforcement of basic security and data-handling requirements.</p>
-        <p>This matters especially in B2B and regulated contexts where an architecture mistake can affect not only availability but also trust in the company.</p>
-        <p>Policy as code does not replace a security model. It simply makes some known rules automatically enforceable.</p>
-        <h2>What do we pay for it?</h2>
-        <p>Rules have to be formalized, which is often harder than writing a general policy document. A requirement must be precise enough for software to decide whether a change is allowed.</p>
-        <p>The company adds a policy platform, tests, exception processes, and ownership for maintaining rules.</p>
-        <p>If exceptions are poorly designed, teams will look for ways around the control. A mature approach needs not only blocking rules but also a clear path for justified exceptions.</p>
-        <h2>When is policy as code unnecessary?</h2>
-        <p>If infrastructure is small, changes are rare, and rules are simple, manual review may still be cheaper.</p>
-        <p>The approach becomes valuable when there are many teams, changes are frequent, infrastructure is standardized, and the same types of violations repeat or carry meaningful cost.</p>
-        <h2>What should we ask before deciding?</h2>
-        <ul><li>Which recurring violations can be checked automatically?</li><li>Which rules are mandatory and which are recommendations?</li><li>Where should policy block a change and where is a warning enough?</li><li>How can a justified exception be requested without bypassing control?</li><li>Who owns the policy lifecycle and removes outdated restrictions?</li></ul>
-        <h2>In the end</h2>
-        <p>Policy as code does not make governance intelligent automatically. It makes chosen rules consistent and testable.</p>
-        <p><strong>For the business, it is a way to scale security and compliance faster than the number of manual approvals grows.</strong></p>
-      </article>
+<p>During an infrastructure review, an engineer is reminded that customer-document storage must not be public. The setting is fixed and the check passes. A month later, someone enables public access directly in the cloud console. The rule exists, the test exists, and the documents are exposed anyway.</p>
+<p>Policy as Code expresses a requirement in a form software can evaluate. Its value depends on where evaluation happens. Reviewing a file before deployment, preventing a live change and finding an existing violation are different capabilities. One should not be presented as evidence of all three.</p>
+<h2>Agree on what the rule means</h2>
+<p>“Do not allow insecure storage” is a reasonable intention, but an imprecise test. Which resources hold customer documents? What access is forbidden? Which exceptions are acceptable? People need to agree on permitted outcomes as well as violations.</p>
+<p>Suppose the rule applies to resources labelled “customer data”. Who supplies that label, and what happens when it is missing? If authors can remove the label to escape evaluation, the control depends on voluntary participation. Perfect policy code can still examine the wrong resources.</p>
+<p>Someone must own the requirement. Engineers can implement the check, but should not have to invent the company's rules for storing particular documents. Record those decisions separately and automate the conditions that can actually be expressed and observed.</p>
+<h2>Who acts on a denial?</h2>
+<p>A policy engine evaluates supplied information. Another component must enforce the result by rejecting a request, stopping deployment or merely displaying a warning. <a href="https://www.openpolicyagent.org/docs" target="_blank" rel="noopener noreferrer">Open Policy Agent</a> explicitly separates decision-making from enforcement. Installing the engine without connecting its decisions to an action protects nothing.</p>
+<p>A build check provides early feedback. Enforcement at the production platform can cover changes outside that build path. Periodic inspection finds drift after it occurs. Each has different coverage and timing. Map the actual routes for change, including administrative consoles and emergency access.</p>
+<p>Nor does a new prohibition necessarily repair existing resources. Kubernetes <a href="https://kubernetes.io/docs/tutorials/cluster-management/admission-policies/" target="_blank" rel="noopener noreferrer">admission checks</a> evaluate matching requests; they do not automatically correct older objects. Existing violations need discovery, review and separate changes. Disabling them indiscriminately can disrupt dependencies nobody checked.</p>
+<h2>Test the rules as well as the infrastructure</h2>
+<p>A test proving that an unsafe setting is rejected is necessary but insufficient. Test permitted work too. A policy that blocks every release admits no bad releases, but the team will soon look for an off switch.</p>
+<p>For document storage, try private access, public access, missing classification, an unapproved exception and modification of a protective label. Include a changed input format after a platform upgrade. The <a href="https://www.openpolicyagent.org/docs/policy-testing" target="_blank" rel="noopener noreferrer">OPA testing guide</a> shows how policy behaviour can be covered by repeatable tests.</p>
+<p>A particularly dangerous failure is a rule that stops finding its expected field and silently appears to pass. Missing information, an explicit permission and an evaluation failure must remain distinct. OPA's <a href="https://www.openpolicyagent.org/docs/operations" target="_blank" rel="noopener noreferrer">operations guidance</a> discusses undefined decisions: a responsive HTTP server is not proof that the necessary policy is loaded and has answered the question.</p>
+<h2>Observation and enforcement are different rollout stages</h2>
+<p>Before a broad prohibition, establish who it would affect. An observation period can reveal disagreement with expected behaviour without stopping work. Call it observation, though: if the change still goes through, there is not yet an enforced constraint.</p>
+<p>After reviewing the results, enable enforcement for a limited scope. Test an ordinary release, an emergency repair and an unavailable policy source. Define failure behaviour in advance. A sensitive change should not become permitted merely because verification failed. Emergency exceptions need a narrow scope, an accountable owner and subsequent review.</p>
+<p>Check which policy version is actually active. In a distributed deployment, some evaluators may still use older rules. OPA's <a href="https://www.openpolicyagent.org/docs/management-bundles" target="_blank" rel="noopener noreferrer">bundle mechanism</a> distributes and activates policy sets. Publishing a bundle is not simultaneous enforcement everywhere. Signing establishes provenance, not correctness of the underlying requirement.</p>
+<h2>An exception needs an end</h2>
+<p>A temporary business exception should name the resource, reason, approver and expiry. Permission to approve it must be separate from the ability to add a convenient label. When it expires, either fix the deviation or make another explicit decision. Otherwise temporary permission becomes permanent policy by neglect.</p>
+<p>Rolling back a policy is not automatically safe either. It can restore access that a newer version deliberately removed. Investigate the difference in permissions rather than reverting every recent restriction. Sometimes correcting one condition is safer than restoring the entire previous policy.</p>
+<p>Useful evidence includes the resource identifier, policy version, decision and applied exception. Explaining a denial rarely requires copying the complete customer document into a log. The people investigating need access to that evidence, while the team being checked should not be able to rewrite it arbitrarily.</p>
+<h2>What counts as a result?</h2>
+<p>For the first rule, demonstrate that the recurring violation is caught on the relevant change paths, ordinary releases still work and the denial tells an engineer how to fix the problem. Then inspect existing resources. Green new builds should not hide an old public document store.</p>
+<p>Policies reduce coordination only while people can understand and maintain them. Weekly exceptions for ordinary work suggest a faulty requirement or implementation. The number of rules is not a useful measure of control quality. The company should be able to identify the risk addressed, the coverage achieved and the routes still outside enforcement.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>

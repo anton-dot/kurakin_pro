@@ -3,70 +3,69 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Why encryption is only as strong as key management: where keys live, how access is limited, and how keys are rotated and revoked without stopping the business.">
+    <meta name="description" content="Managing access to encrypted data: data keys and KMS, rotation limits, deletion risks, caching and recovery of older documents and backups.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Key Management: Why Encryption Is Useless Without Managing the Keys">
-    <meta property="og:description" content="Encrypted data is protected only while the keys are protected better than the data itself. Key Management turns encryption from a checkbox into a controlled process of access, rotation, and revocation.">
+    <meta property="og:description" content="Managing access to encrypted data: data keys and KMS, rotation limits, deletion risks, caching and recovery of older documents and backups.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/key-management-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-10-31">
     <title>Key Management: Why Encryption Is Useless Without Managing the Keys - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/key-management-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/key-management-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/key-management-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Key Management: Why Encryption Is Useless Without Managing the Keys","description":"Why encryption is only as strong as key management: where keys live, how access is limited, and how keys are rotated and revoked without stopping the business.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/key-management-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Key Management: Why Encryption Is Useless Without Managing the Keys","description":"Managing access to encrypted data: data keys and KMS, rotation limits, deletion risks, caching and recovery of older documents and backups.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-31","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/key-management-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/key-management-business.html">RU</a><a href="key-management-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>Key Management: Why Encryption Is Useless Without Managing the Keys</h1><p class="article-summary">Encrypted data is protected only while the keys are protected better than the data itself. Key Management turns encryption from a checkbox into a controlled process of access, rotation, and revocation.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>5 min read</span><span>·</span><span>Updated <time datetime="2026-10-31">31 October 2026</time></span></p><h1>Key Management: Why Encryption Is Useless Without Managing the Keys</h1><p class="article-summary">The backup survived, but the key did not remain accessible. How to protect documents and change keys without losing the ability to read older data.</p></div></header>
       <article class="article-content">
-        <p>“The data is encrypted” sounds like a finished security control. But every encryption scheme has a key. If the key sits next to the data, lives in application configuration, or is available to too many systems, the protection becomes mostly formal.</p>
-        <p>The architecture question therefore starts not with the algorithm, but with the lifecycle of the key.</p>
-        <h2>What problem are we solving?</h2>
-        <p>Key Management covers the processes and infrastructure used to create, store, use, rotate, and revoke cryptographic keys.</p>
-        <p>Keys are separated from applications and data. Systems receive only the access they need, and key usage can be audited and controlled.</p>
-        <p>If a key is compromised, it can be replaced or revoked instead of giving an attacker permanent access to historical data.</p>
-        <h2>What does the business get?</h2>
-        <p>The main benefit is reduced impact from data theft. A stolen encrypted database without usable keys has a very different value to an attacker than plaintext data.</p>
-        <p>Centralized key management also makes internal security and audit requirements easier to enforce.</p>
-        <p>But a KMS is not automatic security. If an application with legitimate decrypt permission is fully compromised, the attacker may still use that permission.</p>
-        <h2>What does the team get?</h2>
-        <p>The team no longer stores encryption keys in source code or static configuration and gets one mechanism for rotation and audit.</p>
-        <p>In return, the product now depends on key infrastructure. Availability, permissions, caching, and failure behavior all need design.</p>
-        <h2>What does the customer get?</h2>
-        <p>Customers rarely see a KMS directly, but they get lower exposure if a storage system or backup is compromised.</p>
-        <p>Poor implementation can create the opposite effect: if key infrastructure is unavailable, critical product operations may also stop.</p>
-        <h2>What do we pay for it?</h2>
-        <p>Additional infrastructure, cryptographic call latency, rotation processes, and careful access management.</p>
-        <p>The hardest part is often changing old keys and data without downtime and without making old data unreadable to new versions.</p>
-        <h2>When is dedicated Key Management unnecessary?</h2>
-        <p>For data with very low sensitivity or impact, sophisticated key infrastructure can be excessive.</p>
-        <p>But the more sensitive the data, the stronger the audit requirements, and the more services involved, the more dangerous it is to keep keys inside applications.</p>
-        <h2>What should we ask before deciding?</h2>
-        <ul><li>Where are keys stored physically and logically?</li><li>Who can perform which key operations?</li><li>How often should keys rotate?</li><li>What happens if one key is compromised?</li><li>Can the product operate while the KMS is temporarily unavailable?</li></ul>
-        <h2>In the end</h2>
-        <p>Encryption without key management often creates only the appearance of protection.</p>
-        <p><strong>For the business, Key Management makes access to encrypted data controlled, revocable, and auditable instead of effectively permanent.</strong></p>
-      </article>
+<p>The contract archive has been copied to a recovery site. Every file is present and the checksums match. Restoration then reveals that the key is accessible only through the unavailable primary cloud account. The company has retained all its data and cannot read a single document.</p>
+<p>Key management is about continued access as well as preventing disclosure. Who can use encrypted data today, and who will be able to restore it years later? This article focuses on keys protecting stored data. Signing keys and other cryptographic uses have different requirements; one replacement schedule should not be assumed to suit them all.</p>
+<h2>Decide which threat the encryption addresses</h2>
+<p>Disk encryption can protect a removed storage device. It does not necessarily prevent an authorised application from reading a running database. An attacker with that application's permissions may be served by the same decryption mechanism.</p>
+<p>Choose the encryption layer against a threat model and design access controls separately. The <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP Cryptographic Storage guide</a> follows this distinction. “Enable encryption” is incomplete until we know which copy could be stolen and who could still open it.</p>
+<p>For contracts, identify the live database, attachments, exports, backups and temporary files. Encrypting the database does not protect an unencrypted nightly export. Copies need not all use the same mechanism, but none should be overlooked.</p>
+<h2>An encrypted key beside a file can be correct</h2>
+<p>A common construction encrypts a document with a data key, then protects that data key under a key managed by a KMS. This is envelope encryption. The encrypted data key can be stored alongside the document; reading it requires an authorised operation to recover the usable key. <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html" target="_blank" rel="noopener noreferrer">AWS KMS documentation</a> describes the construction.</p>
+<p>Asking whether a key is “next to the data” therefore misses the point. A plaintext data key in an accessible folder is not equivalent to an encrypted data key protected by a separately controlled KMS key.</p>
+<p>Applications need permission for specific operations and data, not administration of the entire key system. Upload and viewing services may have different duties. Permission to change a key policy matters too: an administrator who can grant themselves decryption is not an independent control just because their role has another name.</p>
+<h2>Rotation does not rewrite the past</h2>
+<p>“Replace the key” may mean new key material, a different logical key or re-encryption of stored content. These are distinct changes. For example, <a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html" target="_blank" rel="noopener noreferrer">AWS KMS rotation</a> neither re-encrypts existing data nor replaces previously generated data keys. Earlier material remains available for required decryption.</p>
+<p>If an attacker already holds a document and its usable key, an administrative change cannot take that ability away. A new key can protect subsequent writes. Existing data needs a separate decision, and a stolen copy cannot be forced to follow our migration.</p>
+<p>A transition plan should identify what stays under the old key, what is transformed and how both generations are tested. Successfully creating one new document is not permission to delete the earlier key while archives and backups still depend on it.</p>
+<h2>Deleting a key is not just stronger disabling</h2>
+<p>Disabling a key can often be reversed. Destroying indispensable key material can make data unrecoverable. <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html" target="_blank" rel="noopener noreferrer">AWS warns explicitly about deletion</a> and the need to establish that the key is no longer required.</p>
+<p>Maintain an account of which datasets and backup generations depend on each key. No recent use is weak evidence: an archived contract might be opened after years of inactivity. Data retention and the ability to decrypt it must be planned together.</p>
+<p>Key destruction can form part of data deletion, but only within a verified design: no other usable key copies, plaintext exports or alternative reading paths. Removing one KMS object is not proof that every copy of a customer's information has disappeared.</p>
+<h2>Why one instance keeps working without KMS</h2>
+<p>An application may already hold a usable data key in memory. Some reads can continue when KMS becomes unreachable, while a new instance cannot obtain the same material. This also affects permission revocation. Losing the service and immediately preventing every decryption are different events.</p>
+<p>Caching cryptographic material needs limits on age and use. It reduces calls but leaves usable keys in the process for longer. The <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/data-key-caching.html" target="_blank" rel="noopener noreferrer">AWS Encryption SDK</a> treats data-key caching as a mechanism with security thresholds, not an instruction to retain keys indefinitely for speed.</p>
+<p>Test startup, old-document reading and new writes while the dependency is unavailable. An application must distinguish failure to decrypt from absence of the document. Creating an empty replacement automatically would make an availability incident much worse.</p>
+<h2>Recovery ends with a readable document</h2>
+<p>The recovery site needs an authorised route to the necessary keys, compatible decryption and operator access. Operators do not necessarily need, or have the option, to export the root key itself. Verify the supported recovery or transfer arrangement before relying on it.</p>
+<p>Take several generations of the archive and its backups. Restore them in an agreed environment, read them with an authorised identity and confirm that an unauthorised one is refused. Test disabling and re-enabling a disposable test key rather than experimenting with irreversible deletion of production material.</p>
+<p>Record the owner, scope, administration permissions and conditions for retirement. A suitable managed service may be simpler than building a private key-management platform. The company still owns the question of whether an old contract remains readable; an “encryption enabled” setting cannot answer it.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
