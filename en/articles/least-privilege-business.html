@@ -3,46 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Why least privilege reduces incident blast radius, how to limit access to real needs, and what the business pays for stricter boundaries.">
+  <meta name="description" content="How to scope access to real work: indirect privilege escalation, rare operations, temporary elevation and safe permission reviews.">
   <meta name="author" content="Anton Kurakin">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Least Privilege: Why a System Should Not Get More Access Than It Actually Needs">
-  <meta property="og:description" content="How to reduce breach impact with minimum permissions without turning access control into a permanent blocker for teams.">
+  <meta property="og:description" content="How to scope access to real work: indirect privilege escalation, rare operations, temporary elevation and safe permission reviews.">
   <meta property="og:url" content="https://kurakin.pro/en/articles/least-privilege-business.html">
   <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
-  <meta property="article:modified_time" content="2026-08-12">
+  <meta property="article:modified_time" content="2026-10-31">
   <title>Least Privilege: Why a System Should Not Get More Access Than It Actually Needs - Anton Kurakin</title>
   <link rel="canonical" href="https://kurakin.pro/en/articles/least-privilege-business.html">
   <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/least-privilege-business.html">
   <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/least-privilege-business.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Least Privilege: Why a System Should Not Get More Access Than It Actually Needs","description":"Why least privilege reduces incident blast radius, how to limit access to real needs, and what the business pays for stricter boundaries.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/least-privilege-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Least Privilege: Why a System Should Not Get More Access Than It Actually Needs","description":"How to scope access to real work: indirect privilege escalation, rare operations, temporary elevation and safe permission reviews.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-31","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/least-privilege-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body data-page="article" data-lang="en">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+<header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/least-privilege-business.html">RU</a><a href="least-privilege-business.html" aria-current="page">EN</a></div></header>
 <main class="article-page" id="main">
-<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#security">Security</a><p class="article-kicker"><span>5 min read</span></p><h1>Least Privilege: Why a System Should Not Get More Access Than It Actually Needs</h1><p class="article-summary">Broad permissions are convenient: fewer errors, less configuration, faster integration. But if an account or service with those permissions is compromised, the attacker gets the same broad access. Least Privilege limits the damage in advance.</p></div></header>
+<header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#security">Security</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>5 min read</span><span>·</span><span>Updated <time datetime="2026-10-31">31 October 2026</time></span></p><h1>Least Privilege: Why a System Should Not Get More Access Than It Actually Needs</h1><p class="article-summary">A stock export should not be able to delete the database. Define necessary access, account for rare operations and verify that temporary authority actually ends.</p></div></header>
 <article class="article-content">
-<h2>What problem are we solving?</h2><p>Many systems grant access “with room to spare”: a service can perform more operations than it uses, people keep old roles, and technical accounts get access to entire environments because it is easier.</p><p>That is almost invisible during normal operation. During a leak, mistake, or compromise, excessive permissions define the maximum blast radius.</p>
-<h2>How Least Privilege works</h2><p>Every user, service, or process gets only the actions and data required for its current function. Everything else is denied by default.</p><p>Permissions can be limited by resource, operation, environment, time, or context. The important part is not only granting minimum access but reviewing it as roles and systems change.</p>
-<h2>What the business gets</h2><p>The main benefit is lower potential damage from one compromised identity or mistaken action. A single incident is less likely to become access to the whole company.</p><p>Access control also becomes easier to explain for audit, and long-lived permissions that nobody remembers are less likely to accumulate.</p>
-<h2>What the team gets</h2><p>The team gets explicit boundaries: which service accesses which data and which operations it actually needs. That helps expose hidden dependencies and makes the architecture easier to document.</p><p>Role automation, policy as code, and centralized identity reduce the manual cost of maintaining those boundaries.</p>
-<h2>What the customer gets</h2><p>Customers get indirect protection: one mistake or credential leak is less likely to expose data and operations unrelated to that specific function.</p><p>This matters especially in multi-tenant systems and products handling sensitive data.</p>
-<h2>What do we pay for it?</h2><p>The more precise the permissions, the more rules must be designed, tested, and maintained. Policies that are too strict can block legitimate work and create a permanent exception queue.</p><p>There is also a risk of building a perfect permission matrix that nobody can operate. Granularity has to match the real risk.</p>
-<h2>When it is unnecessary</h2><p>A small internal system with few users may not need a sophisticated policy model. Even there, separating administrative from ordinary access is usually worth keeping.</p><p>The higher the cost of error or exposure, the more precision is justified.</p>
-<h2>Questions to ask before deciding</h2><ul><li>Which permissions does this service actually use?</li><li>What could an attacker do with its credentials?</li><li>Have temporary permissions become permanent?</li><li>Can excess access be revoked automatically?</li><li>Does the policy create more operational pain than risk reduction?</li></ul>
-<h2>In the end</h2><p>Least Privilege does not prevent every incident. It does something important: it limits in advance how far one mistake or compromise can spread.</p><p><strong>For the business, minimum permissions are a way to reduce the price of inevitable mistakes instead of assuming mistakes will never happen.</strong></p>
+<p>A nightly stock export receives database administrator access because that is the quickest way to make it work. Months later, nobody remembers the reason. The account can still delete tables and change other users' permissions. The export runs successfully, so there is no obvious error on a dashboard asking anyone to investigate.</p>
+<p>Least privilege means limiting access to the work that actually needs to happen. A shorter permissions list is not the objective. First establish what the process must do, with which resources and under which conditions. Then determine which consequences of a mistake or compromised account can be prevented.</p>
+<h2>Describe the operation before choosing the role</h2>
+<p>The export has a specific job: read stock for the relevant warehouse and write a file to an agreed location. It has no reason to change prices, create users or read personnel records. Even read access needs a boundary: which rows, fields and organisations does the recipient genuinely need?</p>
+<p>Hiding an administrative button is ineffective if the same identity can connect directly to the database. Examine the actual access paths. The <a href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP authorisation guidance</a> connects least privilege with denial by default and checks on resource access, rather than relying on interface restrictions.</p>
+<p>Read-only does not mean harmless. An account might export the entire customer directory or issue queries expensive enough to delay everybody else. Permissions govern allowed actions; workload limits and constraints on data volume address additional risks.</p>
+<p>The process owner and an engineer should agree on why a permission is necessary. An activity log cannot decide whether the recipient should receive the complete dataset. If a report only needs aggregated stock, a bounded export may be more appropriate than access to source tables. Reducing authority sometimes starts with changing the interface rather than designing a more complicated role.</p>
+<h2>Permission to run code can become permission to read data</h2>
+<p>A dangerous capability does not always have an administrator label. Someone unable to query production directly may be able to modify the program that connects with broad access. They might also launch a job under a more privileged identity. The effective boundary then includes changing and releasing that code.</p>
+<p>Review who can assign roles, alter trust settings, replace executable content or manage credentials. For each path, ask whose authority the resulting action will use. A list of directly assigned roles may not reveal the entire chain.</p>
+<p>Independent services should not share one account merely for convenience. Separate identities support different permissions and let the company disable one integration without stopping all the others. The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank" rel="noopener noreferrer">AWS IAM recommendations</a> treat temporary credentials and regular permission reviews as distinct parts of this work.</p>
+<h2>Unused this month is not the same as unnecessary</h2>
+<p>Activity logs help establish what a process actually did. An ordinary month, however, may not include year-end processing, backup recovery or a rare error path. Removing everything absent from that month's report can cause a failure just when the team has the least time to investigate access rules.</p>
+<p>Analysis tools have visibility limits. With <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed.html" target="_blank" rel="noopener noreferrer">AWS last accessed information</a>, the reporting period, tracked actions and attempted access all matter. A missing record is a reason to investigate, not an automatic instruction to remove permission. Successful use does not establish necessity either: a poorly designed process may already rely on excessive access.</p>
+<p>Separate routine work from infrequent privileged procedures. A stock export does not need database restoration rights. A distinct recovery procedure can hold those rights with its own owner and verification. A rare need should not become permanent authority for every ordinary run.</p>
+<h2>Temporary elevation must actually end</h2>
+<p>An administrator's daily work can be separated from privileged activity. Elevation may require a reason, approval and a limited duration. <a href="https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure" target="_blank" rel="noopener noreferrer">Microsoft Entra PIM</a> is one implementation of this approach. An expiry time on the request does not, by itself, demonstrate that every application has stopped accepting the previous authority.</p>
+<p>After expiry, test an existing session, a new request and credentials created while the elevated role was active. Temporary permission that can quietly leave behind a permanent administrator has limited protective value. The actual termination mechanism depends on the system and should be understood before an incident.</p>
+<p>Recovery also needs a controlled emergency path when normal access administration is unavailable. That is not a justification for a shared password in a chat. The exception needs a narrow scope, observable use and subsequent review. Otherwise every urgent task gradually becomes an exception.</p>
+<h2>Remove access without losing the ability to diagnose failures</h2>
+<p>Start with one process and its owner. Record its normal result, dependencies and uncommon operations. Test narrower permissions in an appropriate environment, then limit the initial production change. Observation mode can reveal decisions that would have been denied, but does not itself block excessive actions.</p>
+<p>Test both outcomes: the export finishes, while writing to another location, changing a table and reading unrelated records are rejected. Include restart, credential replacement and recovery of unfinished work. A test using only an established connection can miss permissions required when a fresh connection is opened.</p>
+<p>Support needs the process identity, action, resource and reason for rejection, not a secret or the contents of a protected record. Recovery should restore a specific missing permission after review. Returning to allow-everything at the first inconvenience defeats the exercise.</p>
+<p>The result is a working export with a known access boundary, an owner and checks that run when its responsibilities change. Counting deleted permissions is insufficient: the list can become shorter while one remaining path still provides access to everything.</p>
 </article></main>
-<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+<footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
 </body></html>
