@@ -3,88 +3,64 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What a data lake is, why raw data may be worth keeping before its future use is known, and why governance determines whether the lake creates value.">
+    <meta name="description" content="When a data lake helps investigate equipment failures: source files, provenance, data quality, access limits, retention and research economics.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It">
-    <meta property="og:description" content="Data lakes in business language: flexible storage for diverse data, new analytics opportunities, and the cost of cataloging, quality, and governance.">
+    <meta property="og:description" content="When a data lake helps investigate equipment failures: source files, provenance, data quality, access limits, retention and research economics.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/data-lake-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-11-04">
     <title>Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/data-lake-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/data-lake-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/data-lake-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It","description":"What a data lake is, why raw data may be worth keeping before its future use is known, and why governance determines whether the lake creates value.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/data-lake-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It","description":"When a data lake helps investigate equipment failures: source files, provenance, data quality, access limits, retention and research economics.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-11-04","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/data-lake-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
+      <a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a>
       <nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav>
       <div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/data-lake-business.html">RU</a><a href="data-lake-business.html" aria-current="page">EN</a></div>
     </header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#analytics">Data and analytics</a><p class="article-kicker"><span>5 min read</span></p><h1>Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It</h1><p class="article-summary">Not every dataset is ready for a report or a model today. A data lake lets the company keep diverse information closer to its original form, but without management the storage quickly loses value.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#analytics">Data and analytics</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>4 min read</span><span>·</span><span>Updated <time datetime="2026-11-04">4 November 2026</time></span></p><h1>Data Lake: Why It Can Be Worth Keeping Data Before You Know How You Will Use It</h1><p class="article-summary">Sensor readings, photos and repair reports might reveal failure patterns. Before keeping everything, the company needs a way to connect the records and govern access.</p></div></header>
       <article class="article-content">
-        <p>Operational systems generate more and more data: events, logs, documents, files, user history, and computed results.</p>
-        <p>Some of that information is useful today. Some may become useful six months from now for a new report, model, or investigation. Some may never be used.</p>
-        <p>A data lake gives the company a place to keep data before every dataset has a final analytical structure.</p>
-
-        <h2>What problem are we solving?</h2>
-        <p>A data warehouse usually expects data to be shaped into a known model first. That is useful for stable reporting, but less convenient for new or poorly understood sources.</p>
-        <p>A data lake can accept more varied formats and preserve data closer to its source form.</p>
-        <p>Later, analysts, engineers, or ML teams can select what they need and prepare it for a specific use case.</p>
-
-        <h2>What does the business gain?</h2>
-        <p>The main benefit is not throwing away potentially valuable data simply because there is no report for it yet.</p>
-        <p>That creates room for future analytics and AI use cases. The company can return to historical information and ask new questions later.</p>
-        <p>A second benefit is faster onboarding of new sources because every source does not need a complete analytical model before storage begins.</p>
-        <p>But having data is not the same as creating value. If nobody knows what is stored, whether it can be trusted, or who may use it, the lake becomes an expensive archive.</p>
-
-        <h2>What does the team gain?</h2>
-        <p>The team gets flexibility across formats and can separate data ingestion from later transformation.</p>
-        <p>This is useful for experimentation, data science, and cases where the structure is still changing.</p>
-        <p>At the same time, cataloging, metadata, data quality, and lineage become much more important. Teams need to know where data came from, who owns it, and how it can be used.</p>
-
-        <h2>What does the customer gain?</h2>
-        <p>Customers do not see the data lake directly. They may see better analytics, personalization, or new services made possible by historical data.</p>
-        <p>But keeping data “just in case” cannot be careless. More retained information means stronger requirements around privacy, access, and retention periods.</p>
-
-        <h2>What do we pay for it?</h2>
-        <p>The price is governance.</p>
-        <p>The company needs a catalog, access controls, retention rules, quality checks, and ownership. Otherwise, cheap storage encourages endless accumulation of data nobody understands.</p>
-        <p>The dangerous illusion is that low storage cost makes data free. Storing is easy. Finding, understanding, protecting, and maintaining it is much more expensive.</p>
-
-        <h2>When is a data lake unnecessary?</h2>
-        <p>If sources are limited, analytical needs are stable, and the existing data warehouse handles the required data well, a separate lake may add another layer without enough benefit.</p>
-        <p>It becomes useful when sources are diverse, volumes are large, or future use cases are difficult to define in advance.</p>
-
-        <h2>What should we ask before deciding?</h2>
-        <ul>
-          <li>Which data do we want to keep, and what future value might it have?</li>
-          <li>Who owns each dataset and is responsible for its quality?</li>
-          <li>How will someone find and understand the data a year from now?</li>
-          <li>What privacy and retention rules apply?</li>
-          <li>Can the existing data warehouse solve the problem more simply?</li>
-        </ul>
-
-        <h2>In the end</h2>
-        <p>A data lake lets the company postpone some decisions about data structure until later.</p>
-        <p><strong>For the business, that is useful when the future value of data is still uncertain. Without cataloging, ownership, and rules, however, the lake quickly turns into a swamp.</strong></p>
-      </article>
+<p>A maintenance company wants to understand whether equipment failures can be detected earlier. It has sensor readings, before-and-after repair photos, engineers' notes and records of replaced parts. The data lives in different formats, and there is no agreed analytical model for combining it yet.</p>
+<p>A data lake can preserve those original datasets while the team works out how to analyse them. But “store everything and figure it out later” postpones the difficult decisions. Without identity, access controls and provenance, a year-old reading may no longer be traceable to the right machine, and a photograph may not be permissible to use.</p>
+<h2>Keep the source, but keep its context too</h2>
+<p>Every ingestion needs basic metadata: where the data came from, when a measurement actually occurred, when it arrived, which machine it belongs to and which format version it uses. Sensor readings also need units and, where relevant, calibration details. A value of 85 is not particularly useful if we cannot tell whether it means temperature, load percentage or a delayed duplicate sent after a network outage.</p>
+<p>Original files should be preserved in a way that allows transformations to be repeated and audited. That does not mean every copy must live forever. It means controlled versions, integrity checks and a defined retention policy. Overwriting the source with an allegedly clean table removes the evidence needed to discover a bad conversion later.</p>
+<p><a href="https://docs.databricks.com/aws/en/lakehouse/medallion" target="_blank" rel="noopener noreferrer">Databricks' Medallion Architecture guide</a> describes retaining raw records before progressively validating and preparing them. It is one organisational pattern, not a requirement to deploy three products or use a particular vendor.</p>
+<h2>From files to a question the business can answer</h2>
+<p>Failure analysis begins by linking readings to equipment and operating time. The team then needs to deduplicate messages, normalise timestamps and units, and distinguish a faulty sensor from genuine overheating. A suspicious record should remain traceable to its original form, since the cleaning rule itself may need correction.</p>
+<p>Photographs present different problems. Which inspection do they belong to? Are they linked to a valid work order? Is the intended use permitted under the applicable agreements and privacy requirements? A blurry image can be stored correctly and still be unhelpful for training a model. Storage quality and analytical quality are not the same thing.</p>
+<p>For management, collecting data and making a decision from data are two different milestones. Ingestion volume and metadata completeness show that collection works. A reproducible analysis on a defined set of equipment and failures is evidence that the material may support a particular business question.</p>
+<h2>A lake is not a shared folder without permissions</h2>
+<p>Raw datasets may contain personal information about staff and customers, property addresses, documents and commercially sensitive operating details. Exploratory analysis is not a reason to expose all of them to everyone.</p>
+<p>Datasets need owners, permitted-use rules, access controls and audit trails. Researchers can often work with restricted or de-identified derivatives. Permission to use one such dataset should not automatically grant access to the source photos and documents.</p>
+<p>The lifecycle also needs an ending. Why is a file being kept, when will its value be reviewed, when must it be deleted, and how will requests to correct or erase personal data be handled? Backup retention should not silently invalidate the company's stated deletion rules.</p>
+<h2>Cheap storage is not a cheap data platform</h2>
+<p>Cost extends beyond file capacity. Data has to be ingested, catalogued, processed, protected, located and sometimes transferred between systems. It is possible to pay for years of archives that nobody can query reliably. It is also possible to overbuild a sophisticated platform for one experiment.</p>
+<p>I would begin with a bounded case: one equipment family, known failure types and sources whose provenance can actually be established. Measure how much material remains usable after quality checks, which hypotheses can be investigated and what the preparation costs.</p>
+<p>If the business only needs recurring reports built from stable definitions, a <a href="data-warehouse-business.html">data warehouse</a> or a conventional reporting database may be enough. The lake becomes more compelling when heterogeneous source material is needed for several not-yet-fully-defined investigations and the company can support its ongoing governance.</p>
+<h2>What proves the first stage worked?</h2>
+<p>Take one repair event and reconstruct its path: original readings, related service report, image, cleaning rules and final analysis dataset. Another specialist should be able to obtain a comparable result without interviewing the author of every script.</p>
+<p>Then test the awkward cases. A sensor was replaced, a device clock drifted, a file arrived late, or an employee requested an access restriction. If those cases have an explainable treatment, the retained data can support future questions. Otherwise another terabyte mainly increases the cost of the next investigation.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>

@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Running legacy and replacement systems side by side: safe shadow execution, difference classification, cutover criteria and real business risk.">
+  <meta name="description" content="How to compare old and new commission engines without a second payment: equivalent inputs, missing comparisons, discrepancy ownership and safe cutover.">
   <meta name="author" content="Anton Kurakin">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Parallel Run: Compare Two Systems Without Charging Twice">
-  <meta property="og:description" content="Running legacy and replacement systems side by side: safe shadow execution, difference classification, cutover criteria and real business risk.">
+  <meta property="og:description" content="How to compare old and new commission engines without a second payment: equivalent inputs, missing comparisons, discrepancy ownership and safe cutover.">
   <meta property="og:url" content="https://kurakin.pro/en/articles/parallel-run-migration.html">
   <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
   <meta property="article:published_time" content="2026-08-12">
-  <meta property="article:modified_time" content="2026-10-25">
+  <meta property="article:modified_time" content="2026-11-04">
   <title>Parallel Run: Compare Two Systems Without Charging Twice - Anton Kurakin</title>
   <link rel="canonical" href="https://kurakin.pro/en/articles/parallel-run-migration.html">
   <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/parallel-run-migration.html">
   <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/parallel-run-migration.html">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Parallel Run: Compare Two Systems Without Charging Twice","description":"Running legacy and replacement systems side by side: safe shadow execution, difference classification, cutover criteria and real business risk.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-10-25","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/parallel-run-migration.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Parallel Run: Compare Two Systems Without Charging Twice","description":"How to compare old and new commission engines without a second payment: equivalent inputs, missing comparisons, discrepancy ownership and safe cutover.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-11-04","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/parallel-run-migration.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
   <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/styles.css">
 </head>
@@ -31,24 +31,30 @@
   <a href="../architecture/index.html" aria-current="page">Architecture</a>
   <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/parallel-run-migration.html">RU</a><a href="parallel-run-migration.html" aria-current="page">EN</a></div></header>
-<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy & migration</a><p class="article-kicker"><span>3 min read</span> · <time datetime="2026-10-25">Updated 25 October 2026</time></p><h1>Parallel Run: Compare Two Systems Without Charging Twice</h1><p class="article-summary">The replacement passes its tests, but nobody knows whether it reproduces every legacy rule. How to compare behaviour without duplicate payments?</p></div></header>
+<main class="article-page" id="main"><header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#legacy">Legacy & migration</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>4 min read</span><span>·</span><span>Updated <time datetime="2026-11-04">4 November 2026</time></span></p><h1>Parallel Run: Compare Two Systems Without Charging Twice</h1><p class="article-summary">Most successful comparisons match, but what happened to the commissions that produced no comparison at all? They matter before the cutover.</p></div></header>
 <article class="article-content">
-<p>The company is replacing an old commission-calculation engine. The new implementation passes all known tests. Yet years of undocumented exceptions live in the legacy system: special rounding, contract rules and rare sequences of events.</p>
-<p>Moving every transaction to the replacement overnight is a risk. Parallel Run compares old and new results on the same or equivalent inputs and gives the company evidence before it makes the final switch.</p>
-<h2>Running in parallel is not doing the business action twice</h2>
-<p>For a pure calculation, both systems can receive the same inputs and their outputs can be compared. It becomes more complicated when a process changes the outside world: charging money, reserving stock, sending email or confirming a contract.</p>
-<p>Those actions cannot simply be performed twice for testing. The replacement may run in shadow mode, calculating an expected result without making the irreversible call. Some external dependencies may need to be stubbed, or outcomes compared after the real process finishes.</p>
-<p>One path must be identified as authoritative, and only the appropriate component should commit the final business effect. Otherwise the validation exercise creates a fresh data-integrity problem.</p>
-<h2>A match is not always proof of correctness</h2>
-<p>The old calculation may be wrong too. When the new output differs, the reason matters. It may be a bug in the replacement, or it may reveal a legacy exception the business wanted to retire.</p>
-<p>Classify discrepancies: genuine regression, intentional rule change, different input data, timing issue or formatting difference. Not every mismatch must block migration automatically, but material differences need an explanation.</p>
-<h2>Evidence for the final cutover</h2>
-<p>Compare real classes of transactions: ordinary orders, refunds, partial payments, cancellations and unusual exceptions. A high overall match percentage can hide a serious failure in a rare high-value scenario.</p>
-<p>I would agree in advance on acceptable differences, observation windows, investigation ownership and exit criteria. Another important question is what the company should do if shadow comparison reveals that a result already committed by the authoritative system was wrong.</p>
-<p>Parallel operation has a cost. Both implementations use resources, may process sensitive data and add operational work. The validation period needs an end condition instead of becoming a permanent architecture.</p>
-<h2>Not the same as two active production versions</h2>
-<p>Parallel Run is primarily about validating equivalence or acceptable behavioural differences. <a href="blue-green-deployment-business.html">Blue-Green Deployment</a> addresses how traffic moves between versions. They can be combined, but having two environments does not by itself compare their outcomes.</p>
-<p><strong>Parallel Run is useful when the company needs more than a promise that the replacement should behave like the old system. It buys evidence — provided the comparison does not create new real-world side effects.</strong></p>
+<p>The finance team is replacing a partner commission engine. The new implementation is easier to maintain and performs well in testing. It produces almost the same amounts as the old one. Unfortunately, the legacy application contains special contracts, date-based exceptions and rounding conventions that few people fully understand.</p>
+<p>Switching actual payments to the replacement overnight is risky. Parallel Run lets both implementations calculate on comparable inputs for a period, so differences can be investigated before the final cutover. Done poorly, however, it can create a second payment or give the company misplaced confidence.</p>
+<h2>Run the calculation twice, not the payment</h2>
+<p>Separate calculating a commission from executing the payout. The existing system remains the only authority to create a payable obligation and instruct the bank. The replacement receives the necessary inputs and calculates its expected result without sending payments, notifications or writes to the live account balance.</p>
+<p>This is often called a shadow run. The important part is the boundary, not the label. The candidate should not accidentally possess real payment permissions. Limit external calls and destinations technically instead of relying on a rule written in the team's documentation. If the calculation currently changes business state, isolate that effect or replay the logic in a suitable test environment.</p>
+<p>Give each comparison a stable operation identifier linking its input, rule versions, both outputs and any missing result. That becomes especially important after a worker restarts or a message is delivered again.</p>
+<h2>Match the inputs before judging the outputs</h2>
+<p>Two correct algorithms may return different amounts if they read different exchange rates, contract versions, effective dates or refunds. Use a consistent input snapshot where possible, or explicitly record which data versions were read. Otherwise the team may fix code that merely observed a different state.</p>
+<p>Money requires clear agreements on units, rounding, discount order and negative adjustments. A small difference may be an intended new contractual rule, or it may repeat across a large volume of work. Absolute difference alone is not a sufficient acceptance criterion.</p>
+<p>The older engine is not the definition of truth merely because it is older. If the replacement reveals a long-standing mistake, the owner of financial policy must decide what the correct treatment is. Fixing a legacy bug is a separate business decision, not automatically a failed comparison.</p>
+<h2>No comparison is itself an important observation</h2>
+<p>Suppose a report says almost all successfully paired calculations match. Some candidate calculations timed out, some inputs could not be transformed, and other events never reached the shadow processor. A percentage calculated only from successful pairs ignores precisely the work that failed to produce evidence.</p>
+<p>Track at least four outcomes: matches, explained differences, unexplained differences and operations without a valid pair. That last group includes missing, failed and expired comparisons. Report them against all operations admitted to the trial, not only the ones that finished cleanly.</p>
+<p>Exercise the lifecycle too: refunds after payout, retrospective corrections, cancellations and repeated operations. A convenient batch of standard agreements does not prove that rare but important adjustments behave correctly.</p>
+<h2>Who decides whether a difference is acceptable?</h2>
+<p>Every category needs an owner. Engineering can explain which rule version executed. Finance must decide whether the outcome matches the contract. If the business changes a rule during the trial, preserve its version and effective date rather than rewriting the meaning of older results after the fact.</p>
+<p>Keep enough diagnostic information to investigate without copying personal and payment data into unrestricted comparison logs. Operation identity, rule versions and appropriately protected amounts are usually more useful than a full dump of every connected system.</p>
+<p>Two clean days do not guarantee adequate coverage. Some partner commissions are calculated monthly, while corrections may be rarer. Know which critical scenarios were actually observed in the trial and which were tested separately with prepared examples.</p>
+<h2>Cutover needs its own evidence</h2>
+<p>Before switching authority, agree on acceptable differences, the treatment of critical unexplained cases, the ownership of unfinished work and how actual payouts will be monitored. The replacement is about to execute real actions for the first time. Check its permissions and idempotent payment handling; matching shadow calculations did not prove either.</p>
+<p>Rolling back may also have a boundary. The new engine may have created financial state that the old one cannot interpret. Decide in advance when correction forward or manual reconciliation is required. <a href="https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/" target="_blank" rel="noopener noreferrer">Amazon Builders' Library</a> explains why data compatibility limits safe rollback.</p>
+<p>The Parallel Run is finished when the replacement correctly calculates and pays, missing cases are accounted for, differences are explainable and the older engine has actually stopped executing. Until then, supporting both systems is a deliberate cost of reducing migration risk.</p>
 </article></main>
 <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
 </body></html>

@@ -3,66 +3,61 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What a data warehouse is, why analytics should not compete with production workloads, and what business trade-offs come with a separate analytical platform.">
+    <meta name="description" content="Why a data warehouse cannot fix incorrect service costs by itself: fact grain, shared definitions, late adjustments, source reconciliation and freshness.">
     <meta name="author" content="Anton Kurakin">
     <meta name="color-scheme" content="light">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Data Warehouse: Why Analytics Should Not Compete With the Production System">
-    <meta property="og:description" content="Data warehouses in business terms: how to separate analytical workloads from operational systems and what cost comes with copied and delayed data.">
+    <meta property="og:description" content="Why a data warehouse cannot fix incorrect service costs by itself: fact grain, shared definitions, late adjustments, source reconciliation and freshness.">
     <meta property="og:url" content="https://kurakin.pro/en/articles/data-warehouse-business.html">
     <meta property="og:image" content="https://kurakin.pro/assets/img/article-notes.png">
     <meta property="article:published_time" content="2026-08-12">
-    <meta property="article:modified_time" content="2026-08-12">
+    <meta property="article:modified_time" content="2026-11-04">
     <title>Data Warehouse: Why Analytics Should Not Compete With the Production System - Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/articles/data-warehouse-business.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/data-warehouse-business.html">
     <link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/data-warehouse-business.html">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Warehouse: Why Analytics Should Not Compete With the Production System","description":"What a data warehouse is, why analytics should not compete with production workloads, and what business trade-offs come with a separate analytical platform.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-08-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/data-warehouse-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data Warehouse: Why Analytics Should Not Compete With the Production System","description":"Why a data warehouse cannot fix incorrect service costs by itself: fact grain, shared definitions, late adjustments, source reconciliation and freshness.","inLanguage":"en","datePublished":"2026-08-12","dateModified":"2026-11-04","mainEntityOfPage":{"@type":"WebPage","@id":"https://kurakin.pro/en/articles/data-warehouse-business.html"},"author":{"@type":"Person","name":"Anton Kurakin","url":"https://kurakin.pro/"},"image":"https://kurakin.pro/assets/img/article-notes.png"}</script>
     <link rel="icon" href="../../assets/img/logo-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body data-page="article" data-lang="en">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><a class="brand" href="/en/" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
-  <a href="/en/">Home</a>
-  <a href="/en/projects.html">Projects</a>
-  <a href="/en/experience.html">About</a>
-  <a href="/en/articles/">Writing</a>
-  <a href="/en/architecture/" aria-current="page">Architecture</a>
-  <a href="/en/#contact">Contact</a>
+    <header class="site-header"><a class="brand" href="../index.html" aria-label="Anton Kurakin"><img class="brand-logo" src="../../assets/img/logo-icon.svg" alt="" width="42" height="42"><span class="brand-text">Anton Kurakin</span></a><nav class="site-nav" aria-label="Main navigation">
+  <a href="../index.html">Home</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../experience.html">About</a>
+  <a href="index.html">Writing</a>
+  <a href="../architecture/index.html" aria-current="page">Architecture</a>
+  <a href="../index.html#contact">Contact</a>
 </nav><div class="lang-switcher" aria-label="Language selection"><a href="../../ru/articles/data-warehouse-business.html">RU</a><a href="data-warehouse-business.html" aria-current="page">EN</a></div></header>
     <main class="article-page" id="main">
-      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="/en/architecture/#analytics">Data and analytics</a><p class="article-kicker"><span>5 min read</span></p><h1>Data Warehouse: Why Analytics Should Not Compete With the Production System</h1><p class="article-summary">Operational databases are built to process orders, payments, and state changes. Analytics asks very different, often historical and expensive questions. A data warehouse separates those workloads.</p></div></header>
+      <header class="article-hero"><div class="article-hero-copy"><a class="article-back-link" href="../architecture/index.html#analytics">Data and analytics</a><p class="article-kicker"><span><time datetime="2026-08-12">12 August 2026</time></span><span>·</span><span>5 min read</span><span>·</span><span>Updated <time datetime="2026-11-04">4 November 2026</time></span></p><h1>Data Warehouse: Why Analytics Should Not Compete With the Production System</h1><p class="article-summary">Labour, parts and site visits live in different systems. The cost report looks complete but counts some expenses twice. How do we make the number traceable?</p></div></header>
       <article class="article-content">
-        <p>Most companies eventually need answers beyond “what is the current status of this order?”</p>
-        <p>How did revenue change by segment? What happened to conversion over a year? Which customers return? Those questions scan larger volumes and often combine several sources.</p>
-        <p>If all of that runs directly on the production database, analytics starts competing with customer operations.</p>
-        <h2>What problem are we solving?</h2>
-        <p>A data warehouse stores data separately from operational systems and organizes it for analytical workloads.</p>
-        <p>Data from CRM, billing, product systems, and other sources is loaded into one analytical environment while production systems stay focused on current transactions.</p>
-        <h2>What does the business gain?</h2>
-        <p>The main benefit is that analytics no longer threatens product stability.</p>
-        <p>The company can run heavier reports, retain history, and combine sources without forcing transactional systems to serve customers and scan years of data at the same time.</p>
-        <p>A second benefit is a shared view of the business. Instead of arguing over numbers from separate systems, teams can align definitions and analyze metrics together.</p>
-        <h2>What does the team gain?</h2>
-        <p>Analysts get structures optimized for reading and aggregation, while product teams worry less about ad hoc queries hitting production.</p>
-        <p>In return, the company now owns extraction, transformation, loading, data quality, schema changes, and pipeline monitoring.</p>
-        <h2>What does the customer gain?</h2>
-        <p>Customers rarely interact with the warehouse directly. Their benefit is indirect: production systems are less affected by analytical workloads, and the company can make better-informed product decisions.</p>
-        <h2>What do we pay for it?</h2>
-        <p>The price is duplicated data, delay, and a separate data platform.</p>
-        <p>Warehouse data is usually not updated in the same millisecond as production. The business must decide whether freshness is needed in minutes, hours, or days.</p>
-        <p>Storage, compute, data engineering, governance, and access control also add cost.</p>
-        <h2>When is a data warehouse unnecessary?</h2>
-        <p>If there are few sources, modest data volumes, and simple reporting needs, a separate warehouse may be too expensive.</p>
-        <p>A read replica, BI tool, or a small set of prepared tables may be enough at first.</p>
-        <h2>Questions to ask before deciding</h2>
-        <ul><li>Which analytical queries already affect production systems?</li><li>How many data sources need to be combined?</li><li>How fresh does the data truly need to be?</li><li>Who owns the definition and quality of key metrics?</li><li>How will sensitive data and access be governed?</li></ul>
-        <h2>In the end</h2>
-        <p>A data warehouse separates two different jobs: running the business and analyzing the history of how the business ran.</p>
-        <p><strong>Its business value appears when analytics becomes important enough to deserve its own architecture rather than borrowing capacity from the production product.</strong></p>
-      </article>
+<p>A service director wants the true cost of a field repair. Work orders live in one system, spare parts in another and technicians' time in a third. Analysts join the tables and get a total. The problem appears later: a job with two visits and three material lines has multiplied some of its costs.</p>
+<p>A data warehouse can help, but merely creating a separate database will not repair a wrong number. It gives the company a place to combine and verify information without forcing production systems to serve heavy reports. People still have to agree on what counts as a cost of a job.</p>
+<h2>Decide what one row represents</h2>
+<p>Joining tables by work-order ID is not enough. Labour, parts and visits exist at different levels of detail. One record may represent a single engineer visit, another a spare-part issue and another the complete customer job. A join between two one-to-many sets can multiply amounts even though the database has done exactly what it was asked.</p>
+<p>Start by declaring the <em>grain</em> of each fact — what a single row means. The <a href="https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/grain/" target="_blank" rel="noopener noreferrer">Kimball Group's dimensional modelling guidance</a> makes this the foundation of reliable fact tables. Visit cost, material-line cost and job-level totals may need separate structures before they are safely aggregated by business identity.</p>
+<p>Even a cancelled visit needs a decision. It may have produced no customer outcome yet still incurred travel and labour costs. Assigning zero cost or removing it from the report is a business rule, not a SQL performance setting.</p>
+<h2>Whose definition of cost is correct?</h2>
+<p>Finance may allocate labour using accounting rates. Operations may care about actual engineer hours. Regional management may want transport included. All three views can be useful, but it is misleading to publish them under one metric name without saying what they contain.</p>
+<p>A published measure needs a definition, an accountable owner and a clear inclusion rule. Its date basis matters too. Does an amount belong to the month of service, the month it was posted, or the date it entered analytics? Those are different questions and can produce different monthly totals.</p>
+<p>Comparing regions requires agreed definitions of sites, customers, materials and people. A shared ID alone may not resolve history. A work order could move between branches, so the report must decide whether to attribute its cost to the branch performing the work then or the branch currently owning the account.</p>
+<h2>Keep analytical load away from operational work</h2>
+<p>Production databases are tuned for creating and updating orders and checking current state. A year-long report may scan, aggregate and join large volumes. Without workload isolation, those queries can compete with transactions customers are waiting for.</p>
+<p>A warehouse provides a separate place for extraction, transformations, history and analytical queries. But isolation has to be real. If every warehouse load holds locks or overloads the source, the conflict has merely moved to ingestion. Choose an appropriate extraction method, such as scheduled extracts or change capture, and measure its impact.</p>
+<p>Not every application requires a fully separate warehouse platform. A read replica, prepared reporting tables or a materialised view may be simpler for a small workload. A dedicated layer becomes easier to justify when multiple sources, queries and teams repeatedly pay to transform the same information.</p>
+<h2>Yesterday's transaction can change today</h2>
+<p>Suppose a spare part was charged to a job at month-end. A week later, accounting discovers the assignment was wrong and moves the cost. Analytics must not only ingest the correction but also change the earlier result. Returns, cancellations and labour-time corrections create similar problems.</p>
+<p>Loading only records with new creation timestamps will miss some of these updates. Reliable pipelines need business keys, update and deletion handling, duplicate protection and a way to recalculate affected periods. For audit work, the earlier value and the correction may both matter.</p>
+<p>Every report also needs a data-as-of time and visibility into late sources. A dashboard labelled “today” may combine fresh work orders with yesterday's material postings. Instant consistency with the operational transaction is possible only if explicitly designed and paid for; it is not a standard property of warehousing.</p>
+<h2>Trace the number back to the work</h2>
+<p>Take a few normal and difficult jobs: a return visit, a moved part, a cancellation and work completed across month-end. Reconstruct their costs from source records. Compare them with the warehouse and determine whether differences follow an agreed rule or an accidental join.</p>
+<p>Then inspect the broader reconciliation. Track not only loaded row counts but missing keys, duplicates, source lag and changes to historical periods. If a total stops matching, the responsible team should be able to find the specific work and replay the transformation without manually rewriting an unexplained figure.</p>
+<p>A warehouse pays off not merely when a dashboard opens quickly, but when a manager can use its number and, if challenged, follow it back to the actual business operations that produced it.</p>
+</article>
     </main>
-    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="/en/architecture/">IT Architecture for Everyone</a></footer>
+    <footer class="site-footer"><p>© 2026 Anton Kurakin.</p><a href="../architecture/index.html">IT Architecture for Everyone</a></footer>
   </body>
 </html>
