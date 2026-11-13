@@ -1,26 +1,26 @@
 {
-    "schemaVersion":  1,
-    "publishedAtUtc":  "2026-11-12T06:52:03.2836375Z",
-    "releases":  {
-                     "web":  {
-                                 "version":  "0.15.16",
-                                 "build":  45,
-                                 "available":  true,
-                                 "url":  "https://b-maker.kurakin.pro/"
-                             },
-                     "windows":  {
-                                     "version":  "0.15.16",
-                                     "build":  45,
-                                     "available":  true,
-                                     "url":  "https://kurakin.pro/downloads/bmaker/B-Maker-Setup-win.zip",
-                                     "sha256":  "fd754387bc8c111e6498fcdfe9d64e5b0384af1879443fc107cdc4bbbf745162",
-                                     "sizeBytes":  31074487
-                                 },
-                     "macos":  {
-                                   "version":  "0.15.1",
-                                   "build":  30,
-                                   "available":  true,
-                                   "url":  "https://kurakin.pro/downloads/bmaker/B-Maker-Setup-macos.zip"
-                               }
-                 }
+  "schemaVersion": 1,
+  "publishedAtUtc": "2026-11-13T17:38:06Z",
+  "releases": {
+    "web": {
+      "version": "0.15.16",
+      "build": 45,
+      "available": true,
+      "url": "https://b-maker.kurakin.pro/"
+    },
+    "windows": {
+      "version": "0.15.16",
+      "build": 45,
+      "available": true,
+      "url": "https://kurakin.pro/downloads/bmaker/B-Maker-Setup-win.zip",
+      "sha256": "fd754387bc8c111e6498fcdfe9d64e5b0384af1879443fc107cdc4bbbf745162",
+      "sizeBytes": 31074487
+    },
+    "macos": {
+      "version": "0.15.16",
+      "build": 45,
+      "available": true,
+      "url": "https://kurakin.pro/downloads/bmaker/B-Maker-Setup-macos.zip"
+    }
+  }
 }
