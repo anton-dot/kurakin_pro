@@ -102,6 +102,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/cv-boost.html" />
   </url>
   <url>
+    <loc>https://kurakin.pro/projects/arkiboard.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/arkiboard.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/arkiboard.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/arkiboard.html" />
+  </url>
+  <url>
+    <loc>https://kurakin.pro/en/projects/arkiboard.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/arkiboard.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/projects/arkiboard.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kurakin.pro/projects/arkiboard.html" />
+  </url>
+  <url>
     <loc>https://kurakin.pro/ru/articles/</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://kurakin.pro/ru/articles/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://kurakin.pro/en/articles/" />

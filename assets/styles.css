@@ -554,6 +554,10 @@ h3 {
   background: #eef0f8;
 }
 
+.project-card--featured .project-brand-media--arkiboard {
+  background: #f2f4ff;
+}
+
 .project-card--featured .project-brand-media--coming-soon {
   background: #eef0f4;
 }
@@ -640,6 +644,16 @@ h3 {
   object-fit: contain;
   flex: 0 0 112px;
   width: 112px;
+}
+
+.project-title-lockup--arkiboard {
+  flex-wrap: wrap;
+}
+
+.project-detail-logo--arkiboard {
+  background: #f2f4ff;
+  border-radius: 8px;
+  padding: 6px;
 }
 
 .project-back-link {
@@ -1993,6 +2007,29 @@ h3 {
 
   .project-detail-hero h1 {
     font-size: 3rem;
+  }
+
+  .project-detail-hero--arkiboard {
+    min-height: 0;
+    padding-block: 32px 40px;
+  }
+
+  .project-detail-hero--arkiboard .project-detail-hero-inner {
+    min-height: 0;
+  }
+
+  .project-title-lockup--arkiboard {
+    gap: 12px;
+  }
+
+  .project-detail-logo--arkiboard {
+    flex-basis: 56px;
+    height: 56px;
+    width: 56px;
+  }
+
+  .project-detail-hero--arkiboard h1 {
+    font-size: 2.4rem;
   }
 
   .project-feature-grid,
