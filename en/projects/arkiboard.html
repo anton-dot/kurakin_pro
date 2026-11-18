@@ -16,7 +16,7 @@
     <meta property="og:image:alt" content="ArkiBoard logo">
     <meta property="og:url" content="https://kurakin.pro/en/projects/arkiboard.html">
     <meta property="og:title" content="ArkiBoard — Software Architecture Editor">
-    <meta property="og:description" content="Keep linked diagrams, scenarios, requirements, and decisions in one project. Import from draw.io and Mermaid, export documentation, and run local architecture checks.">
+    <meta property="og:description" content="Design a system from C4 context down to service modules. Play through scenarios, estimate capacity, and prepare an architecture review.">
     <title>ArkiBoard — Software Architecture Editor | Anton Kurakin</title>
     <link rel="canonical" href="https://kurakin.pro/en/projects/arkiboard.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/arkiboard.html">
@@ -28,17 +28,19 @@
         "@type": "SoftwareApplication",
         "name": "ArkiBoard",
         "url": "https://draw.kurakin.pro/",
+        "downloadUrl": "https://github.com/anton-dot/archd-pub/releases/latest/download/ArkiBoard-Setup.exe",
         "mainEntityOfPage": "https://kurakin.pro/en/projects/arkiboard.html",
         "image": "https://kurakin.pro/assets/img/arkiboard-mark.png",
         "applicationCategory": "DesignApplication",
-        "operatingSystem": "Web",
+        "operatingSystem": "Windows 10/11 x64, Web",
         "description": "A software architecture editor with a shared component model, interaction scenarios, requirements, ADRs, and capacity estimates.",
         "featureList": [
-          "Linked system context, container, and component diagrams",
-          "Scenario playback and sequence diagrams",
-          "Requirements, risks, and architecture decision records (ADRs)",
-          "Capacity estimates and architecture checks",
-          "Local storage and .archd import and export"
+          "C4 diagrams with a shared component model, service drill-down, and auto-layout",
+          "Interaction contracts, scenario playback, and sequence diagrams",
+          "Requirements with verification criteria and architecture decision records (ADRs) with alternatives",
+          "Capacity estimates, potential single points of failure, and dependency analysis",
+          "Built-in architecture examples you can copy and edit",
+          "Draw.io, PlantUML, and Mermaid import, standalone HTML reports, and .archd project transfer"
         ],
         "author": {"@type": "Person", "@id": "https://kurakin.pro/#person", "name": "Anton Kurakin", "url": "https://kurakin.pro/"}
       }
@@ -75,9 +77,10 @@
             <img class="project-detail-logo project-detail-logo--arkiboard" src="../../assets/img/arkiboard-mark.png" alt="" width="256" height="256">
             <h1>ArkiBoard</h1>
           </div>
-          <p class="project-detail-lead">Design software systems with linked diagrams, interaction scenarios, and decision records in one project. No account required.</p>
+          <p class="project-detail-lead">Design software systems from the big picture down to individual service modules. Draw diagrams, estimate capacity, and review the design in your browser. No account required.</p>
           <div class="hero-actions">
             <a class="button primary" href="https://draw.kurakin.pro/" target="_blank" rel="noopener noreferrer">Open in browser&nbsp;<span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="https://github.com/anton-dot/archd-pub/releases/latest/download/ArkiBoard-Setup.exe">Download for Windows</a>
           </div>
         </div>
       </section>
@@ -86,22 +89,23 @@
         <div class="project-detail-inner project-intro">
           <h2 id="about-project-title">One model, multiple diagrams</h2>
           <div class="project-intro-copy">
-            <p>A system overview shows boundaries; a detailed diagram shows services and how they connect. In ArkiBoard, a component can appear on several diagrams. You can position it independently in each view while keeping its properties in sync.</p>
-            <p>Link requirements, scenarios, and architecture decision records (ADRs) to the same model. During review, you can see both how the system fits together and the trade-offs behind the design.</p>
+            <p>Draw diagrams separately and the same service can end up as several inconsistent copies. In ArkiBoard, a component has one model record but can appear on multiple diagrams. Each view has its own layout, while the component's responsibilities, technology, and settings stay in sync.</p>
+            <p>Show the big picture in a discussion, open the relevant service during a review, then follow the requirements, scenarios, and decisions that explain its design.</p>
+            <p>The editor includes built-in architecture examples. You can explore them or make an editable copy.</p>
           </div>
         </div>
       </section>
 
       <section class="project-detail-section muted" aria-labelledby="features-title">
         <div class="project-detail-inner">
-          <h2 id="features-title">What you can do in ArkiBoard</h2>
+          <h2 id="features-title">From first sketch to architecture review</h2>
           <div class="project-feature-grid">
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">01</span><div><h3>Model a system</h3><p>Drill down from system context to containers and components with C4. Use built-in shapes for services, data stores, queues, topics, observability, and security.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">02</span><div><h3>Reuse architecture fragments</h3><p>Save groups with their settings, notes, and internal connections in a personal library. Transactional Outbox and Inbox examples are available to get you started.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">03</span><div><h3>Play through scenarios</h3><p>Define sequential and parallel steps, conditions, and compensating actions. Play the flow on the diagram or show it as a sequence diagram.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">04</span><div><h3>Document decisions</h3><p>Link requirements and their acceptance criteria to components and ADRs. Record alternatives, assumptions, risks, and why you chose an approach.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">05</span><div><h3>Estimate capacity</h3><p>Compare a baseline workload with tenfold growth. Estimate traffic, storage, queues, and latency using your own inputs and assumptions.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">06</span><div><h3>Review the architecture</h3><p>Find potential single points of failure, cycles, and long chains of synchronous calls. Use the findings to guide a review, not as a substitute for testing.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">01</span><div><h3>Design on the canvas</h3><p>Build C4 context, container, and component views with built-in services, modules, databases, caches, queues, and topics. Auto-layout can arrange the whole diagram or just the selection without moving pinned elements. Collapse nested containers without losing external links, or open them for editing.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">02</span><div><h3>Components and dependencies</h3><p>Record ownership, criticality, replica counts, or partition settings, depending on the component type. Trace incoming and outgoing dependencies up to three hops or find the shortest path between two nodes. Save a reusable group with its settings and internal links in a personal library.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">03</span><div><h3>Scenarios and contracts</h3><p>Show what follows a request or event: which steps run in order, what can happen in parallel, and where compensation is needed. Record timeouts, retries, idempotency, or a dead-letter queue (DLQ) on a connection. Play back the scenario on the diagram or export it as a sequence diagram.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">04</span><div><h3>Requirements and decisions</h3><p>Link requirements with metrics, verification criteria, and statuses to specific components and architecture decision records (ADRs). Record alternatives and their trade-offs in an ADR. Compare against a snapshot to see changes in the model without counting moves on the canvas as design changes.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">05</span><div><h3>Capacity estimates</h3><p>Compare a baseline workload with tenfold growth. The calculator shows the inputs and formulas behind estimates for traffic, storage, queues, and latency. Use them to discuss scale and assumptions before implementation, not as load-test results.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">06</span><div><h3>Review and failure analysis</h3><p>Local rules flag potential single points of failure, cycles, and long chains of synchronous calls. Jump from a finding to the affected components. Failure analysis shows which nodes depend synchronously on a selected component, but does not simulate live failover.</p></div></article>
           </div>
         </div>
       </section>
@@ -110,17 +114,20 @@
         <div class="project-detail-inner">
           <h2 id="formats-title">Import, export, and storage</h2>
           <div class="project-capability-list">
-            <article class="project-capability"><h3>Diagram import</h3><p>Bring in diagrams from draw.io, PlantUML/C4, and Mermaid. Preview the detected component types and connections before importing.</p></article>
-            <article class="project-capability"><h3>Documentation and export</h3><p>Save diagrams as SVG, PNG, or PDF, export Markdown documentation with Mermaid diagrams, or share a standalone HTML report with scenario playback.</p></article>
-            <article class="project-capability"><h3>Local projects</h3><p>Projects autosave in the current browser without server sync. Export an <code>.archd</code> file to back up or move the full editable model.</p></article>
+            <article class="project-capability"><h3>Import existing diagrams</h3><p>Bring in draw.io projects, PlantUML/C4 or Mermaid diagrams, or Markdown and HTML. ArkiBoard suggests component types and connections. Preview and refine the result before creating the project.</p></article>
+            <article class="project-capability"><h3>Share review materials</h3><p>Export a full diagram or a selection as SVG, PNG, or PDF, or all pages as an editable draw.io file. For discussion, share Markdown with requirements, decisions, and Mermaid diagrams, or a standalone HTML report that can play scenarios offline.</p></article>
+            <article class="project-capability"><h3>Projects without an account</h3><p>In the web version, work is saved in the current browser. Snapshots let you return to an earlier state but are not a backup: clearing site data removes local projects. Use an <code>.archd</code> file to transfer the full editable model to another device.</p></article>
           </div>
         </div>
       </section>
 
       <section class="project-detail-cta" aria-labelledby="project-cta-title">
         <div class="project-detail-cta-inner">
-          <div><h2 id="project-cta-title">Start with a diagram</h2><p>Create a blank project or explore the built-in Outbox and Inbox examples.</p></div>
-          <a class="button primary" href="https://draw.kurakin.pro/" target="_blank" rel="noopener noreferrer">Open in browser&nbsp;<span aria-hidden="true">↗</span></a>
+          <div><h2 id="project-cta-title">Open the ArkiBoard editor</h2><p>Start with a blank canvas or import an existing diagram.</p></div>
+          <div class="project-store-actions">
+            <a class="button primary" href="https://draw.kurakin.pro/" target="_blank" rel="noopener noreferrer">Open in browser&nbsp;<span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="https://github.com/anton-dot/archd-pub/releases/latest/download/ArkiBoard-Setup.exe">Download for Windows</a>
+          </div>
         </div>
       </section>
     </main>

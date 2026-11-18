@@ -16,7 +16,7 @@
     <meta property="og:image:alt" content="Логотип ArkiBoard">
     <meta property="og:url" content="https://kurakin.pro/projects/arkiboard.html">
     <meta property="og:title" content="ArkiBoard — редактор архитектуры ПО">
-    <meta property="og:description" content="Связанные схемы, сценарии, требования и решения в одном проекте. Импорт из draw.io и Mermaid, экспорт документации и локальная проверка архитектуры.">
+    <meta property="og:description" content="Спроектируйте систему от контекста C4 до модулей сервиса. Проиграйте сценарии, оцените нагрузку и подготовьте архитектурное ревью.">
     <title>ArkiBoard — редактор архитектуры ПО | Антон Куракин</title>
     <link rel="canonical" href="https://kurakin.pro/projects/arkiboard.html">
     <link rel="alternate" hreflang="ru" href="https://kurakin.pro/projects/arkiboard.html">
@@ -28,17 +28,19 @@
         "@type": "SoftwareApplication",
         "name": "ArkiBoard",
         "url": "https://draw.kurakin.pro/",
+        "downloadUrl": "https://github.com/anton-dot/archd-pub/releases/latest/download/ArkiBoard-Setup.exe",
         "mainEntityOfPage": "https://kurakin.pro/projects/arkiboard.html",
         "image": "https://kurakin.pro/assets/img/arkiboard-mark.png",
         "applicationCategory": "DesignApplication",
-        "operatingSystem": "Web",
+        "operatingSystem": "Windows 10/11 x64, Web",
         "description": "Редактор архитектуры программных систем с общей моделью компонентов, сценариями взаимодействия, требованиями, ADR и расчётами нагрузки.",
         "featureList": [
-          "Связанные диаграммы контекста, контейнеров и компонентов",
-          "Сценарии с проигрыванием и диаграммами последовательности",
-          "Требования, риски и архитектурные решения (ADR)",
-          "Оценка нагрузки и проверка архитектуры",
-          "Локальное сохранение, импорт и экспорт файлов .archd"
+          "Диаграммы C4 с общей моделью компонентов, детализацией сервисов и автокомпоновкой",
+          "Контракты взаимодействий, проигрывание сценариев и диаграммы последовательности",
+          "Требования с критериями проверки и архитектурные решения (ADR) с альтернативами",
+          "Оценка нагрузки, поиск потенциальных единых точек отказа и разбор зависимостей",
+          "Готовые примеры архитектур с возможностью создать редактируемую копию",
+          "Импорт draw.io, PlantUML и Mermaid, автономные HTML-отчёты и перенос проекта в файле .archd"
         ],
         "author": {"@type": "Person", "@id": "https://kurakin.pro/#person", "name": "Антон Куракин", "url": "https://kurakin.pro/"}
       }
@@ -75,9 +77,10 @@
             <img class="project-detail-logo project-detail-logo--arkiboard" src="../assets/img/arkiboard-mark.png" alt="" width="256" height="256">
             <h1>ArkiBoard</h1>
           </div>
-          <p class="project-detail-lead">Проектируйте архитектуру ПО: связывайте схемы, описывайте сценарии и фиксируйте решения в одном проекте. Без регистрации.</p>
+          <p class="project-detail-lead">Редактор архитектуры ПО: от карты системы до модулей сервиса, от диаграммы до расчёта нагрузки и ревью. Работает в браузере без регистрации.</p>
           <div class="hero-actions">
             <a class="button primary" href="https://draw.kurakin.pro/" target="_blank" rel="noopener noreferrer">Открыть в браузере&nbsp;<span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="https://github.com/anton-dot/archd-pub/releases/latest/download/ArkiBoard-Setup.exe">Скачать для Windows</a>
           </div>
         </div>
       </section>
@@ -86,22 +89,23 @@
         <div class="project-detail-inner project-intro">
           <h2 id="about-project-title">Одна модель для нескольких схем</h2>
           <div class="project-intro-copy">
-            <p>На обзорной схеме нужны границы системы, а на детальной — отдельные сервисы и их связи. В ArkiBoard один компонент может появляться на разных схемах: расположение карточек меняется независимо, а свойства компонента остаются общими.</p>
-            <p>К той же модели можно привязать требования, сценарии и записи об архитектурных решениях (ADR). На ревью видно не только из чего состоит система, но и какие компромиссы стояли за её устройством.</p>
+            <p>Когда диаграммы рисуются отдельно, один и тот же сервис легко превращается в несколько несогласованных копий. В ArkiBoard у компонента одна запись в модели, но он может появляться на нескольких схемах. На каждой схеме у карточки своё положение, а ответственность, технология и настройки остаются общими.</p>
+            <p>Так можно показать общую картину на обсуждении, открыть нужный сервис на техническом ревью и перейти к требованиям, сценариям и решениям, которые объясняют его устройство.</p>
+            <p>В редакторе есть готовые примеры архитектур. Их можно изучить или создать свою редактируемую копию.</p>
           </div>
         </div>
       </section>
 
       <section class="project-detail-section muted" aria-labelledby="features-title">
         <div class="project-detail-inner">
-          <h2 id="features-title">Что можно делать в ArkiBoard</h2>
+          <h2 id="features-title">От наброска до архитектурного ревью</h2>
           <div class="project-feature-grid">
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">01</span><div><h3>Моделировать систему</h3><p>Переходите от контекста системы к контейнерам и компонентам по модели C4. На холсте есть готовые элементы для сервисов, хранилищ, очередей, топиков, наблюдаемости и безопасности.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">02</span><div><h3>Повторно использовать фрагменты</h3><p>Сохраняйте группы вместе с настройками, пояснениями и внутренними связями в личную библиотеку. Для начала есть примеры Transactional Outbox и Inbox.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">03</span><div><h3>Проигрывать сценарии</h3><p>Задавайте последовательные и параллельные шаги, условия и компенсации. Поток можно проиграть на схеме или показать диаграммой последовательности.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">04</span><div><h3>Документировать решения</h3><p>Связывайте требования и их критерии с компонентами и ADR. Фиксируйте альтернативы, допущения, риски и причины выбора.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">05</span><div><h3>Оценивать нагрузку</h3><p>Сравнивайте базовый сценарий и десятикратный рост. Оценки трафика, хранения, очередей и задержек строятся на ваших исходных данных и допущениях.</p></div></article>
-            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">06</span><div><h3>Проверять архитектуру</h3><p>Находите потенциальные единые точки отказа, циклы и длинные цепочки синхронных вызовов. Замечания помогают начать ревью, но не заменяют тесты.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">01</span><div><h3>Проектирование на холсте</h3><p>Собирайте контекст, контейнеры и компоненты C4 из типовых элементов: сервисов, модулей, баз, кэшей, очередей и топиков. Автокомпоновка перестраивает всю схему или только выделение, не трогая закреплённые элементы. Вложенные контейнеры можно свернуть, сохранив внешние связи, или открыть отдельно для редактирования.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">02</span><div><h3>Компоненты и зависимости</h3><p>Укажите владельца, критичность, реплики или настройки партиций в зависимости от типа компонента. Проследите входящие и исходящие зависимости до трёх шагов или найдите кратчайший путь между двумя узлами. Повторяющийся фрагмент можно сохранить в личную библиотеку вместе с настройками и связями.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">03</span><div><h3>Сценарии и контракты</h3><p>Покажите, что происходит после запроса или события: какие шаги идут последовательно, что выполняется параллельно и где нужна компенсация. Для связи можно задать таймаут, повторные попытки, идемпотентность или очередь для необработанных сообщений (DLQ). Сценарий проигрывается на схеме и экспортируется как диаграмма последовательности.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">04</span><div><h3>Требования и решения</h3><p>Привязывайте требования с метриками, критериями проверки и статусами к конкретным компонентам и записям об архитектурных решениях (ADR). В ADR можно зафиксировать альтернативы и их компромиссы. Сравнение со снимком показывает изменения модели, не считая перенос карточек изменением архитектуры.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">05</span><div><h3>Оценка нагрузки</h3><p>Сравните базовую нагрузку и рост в десять раз. Калькулятор показывает исходные числа и формулы для трафика, объёма хранения, очередей и задержек. Это способ обсудить масштаб и допущения до реализации, а не результат нагрузочного теста.</p></div></article>
+            <article class="project-feature-item"><span class="project-feature-index" aria-hidden="true">06</span><div><h3>Ревью и разбор отказов</h3><p>Локальные правила подсвечивают потенциальные единые точки отказа, циклы и длинные цепочки синхронных вызовов. Из замечания можно перейти к компонентам на схеме. Разбор отказа показывает, какие узлы синхронно зависят от выбранного компонента, но не моделирует реальное переключение на резерв.</p></div></article>
           </div>
         </div>
       </section>
@@ -110,17 +114,20 @@
         <div class="project-detail-inner">
           <h2 id="formats-title">Импорт, экспорт и хранение</h2>
           <div class="project-capability-list">
-            <article class="project-capability"><h3>Импорт схем</h3><p>Переносите схемы из draw.io, PlantUML/C4 и Mermaid. Перед импортом можно проверить распознанные типы элементов и связи.</p></article>
-            <article class="project-capability"><h3>Документация и экспорт</h3><p>Сохраняйте схемы в SVG, PNG и PDF, выгружайте документацию в Markdown с диаграммами Mermaid или делитесь автономным HTML-отчётом с проигрывателем сценариев.</p></article>
-            <article class="project-capability"><h3>Локальные проекты</h3><p>Автосохранение работает в текущем браузере, без серверной синхронизации. Для резервной копии и переноса полной редактируемой модели используйте файл <code>.archd</code>.</p></article>
+            <article class="project-capability"><h3>Перенос готовых схем</h3><p>Импортируйте проекты из draw.io, схемы PlantUML/C4 и Mermaid, а также Markdown и HTML. ArkiBoard предлагает типы компонентов и связи. В предварительном просмотре можно уточнить результат до создания проекта.</p></article>
+            <article class="project-capability"><h3>Материалы для ревью</h3><p>Выгружайте выбранную схему или её фрагмент в SVG, PNG или PDF, а все страницы — в редактируемый файл draw.io. Для обсуждения отправьте Markdown с требованиями, решениями и схемами Mermaid или автономный HTML-отчёт, в котором можно проиграть сценарий без интернета.</p></article>
+            <article class="project-capability"><h3>Проекты без аккаунта</h3><p>В веб-версии работа сохраняется в текущем браузере. Снимки помогают вернуться к предыдущему состоянию, но не заменяют резервную копию: очистка данных сайта удалит локальные проекты. Файл <code>.archd</code> переносит полную редактируемую модель на другое устройство.</p></article>
           </div>
         </div>
       </section>
 
       <section class="project-detail-cta" aria-labelledby="project-cta-title">
         <div class="project-detail-cta-inner">
-          <div><h2 id="project-cta-title">Начните со своей схемы</h2><p>Создайте пустой проект или откройте готовый пример Outbox или Inbox.</p></div>
-          <a class="button primary" href="https://draw.kurakin.pro/" target="_blank" rel="noopener noreferrer">Открыть в браузере&nbsp;<span aria-hidden="true">↗</span></a>
+          <div><h2 id="project-cta-title">Откройте редактор ArkiBoard</h2><p>Создайте проект с нуля или импортируйте свою схему.</p></div>
+          <div class="project-store-actions">
+            <a class="button primary" href="https://draw.kurakin.pro/" target="_blank" rel="noopener noreferrer">Открыть в браузере&nbsp;<span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="https://github.com/anton-dot/archd-pub/releases/latest/download/ArkiBoard-Setup.exe">Скачать для Windows</a>
+          </div>
         </div>
       </section>
     </main>
